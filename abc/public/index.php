@@ -3,6 +3,7 @@ use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\DI\FactoryDefault;
+use Phalcon\Session\Adapter\Files as Session;
 
 try {
 
@@ -25,6 +26,12 @@ $view = new View();
 $view->setViewsDir('../app/views/');
 return $view;
 });
+//实例化session并且开始 赋值给DI实例 方便在控制器中调用
+    $di->setShared('session', function () {
+        $session = new Session();
+        $session->start();
+        return $session;
+    });
 
 // 处理请求
 $application = new Application($di);
