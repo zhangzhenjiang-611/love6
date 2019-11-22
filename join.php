@@ -12,6 +12,7 @@
         $a = ' '.$join.' ';
     }
 
+	
     return $a;
 }
   print_r(joins('user'));
