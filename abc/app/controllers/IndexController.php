@@ -63,10 +63,10 @@ class IndexController extends Controller {
 
     }
     //请求与响应
-    public function requestAction()
+    public function reqAction()
     {
-        $request = $this->request();
-        var_dump($request);
+        $request = $this->request->get('name');
+        var_dump(11);
     }
 
 
