@@ -6,3 +6,5 @@
  * Time: 22:10
  */
 echo substr(time(),1);
+
+echo 123;
