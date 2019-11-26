@@ -1,0 +1,6 @@
+10、对json数据格式的理解？
+
+
+JSON(JavaScript Object Notation)是一种轻量级的数据交换格式，json数据格式固定，可以被多种语言用作数据的传递。
+PHP中处理json格式的函数为json_decode( string $json [, bool $assoc ] ) ，接受一个 JSON格式的字符串并且把它转换为PHP变量，参数json待解码的json string格式的字符串。assoc当该参数为TRUE时，将返回array而非object；
+Json_encode：将PHP变量转换成json格式。
