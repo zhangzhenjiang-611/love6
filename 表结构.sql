@@ -1,6 +1,6 @@
 uc_merchant_student  商家学员关系表
 
-CREATE TABLE `uc_merchant_student` (
+CREATE TABLE `uc_merchant_student` (zz
   `id` char(32) NOT NULL COMMENT '主键ID',
   `merchant_id` char(32) NOT NULL COMMENT '商家ID',
   `student_id` char(32) NOT NULL COMMENT '学员ID',
