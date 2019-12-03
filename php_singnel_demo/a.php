@@ -6,3 +6,4 @@
  * Time: 18:02
  */
 $var = 1;
+echo $var;

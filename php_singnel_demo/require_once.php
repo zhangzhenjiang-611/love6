@@ -11,3 +11,11 @@
 
 /*1 include与require的区别
 include与require除了在处理引入文件的方式不同外，最大的区别就是：include在引入不存文件时产生一个警告且脚本还会继续执行，而require则会导致一个致命性错误且脚本停止执行。*/
+require 'a.php';
+require_once 'a.php';  //包含过了一次，不会再包含
+echo "<br/>";
+
+
+require_once 'a.php';  //包含过了一次，不会再包含
+require_once 'a.php';  //包含过了一次，不会再包含
+echo "<br/>";
