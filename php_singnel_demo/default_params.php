@@ -24,3 +24,19 @@ demo1('liuyanli',22);
 demo1('liuyanli',22,'girls');
 demo1('liuyanli',22,'girls','521@qq.com');
 //demo1('liuyanli');  //fatal error
+
+
+
+//可变参数个数的函数
+function demo2(){
+    echo "###############<br>";
+    $arr = func_get_args();  //获取外部所有的参数
+    var_dump($arr);
+    $num = func_num_args(); //获取外部所有的参数的个数
+    var_dump($num);
+
+    $zhiding = func_get_arg(1);   //获取外部指定的参数
+    var_dump($zhiding);
+}
+//demo2(1);
+demo2(1,2,3); //不会报错
