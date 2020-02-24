@@ -17,9 +17,10 @@
 
    }
  $getMoneys= getMoneycount();
- /*$getMoneys();
- $getMoneys();
- $getMoneys();*/
+ //echo $getMoneys;
+ //echo $getMoneys;
+
+ //$getMoneys();
 
 
 

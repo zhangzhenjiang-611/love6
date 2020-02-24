@@ -16,6 +16,7 @@ function getMoney() {
         $rmb++; //匿名函数里不能改变局部变量
     };
     $func();
+    echo "<br/>";
     echo $rmb;
 }
 getMoney();
@@ -27,4 +28,4 @@ $fun = function () use ($a) {
     echo 666;
     echo $a;
 };
-//$fun();
+$fun();
