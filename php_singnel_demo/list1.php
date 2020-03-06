@@ -11,3 +11,25 @@ echo $a;
 echo $b;
 //echo $c;
 echo $d;
+
+echo "<hr/>";
+$arr = ['妹子','亚军','江江'];
+  /* $arr1 = each($arr);
+   print_r($arr1);
+   echo "<br/>";
+$arr1 = each($arr);
+print_r($arr1);
+echo "<br/>";
+$arr1 = each($arr);
+print_r($arr1);
+echo "<br/>";
+$arr1 = each($arr);
+print_r($arr1);
+echo "<br/>";*/
+  while(list($key,$val) = each($arr)){
+      //print_r($tmp);
+      //echo "{$tmp['key']}=>"."{$tmp['value']}";
+      //echo "{$tmp['0']}=>"."{$tmp['1']}";
+      echo "{$key}=>"."{$val}";
+      echo "<br/>";
+  }
