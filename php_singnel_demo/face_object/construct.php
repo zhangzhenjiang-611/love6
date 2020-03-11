@@ -22,9 +22,17 @@ class Person {
          echo $this->name.'年龄是'.$this->age."性别是".$this->sex;
          echo "<br/>";
      }
+     //对象串行化自动调用 可以设置需要串行化的对象的属性 __wakeup() 反串行化自动调用
+     public function __sleep()
+     {
+         // TODO: Implement __sleep() method.
+         echo "串行化";
+         return ['name','age'];
+
+     }
 }
 
 $b1 = new Person('张三','15','女');
-$b1->eat();
+//$b1->eat();
 $b2 = new Person('李四','22','妖怪');
-$b2->eat();
+//$b2->eat();
