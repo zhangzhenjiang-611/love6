@@ -32,3 +32,4 @@ namespace a\b;
 const BBB=2;
   echo BBB;
   echo \a\b\BBB;
+  echo 123;

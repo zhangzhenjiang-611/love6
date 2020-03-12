@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19aeca60-a1ed-445a-ae85-4f9e952418b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/face_object/const.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/mxdx/const.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/mxdx/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/mxdx/juxing.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/mxdx/shape.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/mxdx/triangle.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/namespace/a.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/namespace/meizi.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/namespace/test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php_singnel_demo/namespace/test2.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php_singnel_demo/namespace/meizi.php" afterPath="$PROJECT_DIR$/php_singnel_demo/namespace/meizi.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -125,7 +115,7 @@
         <entry file="file://$PROJECT_DIR$/php_singnel_demo/namespace/meizi.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="627">
-              <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
               <folding>
                 <element signature="e#6#86#0#PHP" expanded="true" />
               </folding>
@@ -447,12 +437,12 @@
       <workItem from="1583817566470" duration="3131000" />
       <workItem from="1583895459779" duration="6060000" />
       <workItem from="1583909089632" duration="4116000" />
-      <workItem from="1583981297388" duration="10830000" />
+      <workItem from="1583981297388" duration="11303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102300000" />
+    <option name="totallyTimeSpent" value="102773000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -894,7 +884,7 @@
     <entry file="file://$PROJECT_DIR$/php_singnel_demo/namespace/meizi.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
-          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
           <folding>
             <element signature="e#6#86#0#PHP" expanded="true" />
           </folding>
