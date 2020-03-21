@@ -6,9 +6,9 @@
  * Time: 9:44
  */
 class Person {
-    private $name;
-    private $age;
-    private $sex;
+    protected $name;
+    protected $age;
+    protected $sex;
 
     public function __construct($name,$age,$sex = "男")
     {
