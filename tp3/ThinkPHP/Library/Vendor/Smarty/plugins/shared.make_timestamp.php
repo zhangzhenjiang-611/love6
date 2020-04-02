@@ -8,7 +8,7 @@
 
 /**
  * Function: smarty_make_timestamp<br>
- * Purpose:  used by other smarty functions to make a timestamp from a string.
+ * Purpose:  used by other smarty functions.php to make a timestamp from a string.
  *
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @param DateTime|int|string $string  date object, timestamp or string that can be converted using strtotime()

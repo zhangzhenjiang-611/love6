@@ -935,12 +935,12 @@ class Template_Lite_Compiler extends Template_Lite {
 
 	function _plugin_exists($function, $type)
 	{
-		// check for object functions
+		// check for object functions.php
 		if (isset($this->_plugins[$type][$function]) && is_array($this->_plugins[$type][$function]) && is_object($this->_plugins[$type][$function][0]) && method_exists($this->_plugins[$type][$function][0], $this->_plugins[$type][$function][1]))
 		{
 			return '$this->_plugins[\'' . $type . '\'][\'' . $function . '\'][0]->' . $this->_plugins[$type][$function][1];
 		}
-		// check for standard functions
+		// check for standard functions.php
 		if (isset($this->_plugins[$type][$function]) && function_exists($this->_plugins[$type][$function]))
 		{
 			return $this->_plugins[$type][$function];

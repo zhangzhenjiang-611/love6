@@ -57,10 +57,10 @@ class Smarty_Security {
      */
     public $static_classes = array();
     /**
-     * This is an array of trusted PHP functions.
+     * This is an array of trusted PHP functions.php.
      *
-     * If empty all functions are allowed.
-     * To disable all PHP functions set $php_functions = null.
+     * If empty all functions.php are allowed.
+     * To disable all PHP functions.php set $php_functions = null.
      * @var array
      */
     public $php_functions = array(

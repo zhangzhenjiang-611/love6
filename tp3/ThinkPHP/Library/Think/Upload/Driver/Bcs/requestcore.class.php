@@ -654,7 +654,7 @@ class BCS_RequestCore {
 	}
 
 	/**
-	 * Sends the request, calling necessary utility functions to update built-in properties.
+	 * Sends the request, calling necessary utility functions.php to update built-in properties.
 	 *
 	 * @param boolean $parse (Optional) Whether to parse the response with BCS_ResponseCore or not.
 	 * @return string The resulting unparsed data from the request.

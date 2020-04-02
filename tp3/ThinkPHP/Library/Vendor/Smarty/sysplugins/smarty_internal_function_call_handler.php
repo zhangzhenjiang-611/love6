@@ -16,7 +16,7 @@
 class Smarty_Internal_Function_Call_Handler {
 
     /**
-     * This function handles calls to template functions defined by {function}
+     * This function handles calls to template functions.php defined by {function}
      * It does create a PHP function at the first call
      *
      * @param string                   $_name       template function name

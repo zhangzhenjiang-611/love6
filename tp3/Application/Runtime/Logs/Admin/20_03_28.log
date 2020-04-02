@@ -1,0 +1,49 @@
+[ 2020-03-28T13:50:19+08:00 ] 127.0.0.1 /admin/login/verify
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000206s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000168s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000225s ]
+ERR: 无法加载控制器:Login
+
+[ 2020-03-28T13:50:42+08:00 ] 127.0.0.1 /admin/login/verify
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000126s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000096s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000178s ]
+ERR: 无法加载控制器:Login
+
+[ 2020-03-28T13:50:52+08:00 ] 127.0.0.1 /admin/login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000174s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000165s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000221s ]
+ERR: 无法加载控制器:Login
+
+[ 2020-03-28T13:51:07+08:00 ] 127.0.0.1 /admin/Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000102s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000068s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000124s ]
+ERR: 无法加载控制器:Login
+
+[ 2020-03-28T13:52:04+08:00 ] 127.0.0.1 /admin/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000092s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000061s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000112s ]
+SQL: SHOW COLUMNS FROM `hd_user` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `hd_user`  [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000172s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000216s ]
+

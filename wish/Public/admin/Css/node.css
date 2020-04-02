@@ -1,0 +1,35 @@
+#wrap{
+    width: 94%;
+    height: auto;
+    overflow: hidden;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border:1px solid #ccc;
+}
+#wrap .add-app{
+    display: block;
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: red;
+    color: #fff;
+    border-radius: 4px;
+}
+#wrap .app{
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #f6f6f6;
+    border-radius: 4px;
+}
+#wrap .app p{
+    height: 30px;
+    line-height: 30px;
+}
+#wrap .app p strong{
+    font-size: 20px;
+    color: blue;
+}
+#wrap .app dl{
+    margin:10PX 0;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__PUBLIC__/admin/Css/public.css" />
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>用户名称</th>
+            <th>上一次登录时间</th>
+            <th>上一次登录IP</th>
+            <th>锁定状态</th>
+            <th>用户所属组</th>
+            <th>操作</th>
+        </tr>
+        <foreach name="user" item="v">
+             <tr>
+                 <td>{$v.id}</td>
+                 <td>{$v.username}</td>
+                 <td>{$v.logintime|date='Y-m-d H:i:s',###}</td>
+                 <td>{$v.loginip}</td>
+                 <td>
+                     <if condition="$v['lock']">
+                         锁定
+                         <else/>
+                        不锁定
+                     </if>
+                 </td>
+                 <td>
+                     <if condition="$v['username'] eq C('RBAC_SUPERADMIN')">
+                         超级管理员
+                         <else/>
+                         <ul>
+                             <foreach name="v.role" item="val">
+                                 <li>{$val.name}({$val.remark})</li>
+                             </foreach>
+                         </ul>
+                     </if>
+                 </td>
+                     <td><a href="">锁定</a></td>
+             </tr>
+        </foreach>
+
+
+    </table>
+
+</body>
+</html>

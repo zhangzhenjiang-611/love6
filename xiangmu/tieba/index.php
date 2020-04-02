@@ -25,4 +25,6 @@ class mysql {
    }
    echo "执行完毕";*/
 //测试递归转义
-print_r($_GET);
+//print_r($_GET);
+$my = mysql::getIns();
+var_dump($my);

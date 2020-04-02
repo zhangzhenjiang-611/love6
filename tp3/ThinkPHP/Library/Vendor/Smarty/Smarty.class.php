@@ -428,7 +428,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**#@-*/
 
     /**
-    * global template functions
+    * global template functions.php
     * @var array
     */
     public $template_functions = array();

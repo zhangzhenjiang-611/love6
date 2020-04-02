@@ -1,0 +1,75 @@
+[ 2020-03-27T14:16:31+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000070s ]
+ERR: 无法加载模块:Favicon
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Css/index.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+ERR: 无法加载模块:Css
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000115s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/baobao.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000100s ]
+ERR: 无法加载模块:Images
+
+
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Js/index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000170s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/ku.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000085s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/xixi.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/haixiu.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000070s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/touxiao.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000110s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/taikaixin.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000156s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/qian.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000078s ]
+ERR: 无法加载模块:Images
+
+[ 2020-03-27T14:41:17+08:00 ] 127.0.0.1 /Images/phiz/jiyan.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000089s ]
+ERR: 无法加载模块:Images
+
+

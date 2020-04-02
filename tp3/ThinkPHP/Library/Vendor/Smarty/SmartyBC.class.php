@@ -211,7 +211,7 @@ class SmartyBC extends Smarty {
      * Registers a resource to fetch a template
      *
      * @param string $type      name of resource
-     * @param array  $functions array of functions to handle resource
+     * @param array  $functions array of functions.php to handle resource
      */
     public function register_resource($type, $functions)
     {

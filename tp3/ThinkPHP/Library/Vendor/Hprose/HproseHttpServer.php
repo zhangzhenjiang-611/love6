@@ -186,7 +186,7 @@ class HproseHttpServer {
             if ($this->onAfterInvoke) {
                 call_user_func($this->onAfterInvoke, $functionName, $args, $byref, $result);
             }
-            // some service functions/methods may echo content, we need clean it
+            // some service functions.php/methods may echo content, we need clean it
             ob_clean();
             if ($resultMode == HproseResultMode::RawWithEndTag) {
                 $this->output->write($result);
@@ -265,7 +265,7 @@ class HproseHttpServer {
         $aliases_is_null = ($aliases === NULL);
         $count = count($functions);
         if (!$aliases_is_null && $count != count($aliases)) {
-            throw new HproseException('The count of functions is not matched with aliases');
+            throw new HproseException('The count of functions.php is not matched with aliases');
         }
         for ($i = 0; $i < $count; $i++) {
             $function = $functions[$i];

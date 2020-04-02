@@ -1,0 +1,89 @@
+[ 2020-03-28T10:21:43+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000085s ]
+ERR: 无法加载模块:Favicon
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000080s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Js/index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000094s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Css/index.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000107s ]
+ERR: 无法加载模块:Css
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Css/public.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+ERR: 无法加载模块:Css
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Css/index.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+ERR: 无法加载模块:Css
+
+
+:Js
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Js/index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000078s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:07:34+08:00 ] 127.0.0.1 /Css/public.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+ERR: 无法加载模块:Css
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Css/index.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000119s ]
+ERR: 无法加载模块:Css
+
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Js/index.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000133s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Css/index.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000097s ]
+ERR: 无法加载模块:Css
+
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000082s ]
+ERR: 无法加载模块:Js
+
+[ 2020-03-28T13:10:56+08:00 ] 127.0.0.1 /Css/public.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000081s ]
+ERR: 无法加载模块:Css
+

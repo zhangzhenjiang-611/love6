@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__PUBLIC__/admin/Css/public.css" />
+    <js file="__PUBLIC__/Js/jquery-1.7.2.min.js" />
+</head>
+<body>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>发布者</th>
+        <th>内容</th>
+        <th>发布时间</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+        <td>{$v.id}</td>
+        <td>{$v.username}</td>
+        <td>{$v.content|replace_phiz=###}</td>
+        <td>{$v.time|date='Y-m-d H:i:s',###}</td>
+        <td><a href="{:u('delete',array('id'=>$v['id']))}">删除</a></td>
+        </tr>
+    </foreach>
+</table>
+<div class="result page"><center>{$page}</center></div>
+</body>
+</html>

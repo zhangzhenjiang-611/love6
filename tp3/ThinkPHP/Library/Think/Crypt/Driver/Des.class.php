@@ -118,7 +118,7 @@ class Des {
           for ($i=$looping[$j]; $i!=$endloop; $i+=$loopinc) { //for efficiency
             $right1 = $right ^ $keys[$i];
             $right2 = (($right >> 4 & $masks[4]) | ($right << 28)) ^ $keys[$i+1];
-            //the result is attained by passing these bytes through the S selection functions
+            //the result is attained by passing these bytes through the S selection functions.php
             $temp = $left;
             $left = $right;
             $right = $temp ^ ($spfunction2[($right1 >> 24 & $masks[24]) & 0x3f] | $spfunction4[($right1 >> 16 & $masks[16]) & 0x3f]
@@ -221,7 +221,7 @@ class Des {
           //now apply PC-2, in such a way that E is easier when encrypting or decrypting
           //this conversion will look like PC-2 except only the last 6 bits of each byte are used
           //rather than 48 consecutive bits and the order of lines will be according to
-          //how the S selection functions will be applied: S2, S4, S6, S8, S1, S3, S5, S7
+          //how the S selection functions.php will be applied: S2, S4, S6, S8, S1, S3, S5, S7
           $lefttemp = $pc2bytes0[$left >> 28 & $masks[28]] | $pc2bytes1[($left >> 24 & $masks[24]) & 0xf]
                   | $pc2bytes2[($left >> 20 & $masks[20]) & 0xf] | $pc2bytes3[($left >> 16 & $masks[16]) & 0xf]
                   | $pc2bytes4[($left >> 12 & $masks[12]) & 0xf] | $pc2bytes5[($left >> 8 & $masks[8]) & 0xf]

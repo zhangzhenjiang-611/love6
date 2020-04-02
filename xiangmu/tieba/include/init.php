@@ -19,6 +19,7 @@ require (ROOT.'/include/db.class.php');
 require (ROOT.'/include/conf.class.php');
 require (ROOT.'/include/log.class.php');
 require (ROOT.'/include/lib_base.class.php');
+require (ROOT.'/include/mysql.class.php');
 //递归 过滤参数
   $_GET = zhuanyi($_GET);
   $_POST = zhuanyi($_POST);
