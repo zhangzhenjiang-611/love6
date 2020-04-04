@@ -35,7 +35,7 @@ class User extends Controller
         $user = new UserModel();
        // print_r($user);
        // dump($user);
-        $user->username  = '张芳芳12';
+        $user->username  = '张芳芳'.mt_rand(1000,5000);
         $user->password  = md5('111111');
         $user->logintime = time();
         $user->loginip   = '127.0.0.1';
@@ -92,6 +92,7 @@ class User extends Controller
         $user = UserModel::get(14);
         //$user->num   =  Db::raw('num + 1');
         $user->num   = ['inc',2];
+        $user->username   = 'aaa';
         print_r($user->save());
     }
 
@@ -159,6 +160,16 @@ class User extends Controller
             return $data['id'] > 15;
         });
         dump($new_res);
+    }
+
+    //类型转换
+    public  function convert() {
+        $user = UserModel::get(17);
+        var_dump($user->num);
+        //会调用获取器
+        var_dump($user->status);
+        var_dump($user->create_at);
+        var_dump($user->email);
     }
 
 }

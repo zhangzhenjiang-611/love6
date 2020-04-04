@@ -16,7 +16,35 @@ class User extends Model
     //protected $pk = 'loginip'; //设置主键
 
   //  protected $table = 'hd_role'; //设置其他表
+    //开启自动时间戳
+    protected $autoWriteTimestamp =  'datetime';
+    protected $createTime = 'create_at';
+    protected $updateTime = false;
 
+    //设置只读字段 不可修改
+    protected $readonly = ['username'];
+
+
+    //设置类型转换
+    protected $type = [
+        'num'   =>   'string',
+        'create_at'   =>   'datetime:Y-m-d',
+        'email'   =>   'integer',
+    ];
+
+    //自动完成
+    protected $auto = [
+        'email'
+
+    ];
+    protected $insert = [
+        'num' => 1  //新增数据的时候填充
+
+    ];
+    protected $update = [
+        //'email'
+
+    ];
     //初始化模型方法
     protected  static function init()
     {
@@ -47,6 +75,10 @@ class User extends Model
             1 => '正常'
         ];
         return $arr[$data['status']];
+    }
+    //创建一个修改器
+    public function setEmailAttr($value) {
+        return strtoupper($value);
     }
 
     //创建一个搜索器
