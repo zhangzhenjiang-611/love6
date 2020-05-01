@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>邮箱</th>
+        <th>登录时间</th>
+    </tr>
+    {volist name="list" id="vo"}
+    <tr>
+        <td>{$vo.id}</td>
+        <td>{$vo.username}</td>
+        <td><if condition="$vo.sex eq 1">男</else>女</if></td>
+        <td>{$vo.email}</td>
+        <td>{$vo.logintime}</td>
+    </tr>
+    {/volist}
+</table>
+{$list|raw}
+</body>
+</html>

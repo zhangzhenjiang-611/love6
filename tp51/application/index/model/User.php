@@ -10,12 +10,16 @@ namespace app\index\model;
 
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 class User extends Model
 {
     //protected $pk = 'loginip'; //设置主键
 
   //  protected $table = 'hd_role'; //设置其他表
+    //引入trait 模型软删除
+    use SoftDelete;
+    protected $deleteTime = 'delete_time';
     //开启自动时间戳
     protected $autoWriteTimestamp =  'datetime';
     protected $createTime = 'create_at';
@@ -89,6 +93,21 @@ class User extends Model
     //创建一个限定时间搜索器
     public function searchCreateAtAttr($query,$value) {
         $query->whereBetweenTime('create_at',$value[0],$value[1]);
+    }
+
+
+    //封装模型查询范围
+    public function scopeSex($query) {
+        $query->where('sex',2)->limit(4);
+    }
+
+    //封装模型多个查询范围
+    public function scopeEmailLike($query,$value) {
+        $query->where('email','like','%'.$value.'%');
+    }
+
+    public function scopeNum($query,$value) {
+        $query->where('num','>',$value);
     }
 
 }

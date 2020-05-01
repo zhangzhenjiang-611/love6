@@ -172,4 +172,78 @@ class User extends Controller
         var_dump($user->email);
     }
 
+    //封装模型查询范围
+
+    public function queryScope() {
+        //$res = UserModel::scope('sex')->select();
+        //$res = UserModel::sex()->select();
+
+        $res = UserModel::emailLike('477')->num(12)->select();
+        dump($res);
+    }
+
+    //模板输出
+    public function view() {
+        $user = UserModel::get(27);
+        $this->assign('user',$user);
+        return $this->fetch();
+    }
+
+    //json数据
+    public function json() {
+        $data = [
+            'username'  => '张芳芳16',
+            'password'  => md5('111111'),
+            'logintime' => time(),
+            'loginip'   => '127.0.0.1',
+            'list'  =>     [
+                'username'  => '张芳芳17',
+                'password'  => md5('111111'),
+                'logintime' => time(),
+                'loginip'   => '127.0.0.1'
+            ]
+        ];
+
+        $user = new UserModel();
+        $user->save($data);
+
+    }
+
+
+    //软删除
+    public function softDelete() {
+        $user = Db::name('user')->where('id',27)->useSoftDelete('delete_time',date('Y-m-d H:i:s'))->delete();
+    }
+
+    //模型软删除查询
+    public function msoftDelete() {
+        //模型自动屏蔽被软删除的数据 数据库出巡不会屏蔽
+        $user = UserModel::where('id','gt',26)->select();
+        //SELECT * FROM `hd_user` WHERE ( `id` > 26 ) AND `hd_user`.`delete_time` IS NULL
+         dump($user);
+         $user1 = Db::name('user')->where('id','gt',26)->select();
+         //SELECT * FROM `hd_user` WHERE `id` > 26
+         dump($user1);
+    }
+    //模型软删除
+    public function softDelete1() {
+        $user = UserModel::get(28);
+        $user->delete();  //模型软删除
+    }
+    //还原软删除数据
+    public function back() {
+        //查询出所有数据 包括软删除的
+        //$user0 = UserModel::withTrashed()->select();
+       // dump($user0);
+        //查询出所有软删除的数据
+        //$user = UserModel::onlyTrashed()->select();
+       // dump($user);
+        //查询出一条软删除的数据
+        $user = UserModel::onlyTrashed()->find();
+        //dump($user);
+        //还原
+        $user->restore();
+
+    }
+
 }

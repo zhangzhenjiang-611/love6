@@ -15,6 +15,8 @@ Route::get('think', function () {
 
 Route::get('hello/:name', 'index/hello');
 
+\think\facade\Route::get('detail/:id','Address/detail');
+Route::get('read/:id', 'Inject/read');
 return [
 
 ];
