@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+   
+    <link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/common.js"></script>
+   
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__URL__/">首页</a></li>
+    <li><a href="#">科室列表</a></li>
+    </ul>
+    </div>
+<div class="rightinfo">
+<div class="tools">
+    
+    	<ul class="toolbar">
+        <li class="click"><a href="__URL__/add"><span><img src="/mz/Public/Nurse2/images/t01.png"></span>添加</a></li>
+        <li class="click"><span><img src="/mz/Public/Nurse2/images/t02.png"></span>修改</li>
+        <li><span><img src="/mz/Public/Nurse2/images/t03.png"></span>删除</li>
+       
+        </ul>
+        
+        
+      
+    
+    </div>
+<table class="tablelist">
+    <thead>
+    <tr>
+        <th width="50"><input type="checkbox" checked="checked" value="" name=""></th>
+        <th>序号</th>
+        <th>用户名</th>
+        <th>用户昵称</th>
+        <th>所属分组</th>
+        <th>管理操作</th>
+    </tr>
+    </thead>
+        <volist name="list" id="vo"> 
+        <tr <if condition="$i%2 eq 0">class="odd"</if>>
+        <td><input type="checkbox" value="" name=""></td>
+                <td>{$vo.id}</td>
+                <td>{$vo.uname}</td>
+                <td>{$vo.nickname}</td>
+               <td>{$vo.gid}</td>
+                <td>
+                <a href="__URL__/edit/uid/{$vo.uid}/url/<?=base64_encode(curPageURL())?>">编辑</a>
+                <a href="__URL__/del/uid/{$vo.uid}/url/<?=base64_encode(curPageURL())?>">删除</a>
+                </td>
+            </tr>
+     </volist>       
+     </table>
+</div>
+</body>
+</html>
+<script>
+    $(function () {
+        
+
+		$('#addnew').click(function(){
+				
+				window.location.href="add.html";
+		 });
+
+
+    });
+	
+</script>

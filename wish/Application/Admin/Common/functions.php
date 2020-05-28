@@ -22,3 +22,8 @@
         }
         return $arr;
    }
+
+
+   function say() {
+       echo 333;
+   }

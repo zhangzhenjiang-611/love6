@@ -1,0 +1,32 @@
+[2016-09-26 23:42:17] 顺呼传入参数 -- 房间号:2 医生编码:00145 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00145' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:42:17] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 0第一1第二1
+[2016-09-26 23:42:17] 呼叫内容：请神经内科门诊,69号岳长生,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:50:59] 顺呼传入参数 -- 房间号:2 医生编码:00145 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00145' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:50:59] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 0第一1第二2
+[2016-09-26 23:50:59] 呼叫内容：请神经内科门诊,69号岳长生,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:51:21] 顺呼传入参数 -- 房间号:1 医生编码:00380 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00380' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:51:21] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-26 23:51:21] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00380',fp_doctor_name='赵丽英' where reg_id='12062907630019'
+[2016-09-26 23:51:21] 呼叫内容：请神经内科门诊,76号刘晓卫,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:52:12] 顺呼传入参数 -- 房间号:2 医生编码:00145 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00145' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:52:12] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 0第一1第二1
+[2016-09-26 23:52:12] 呼叫内容：请神经内科门诊,12号顾敬臣,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:53:05] 顺呼传入参数 -- 房间号:2 医生编码:00145 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00145' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-26 23:53:05] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-26 23:53:05] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00145',fp_doctor_name='唐晓梅' where reg_id='1401230223006'
+[2016-09-26 23:53:05] 呼叫内容：请神经内科门诊,28号白银京,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------

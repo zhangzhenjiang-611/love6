@@ -1,0 +1,432 @@
+<!doctype html>
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<SCRIPT language=javascript> 
+
+<!-- 
+//window.onerror=function(){return true;} 
+ --> 
+</SCRIPT>
+<script type="text/javascript" language="javascript">
+var n = 0; 
+var intervalID;
+function setEnable(){
+    n++;
+    if(n==5){
+        shunhu.disabled = false;
+		 shunhu.value = "下一位";
+  // 有时稍后
+  		clearInterval(intervalID);
+		n=0;
+    }else{
+        shunhu.value = "下一位（"+(5-n)+ "）";
+    }
+}
+function run(){
+	interval = setInterval(getInfo, "3000"); 
+} 
+
+
+
+$(function(){
+    run();
+	$("#jpz").click(function(){
+		var jz_type = $(this).attr("jz_type");
+		var params = {"doctor_code":<?=$doctor_code?>,"room":<?=$room?>,"jz_type":jz_type}; 
+		$.ajax({
+			url:"__URL__/jz_normal", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					if(data.jz_normal==1){
+						$("#jpz").val("接专诊");
+					}else{
+						$("#jpz").val("接普诊");
+					}
+					fresh_list(data.data);
+				}
+			}
+		})		
+	})
+	$(".guohao").live("click",function(){
+		var reg_id = $(this).attr("param");
+		var dept_code = $(this).attr("param2");
+		var dept_code_all = $("#ipt_dept_all").val();
+		var params = {"reg_id":reg_id,"dept_code":dept_code,"dept_code_all":dept_code_all,"login_type":"<?=$login_type?>","doctor_code":<?=$doctor_code?>}; 
+		$.ajax({
+			url:"__URL__/setGuoHao", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend:function(){
+				$("#tips_"+reg_id).show();
+			},
+			success:function(data){
+				$("#tips_"+reg_id).hide();
+				if(data.success==1){
+					fresh_list(data.data);
+				}else{
+					alert("过号失败");
+				}
+			}
+		})	
+		return false;
+	})
+	$("#recall").click(function(){
+		var doctor_code = "<?=$doctor_code?>";
+		var dept_code = $("#ipt_dept").val();
+		var params = {"doctor_code":doctor_code,"dept_code":dept_code,"login_type":"<?=$login_type?>","doctor_code":<?=$doctor_code?>}; 
+		$.ajax({
+			url:"__URL__/chonghu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				
+			}
+		})		
+		return false;
+	})
+	$(".qihao").live("click",function(){
+		var pat_code = $(this).attr("param");
+		var dept_code = $(this).attr("param2");
+		var dept_code_all = $("#ipt_dept_all").val();
+		var params = {"pat_code":pat_code,"dept_code":dept_code,"dept_code_all":dept_code_all,"login_type":"<?=$login_type?>","doctor_code":<?=$doctor_code?>}; 
+		var msg = "真的要弃号吗？\n\n请确认！";
+	    if (confirm(msg)==true){
+			$.ajax({
+			url:"__URL__/setQiHao", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend: function(){
+				$("#tips_"+pat_code).show();
+			},
+			success:function(data){
+				$("#tips_"+pat_code).hide();
+				if(data.success==1){
+					fresh_list(data.data);
+				}else{
+					alert("弃号失败");
+				}
+				
+			}
+		})	
+	 			
+	    }else{
+			return false;
+	    }
+		return false;
+	})
+	
+	$(".guidui").live("click",function(){
+		var reg_id = $(this).attr("param");
+		var dept_code = $(this).attr("param2");
+		var dept_code_all = $("#ipt_dept_all").val();
+		var params = {"reg_id":reg_id,"dept_code":dept_code,"dept_code_all":dept_code_all,"login_type":"<?=$login_type?>","doctor_code":<?=$doctor_code?>}; 
+		$.ajax({
+			url:"__URL__/setGuiDui", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend:function(){
+				$("#tips_"+reg_id).show();
+			},
+			success:function(data){
+				$("#tips_"+reg_id).hide();
+				if(data.success==1){
+					fresh_list(data.data);
+				}else{
+					alert("归队失败");
+				}
+			}
+		})	
+		return false;
+	})
+	
+	$("#shunhu").click(function(){
+		var dept_code = $("#ipt_dept").val();
+		var dept_code_all = $("#ipt_dept_all").val();
+		var doctor_code = "<?=$doctor_code?>";
+		$(this).attr("disabled","disabled");
+		intervalID = window.setInterval("setEnable()",1000);
+		var params = {"dept_code":dept_code,"doctor_code":doctor_code,"dept_code_all":dept_code_all,"login_type":"<?=$login_type?>"}; 
+		$.ajax({
+			url:"__URL__/shunhu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					fresh_list(data.data);
+					
+					    
+				}else{
+					alert("顺呼失败");
+				}
+			}
+		})		
+	})
+	
+	
+	$(".xuanhu").live("click",function(){
+		var doctor_code = "<?=$doctor_code?>";
+		var pat_code = $(this).attr("param");
+		var dept_code= $(this).attr("param2");
+		var dept_code_all = $("#ipt_dept_all").val();
+		var params = {"doctor_code":doctor_code,"pat_code":pat_code,"dept_code":dept_code,"dept_code_all":dept_code_all}; 
+		$.ajax({
+			url:"__URL__/xuanhu",  
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					fresh_list(data.data);
+				}else{
+					alert("呼叫失败");
+				}
+			}
+		})		
+	})
+	
+	$(".itab ul li a").live("click",function(){
+		var dept_code = $(this).attr("param");
+		$(".itab ul li a").removeClass("selected");
+		$(this).addClass("selected");
+		$(".patlist_con").hide();
+		$("#patbody_"+dept_code).show();
+		$("#guohao_list_"+dept_code).show();
+		$("#ipt_dept").val(dept_code);
+		
+		$(".pat_guohao_area").hide();
+		$("#pat_guohao_area_"+dept_code).show();
+		
+	})
+	
+}) 
+	function getInfo(){
+		var doctor_code = '<?=$doctor_code?>';
+		var room = "<?=$room?>";
+		var params = {"doctor_code":doctor_code,"room":room}; 
+		$.ajax({
+			url:"__URL__/getData", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				fresh_list(data.data);
+			}
+		})	
+	}
+	function fresh_list(data){
+		 //$(".patlist_con").html("");
+		 for(var m=0;m<data.length;m++){
+			 var pat_list = "";
+			 var pat_list_guohao = "";
+			 $("#normal_num").html(data[0].normal_num); 
+			 if(data[m].pat_now!="n"){
+				var pat_now = data[m].pat_now;
+			    for(var i=0;i<pat_now.length;i++){
+					pat_list+="<ul style='background:yellow'><li class='one'>"+pat_now[i].reg_seq_no+"</li><li class='two'>"+pat_now[i].pat_name+"</li><li class='five'>"+data[m].jz_type+"</li><li class='thr status'>已呼叫</li><li class='four'><a href='#' class='guohao' param='"+pat_now[i].pat_code+"' param2='"+pat_now[i].dept_code+"'>过号</a><i class='tips_s' id='tips_"+pat_now[i].pat_code+"'>请稍后...</i></li></ul>";
+				}
+			 }
+			 
+			 if(data[m].pat_wait!="n"){
+				var pat_wait = data[m].pat_wait;
+				for(var i=0;i<pat_wait.length;i++){
+					pat_list+="<ul style='background:#ffffff'><li class='one'>"+pat_wait[i].reg_seq_no+"</li><li class='two'>"+pat_wait[i].pat_name+"</li><li class='five'>"+data[m].jz_type+"</li><li class='thr status'>未呼叫</li><li class='four'><a href='#' class='guohao' param='"+pat_wait[i].pat_code+"' param2='"+pat_wait[i].dept_code+"'>过号</a><i class='tips_s' id='tips_"+pat_wait[i].pat_code+"'>请稍后...</i></li></ul>";
+				}
+			 }
+			 $("#switch_tit_"+data[m].dept_code+" a i").html("("+data[m].pat_wait_num+")");
+			 $("#patbody_"+data[m].dept_code).html(pat_list);
+			 if(data[m].pat_guohao!="n"){
+				var pat_guohao = data[m].pat_guohao;
+				for(var i=0;i<pat_guohao.length;i++){
+					pat_list_guohao+="<ul style='background:#fff'><li class='one'>"+pat_guohao[i].reg_seq_no+"</li><li class='two'>"+pat_guohao[i].pat_name+"</li><li class='five'>"+data[m].jz_type+"</li><li class='thr status'>已过号</li><li class='four'><a href='#' class='guidui' param='"+pat_guohao[i].pat_code+"' param2='"+pat_guohao[i].dept_code+"'>归队</a><i class='tips_s' id='tips_"+pat_guohao[i].pat_code+"'>请稍后...</i></li></ul>";
+				}
+			 }
+			//alert(data[m].dept_code);
+			 $("#guohao_list_"+data[m].dept_code).html(pat_list_guohao);
+			 //$("#guohao_list_"+data[m].dept_code+":hidden").html(pat_list_guohao);
+		 }
+		 
+		// $(".patlist")
+
+}
+</script>
+<style>
+html,body{ background:#fff; _overflow:hidden;	}
+.ipt{ width:204px; height:60px; font-weight:bold; cursor:pointer; font-size:30px; margin-left:5px;}
+.switch_tit{ width:100%; height:40px; border-bottom:1px solid #ccc; line-height:40px;margin-bottom:10px; border-left:1px solid #ccc;}
+.switch_tit ul li{ float:left;border:1px solid #ccc; border-left:none; border-bottom:none;  padding:0px 20px; cursor:pointer; font-size:16px;}
+.switch_tit ul li.current{ background:#fff; border-top:2px solid #11CCF3; margin-top:0px; height:39px; font-weight:bold; }
+.switch_tit ul li i{ font-style:normal; font-weight:bold; color:red;}
+
+.itab {
+  border-bottom: 1px solid #d0dee5;
+  border-left: 1px solid #d3dbde;
+  height: 36px;
+  position: relative;
+  margin-bottom:12px;
+  margin-top:15px;
+  
+}
+.itab ul li {
+  background: url("__PUBLIC__/Home/img/itabbg.png") repeat-x;
+  border-right: 1px solid #d3dbde;
+  float: left;
+  height: 37px;
+  line-height: 37px;
+  _width:205px;
+}
+.itab ul li a {
+  color: #000;
+  font-size: 16px;
+  padding-left: 25px;
+  padding-right: 25px;
+  text-decoration:none;
+}
+.itab ul li a i{ font-style:normal; font-weight:bold; color:red;}
+.itab ul li a.selected {
+  background: url("__PUBLIC__/Home/img/itabbg1.png") repeat-x;
+  display: block;
+  font-weight: bold;
+  height: 37px;
+}
+.pat_guohao_area{display:none;}
+.patbody{ display:none;}
+</style>
+<title>医生虚拟呼叫</title>
+</head>
+	
+<body>
+<!-- <div id="zhezhao">数据加载中...</div> -->
+<input type="hidden" id="ipt_dept" value="{$dnList[0]['dept_code']}" />
+<input type="hidden" id="ipt_dept_all" value="{$dept_all}" />
+<div class="mainbody">
+<div class="button">
+	<span class="b_in">
+  
+   <if condition="$expert eq 1 and $jz_normal eq 0 and $jpz eq 'y'">
+    <input type="button" value="下一位" id="shunhu" class="ipt" style="width:130px;">
+      <input type="button" value="重呼" id="recall" class="ipt" style="width:130px;">
+       <input type="button" <if condition="$jz_normal eq 1">value="接专诊"</if> <if condition="$jz_normal eq 0">value="接普诊"</if> id="jpz" jz_type="expert" class="ipt" style="width:137px; ">
+   <else />
+   
+   <input type="button" value="下一位" id="shunhu" class="ipt">
+      <input type="button" value="重呼" id="recall" class="ipt">
+   </if>
+    <!--  
+     --> 
+ 
+    </span>
+</div>
+
+<div class="patlist">
+	<div id="cinfo" style=" padding-right:12px; position:absolute; left:260px; top:93px;">
+   <if condition="$expert eq 1 and $jz_normal eq 0 and 1 eq 2">
+   当前有 <span class="num" id="normal_num" style="color:red; font-weight:bold"><?=$dnList[0]['normal_num']?></span> 名普诊患者
+   </if>
+    <p style="float:right" id="chonghuinfo"></p>
+    </div>
+    <div class="itab">
+  	<ul> 
+    <volist name="dnList" id="vo">
+       
+        <li id="switch_tit_{$vo.dept_code}"><a <if condition="$i eq 1">class="selected"</if> href="#tab{$vo.dept_code}" param="{$vo.dept_code}">{$vo.dept_name}<i>({$vo.pat_wait_num})</i></a></li> 
+        
+    </volist>
+    <!-- <div style="position:absolute; left:340px; margin-top:8px;" id="jiezhen"><a href="#">接诊普诊患者</a></div> -->
+  	</ul>
+    </div>
+    <div class="patlist_tit">
+    	<ul>
+        	<li class="one">序号</li>
+            <li class="two">患者姓名</li>
+            <li class="five">类别</li>
+            <li class="thr">呼叫状态</li>
+            <li class="four">操作</li>
+        </ul>
+    </div>
+<volist name="dnList" id="vo" key="k">
+        <div class="patlist_con" id="patbody_{$vo.dept_code}" <if condition="$k eq 1">style="display:block"</if>>
+        
+            <volist name="vo['pat_now']" id="vo2">
+                <ul style="background:yellow">
+                    <li class="one">{$vo2.reg_seq_no}</li>
+                    <li class="two">{$vo2.pat_name}</li>
+                    <li class="five">{$vo.jz_type}</li>
+                    <li class="thr status">已呼叫</li>
+                    <li class="four"><a href='#' class='guohao' param='{$vo2.pat_code}' param2='{$vo2.dept_code}'>过号</a><!--  | <a href='#' class='qihao' param='{$vo.pat_code}|{$vo.noon_flag}' param2='{$vo.noon_flag}'>弃号</a> | <a href='#' class='xuanhu' param='{$vo2.pat_code}'  param2='{$vo2.dept_code}'>呼叫</a>--><i class="tips_s" id="tips_{$vo2.pat_code}">请稍后...</i></li>
+                </ul>
+            </volist>
+            
+            <volist name="vo['pat_wait']" id="vo3">
+                <ul>
+                    <li class="one">{$vo3.reg_seq_no}</li>
+                    <li class="two">{$vo3.pat_name}</li>
+                    <li class="five">{$vo.jz_type}</li>
+                    <li class="thr status">未呼叫</li>
+                    <li class="four"><a href='#' class='guohao' param='{$vo3.pat_code}' param2='{$vo3.dept_code}'>过号</a><!--   | <a href='#' class='qihao' param='{$vo3.pat_code}' param2='{$vo3.dept_code}'>弃号</a>--> <i class="tips_s" id="tips_{$vo3.pat_code}">请稍后...</i></li>
+                </ul>
+            </volist>
+        </div>
+        <div class="pat_guohao_area" id="pat_guohao_area_{$vo.dept_code}"  <if condition="$k eq 1">style="display:block"</if>>
+            <div style="width:100%; float:left;"><h2 class="guohao_tit">过号列表</h2></div>
+            <div class="guohao_area">
+                 <div class="patlist_tit">
+                    <ul>
+                        <li class="one">序号</li>
+                        <li class="two">患者姓名</li>
+                        <li class="five">类别</li>
+                         <li class="thr">呼叫状态</li>
+                            <li class="four">操作</li>
+                        
+                    </ul>
+                  </div>
+                 <div class="patlist_con" id="guohao_list_{$vo.dept_code}" style="height:100px;"> 
+                     <volist name="vo['pat_guohao']" id="vo3">
+                        <ul>
+                            <li class="one">{$vo3.reg_seq_no}</li>
+                            <li class="two">{$vo3.pat_name}</li>
+                            <li class="five">{$vo.jz_type}</li>
+                            <li class="thr status">
+                            已过号
+                            </li>
+                            <!-- <li class="four"><a href='#' class='xuanhu' param='{$vo3.pat_code}' param2='{$vo3.dept_code}'>呼叫</a></li> -->
+                            <li class="four"><a href='#' class='guidui' param='{$vo3.pat_code}' param2='{$vo3.dept_code}'>归队</a></li>
+                        </ul>
+                     </volist>
+                 </div>
+            </div>
+        </div>
+   
+</volist>
+
+
+<script>  
+
+//禁用右键、文本选择功能、复制按键  
+//    $(document).bind("contextmenu",function(){return false;});  
+    $(document).bind("keydown",function(e){ 
+e=window.event||e; 
+if(e.keyCode==116){ 
+e.keyCode = 0; 
+return false; 
+} 
+}); 
+
+    $(document).keydown(function(){return false});  
+
+
+</script>   
+
+</body>
+</html>

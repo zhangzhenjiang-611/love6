@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+  RewriteRule ^(.*)/r/(.*)$ $1/Home/SmallScreen/index/room/$2 
+  #RewriteRule ^(.*)/login/(.*)$ $1/Home/Login/index/room/$2 
+   RewriteRule ^(.*)/b/(.*)$ $1/Home/BigScreen/index/id/$2
+   RewriteRule ^(.*)/c$ $1/Home/ChuZhen
+   
+   RewriteRule ^(.*)/Nurse/zq/(.*)$ $1/Nurse/Index/index/zhenqu/$2
+    RewriteRule ^(.*)/nlogin$ $1/Nurse/Login/
+   RewriteRule ^(.*)/nlogin/(.*)$ $1/Nurse/Login/index/zhenqu/$2
+   RewriteRule ^(.*)/fuzhen/(.*)/(.*)$ $1/FuZhen/index/index/zhenqu/$2/sid/$3
+</IfModule>

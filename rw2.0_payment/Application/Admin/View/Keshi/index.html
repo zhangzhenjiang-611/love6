@@ -1,0 +1,74 @@
+<include file="Base/head" />
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span><i class="icon-table"></i>类别浏览</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+            <form action="__URL__/index" method="get">
+            <div id="DataTables_Table_1_length" class="dataTables_length">
+            <label>
+                共{$count}条&nbsp;
+            </label>
+             </div>
+            <div class="dataTables_filter" id="DataTables_Table_0_filter">
+                <label>按科室名称搜索: <input aria-controls="DataTables_Table_0" name="keywords" value="{$keywords}" type="text"><button class="btn btn-info">搜索</button></label>
+            </div>
+            </form>
+                <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 208px;" aria-label="Browser: activate to sort column ascending">类别ID</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 195px;" aria-label="Platform(s): activate to sort column ascending">科室名称</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 135px;" aria-label="Engine version: activate to sort column ascending">科室内容</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 98px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
+                        </tr>
+                    </thead>         
+                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    <volist name="list" id="v">
+                        <tr class="odd" align='center'>
+                            <td class="  ">{$v['id']}</td>
+                            <td class=" ">{$v['tid']}</td>
+                            <td class=" ">{$v['name']}</td>
+                            <td class=" " onclick="getinfo(this)" content="{$v['content']}">点击查看</td>
+                            <td class=" ">
+                                <a href="__URL__/delete/id/{$v['id']}" class="icon-trash" style="font-size:20px;color:black"></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="__URL__/edit/id/{$v['id']}" class="icon-tools" style="font-size:20px;color:black"></a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table> 
+            <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+            {$page} 
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function getinfo(obj){
+        var html = $(obj).attr("content");
+        if(html==""){
+            html = "暂无数据";
+            layer.open({
+                  type: 1,
+                  title: '详细信息',
+                  skin: 'layui-layer-rim', //加上边框
+                  area: ['420px', '240px'], //宽高
+                  content: "<div style='margin:80px;text-align: center'>"+html+"</div>"
+            });
+        }else{
+            layer.open({
+                  type: 1,
+                  title: '详细信息',
+                  skin: 'layui-layer-rim', //加上边框
+                  area: ['750px', '400px'], //宽高
+                  content: "<div style='margin:20px;'>"+html+"</div>"
+            });
+        }
+
+    }
+</script>
+<include file="Base/foot" />

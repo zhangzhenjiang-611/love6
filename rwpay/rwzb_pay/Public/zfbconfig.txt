@@ -1,0 +1,11 @@
+{
+	"sign_type": "RSA",
+	"alipay_public_key": "xxx",
+	"merchant_private_key": "xxxx",
+	"charset": "UTF-8",
+	"gatewayUrl": "https://openapi.alipay.com/gateway.do",
+	"app_id": "xxx",
+	"notify_url": "http://222.128.103.58:11288/rwzb-pay/index.php/Home/Pay/notify/pay_type/alipay",
+	"MaxQueryRetry": "10",
+	"QueryDuration": "3"
+}

@@ -1,4 +1,5 @@
 <?php
+//include 'D:/project/love6/wish/ThinkPHP/Common/functions.php';
 return array(
 	//'配置项'=>'配置值'
     'DB_TYPE'               =>  'mysql',     // 数据库类型
@@ -17,6 +18,31 @@ return array(
     'DB_MASTER_NUM'         =>  1, // 读写分离后 主服务器数量
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
     //自定义SESSION 数据库存储
-   // 'SESSION_TYPE' => 'Db'
-    //'SESSION_TYPE' => 'Redis'
+    //'SESSION_TYPE' => 'mysqli',
+    //'SESSION_TYPE' => 'Redis',
+'SESSION_OPTIONS'         =>  array(
+        //'name'                =>  'username',                    //设置session名
+      //  'type'   =>  'redis',
+        //'prefix'=>'sess_',
+        //'expire'              =>  1440,                      //SESSION过期时间，单位秒
+        //'use_trans_sid'       =>  1,                               //跨页传递
+        //'use_only_cookies'    =>  0,                               //是否只开启基于cookies的session的会话方式
+
+    ),
+    'SESSION_TABLE'=>'hd_session',
+
+  /*  'SESSION_AUTO_START'    =>  true,    // 是否自动开启Session
+    'SESSION_TYPE'          =>  'Mysqli', // session hander类型 默认无需设置 除非扩展了session hander驱动
+    'SESSION_PREFIX'        =>  'sess_', // session 前缀
+    'VAR_SESSION_ID'        =>  'session_id', //sessionID的提交变量*/
+
+   //公众号配置
+    /*
+     *   protected $apiKey = '';            //apikey
+        protected $apiSecret = '';         // api秘钥
+        protected $templateId = '';        //模板id
+     * */
+    'API_KEY' =>  '12',
+    'apiSecret' =>  '34',
+    'templateId' =>  '56',
 );

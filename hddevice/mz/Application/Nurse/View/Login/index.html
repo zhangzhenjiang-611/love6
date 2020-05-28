@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+
+<link href="__PUBLIC__/Home/wopop/css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+<script language="javascript">
+$(function(){
+	$("#submit").click(function(){
+		if($("#code").val()==""||$("#code").val()=="请输入您的工作编号"){
+			alert("工号不能为空");
+			return;
+		}
+		if($("#zhenqu").val()==""){
+			alert("必须选择登录诊区"); 
+			return;
+		}
+		
+		var params = {"code":$("#code").val(),"zhenqu":$("#zhenqu").val()};  
+		$.ajax({
+			url:"__URL__/login_do", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					window.location.href="__APP__/Nurse2/Index/main/zhenqu/"+$("#zhenqu").val()+"#1/16"; 
+				}else{
+					alert("工号不存在");
+				}	
+			}
+		})						
+	})
+})
+</script>
+<style>
+.login_padding{ margin-top:20px;}
+</style>
+</head>
+
+<body class="login">
+
+<div class="login_m">
+	<!-- <div class="login_logo"><img src="__PUBLIC__/Home/wopop/images/logo.png" width="406"></div> -->
+	<div class="login_boder">
+		<div class="login_padding" >
+			<h2>护士工号</h2>
+			<label>
+				<input type="text" id="code" class="txt_input txt_input2" onfocus="if (value =='请输入您的工作编号'){value =''}" onblur="if (value ==''){value='请输入您的工作编号'}" value="请输入您的工作编号">
+			</label>
+			
+            <h2>请选择诊区</h2>
+            <label>
+				<select id="zhenqu">
+                	 <option value="">请选择诊区</option>
+                    <volist name='zqlist' id="vo">
+                   
+                    <option value="{$vo.id}" <if condition="$vo['id'] eq $zhenqu">selected="selected"</if>>{$vo.name}</option>
+                   </volist>
+                </select>
+			</label>
+			<p class="forgot"><a href="javascript:void(0);"> </a></p>
+			<div class="rem_sub">
+				
+				<label>
+					<input type="submit" class="sub_button" name="button" id="submit" value="登录" style="opacity: 0.7;">
+				</label>
+			</div>
+		</div>
+	</div><!--login_boder end-->
+</div><!--login_m end-->
+
+<br />
+<br />
+
+<p align="center"> BeiJing HaiDian Hospital <a href="#" target="_blank" title="北京海淀医院">北京海淀医院</a></p>
+
+</body>
+</html>

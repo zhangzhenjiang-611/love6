@@ -1,0 +1,1233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/jianka/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/jianka/css/index.css" />
+<script language="javascript" src="__PUBLIC__/zizhu/js/jquery-1.9.1.js" ></script> 
+<script language="javascript" src="__PUBLIC__/zizhu/js/ServerClock.js" ></script>  
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/zizhu/js/my.js"></script>
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)  
+{   
+    var myDate= this;  
+    var str = myDate.toLocaleDateString();  
+    if (showWeek)  
+    {   
+        var Week = ['日','一','二','三','四','五','六'];  
+        str += ' 星期' + Week[myDate.getDay()];  
+    }  
+    return str;  
+}  
+<!-- 
+//window.onerror=function(){return true;} 
+// -->
+</SCRIPT>
+<script language="javascript">
+	// 对Date的扩展，将 Date 转化为指定格式的String
+	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+	// 例子： 
+	// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
+	// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+	Date.prototype.Format = function (fmt) { //author: meizz 
+	    var o = {
+	        "M+": this.getMonth() + 1, //月份 
+	        "d+": this.getDate(), //日 
+	        "h+": this.getHours(), //小时 
+	        "m+": this.getMinutes(), //分 
+	        "s+": this.getSeconds(), //秒 
+	        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+	        "S": this.getMilliseconds() //毫秒 
+	    };
+	    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+	}
+	var c = 0;
+    <?php
+    $weekary = array("日","一","二","三","四","五","六");
+    $W = $weekary[date("w")];
+    ?>
+    var Y =<?php echo date('Y')?>, M =<?php echo date('n')?>, D =<?php echo date('j')?>;
+    function stime() {
+        c++
+        sec = <?php echo time() - strtotime(date("Y-m-d"))?>+c;
+        H = Math.floor(sec / 3600) % 24
+        I = Math.floor(sec / 60) % 60
+        S = sec % 60
+        if (S < 10) S = '0' + S;
+        if (I < 10) I = '0' + I;
+        if (H < 10) H = '0' + H;
+        if (H == '00' & I == '00' & S == '00') D = D + 1; //日进位
+        if (M == 2) { //判断是否为二月份******
+            if (Y % 4 == 0 && !Y % 100 == 0 || Y % 400 == 0) { //是闰年(二月有28天)
+                if (D == 30) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //非闰年(二月有29天)
+                if (D == 29) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        else { //不是二月份的月份******
+            if (M == 4 || M == 6 || M == 9 || M == 11) { //小月(30天)
+                if (D == 31) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //大月(31天)
+                if (D == 32) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        if (M == 13) {
+            Y += 1;
+            M = 1;
+        } //年份进位
+        $.ajax({
+            url:"__URL__/getdangqian_timme", 
+            type:'post',
+            dataType:'json',
+            success:function(data){
+                // $("#show_times").html(data['rq']+"<span style='margin-right:34px;'>"+data['xq']+"</span>"+data['sj'])
+                $("#show_times").html(Y + '年&nbsp;&nbsp;' + M + '月' + D + '日 ' +"<span style='margin-left:75px;color:#fff;'>星期<?=$W?></span>") 
+            }
+        })
+        /********************改为一秒执行一次***********************/
+        setTimeout("stime()", 30000); 
+    }
+	$(function(){
+		// 操作之前,如果读卡器内有卡,先把读卡器内有卡回收;
+		// var re = window.external.getUserId();
+		var re = "zzj001";
+ 		$("#zzj_id").val(re);
+		stime();
+		/*var DcrfGetSecBlockData =window.external.DcrfGetSecBlockData();
+		alert(DcrfGetSecBlockData);return false;*/
+		// 发卡机走卡
+		/*var flag_MoveInCard = window.external.Crt580MoveInCard;//发卡机走卡成功,发卡机走卡失败
+		alert(flag_MoveInCard);
+		var Crt580WriteM1CardNo =window.external.Crt580WriteM1CardNo("1005589201");
+		alert(Crt580WriteM1CardNo);
+		var Crt580ReadM1CardBlockData =window.external.Crt580ReadM1CardBlockData();
+		alert(Crt580ReadM1CardBlockData);*/
+		// var Crt580RecyleCard_flag =window.external.Crt580RecyleCard();
+		// alert(Crt580RecyleCard_flag);
+		var data,datarow;
+		var interval = "";
+		var interval2 = new Array();
+		var interval3 = new Array();
+		var interval4 = new Array();
+		var countdown = 60;
+		var jzk_flag = 0;
+		var page = 1;
+		var pagedata = null;
+		var ocx;
+		var cardNum;
+		var now_time = null;
+		var moring_time = null;
+		var moon_time = null;
+		var key_value="";
+		var key_value2="";
+		// $("#card_code").val("3");
+		// writeLog("选择身份证建卡");
+		//$("#op_now").val("jianka_xz_sfz_input_phone");
+		$("#op_now").val("jianka_chose_card_type");
+		//导航条---开始
+        $("#tishi_dian1").show();
+        $("#tishi_dian2").hide();
+        $("#tishi_dian3").hide();
+        $("#tishi_dian4").hide();
+        $("#tishi_1").css({"color":"#ff7800","font-size":"26px"});
+        //导航条---结束
+		// 选择卡类型隐藏
+		$(".mtnum2").hide();
+		$(".chose_card_type_area").show();
+		// $(".jianka_input_phone").show();
+		$("#jianka_phone").val("");
+		$(".jianka_phone_area .tips_jianka").text(""); 
+		key_value = "";
+		$("#op_code").val(new Date().Format("yyyyMMddhhmmssS"));
+		$(".btn_area").show();
+		$("#confirm").css({"visibility":"hidden"});
+		$("#fanhui").css({"visibility":"visible"});
+		$("#tuichu").css({"visibility":"visible"});
+		daojishi(120);
+		// writeLog("选择自助建卡");
+		document.onselectstart = function(){
+            return false;
+        }
+		function settime(val) {
+		    if(countdown == 1){
+		        $("#tuichu").trigger("click");
+		        countdown = 0; 
+		        clearTimeout(interval2);
+		        return;
+		    }else{ 
+		        countdown--; 
+		        $("#downcount").show().text(countdown);
+		    } 
+		    var in2 = setTimeout(function() { 
+		        settime(val) 
+		    },1000);
+		    interval2.push(in2);
+		}
+		/***
+		***倒计时函数
+		********/
+		function daojishi(etime){
+		    for(var key in interval2){
+		        clearTimeout(interval2[key]);
+		    }
+		    countdown = etime;
+		    settime(etime);
+		}
+		/*******建卡数字键盘区开始*******************************************************************************/
+		var key_value = "";
+		$(".jianka_phone_area .key li.num").on("mousedown",function(){
+			//$(".j_keybord_area .key li").removeClass("active");
+			$(".jianka_phone_area .tips_jianka").text("");
+			$(this).addClass("active");
+			var key_value=$("#jianka_phone").val();
+			key_value+=$(this).attr("param");
+			$("#jianka_phone").val(key_value);
+			$("#jk_phone").val(key_value);
+
+		})
+		$(".jianka_phone_area .key li.del").on("click",function(){
+			$(".jianka_phone_area .tips_jianka").text("");
+			var jianka_phone=$("#jianka_phone").val();
+		    var a="";
+		    if(jianka_phone.length>0){
+		    	var a=jianka_phone.substr(0,jianka_phone.length-1);
+		    }
+		   	$("#jianka_phone").val(a);
+			$("#jk_phone").val(a); 
+		    key_value="";
+		    key_value2="";
+		})
+		$(".jianka_phone_area .key li").on("mouseup",function(){
+			$(".jianka_phone_area .key li").removeClass("active");
+			//$(this).addClass("active");
+		})	
+		/*******建卡数字键盘区结束********************************************************************************/
+		
+		/*xz_sfz选择身份证建卡*/
+		$("#xz_sfz").on("click",function(){
+			//导航条---开始
+            $("#tishi_dian1").hide();
+            $("#tishi_dian2").show();
+            $("#tishi_dian3").hide();
+            $("#tishi_dian4").hide();
+            $("#tishi_1").css({"color":"#666","font-size":"24px"});
+            $("#tishi_2").css({"color":"#ff7800","font-size":"26px"});
+            //导航条---结束
+			$("#card_code").val("3");
+			// writeLog("选择身份证建卡");
+			$("#op_now").val("jianka_xz_sfz_input_phone");
+			// 选择卡类型隐藏
+			$(".mtnum2").hide();
+			$(".chose_card_type_area").hide();
+			$(".jianka_input_phone").show();
+			$("#jianka_phone").val("");
+			$(".jianka_phone_area .tips_jianka").text(""); 
+			key_value = "";
+			// window.external.send(4,2);   //身份证
+			$("#fanhui").css({"visibility":"visible"});
+			$("#confirm").css({"visibility":"visible"});
+			$("#tuichu").css({"visibility":"visible"});
+			daojishi(120);
+		});
+		/*xz_yibao建卡*/
+		$("#xz_yibao").on("click",function(){
+			//导航条---开始
+            $("#tishi_dian1").hide();
+            $("#tishi_dian2").show();
+            $("#tishi_dian3").hide();
+            $("#tishi_dian4").hide();
+            $("#tishi_1").css({"color":"#666","font-size":"24px"});
+            $("#tishi_2").css({"color":"#ff7800","font-size":"26px"});
+            //导航条---结束
+			$("#card_code").val("1");
+			// writeLog("选择医保卡建卡");
+			$("#op_now").val("jianka_xz_yibao_input_phone");
+			// 选择卡类型隐藏
+			$(".mtnum2").hide();
+			$(".chose_card_type_area").hide();
+			$(".jianka_input_phone").show();
+			$("#jianka_phone").val("");
+			$(".jianka_phone_area .tips_jianka").text(""); 
+			key_value = "";
+			$("#fanhui").css({"visibility":"visible"});
+			$("#confirm").css({"visibility":"visible"});
+			$("#tuichu").css({"visibility":"visible"});
+			daojishi(120);
+		});
+		$(".inp").on("click",function(){
+		 	window.external.runHandInput();
+		});
+		$(".delete").on("click",function(){
+		 	// $(this).parent('tr').find('input').val("");
+		 	var str = $(this).parent('tr').find('input').val();
+		 	var a="";
+		    if(str.length>0){
+		    	var a=str.substr(0,str.length-1);
+		    }
+		    $(this).parent('tr').find('input').val(a);
+		});
+		
+		/*退出按钮点击事件*/
+		$("#tuichu").on("click",function(){
+			// 关闭手动输入
+		 	// window.external.stopHandInput(); 
+		    // writeLog("点击退出退到主界面");
+		    $("#jz_card_quhao").val("");
+		    $("#jz_card_no_guahao_sfz").val("");
+		    $("#jz_card_no_sfz").val("");
+		    $(".op_now").val("");
+
+		    $("#jz_name").html("");
+		    $("#guahao_name").html("");
+		    $("#keshi_name").html("");
+		    $("#attr_list").html("");
+		    $("#sub_list").html("");
+		    $(".chose_room h4").html("");
+		    $(".tips").html("");
+		    $(".alipay_ma_show .tips").html("请用手机支付宝扫描付款");
+		    $(".alipay_ma_show .tips").html("请用手机支付宝扫描付款");
+		    $(".alipay_ma_show .erweima").html("");  
+		    $(".alipay_ma_show .erweima").html(""); 
+		    $(".alipay_ma_show .pay_val").html("");
+		    $(".alipay_ma_show .pay_val").html("");
+		    $(".chufang_list").html("<h4></h4>");
+		    $(".yb_op_area .tips").html('');
+		    $(".yb_op_area_guahao .tips_guahao").html('');
+		    key_value="";
+		    key_value2="";
+		    $(".inhide").val("");
+		    $("#downcount").hide();
+		    for(var key in interval2){
+		        clearTimeout(interval2[key]);
+		    }
+		    for(var key in interval3){
+		        clearInterval(interval3[key]);
+		    }
+		  
+		    // 弹出卡
+		    // window.external.MoveOutCard();
+		    //禁止进卡
+		    // window.external.DisAllowCardIn();
+		    // window.external.keybord_close();
+		    // window.external.Out_UMS_CardClose();
+		    // window.external.Out_UMS_EjectCard();
+		    // var zzj_id = $("#zzj_id").val();
+		    // alert(zzj_id);
+		    //alert("__APP__/ZiZhu");
+		    // window.external.send(1,4); //关闭灯带
+		    window.location.href="__APP__/ZiZhu/Index";
+		   // window.external.webBrowserNavigateHome();
+		    // window.external.webBrowserNavigateHome();
+		    // window.external.FreeYBIntfDll();
+		})
+
+		/*****确定按钮点击事件开始**********/
+		$("#confirm").on("click",function(){
+		    //alert($("#op_now").val());
+		    var op_now=$("#op_now").val();
+		    for(var key in interval3){
+		        clearInterval(interval3[key]);
+		    }
+		    switch(op_now){
+		    	case "jianka_xz_sfz_input_phone":
+		        	// writeLog("输入手机号点击确定");
+		        	// 清空手机号输入错误时的提示信息
+		        	$(".jianka_phone_area .tips_jianka").text(""); 
+		        	var jk_phone = $("#jk_phone").val();
+		        	var reg = /^1(3|4|5|7|8)\d{9}$/;
+		        	if(!reg.test(jk_phone)){
+						　$(".jianka_phone_area .tips_jianka").text("手机号输入错误"); 
+						return;
+					}
+					// window.external.send(4,2);
+		        
+		        	$(".jianka_input_phone").hide();
+		        	$(".put_shenfenzheng").show();
+		        	// $(".jianka_xz_ic_getinfo").show();
+		        	// $(".shenfenzheng_type").show();
+		        	$(".shenfenzheng_type .tips").html("");
+		        	daojishi(120);
+		        	$("#fanhui").css({"visibility":"visible"});
+					$("#confirm").css({"visibility":"hidden"});
+					$("#tuichu").css({"visibility":"visible"});
+		        	$("#op_now").val("jianka_xz_sfz_put_sfz");
+		        	// writeLog("定时判断患者是否放身份证");
+		        	interval = setInterval(getCardNoS,"1000");
+					interval3.push(interval);
+		    	break;
+		    	case "jianka_xz_sfz_put_sfz":
+		    		//导航条---开始
+		            $("#tishi_dian1").hide();
+		            $("#tishi_dian2").hide();
+		            $("#tishi_dian3").show();
+		            $("#tishi_dian4").hide();
+		            $("#tishi_2").css({"color":"#666","font-size":"24px"});
+		            $("#tishi_3").css({"color":"#ff7800","font-size":"26px"});
+		            //导航条---结束
+		        	$(".put_shenfenzheng").hide();
+		        	$(".jianka_xz_sfz_getinfo").show();
+		        	$(".jianka_xz_sfz_patinfo_tishi").html("");
+		        	daojishi(120);
+		        	$("#fanhui").css({"visibility":"visible"});
+					$("#confirm").css({"visibility":"visible"});
+					$("#tuichu").css({"visibility":"visible"});
+					var pat_name = $("#pat_name").val();
+					var pat_sex = $("#pat_sex").val();
+					var pat_minzu  = $("#pat_minzu").val();
+					var pat_birthday = $("#pat_birthday").val();
+					var pat_nian = pat_birthday.substr(0,4);//substr(start,length)
+					var pat_yue = pat_birthday.substr(4,2);
+					var pat_ri = pat_birthday.substr(6,2);
+					/*var pat_age = GetAge(pat_nian+"."+pat_yue+"."+pat_ri);
+					if(pat_sex=="男" && pat_age>=12 && pat_age<=70){
+						$(".shengyu_type").show();
+						$("#shengyu_type_flag").val(1);
+					}else{
+						$(".shengyu_type").hide();
+						$("#shengyu_type_flag").val(0);
+					}*/
+					var pat_address = $("#pat_address").val();
+					var pat_sfz = $("#pat_sfz").val();
+					var pat_register = $("#pat_register").val();
+					var sfz_begin = $("#sfz_begin").val();
+					var sfz_end = $("#sfz_end").val();
+					var pat_phone = $("#jk_phone").val();
+					$("#name").val(pat_name);
+					$("#sex").val(pat_sex);
+					// $("#patient_minzu").val(pat_minzu);
+					$("#nian").val(pat_nian);
+					$("#yue").val(pat_yue);
+					$("#ri").val(pat_ri);
+					$("#address").val(pat_address);
+					$("#sfz").val(pat_sfz);
+					$("#type").val(pat_type);
+					$("#phone").val(pat_phone);
+		        	$("#op_now").val("sfz_save");
+		    	break;
+		    	case "sfz_save":
+		    		//导航条---开始
+		            $("#tishi_dian1").hide();
+		            $("#tishi_dian2").hide();
+		            $("#tishi_dian3").hide();
+		            $("#tishi_dian4").show();
+		            $("#tishi_3").css({"color":"#666","font-size":"24px"});
+		            $("#tishi_4").css({"color":"#ff7800","font-size":"26px"});
+		            //导航条---结束
+					$(".jianka_xz_sfz_getinfo").hide();
+				    $(".pay_success").show();
+				    $(".pay_success h3").html("建卡成功,请取走您的就诊卡");
+				    $("#yes_success").show();
+				    $("#not_success").hide();
+				    $("#confirm").css({"visibility":"hidden"});
+				    $("#fanhui").css({"visibility":"hidden"});
+				    $("#tuichu").css({"visibility":"visible"});
+				    daojishi(5);
+				    return;
+		    		$(".jianka_xz_sfz_patinfo_tishi").html("");
+		        	/*if($("#shengyu_type_flag").val()==1){
+		        		var patient_type =$('input[name="sfz_xz_type"]:checked').val();
+			        	if(patient_type==undefined){
+			            	$(".jianka_xz_sfz_patinfo_tishi").html("请选择生育险类别");
+			                return false;
+			        	}
+			        	$("#patient_type").val(patient_type);
+		        	}else{
+		        		$("#patient_type").val(1);
+		        	}*/
+		        	var jk_phone = $("#jk_phone").val();
+		        	var params = {"op_code":$("#op_code").val(),"patient_phone":$("#jk_phone").val(),"patient_type":$("#patient_type").val(),"sfz_jianka_yibaokahao":$("#sfz_jianka_yibaokahao").val(),"patient_name":$("#pat_name").val(),"patient_sex":$("#pat_sex").val(),"patient_sfz":$("#pat_sfz").val(),"card_code":$("#card_code").val(),"patient_birthday":$("#pat_birthday").val(),"patient_address":$("#pat_address").val(),"zzj_id":$("#zzj_id").val()};
+					$.ajax({
+			            url:"__URL__/jianka_sfz_chaxun",
+			            type:'post',
+			            dataType:'json',
+			            data:params,
+			            beforeSend:function(){
+							index_load = layer.msg('正在建卡请稍后...', {icon: 16,time:20000});
+							$("#fanhui").css({"visibility":"hidden"});
+							$("#confirm").css({"visibility":"hidden"});
+							$("#tuichu").css({"visibility":"hidden"});
+						},
+			            success:function(data){
+			            	layer.close(index_load);
+			            	if(data['body']['IDCardStatus']=="0"){
+								writeLog("该身份证未建档，可以建卡");
+								//获取发卡机发卡机状态
+				        		var flag_check = window.external.Crt580CheckDevice;
+				        		// alert(flag_check);
+				        		var arr = flag_check.split(",");
+								var k0 = arr[0];//读卡器内无卡，读卡器内有卡射频卡操作位，读卡器卡口持卡位置有卡
+								var k1 = arr[1];//发卡通道无卡,
+								var k2 = arr[2];//发卡箱内无卡,发卡箱内卡少
+								var k3 = arr[3];//收卡箱不满
+				        		if(k0=="读卡器内无卡" && k1=="发卡通道无卡" && k2!="发卡箱内无卡" && k3=="收卡箱卡不满"){
+				        			writeLog("发卡机状态正常");
+				        			// 发卡机走卡
+				        			var flag_MoveInCard = window.external.Crt580MoveInCard;//发卡机走卡成功,发卡机走卡失败
+				        			//发卡机走卡成功
+				        			if(flag_MoveInCard=="发卡机走卡成功"){
+				        				writeLog("发卡机走卡成功");
+			        					var jk_phone = $("#jk_phone").val();
+		        						var params = {"op_code":$("#op_code").val(),"patient_phone":$("#jk_phone").val(),"patient_type":$("#patient_type").val(),"sfz_jianka_yibaokahao":$("#sfz_jianka_yibaokahao").val(),"patient_name":$("#pat_name").val(),"patient_sex":$("#pat_sex").val(),"patient_sfz":$("#pat_sfz").val(),"card_code":$("#card_code").val(),"patient_birthday":$("#pat_birthday").val(),"patient_address":$("#pat_address").val(),"zzj_id":$("#zzj_id").val()};
+			        					$.ajax({
+								            url:"__URL__/jianka_sfz_save", 
+								            type:'post',
+								            dataType:'json',
+								            data:params,
+								            success:function(data){
+								            	layer.close(index_load);
+								            	if(data['head']['succflag']=="1"){
+								            		//门诊号
+								            		var OutPatientNo = data['body']['OutPatientNo'];
+								            		// 病人ID
+								            		var PatientID = data['body']['PatientID'];
+							            			// 发卡机写入门诊号
+							        				var Crt580WriteM1CardNo = window.external.Crt580WriteM1CardNo(OutPatientNo);
+							        				var Crt580ReadM1CardBlockData = window.external.Crt580ReadM1CardBlockData();
+							        				if(Crt580WriteM1CardNo=="0" && Crt580ReadM1CardBlockData==OutPatientNo){
+							        					writeLog("发卡机写卡成功："+Crt580WriteM1CardNo+"，"+Crt580ReadM1CardBlockData);
+							        					writeLog("HIS建卡返回成功");
+									            		// 发卡
+									            		var flag_MoveOutCard= window.external.Crt580MoveOutCard;
+									            		if(flag_MoveOutCard=="发卡机吐卡成功"){
+									            			writeLog("发卡机吐卡成功");
+									            			daojishi(10);
+									            			$(".jianka_xz_sfz_getinfo").hide();
+				        									$(".pay_success").show();
+				        									$(".pay_success h3").html("建卡成功,请取走您的就诊卡");
+				        									writeLog("发卡成功,请取走您的就诊卡");
+				        									window.external.send(6,2);   //发卡机
+									            		}else{
+									            			daojishi(10);
+									            			writeLog("发卡机吐卡失败");
+									            			$(".jianka_xz_sfz_getinfo").hide();
+				        									$(".pay_success").show();
+				        									$(".pay_success h3").html(flag_MoveOutCard);
+				        									var Crt580RecyleCard= window.external.Crt580RecyleCard;
+										            		if(Crt580RecyleCard=="回收卡成功"){
+										            			writeLog("吐卡失败,回收卡成功");
+										            		}else{
+										            			writeLog("吐卡失败,回收卡失败");
+										            		}
+									            		}
+							        				}else{
+							        					writeLog("发卡机写卡失败："+flag_CardNo);
+						        						$(".jianka_xz_sfz_patinfo_tishi").html("发卡机读卡失败："+flag_CardNo);
+						        						var Crt580RecyleCard= window.external.Crt580RecyleCard;
+									            		if(Crt580RecyleCard=="回收卡成功"){
+									            			writeLog("读取卡号失败,回收卡成功");
+									            		}else{
+									            			writeLog("读取卡号失败,回收卡失败");
+									            		}
+									            		$(".jianka_xz_sfz_patinfo_tishi").html("发卡机读写卡失败");
+						        						return false;
+							        				}
+								            	}else{
+								            		writeLog("HIS建卡返回失败");
+								            		daojishi(10);
+								            		$(".jianka_xz_sfz_getinfo").hide();
+			        								$(".pay_success").show();
+			        								$(".pay_success h3").html("HIS建卡返回失败");
+								            		var Crt580RecyleCard= window.external.Crt580RecyleCard;
+								            		if(Crt580RecyleCard=="回收卡成功"){
+								            			writeLog("回收卡成功");
+								            		}else{
+								            			writeLog("回收卡失败");
+								            		}
+								            	}
+								            }
+									    });
+				        			}else{
+				        				$("#fanhui").css({"visibility":"visible"});
+										$("#confirm").css({"visibility":"visible"});
+										$("#tuichu").css({"visibility":"visible"});
+				        				//发卡机走卡失败
+				        				writeLog("发卡机走卡失败");
+				        				$(".jianka_xz_sfz_patinfo_tishi").html(flag_MoveInCard);
+				        				return false;
+				        			}
+				        		}else{
+				        			daojishi(60);
+				        			$("#fanhui").css({"visibility":"visible"});
+									$("#confirm").css({"visibility":"visible"});
+									$("#tuichu").css({"visibility":"visible"});
+				        			writeLog("发卡机状态异常："+flag_check);
+				        			$(".jianka_xz_sfz_patinfo_tishi").html(flag_check);
+			        				return false;
+				        		}
+			            	}else{
+			            		daojishi(10);
+			            		$(".jianka_xz_sfz_getinfo").hide();
+								$(".pay_success").show();
+								$(".pay_success h3").html("建卡失败，该身份证已经建过卡了!");
+			            		writeLog("该身份证已建档，不可以建卡");
+			            	}
+			            }
+				    });
+		    	break;
+		    	case "jianka_xz_yibao_input_phone":
+		        	// writeLog("医保输入手机号点击确定");
+		        	daojishi(120);
+		        	// 清空手机号输入错误时的提示信息
+		        	$(".jianka_phone_area .tips_jianka").text(""); 
+		        	var jk_phone = $("#jk_phone").val();
+		        	var reg = /^1(3|4|5|7|8)\d{9}$/;
+		        	if(!reg.test(jk_phone)){
+						　$(".jianka_phone_area .tips_jianka").text("手机号输入错误"); 
+						return;
+					}
+					$("#op_now").val("jianka_xz_yibao_getinfo");
+		        	/*if(jk_phone==""){
+						$(".jianka_phone_area .tips_jianka").text("输入错误"); 
+						return;
+					}*/
+					// window.external.send(2,2);   //社保卡
+		        	$(".jianka_input_phone").hide();
+		        	$(".yb_op_area").show();
+		        	$(".yb_op_area .tips").html("");
+		        	$("#fanhui").css({"visibility":"visible"});
+					$("#confirm").css({"visibility":"hidden"});
+					$("#tuichu").css({"visibility":"visible"});
+		        	// window.external.AllowCardIn();//允许社保进卡
+		        	interval = setInterval(getYibaoInfo,"3000");
+					interval3.push(interval);
+		    	break;
+		    }
+		})
+		/*****返回按钮点击事件开始**********/
+		$("#fanhui").on("click",function(){
+		   //alert($("#op_now").val());
+			switch($("#op_now").val()){
+				//从选择卡类型界面返回到首页
+		        case "jianka_chose_card_type":
+			        $("#op_now").val("jianka_chose_card_type");
+			        window.location.href="__APP__/ZiZhu/Index";
+			        // window.external.webBrowserNavigateHome();
+		        break;
+		        // 从身份证建卡输入手机号码页面返回选择卡类型页面
+		        case "jianka_xz_sfz_input_phone":
+		        	//导航条---开始
+		            $("#tishi_dian1").show();
+		            $("#tishi_dian2").hide();
+		            $("#tishi_dian3").hide();
+		            $("#tishi_dian4").hide();
+		            $("#tishi_2").css({"color":"#666","font-size":"24px"});
+		            $("#tishi_1").css({"color":"#ff7800","font-size":"26px"});
+		            //导航条---结束
+		        	$(".mtnum2").hide();
+			        $(".jianka_input_phone").hide();
+			        $(".chose_card_type_area").show();
+			        daojishi(120);
+			        $("#confirm").css({"visibility":"hidden"});
+			        // 清空卡类型
+			        $("#card_code").val("");
+			        $("#op_now").val("jianka_chose_card_type");
+		        break;
+		        //从识别身份证获取信息，返回到输入电话页面
+		        case "jianka_phone_queding":
+			        $(".put_shenfenzheng").hide();
+			        $(".jianka_input_phone").show();
+			        $("#op_now").val("jianka_input_phone");
+		        break;
+		        // 从身份证建卡输入手机号码页面返回到首页
+		        case "jianka_xz_sfz_input_phone":
+		        	window.location.href="__APP__/ZiZhu/Index";
+		        	// window.external.webBrowserNavigateHome();
+		        	daojishi(10);
+		        break;
+		        // 从身份证建卡提示放身份，返回到输入手机号界面
+		        case "jianka_xz_sfz_put_sfz":
+		        	$(".mtnum2").hide();
+		        	$(".put_shenfenzheng").hide();
+		        	$(".jianka_input_phone").show();
+		        	daojishi(120);
+		        	$("#confirm").css({"visibility":"visible"});
+		        	for(var key in interval3)
+					{
+						clearInterval(interval3[key]);
+					}
+					$("#op_now").val("jianka_xz_sfz_input_phone");
+					window.external.send(1,4);
+		        break;
+		        // 从确认身份证信息页面返回到提示患者放身份证页面
+		        case "sfz_save":
+		        	//导航条---开始
+		            $("#tishi_dian1").hide();
+		            $("#tishi_dian2").show();
+		            $("#tishi_dian3").hide();
+		            $("#tishi_dian4").hide();
+		            $("#tishi_3").css({"color":"#666","font-size":"24px"});
+		            $("#tishi_2").css({"color":"#ff7800","font-size":"26px"});
+		            //导航条---结束
+		        	$(".mtnum2").hide();
+		        	// 身份类别取消选中
+		        	$('input[name="sfz_xz_type"]').attr('checked',false);
+		        	$(".jianka_xz_sfz_getinfo").hide();
+		        	$(".put_shenfenzheng").show();
+		        	daojishi(120);
+		        	$("#fanhui").css({"visibility":"visible"});
+					$("#confirm").css({"visibility":"hidden"});
+					$("#tuichu").css({"visibility":"visible"});
+		        	// $(".jianka_xz_ic_getinfo").show();
+		        	$("#op_now").val("jianka_xz_sfz_put_sfz");
+		        	interval = setInterval(getCardNoS,"1000");
+					interval3.push(interval);
+		        	$("#op_now").val("jianka_xz_sfz_put_sfz");
+		        break;
+		         // 从医保卡建卡输入手机号，返回到选择卡类型界面
+		        case "jianka_xz_yibao_input_phone":
+		        	//导航条---开始
+		            $("#tishi_dian1").show();
+		            $("#tishi_dian2").hide();
+		            $("#tishi_dian3").hide();
+		            $("#tishi_dian4").hide();
+		            $("#tishi_2").css({"color":"#666","font-size":"24px"});
+		            $("#tishi_1").css({"color":"#ff7800","font-size":"26px"});
+		            //导航条---结束
+		        	$(".mtnum2").hide();
+			        $(".jianka_input_phone").hide();
+			        $(".chose_card_type_area").show();
+			        $("#confirm").css({"visibility":"hidden"});
+			        // 清空卡类型
+			        $("#card_code").val("");
+			        $("#op_now").val("jianka_chose_card_type");
+			        daojishi(120);
+		        break;
+		        // 从医保卡建卡提示插入医保卡页面，返回到输入手机号页面
+		        case "jianka_xz_yibao_getinfo":
+
+					for(var key in interval3){
+						clearInterval(interval3[key]);
+					}
+					$(".yb_op_area").hide();
+					$(".jianka_input_phone").show();
+					daojishi(120);
+					$("#confirm").css({"visibility":"visible"});
+					$("#op_now").val("jianka_xz_yibao_input_phone");
+					window.external.send(1,4);
+		        break;
+		    }
+		})
+		/*****返回按钮点击事件结束**********/
+		/**
+		*日志记录函数
+		**/
+		function writeLog(logtxt,logtype){
+			var params = {"log_txt":logtxt,"log_type":logtype,"card_code":$("#card_code").val(),"card_no":$("#card_no").val(),"patient_id":$("#patient_id").val(),"direction":"操作步骤","op_code":$("#op_code").val(),"zzj_id":$("#zzj_id").val()};
+			$.ajax({
+					url:"__URL__/writeLogs", 
+					type:'post',
+					dataType:'json',
+					data:params,
+					success:function(data){}
+			})
+		}
+		//读取身份证方法
+		function getCardNoS(){
+			//var card_no =window.external.GetCardNo();
+			// var card_no2 = window.external.sfz_card_read();
+			// if(card_no2!=""){
+				// if(card_no2!="请重放身份证" && card_no2!="开usb失败" && card_no2!="读卡失败"){
+					// writeLog("二代身份证读卡器获取身份证信息成功");
+					// var sfz = card_no2.split(",");
+					// for(var key in interval3)
+					// {
+					// 	clearInterval(interval3[key]);
+					// }
+					// var s0 = sfz[0];//姓名
+					// var s1 = sfz[1];//性别
+					// var s2 = sfz[2];//民族
+					// var s3 = sfz[3];//出生日期
+					// var s4 = sfz[4];//住址
+					// var s5 = sfz[5];//身份证号
+					// var s6 = sfz[6];//签发机关
+					// var s7 = sfz[7];//有效期开始日期
+					// var s8 = sfz[8];//有效期截止日期else
+					// $("#pat_name").val(s0);
+					// $("#pat_sex").val(s1);
+					// $("#pat_minzu").val(s2);
+					// $("#pat_birthday").val(s3);
+					// $("#pat_address").val(s4);
+					var s0 = "测试";//姓名
+					var s1 = "女";//性别
+					var s3 = "19980101";//出生日期
+					var s4 = "北京市海淀区中关村南大街";//住址
+					var s5 = "123123111111111111";
+					$("#pat_name").val(s0);
+					$("#pat_sex").val(s1);
+					$("#pat_birthday").val(s3);
+					$("#pat_address").val(s4);
+					$("#pat_sfz").val(s5);
+					// 身份证作为卡号放入隐藏域
+					$("#card_no").val(s5);
+					// $("#pat_register").val(s6);
+					// $("#sfz_begin").val(s7);
+					// $("#sfz_end").val(s8);
+					// writeLog("通知HIS保存身份证信息开始");
+					$("#confirm").trigger("click");
+					$(".put_shenfenzheng .tips").html("请您按图示放置身份证");
+				// }else{
+				// 	$(".put_shenfenzheng .tips").html("请您按图示放置身份证");
+				// }
+			// }	
+		}
+		/*****************获取医保患者信息************************/
+		function getYibaoInfo(){
+			//导航条---开始
+            $("#tishi_dian1").hide();
+            $("#tishi_dian2").hide();
+            $("#tishi_dian3").hide();
+            $("#tishi_dian4").show();
+            $("#tishi_2").css({"color":"#666","font-size":"24px"});
+            $("#tishi_4").css({"color":"#ff7800","font-size":"26px"});
+            //导航条---结束
+			$(".yb_op_area").hide();
+					
+		    $(".pay_success").show();
+		    $(".pay_success h3").html("建卡成功,请取走您的就诊卡");
+		    $("#yes_success").show();
+		    $("#not_success").hide();
+		    $("#confirm").css({"visibility":"hidden"});
+		    $("#fanhui").css({"visibility":"hidden"});
+		    $("#tuichu").css({"visibility":"visible"});
+		    daojishi(3);
+		    return;
+			// var flag ="";
+			// flag = window.external.ReadStatus();//获取读卡器状态, 有卡返回true, 无卡返回false
+			var flag ="123";
+			if(flag){
+				clearInterval(interval);
+				for(var key in interval3){
+                	clearInterval(interval3[key]);
+        		}
+				setTimeout(function(){
+					$(".yb_op_area .tips").show().text('医保患者数据读取中,请稍后...');
+					// 查询医保卡信息
+					var params = {"op_code":$("#op_code").val(),"card_code":$("#card_code").val(),"zzj_id":$("#zzj_id").val()};
+					$.ajax({
+						url:"__URL__/yibao_getPatInfo",
+						type:'post',
+						dataType:'json',
+						data:params,
+						beforeSend:function(){
+							index_load = layer.msg('患者数据查询中,请稍候...', {icon: 16,time:20000});
+							$("#fanhui").css({"visibility":"hidden"});
+							$("#confirm").css({"visibility":"hidden"});
+							$("#tuichu").css({"visibility":"hidden"});
+						},
+						success:function(data){
+							window.external.send(1,4);
+							if(data['head']['succflag']=="1"){
+								layer.close(index_load);
+								daojishi(5);
+								writeLog("该医保卡已经建卡了！");
+								$(".mtnum2").hide();
+		            			$(".yb_op_area").hide();
+								$(".pay_success").show();
+								$(".pay_success h3").html("已建卡成功!");
+								window.external.MoveOutCard();
+								window.external.DisAllowCardIn();
+			            	}else{
+			            		if(data['head']['retmsg'] == "识别卡信息有效性不成功(\\)!"){
+			            			layer.close(index_load);
+			            			$(".mtnum2").hide();
+									$(".yb_op_area").show();
+									daojishi(60);
+									$("#fanhui").css({"visibility":"visible"});
+									$("#confirm").css({"visibility":"hidden"});
+									$("#tuichu").css({"visibility":"visible"});
+									$(".yb_op_area .tips").html("");
+									$(".yb_op_area .tips").html("识别卡信息有效性不成功(\\)!，请重新插卡！");
+									window.external.MoveOutCard();
+									interval = setInterval(getYibaoInfo, "1000");
+									interval3.push(interval);
+			            		}else if(data['head']['retmsg'] == "该诊疗卡未建档!"){
+			                        $("#confirm").css({"visibility":"hidden"});
+			                        $("#fanhui").css({"visibility":"hidden"});
+			                        $("#tuichu").css({"visibility":"hidden"});
+			                        var jk_phone = $("#jk_phone").val();
+	        						var params = {"op_code":$("#op_code").val(),"patient_phone":$("#jk_phone").val(),"patient_type":$("#patient_type").val(),"sfz_jianka_yibaokahao":$("#sfz_jianka_yibaokahao").val(),"patient_name":$("#pat_name").val(),"patient_sex":$("#pat_sex").val(),"patient_sfz":$("#pat_sfz").val(),"card_code":$("#card_code").val(),"patient_birthday":$("#pat_birthday").val(),"patient_address":$("#pat_address").val(),"zzj_id":$("#zzj_id").val()};
+		        					$.ajax({
+							            url:"__URL__/jianka_yb_save", 
+							            type:'post',
+							            dataType:'json',
+							            data:params,
+							            success:function(data){
+							            	layer.close(index_load);
+							            	if(data['head']['succflag']=="1"){
+						            			daojishi(5);
+						      					writeLog("医保建卡HIS返回成功");
+						            			$(".mtnum2").hide();
+												$(".pay_success").show();
+												$(".pay_success h3").html("建卡成功!");
+												writeLog("医保卡建卡成功,请使用医保卡作为您的院内卡使用");
+												window.external.MoveOutCard();
+												window.external.DisAllowCardIn();	
+							            	}else{
+							            		writeLog("医保建卡HIS返回失败");
+							            		daojishi(10);
+							            		$(".mtnum2").hide();
+		        								$(".pay_success").show();
+		        								$(".pay_success h3").html("医保建卡失败:"+data['head']['retmsg']);
+		        								window.external.MoveOutCard();
+												window.external.DisAllowCardIn();	
+							            	}
+							            }
+								    });
+			            		}
+			            	}
+						}
+					});
+				},2500);
+				
+			}
+		}
+		/*****************获取医保患者信息结束************************/
+		// 计算年龄
+		function GetAge(strBirthday){ 
+		    var returnAge;
+		    var strBirthdayArr=strBirthday.split(".");
+		    var birthYear = strBirthdayArr[0];
+		    var birthMonth = strBirthdayArr[1];
+		    var birthDay = strBirthdayArr[2];
+		    d = new Date();
+		    var nowYear = d.getFullYear();
+		    var nowMonth = d.getMonth() + 1;
+		    var nowDay = d.getDate();
+		    if(nowYear == birthYear){
+		        if(nowMonth == birthMonth){
+	                var dayDiff = nowDay - birthDay;//日之差
+	                if(dayDiff < 0){
+	                    returnAge = - 1;
+	                }else{
+	                    returnAge = 0;
+	                }
+		        }else{
+	                var monthDiff = nowMonth - birthMonth;//月之差
+	                if(monthDiff < 0){
+	                    returnAge = -1;
+	                }else{
+	                    returnAge = 0;
+	                }
+		        }
+		    }else{
+		        var ageDiff = nowYear - birthYear ; //年之差
+		        if(ageDiff>0){
+		            if(nowMonth == birthMonth){
+		                var dayDiff = nowDay - birthDay;//日之差
+		                if(dayDiff < 0){
+		                    returnAge = ageDiff - 1;
+		                }else{
+		                    returnAge = ageDiff ;
+		                }
+		            }else{
+		                var monthDiff = nowMonth - birthMonth;//月之差
+		                if(monthDiff < 0){
+		                    returnAge = ageDiff - 1;
+		                }else{
+		                    returnAge = ageDiff ;
+		                }
+		            }
+				}else{
+		            returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
+		        }
+		    }
+		    return  returnAge;//返回周岁年龄
+		}
+		/*****************获取医保患者信息结束************************/
+		/**
+		*日志记录函数
+		**/
+		function pay_record_bank(){
+	        var params = {"RespCode":$("#RespCode").val(),"RespInfo":$("#RespInfo").val(),"idCard":$("#idCard").val(),"Amount":$("#Amount").val(),"trade_no":$("#trade_no").val(),"Batch":$("#Batch").val(),"TransDate":$("#TransDate").val(),"Ref":$("#Ref").val(),"pat_id":$("#card_no").val(),"business_type":$("#business_type").val(),"out_trade_no":$("#stream_no").val()}; 
+	        $.ajax({
+	            url:"__URL__/witeJyRecordToDataBaseBank", 
+	            type:'post',
+	            dataType:'json',
+	            data:params,
+	            success:function(data){
+	                //alert(22)
+	            }
+	        });
+		}
+		/**********************************交易记录****************************************/
+		function pay_record(dept_code,dept_name,doctor_code,doctor_name,card_type,business_type,pat_card_no,healthcare_card_no,id_card_no,pat_id,pat_name,pat_sex,charge_total,cash,zhzf,tczf,trading_state,healthcare_card_trade_state,his_state,bank_card_id,reg_info,trade_no,zzj_id,stream_no,tk_status){
+	        var params = {"dept_code":dept_code,"dept_name":dept_name,"doctor_code":doctor_code,"doctor_name":doctor_name,"card_type":card_type,"business_type":business_type,"pat_card_no":pat_card_no,"healthcare_card_no":healthcare_card_no,"id_card_no":id_card_no,"pat_id":pat_id,"pat_name":pat_name,"pat_sex":pat_sex,"charge_total":charge_total,"cash":cash,"zhzf":zhzf,"tczf":tczf,"trading_state":trading_state,"healthcare_card_trade_state":healthcare_card_trade_state,"his_state":his_state,"bank_card_id":bank_card_id,"reg_info":tk_status,"trade_no":trade_no,"zzj_id":zzj_id,"stream_no":$("#stream_no").val(),"tk_status":tk_status}; 
+	        //alert("开始记录交易数据");
+	        $.ajax({
+	            url:"__URL__/witeJyRecordToDataBase", 
+	            type:'post',
+	            dataType:'json',
+	            data:params,
+	            success:function(data){
+	                
+	            }
+	        });
+		}
+		/********************************交易记录结束****************************************/
+	})
+</script>
+<style type="text/css">
+	.chose_pat_type ul li{
+	    font-size: 30px;
+	    font-weight:bold;
+	}
+	.yuyue_list li{
+	    float:left;
+	    margin-left:60px; 
+	}
+</style>
+<title>自助建卡</title>
+</head>
+
+<body>
+	<input type="hidden" id="zzj_id"  value="{$zzj_id}" />
+	<!--是否是生育险类别标志-->
+	<input type="hidden" id="shengyu_type_flag"  value="" />
+	<!--自助建卡电话-->
+	<input type="hidden" class="inhide" id="jk_phone" />
+	<!--添加了病人隐藏域-->
+	<input type="hidden" class="inhide" id="pat_type" />
+	<!-- 病人名字 -->
+	<input type="hidden" class="inhide" id="pat_name" />
+	<!-- 病人性别 男，女-->
+	<input type="hidden" class="inhide" id="pat_sex" />
+	<!-- 病人民族-->
+	<input type="hidden" class="inhide" id="pat_minzu" />
+	<!-- 病人出生日期-->
+	<input type="hidden" class="inhide" id="pat_birthday" />
+	<!-- 身份证发证机关-->
+	<input type="hidden" class="inhide" id="pat_register" />
+	<!-- 身份证有效期起始时间-->
+	<input type="hidden" class="inhide" id="sfz_begin" />
+	<!-- 身份证有效期截止时间-->
+	<input type="hidden" class="inhide" id="sfz_end" />
+	<!-- 病人住址-->
+	<input type="hidden" class="inhide" id="pat_address" />
+	<!-- 病人身份证号-->
+	<input type="hidden" class="inhide" id="pat_sfz" />
+	<!-- 病人医保手册号-->
+	<input type="hidden" class="inhide" id="ybsch" />
+	<!-- 身份证建卡输入医保卡号-->
+	<input type="hidden" class="inhide" id="sfz_jianka_yibaokahao" />
+	<!--添加了病人隐藏域-->
+	<input type="hidden" class="inhide" id="op_code" value=""/>
+	<input type="hidden" class="inhide" id="dingshi" value=""/>
+	<input type="hidden" class="inhide" id="pat_code" value=""/>
+	<input type="hidden" class="inhide" id="card_no" value=""/>
+	<input type="hidden" class="inhide" id="card_code" value=""/>
+	<input type="hidden" class="inhide" id="response_type" value=""/>
+	<input type="hidden" class="inhide" id="times" value="" />
+	<input type="hidden" class="inhide" id="pat_age" value="" />
+	<input type="hidden" class="inhide" id="cash" value=""/>
+	<input type="hidden" class="inhide" id="charge_total" value=""/>
+	<input type="hidden" class="inhide" id="zhzf" value=""/>
+	<input type="hidden" class="inhide" id="tczf" value=""/>
+	<input type="hidden" class="inhide" id="pay_seq" value=""/>
+	<input type="hidden" class="inhide" id="trade_no" value=""/>
+	<input type="hidden" class="inhide" id="idCard" value=""/><!--支付宝支付帐号-->
+	<input type="hidden" class="inhide" id="PayStatus" value=""/>
+	<input type="hidden" class="inhide" id="times_order_no"  value=""/>
+	<input type="hidden" class="inhide" id="dept_code" value=""/>
+	<input type="hidden" class="inhide" id="doctor_code" value=""/>
+	<input type="hidden"  class="inhide" id="dept_name" value=""/>
+	<input type="hidden" class="inhide" id="doctor_name" value=""/>
+	<input type="hidden" class="inhide" id="healthcare_card_no" value=""/>
+	<input type="hidden"  class="inhide" id="tansType" value="00"  />
+	<input type="hidden" class="inhide" id="reponse_name" value="" />
+	<input type="hidden" id="daojishi" class="inhide" value=""/>
+	<input type="hidden" id="business_type" class="inhide" value=""/>
+	<input type="hidden" id="pay_type" class="inhide" value=""/>
+	<input type="hidden" id="yb_flag" class="inhide" value=""/>
+	<input type="hidden" id="record_sn" class="inhide" value=""/>
+	<input type="hidden" id="bank_card_num" class="inhide" value=""/>
+	<input type="hidden" id="personcount" class="inhide" value=""/>
+	<input type="hidden" id="req_type" class="inhide" value=""/>
+	<input type="hidden" id="ksdm" class="inhide" value=""/><!--医保代码-->
+	<input type="hidden" id="nl_xz" class="inhide" value=""/><!--年龄挂儿科限制-->
+	<input type="hidden" id="pant_jzsj" class="inhide" value=""/><!--就诊时间-->
+	<input type="hidden" id="pant_wz" class="inhide" value=""/><!--就诊位置-->
+	<input type="hidden" id="pant_hx" class="inhide" value=""/><!--就诊号序-->
+	<input type="hidden" id="pant_ksmc" class="inhide" value=""/><!--就诊科室名称-->
+	<input type="hidden" id="yb_dfje" class="inhide" value=""/><!--医保垫付金额-->
+	<input type="hidden" id="yb_fjlsh" class="inhide" value=""/><!--医保分解流水号-->
+	<input type="hidden" id="yb_zlf" class="inhide" value=""/><!--医保总金额-->
+	<input type="hidden" id="jssjh" class="inhide" value=""/><!--预算收据号-->
+	<input type="hidden" id="yuyue_sj" class="inhide" value=""/><!--预算时间-->
+	<input type="hidden" id="pbmxid" class="inhide" value=""/><!--排班明细序号-->
+	<input type="hidden" id="kssj" class="inhide" value=""/><!--预约开始时间-->
+	<input type="hidden" id="zzlx" class="inhide" value=""/><!--预约就诊时间-->
+	<input type="hidden" id="zxrq" class="inhide" value=""/><!--预约日期-->
+	<!---银联隐藏域-->
+	<!--本地交易流水号-->
+	<input type="hidden" id="stream_no" value=""/> 
+	<input type="hidden" id="bank_success" value=""/>
+	<input type="hidden" id="op_code"  value="{$op_code}" />
+	<input type="hidden" id="op_now"  value="" />
+	<div class="main_body">
+	    <div id="downcount"></div>
+	    <div id="show_times">2016年10月12日 星期三 &nbsp;16:51</div>
+	    <!-- 导航条 -->
+	    <div id="daohangtiao">
+	        <div id="liuchengdian1"></div>
+	        <div id="liuchengdian2"></div>
+	        <div id="liuchengdian3"></div>
+	        <div id="liuchengdian4"></div>
+	        <div id="tishi_dian1"></div>
+	        <div id="tishi_dian2"></div>
+	        <div id="tishi_dian3"></div>
+	        <div id="tishi_dian4"></div>
+	        <div id="tishi_1">选择建卡方式</div>
+	        <div id="tishi_2">输入手机号</div>
+	        <div id="tishi_3">确认建卡信息</div>
+	        <div id="tishi_4">建卡成功</div>
+	    </div>
+	    <!-- 导航条 -->
+	   	<div class="main_left_jianka">
+	   		<div class="chose_card_type_area mtnum2" style="display:block;">
+	        	<h3>请您选择建卡方式</h3>
+	        	<div style="font-size:20px;"><b> 建卡提示：</b><br>
+			        1、如您是第一次就诊，请选择下面两种建卡方式之一。
+			        2、有医保卡的患者，请点击医保卡按钮建卡，否则无法走医保报销。
+			        3、没有医保卡，有身份证患者，请点击就诊卡按钮建卡。
+			        4、没有医保卡，身份证患者，请去窗口建卡。
+	            </div>
+	            <ul>
+	            	<!-- <li class="ic" id="xz_ic">就诊卡</li> -->
+	            	<li class="sfz" id="xz_sfz">身份证</li>
+	                <li class="yibao" id="xz_yibao">医保卡</li>
+	            </ul>
+	        </div>
+	   	 	<!--------------输入电话号码操作界面-------------->
+	        <div class="jianka_input_phone mtnum2" style="display:none;">
+	        	<h3>为了您的资金安全，请输入常用手机号码</h3>
+	            <input type="text" class="iptx" value="" id="jianka_phone" />
+	            <div class="jianka_phone_area">
+	            	<!-- <ul class="img_view"></ul> -->
+	                <ul class="key">
+	                	<li class="num" param="1">1</li>
+	                    <li class="num" param="2">2</li>
+	                    <li class="num" param="3">3</li>
+	                    <li class="num" param="4">4</li>
+	                    <li class="num" param="5">5</li>
+	                    <li class="num" param="6">6</li>
+	                    <li class="num" param="7">7</li>
+	                    <li class="num" param="8">8</li>
+	                    <li class="num" param="9">9</li>
+	                    <li class="num" param="0">0</li>
+	                    <li class="num" param="X">X</li>
+	                    <li class="del">删除</li>
+	                </ul>
+	                <div class="tips_jianka"></div>
+	            </div>
+	        </div>
+	        <div class="put_shenfenzheng mtnum2" style="display:none;">
+	        	<h3>请将二代身份证放在自助机感应区3~5秒</h3>
+	        	<div class="img_view"></div>
+	            <div class="tips"></div>
+	        </div>	
+	        <div class="jianka_xz_sfz_getinfo mtnum2" style="display:none;">
+	        	<h3>请确认建卡信息</h3>
+	        	<div class="jianka_xz_sfz_patinfo">
+		        	<table  bordercolor="pink" width="800" height="300"  cellspacing="0">
+			            <tr>
+			            	<td>姓 名：&nbsp;&nbsp;<input id="name" type="text" size="25" name="name" value="" /></td>
+			            </tr>
+			            <tr>
+			            	<td>性 别：&nbsp;&nbsp;<input id="sex" type="text" size="25" name="sex" value="" />
+			            	</td>
+						</tr>
+						<tr>
+							<td>电 话：&nbsp;&nbsp;<input type="text" id="phone" name="phone" size="25"  value="" />
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>身份类别：
+								<input type="text" id="type" name="type" size="25"  value="" />
+							</td>
+						</tr>
+						<tr>
+							<td>医保卡号：
+								<input type="text" id="sfz_ybkh" name="sfz_ybkh" size="25"  value="" />
+							</td>
+						</tr> -->
+						<tr>
+			            	<td>身份证：<input type="text" size="25" id="sfz" name="sfz" value="" /></td>
+			            </tr>
+						<tr>
+							<td>出生日期：<input type="text" id="nian" name="nian" size="2" value="" />年
+							<input type="text" name="yue" id="yue" size="2" value="" />月
+							<input type="text" name="ri" id="ri" size="2" value="" />日
+							</td>
+						</tr>
+						<tr>
+							<td>住址：<input type="text"  id="address" name="address" size="40"  value="" /></td>
+						</tr>
+						<tr class="shengyu_type" style="display:none;">
+		                    <td style = "font-size:25px;" align="left">身份类别：
+			                    <input type="radio" name="sfz_xz_type" value="1" style="width:25px;height:25px"/>非生育险&nbsp;
+			                    <input type="radio" name="sfz_xz_type" value="2" style="width:25px;height:25px"/>生育险&nbsp;<br>说明：生育险的患者，请选择生育险
+		                    </td>
+                    	</tr>
+					</table>
+        		</div>
+        		<div class="jianka_xz_sfz_patinfo_tishi"></div>
+        		<div class="jianka_xz_sfz_patinfo_zhuyi">温馨提示:为了您正常就医,请核实您的有效信息</div>
+	        </div>
+	        <!---------------医保卡插入操作界面-------------------->
+	        <div class="yb_op_area mtnum2" style="display:none;">
+	        	<h3>请插入您的医保卡</h3>
+	            <div class="tips"></div>
+	        </div>
+	        <div class="pay_success mtnum2" style="display:none">
+	            <div id="yes_success"></div>
+	            <div id="not_success"></div>
+	            <h3>操作完毕 !</h3>
+	        </div>
+	   	</div>
+	    <div class="btn_area">
+	    <ul>
+	        <li id="confirm"></li>
+	        <li id="fanhui"></li>
+	        <li id="tuichu"></li>
+	    </ul>
+	   </div>
+	   <div class="dayin_zhuantai" style="display:none;">打印机缺纸,请联系咨询台。</div>
+	</div>
+	<script>
+		//格式化金额字符串
+		function cash(cash){
+		    var money = new Number(cash).toFixed(2);
+		    var length =parseInt((money*100)).toString().length;
+		    var n = 12-length;
+		    var yl_cash="";
+		    for(i=0;i<n;i++){
+		        yl_cash+="0";
+		    }
+		    return yl_cash+parseInt((money*100).toFixed(2)).toString();
+		}
+	</script> 
+</body>
+</html>

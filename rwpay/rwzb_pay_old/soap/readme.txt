@@ -1,0 +1,1 @@
+call.php和SoapDiscovery.class.php 里面涉及到路径需要修改

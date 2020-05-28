@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zizhu/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zizhu/css/index.css" />
+<script language="javascript" src="__PUBLIC__/zizhu/js/jquery-1.9.1.js" ></script> 
+<script language="javascript" src="__PUBLIC__/zizhu/js/ServerClock.js" ></script>  
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/zizhu/js/my.js"></script>
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)  
+{   
+    var myDate= this;  
+    var str = myDate.toLocaleDateString();  
+    if (showWeek)  
+    {   
+        var Week = ['日','一','二','三','四','五','六'];  
+        str += ' 星期' + Week[myDate.getDay()];  
+    }  
+    return str;  
+}  
+<!-- 
+//window.onerror=function(){return true;} 
+// --> 
+</SCRIPT> 
+<script language="javascript">
+ window.onload = function () {
+        stime();
+        var re = window.external.getUserId();  //获取自助机id
+        $("#zzj_id").val(re);
+        document.onselectstart = function(){
+            return false;
+        }
+        var flag_check = window.external.Crt580CheckDevice();//获取卡状态
+        // alert(flag_check);
+        var arr = flag_check.split(",");
+        var k0 = arr[0];//读卡器内无卡，读卡器内有卡射频卡操作位，读卡器卡口持卡位置有卡
+        var k1 = arr[1];//发卡通道无卡,
+        var k2 = arr[2];//发卡箱内无卡,发卡箱内卡少
+        var k3 = arr[3];//收卡箱不满
+        var params = {"k0":k0,"k1":k1,"k2":k2,"k3":k3,"zzj_id":$("#zzj_id").val()};
+        $.ajax({
+            url:"__URL__/fakaji", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){
+            }
+        })
+    }
+    var c = 0;
+	<?php
+	$weekary = array("日","一","二","三","四","五","六");
+	$W = $weekary[date("w")];
+	?>
+    var Y =<?php echo date('Y')?>, M =<?php echo date('n')?>, D =<?php echo date('j')?>;
+    function stime() {
+        c++
+        sec = <?php echo time() - strtotime(date("Y-m-d"))?>+c;
+        H = Math.floor(sec / 3600) % 24
+        I = Math.floor(sec / 60) % 60
+        S = sec % 60
+        if (S < 10) S = '0' + S;
+        if (I < 10) I = '0' + I;
+        if (H < 10) H = '0' + H;
+        if (H == '00' & I == '00' & S == '00') D = D + 1; //日进位
+        if (M == 2) { //判断是否为二月份******
+            if (Y % 4 == 0 && !Y % 100 == 0 || Y % 400 == 0) { //是闰年(二月有28天)
+                if (D == 30) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //非闰年(二月有29天)
+                if (D == 29) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        else { //不是二月份的月份******
+            if (M == 4 || M == 6 || M == 9 || M == 11) { //小月(30天)
+                if (D == 31) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //大月(31天)
+                if (D == 32) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        if (M == 13) {
+            Y += 1;
+            M = 1;
+        } //年份进位
+		/********************改为一秒执行一次***********************/
+        setTimeout("stime()", 1000);
+        $("#show_times").html(Y + '年&nbsp;&nbsp;' + M + '月' + D + '日 ' +"<span style='margin-left:75px;color:#fff;'>星期<?=$W?></span>") 
+    }
+</script> 
+<script language="javascript">
+function settime(val) {
+
+	if (countdown == 1) { 
+		$("#tuichu").trigger("click");
+		countdown = 0; 
+		clearTimeout(interval2);
+		return;
+	} else { 
+		countdown--; 
+		$("#downcount").show().text(countdown);
+	} 
+	
+	var in2 = setTimeout(function() { 
+		settime(val) 
+	},1000);
+	interval2.push(in2);
+	
+} 
+$(function(){
+
+      //今日挂号功能模块跳转方法
+    $("#jrgh_btn").mouseup(function(){
+        var zzj_id = $("#zzj_id").val();
+       window.location.href="__APP__/ZiZhu/JinRiGuaHao/index/zzj_id/"+zzj_id;
+    });
+     //首页自助缴费按钮点击事件
+    $("#jiaofei_btn").mouseup(function(){
+          var zzj_id = $("#zzj_id").val();
+          window.location.href="__APP__/ZiZhu/JiaoFei/index/zzj_id/"+zzj_id;
+    })
+
+    //预约取号功能模块跳转方法
+    $("#yyqh_btn").mouseup(function(){
+         var zzj_id = $("#zzj_id").val();
+        window.location.href="__APP__/ZiZhu/YuYueQuHao/index/zzj_id/"+zzj_id;
+    });
+
+    //预约挂号功能模块跳转方法
+    $("#yygh_btn").mouseup(function(){
+        var zzj_id = $("#zzj_id").val();
+        window.location.href="__APP__/ZiZhu/YuYueGuaHao/index/zzj_id/"+zzj_id;
+    });
+    //化验单打印
+    $("#huayan").mouseup(function(){
+        var zzj_id = $("#zzj_id").val();                
+        window.location.href="__APP__/ZiZhu/HuaYan/index/zzj_id/"+zzj_id;
+    });
+
+    // 病历底方打印
+    $("#dfdy").mouseup(function(){
+        var zzj_id = $("#zzj_id").val();                
+         window.location.href="__APP__/ZiZhu/Dfdy/index/zzj_id/"+zzj_id;
+    });
+
+    // 自助建卡
+     $("#jianka_btn").mouseup(function(){
+        var zzj_id = $("#zzj_id").val();               
+        window.location.href="__APP__/ZiZhu/JianKa/index/zzj_id/"+zzj_id; 
+    });
+
+    //查询功能模块跳转方法
+    $("#chaxun_btn").mouseup(function(){
+        window.location.href="__APP__/Chaxun/Index";
+    });
+
+   
+    //缴费凭条功能模块跳转方法
+    $("#ptbd_btn").mouseup(function(){
+        window.location.href="__APP__/ZiZhu/JiaoFeiPingTiao";
+    });
+      //首页点击退卡
+    $("#tuika_btn").click(function(){
+        //弹出卡
+
+          // window.external.LisPrint('王二|男|7');
+        window.external.MoveOutCard();
+        //禁止进卡
+        window.external.DisAllowCardIn();
+        window.external.send(1,4); //关闭灯带
+                   
+    })
+    //首页点击退卡
+    $(".tuika").click(function(){
+        var s1="";
+        var pos = 0;
+        s1 = "<?xml version='1.0' encoding='utf-8'?>" + "<print_info width='300' height='500'>";
+        s1 += "<tr font='黑体' type='text' size='12' x='90' y='" + (pos += 10) + "' >检查单(自助缴费)</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='50' y='" + (pos += 25) + "' >卡类型:就诊卡</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='10' y='" + (pos += 15) + "' >---------------------------------------</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='30' y='" + (pos += 15) + "' >门诊号:12345678912</tr>";
+        s1 += "<tr font='黑体' type='barcode' width='115' height='55' size='10' x='170' y='" + (pos += 0) + "' >12345678912</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='10' y='" + (pos += 60) + "' >---------------------------------------</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='30' y='" + (pos += 15) + "' >申请单:12345678912</tr>";
+        s1 += "<tr font='黑体' type='barcode' width='115' height='55' size='10' x='170' y='" + (pos += 0) + "' >12345678912</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='10' y='" + (pos += 60) + "' >---------------------------------------</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='30' y='" + (pos += 20) + "' >姓名:1</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='140' y='" + (pos += 0) + "' >年龄:2</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='220' y='" + (pos += 0) + "' >性别:3</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='30' y='" + (pos += 20) + "' >开单科室:3</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='190' y='" + (pos += 0) + "' >医生:4</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='30' y='" + (pos += 20) + "' >检查科室:5</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='190' y='" + (pos += 0) + "' >金额:6</tr>";
+        s1 += "<tr font='黑体' type='text' size='10' x='10' y='" + (pos += 40) + "' >.</tr>";
+        s1 += "</print_info>";
+        // alert(s1);
+        window.external.paint(s1);
+                            
+           
+           
+    })
+
+    //退出程序
+        $("#close").on("click",function(){ 
+            window.external.closeWindow();
+        })
+
+
+})
+
+
+</script>
+<style type="text/css">
+
+</style>
+<title>自助程序</title>
+</head>
+
+<body>
+<input type="hidden" id="zzj_id" value="" value="" />
+<input type="hidden" id="op_now" />
+<div class="main_body">
+    <div style="width:70px; height:70px;float:left;" id="close"></div>
+	<div id="downcount"></div>
+    <div id="show_times">2016年10月12日 星期三</div>
+	<div id="zzj_bh">zzj001</div>
+    <div id="diqu">BJhos001</div>
+    <div class="main_left_1">
+        <div class="wen_1">
+            <div class="wen1 anniu_top" id="jrgh_btn"></div>
+            <div class="wen501 anniu_bottom" id="jianka_btn"></div>
+            <div class="wen3 anniu_top"  id="huayan"></div>
+            <div class="wen4 anniu_top" id="chaxun_btn"></div>
+            <!-- <div class="wen301 anniu_top"  id="dfdy"></div> -->
+            <div class="wen5 anniu_bottom" id="yyqh_btn"></div>
+            <div class="wen6 anniu_bottom" id="yygh_btn"></div>    
+            <div class="wen2 anniu_top" id="jiaofei_btn"></div>
+     		<!-- <div class="wen7 anniu_bottom" id="ptbd_btn"></div> -->
+            <div class="wen8 anniu_bottom" id="tuika_btn"></div>
+               <!-- <div class="tuika" style="color:red; ">打印凭条测试</div> -->
+         </div>
+        
+    </div>
+
+   <div class="btn_area" style="display:none;">
+   	<ul>
+    	<li id="confirm">确定</li>
+        <li id="fanhui">返回</li>
+        <li id="tuichu">退出</li>
+       
+    </ul>
+   </div>
+</div>
+<script>  
+
+</script>   
+</body>
+</html>

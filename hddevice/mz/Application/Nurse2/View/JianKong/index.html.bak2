@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+    <link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+			
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+	.jk_arae{width:100%;}
+	.zhenshi{width:290px; float:left; background:#eee; margin-left:18px; margin-top:15px; padding-left:10px; position:relative;}
+    .zhenshi .tit{ font-size:20px; font-weight:bold; display:block; padding-top:15px; padding-bottom:10px;}
+    .zhenshi .tit i{ font-style:normal; color:red; font-size:16px;}
+	.zhenshi .dh{height:175px; overflow:hidden;overflow-y:auto; padding-top:8px; border-top:1px solid #ccc;}
+	.zhenshi .dh ul.tt{width:100%; height:30px; margin:0px;}
+	.zhenshi .dh ul.tt li{list-style:none; font-size:12px;float:left; width:50px; font-weight:bold;}
+	.zhenshi .dh ul.tt li.one{width:50px;}
+	
+	.zhenshi .dh ul.bb{ margin-left:0px; width:100%; height:20px; line-height:20px; margin:0px;}
+	.zhenshi .dh ul.bb li{list-style:none; font-size:12px;float:left; width:50px; text-align:left;}
+	.zhenshi .dh ul.bb li.one{width:50px;}
+	.zhenshi .dh ul.bb li.thr{width:50px;}
+	
+	.zhenshi .dh p{ line-height:120%;}
+	.close{ font-weight:bold; font-size:24px; position:absolute; left:270px; top:10px;}  
+    </style>
+<script language="javascript">
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+$(function(){
+	$(".guidui").click(function(){
+		var reg_id = $(this).attr("reg_id");
+		var params = {"reg_id":$(this).attr("reg_id"),"doctor_code":$(this).attr("doctor_code"),"dept_code":$(this).attr("dept_code")}; 
+		$.ajax({
+			url:"__APP__/Nurse/PatList/guidui", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					$("#"+reg_id).find(".guidui").remove();
+					layer.msg("归队成功");
+				}else{
+					layer.msg("归队失败");
+				}
+			}
+		})			
+	})
+	$(".close").click(function(){
+		 if(p_del()){
+			 var room = $(this).attr("param");
+			 var doctor_code = $(this).attr("param2");
+		 	var params = {"room":room,"doctor_code":doctor_code}; 
+			$.ajax({
+				url:"__URL__/delRoom", 
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.success==1){
+						$("#room_"+room).remove();
+					}else{
+						alert("操作失败");
+					}
+				}
+			})		
+		 }							 
+	})
+	
+	$(".chadui").click(function(){
+		var doctor_code = $(this).attr("doctor_code");
+		var dept_code = $(this).attr("dept_code");
+		var reg_id = $(this).attr("reg_id");
+		if(doctor_code==""){
+			var  url = "__APP__/Nurse/PatAdd/pat_chadui/reg_id/"+reg_id+"/dept_code/"+dept_code;
+		}else{
+			var url = "__APP__/Nurse/PatAdd/pat_chadui/doctor_code/"+doctor_code+"/reg_id/"+reg_id+"/dept_code/"+dept_code;
+		}
+		var index = layer.open({
+			type: 2,
+			skin: 'layui-layer-lan',
+			
+			title: '绿色通道', 
+			offset:['100px','350px'],
+			//fix: false,
+			shade:0.8,
+			shadeClose: true,
+		   // maxmin: false,
+			move: false,
+			area: ['500px'],
+			content: [url,'yes'],
+			end: function(){
+			   
+			}
+		});	
+		$("#layui-layer-iframe"+index).css({"height":"465px"});
+	})
+	
+	$(".tingzhen").click(function(){
+		var room = $(this).attr("param");
+		var is_over = $(this).attr("param2");
+		var doctor_code = $(this).attr("param3");
+		var params = {"room":room,"is_over":is_over,"doctor_code":doctor_code};  
+		var _this = $(this);
+		$.ajax({
+			url:"__URL__/op_tingzhen", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.no_chuli>0){
+					alert("还有"+data.no_chuli+"位初复诊患者未做转医生处理，停诊操作失败！");
+					return;
+				}else{
+					if(data.success==1){
+						_this.attr("param2",data.is_over);
+						if(data.is_over==1){
+							_this.removeClass("btn-success");
+							_this.addClass("btn-danger");
+							_this.val("点击开诊");
+							alert("停诊成功");
+							
+						}else{
+							_this.addClass("btn-success");
+							_this.removeClass("btn-danger");
+							_this.val("点击停诊");
+						}
+					}else{
+						alert("操作失败");
+					}
+				}
+				
+			}
+		})		
+})
+	
+$(".change_doctor").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code"); 
+	var reg_id = $(this).attr("reg_id");
+	if(doctor_code==""){
+		var  url = "__APP__/Nurse/PatAdd/change_doctor/reg_id/"+reg_id+"/dept_code/"+dept_code+"/zhenqu/{$zhenqu}";
+	}else{
+		var url = "__APP__/Nurse/PatAdd/change_doctor/doctor_code/"+doctor_code+"/reg_id/"+reg_id+"/dept_code/"+dept_code+"/zhenqu/{$zhenqu}";
+	}
+
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '患者转医生', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:false,
+        shadeClose: true,
+       // maxmin: false,
+		//move: false,
+        area: ['500px'],
+        content: [url,'yes'],
+        end: function(){
+           location.reload();
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"250px"});
+})
+
+$(".fuzhen").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var reg_id = $(this).attr("reg_id");
+	var params = {"doctor_code":doctor_code,"dept_code":dept_code,"reg_id":reg_id};
+	$.ajax({
+		url:"__APP__/Nurse/PatList/fuzhen",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				layer.msg('复诊成功',{shade: 0.3})
+			}else{
+				layer.msg(data.txt,{shade: 0.3})   
+			}
+		}						
+	})
+})
+})
+</script>
+<style>
+.tingzhen{ position:absolute; left:206px; top:75px;}
+</style>
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__URL__/">首页</a></li>
+    <li><a href="#">诊室监控</a></li>
+    </ul>
+    </div>
+<div class="jk_area">
+	<volist name="list" id="vo">
+    <div class="zhenshi" id="room_{$vo.room_id}"> 
+    <div class="close" title="关闭" param="{$vo.room_id}"  param2="{$vo.doctor_code}">X</div>
+    <if condition="$vo['is_over'] eq 0">
+     <input type="button" param="{$vo.room_id}" param2="{$vo.is_over}" param3="{$vo.doctor_code}" class="tingzhen btn btn-success" value="点击停诊" />
+     <else />
+     <input type="button" param="{$vo.room_id}" param2="{$vo.is_over}" param3="{$vo.doctor_code}" class="tingzhen btn btn-danger" value="点击开诊" />
+     </if>
+    	<div class="tit">{$vo.zhentai_name}诊室 <i>{$vo.zhentai_id}诊台</i></div> 
+        <div><b>坐诊医生：</b>{$vo.doctor_name}（{$vo.doctor_code}）</div>
+        <div><b>当前患者：</b>{$vo.pat_now.pat_name}</div>
+        <div style="padding-bottom:5px; margin-bottom:3px;"><b>等候患者</b></div>
+       
+        <div class="dh">
+        	<table cellpadding="0" cellspacing="0">
+            	<thead>
+                	<th width="50" align="left">序号</th>
+                    <th width="60" align="left">姓名</th>
+                    <th width="60" align="left">状态</th>
+                    <th align="left">操作</th>
+                    
+                </thead>
+                <tbody>
+                	 <volist name="vo['pat_wait']" id="vo2" key="m">
+                    <tr id="{$vo2.reg_id}">
+                    	<td>{$vo2.reg_seq_no}</td>
+                        <td>{$vo2.pat_name}</td>
+                        <td>{$vo2.status_txt}</td>
+                        <td class="op">
+                         <if condition="$vo2['status'] eq 3">
+           
+                        <a href="#" class="guidui" reg_id="{$vo2.reg_id}" doctor_code="{$vo.doctor_code}" dept_code="{$vo.dept_code}">归队</a></li>
+                        </if>
+                        <if condition="$vo2['fuzhen'] eq 1">
+                        <a href="#" class="fuzhen" reg_id="{$vo2.reg_id}" doctor_code="{$vo.doctor_code}" dept_code="{$vo.dept_code}">复诊</a>
+                        </if>
+                        <a href="#" class="change_doctor" reg_id="{$vo2.reg_id}" doctor_code="{$vo.doctor_code}" dept_code="{$vo.dept_code}">转医生</a>
+                        <a href="#" class="chadui" reg_id="{$vo2.reg_id}" doctor_code="{$vo.doctor_code}" dept_code="{$vo.dept_code}">插队</a>
+                        </td>
+                    </tr>
+                    </volist>
+                </tbody>
+                <tr>
+                	
+                </tr>
+            </table>
+
+            
+        </div>
+    </div>
+    
+  </volist>
+</div>
+
+</body>
+</html>
+<script>
+    $(function () {
+        
+
+		$('#addnew').click(function(){
+
+				window.location.href="add.html";
+		 });
+
+
+    });
+	
+</script>

@@ -1,0 +1,84 @@
+<include file="Base/head" />
+     <link rel="stylesheet" href="__PUBLIC__/admin/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="__PUBLIC__/admin/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/admin/kindeditor/lang/zh_CN.js"></script>
+    <div class="mws-panel grid_8">
+        <div class="mws-panel-header">
+            <span>修改科室介绍</span>
+        </div>
+        <div class="mws-panel-body no-padding">
+            <form class="mws-form" action="__URL__/update" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{$list.id}"/>
+                <input type="hidden" name="oldphoto" value="{$list.photo}"/>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">选择科室</label>
+                    <div class="mws-form-item">
+                        <select class="small" name='type_id'>
+                            <volist name="list0" id="v">
+                            <option value='{$v['id']}' <if condition="$list['keshi'] eq $v['name']" > selected <else/></if> >{$v['name']}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                 <div class="mws-form-row">
+                    <label class="mws-form-label">专家姓名</label>
+                    <div class="mws-form-item">
+                        <input class="small" type="text" name="name"  value="{$list['name']}">
+                    </div>
+                </div>
+                 <div class="mws-form-row">
+                    <label class="mws-form-label">职称</label>
+                    <div class="mws-form-item">
+                        <input class="small" type="text" name="zhicheng"  value="{$list['zhicheng']}">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">特长</label>
+                    <div class="mws-form-item">
+                        <input class="small" type="text" name="techang"  value="{$list['techang']}">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">排序</label>
+                    <div class="mws-form-item">
+                        <input class="small" type="text" name="paixu"  value="{$list['paixu']}">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">原专家照片</label>
+                    <div class="mws-form-item">
+                        <img src="{$list['photo']}" alt="" width="60px">
+                    </div>
+                </div>
+                 <div class="mws-form-row">
+                        <label class="mws-form-label">修改专家照片</label>
+                        <div class="mws-form-item">
+                           <div class="fileinput-holder" style="position: relative;">
+                                <input type="file" name="photo" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;" value="{$list['photo']}">
+                           </div>
+                        </div>
+                    </div>
+                <div class="mws-form-inline">
+                    <div class="mws-form-row">
+                      <label class="mws-form-label">专家介绍</label>
+                        <script type="text/javascript">
+                            var editor;
+                            KindEditor.ready(function(K) {
+                                editor = K.create('textarea[name="title"]', {
+                                    allowFileManager : true
+                                });             
+                            });
+                        </script>
+                        <textarea name="title" style="width:100%;height:300px;visibility:hidden;">
+                            {$list.title}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="mws-button-row">
+                    <input value="提交" class="btn btn-danger" type="submit">
+                    <input value="重置" class="btn " type="reset">
+                </div>
+            </form>
+        </div>      
+    </div>
+<include file="Base/foot" />

@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<!--[if lte IE 6]> 	
+<script type="text/javascript" src="__PUBLIC__/Home/css/png.js"></script>
+<![endif]-->  
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+
+<script language="javascript">
+var WEBBROWSER = function () { 
+	this.Show = function (caption, msg) { 
+		window.external.DialogShow(caption,msg); 
+	} 
+	this.SetValue = function (uid, room_id) { 
+		window.external.SetValue(uid,room_id); 
+	}
+}
+var myBrowser = new WEBBROWSER(); 
+
+$(function(){
+	$("#inspect_area li").live("click",function(){
+		if($(this).attr("have_click")==1){
+			$(this).attr("have_click","0");
+			$(this).find("input").removeAttr("checked");
+			//$(this).css({"background":"#ececec","color":"#333333"});
+			
+		}else{
+			$(this).find("input").attr("checked","checked");
+			$(this).attr("have_click","1");
+			//$(this).css({"background":"#5D9019","color":"#ffffff"});
+		}							
+    })   
+	$(".login").click(function(){
+		if($("#doctor_code").val()==""){
+			alert("编号不能为空");
+			//myBrowser.Show("警告","编号不能为空");
+			return;
+		}
+		var str="";
+		var flc = 0;
+		$("input[name='dept']:checked").each(function () {
+                    //alert(this.value);
+                    str+=this.value + ",";
+					flc++;
+         });
+		 $("input[name='dept[]']:checked").each(function () {
+                    //alert(this.value);
+                    str+=this.value + ",";
+					flc++;
+         });
+		if(str==""){
+			alert("请选择登录科室")
+			//myBrowser.Show("警告","请选择登录科室");;
+			return;
+		}
+	
+		/*if(flc>1){
+			alert("最多选择一个科室");
+			return;
+		}*/
+		var login_type = $(this).attr("login_type");
+		params = {"doctor_code":$("#doctor_code").val(),"room":<?=$room?>,"dept":str,"login_type":login_type};
+		$.ajax({
+				url:"__URL__/login_do",
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.success==1){
+						myBrowser.SetValue($("#doctor_code").val(),<?=$room?>);
+						window.location.href="__APP__/Home/Index/index/doctor_code/"+$("#doctor_code").val()+"/room/<?=$room?>/login_type/"+data.expert+"/dept/"+data.dept; 	
+						
+					}else{
+						alert("登录失败");
+						//myBrowser.Show("警告","登录失败");;
+					}
+				}						
+		})
+	  })
+	$("#room_id").keyup(function(){
+		window.localStorage.setItem("room_id",$(this).val());							
+	})
+	$("#shows").toggle(function(){
+		$("#sets").show();
+		$(this).text("[隐藏]");
+	},function(){
+		$("#sets").hide();
+		$(this).text("[显示]");
+	})
+	
+})
+
+</script>
+<style>
+html,body{_overflow:hidden;}
+.myform{width:420px; padding-left:10px; overflow:hidden; float:left;_display:inline;}
+.myform ul{width:100%; float:left;line-height:30px; margin-top:10px;}
+.myform ul li{float:left; font-size:16px; white-space:nowrap; }
+.myform ul li.dept_li{width:40%;}
+.myform ul li span{display:block; margin-left:20px;_display:inline; width:180px;float:left; margin-top:1px}
+.iptx{ height:43px !important; line-height:43px !important; margin-top:2px; padding-left:5px;}
+#shows{}
+#sets{ background:#FC0; padding:10px;}
+.ibtn {
+
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	font: 22px/100% Arial, Helvetica, sans-serif;
+	padding: .3em 0.5em .35em;
+	
+	text-shadow: 0 1px 1px rgba(0,0,0,.6);
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	color: #e8f0de;
+	border: solid 1px #538312;
+	background: #64991e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+	background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+	margin-right:6px;
+	margin-top:-1px;
+	height:38px; overflow:hidden;
+	width:120px;
+	float:right;
+	margin-top:0px; margin-left:43px;  margin-right:0px;
+}
+.ibtn:hover {
+	background: #538018;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+	background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+	color:#fff;
+}
+#doctor_code{ height:40px; font-family:微软雅黑; width:285px; font-size:26px}
+.logo{ margin-top:20px; margin-bottom:15px; margin-left:5px;}
+.info{ width:420px; margin-left:8px; border-top:2px solid #ccc; margin-top:28px; padding-top:10px; font-size:14px;}
+.info h3{ display:block; line-height:200%;}
+.info p{ line-height:200%;}
+.info span{ color:#F60; display:block; width:100%; text-align:left; line-height:200%;}
+#inspect_area{ margin-left:15px;}
+#inspect_area li{ cursor:pointer; margin-right:15px; padding:2px 8px;}
+</style>
+<title>用户登录</title>
+</head>
+
+<body style="width:425px;_width:425px;_height:600px; overflow:hidden">
+<div class="mainbody" style="width:100%; overflow:hidden; ">
+<div class="logo"><img src="__PUBLIC__/Home/img/logo.png" width="420" height="80"/></div> 
+<div class="myform">
+<ul>
+	<li style="line-height:45px; font-size:24px;">医生工号：</li>
+    <li><input type="text" name="doctor_code" id="doctor_code" class="iptx fl" /></li>
+</ul>
+<ul>
+<fieldset style="width:410px;padding-bottom:15px; padding-top:8px;"> 
+    <legend style="font-size:16px; padding-right:10px; padding-left:10px;">科室选择</legend>	
+<ul id="inspect_area" style="width:393px;_width:380px;">
+              <if condition="$zq_id eq 1 or $zq_id eq 4">
+              <volist name="dept" id="vo">
+                
+                	<li class="dept_li"><input type="radio" name="dept" value="{$vo.dept_code}" <if condition="$vo['cookies'] eq 1">checked</if> /> {$vo.dept_name}</li>
+                
+                </volist>
+              <else />
+              <volist name="dept" id="vo">
+                
+                	<li class="dept_li" ><input type="checkbox" name="dept[]" value="{$vo.dept_code}" <if condition="$vo['cookies'] eq 1">checked</if> /> {$vo.dept_name}</li>
+                
+                </volist>
+              </if>
+                
+                </ul>
+
+</fieldset>
+</ul>
+<!-- <ul>
+	<li colspan="2">参数设置 <a href="#" id="shows" onClick="return false;">[显示]</a></li>
+</ul>
+<ul style="display:none;" id="sets">
+	<li>诊室ID：</li>
+    <li><input type="text" class="iptx" id="room_id" /></li>
+</ul>
+-->
+<ul>
+	<li style="padding-left:30px; padding-top:6px; float:left; ">
+		<if condition="$expert  eq 1">
+        <input type="submit" value="专家登录" class="ibtn fl login" login_type="expert" style="float:left;" />
+        <else />
+        <input type="submit" value="普通登录" class="ibtn fl login" login_type="normal" style="float:left"/>
+        </if>    	
+        
+        
+    </li>
+  
+</ul>
+</div>
+
+
+</div>
+<div class="info">
+
+             <?php
+                 echo html_entity_decode(stripslashes(htmlspecialchars_decode($login_txt)), ENT_QUOTES, 'UTF-8');
+                 
+                 ?> 
+
+</div>
+</body>
+</html>

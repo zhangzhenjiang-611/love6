@@ -1,0 +1,20 @@
+body,html {
+	font-size: 12px;
+	font-family:"Arial Black", Gadget, sans-serif;
+	color: #6B506B;	
+	margin: 0px;
+	padding: 0px; 
+	background:#ECE9D8;
+}
+*{margin:0px; padding:0px;}
+ul,li{ font-style:normal; border-style:none; list-style:none;}
+a {
+	color: #6B506B;
+}
+.fl{float:left;}
+.fr{float:right;}
+.mainbody{width:425px;}
+.button{width:100%; margin:auto; padding-top:20px; float:left;}
+.b_in{width:110%; display:block; height:50px; float:left;}
+.button div{width:100px; height:45px; background:gray; float:left; text-align:center; line-height:45px; margin-left:7px; color:#fff; font-size:16px; cursor:pointer;}
+.button div:hover{ background:#999999}

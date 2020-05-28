@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Nurse2/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/select-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/editor/kindeditor.js"></script>
+<style>
+label{ width:125px !important;}
+</style>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__APP__/Nurse2">首页</a></li>
+    <li><a href="#">分诊设置</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    
+    <form action="__URL__/jpz_do" method="post" />
+    
+    <ul class="forminfo">
+    <div class="formtitle"><span>常用设置</span></div>
+      <li><label>大屏底部文字：</label><input name="bottom_info" type="text" class="dfinput" value="{$bottom_info}"  style="width:700px;"/></li>
+   <li><label>语音呼叫次数：</label><input name="call_times" type="text" class="dfinput" value="{$call_times}"  style="width:70px;"/><i>实时生效</i></li>
+    <!-- <li><label>两专业诊室：</label><input name="s5" type="text" class="dfinput" value="{$row[4].con}"  style="width:200px;"/></li> -->
+     <li><label>大屏翻屏时间：</label><input name="ftime" type="text" class="dfinput" value="{$ftime}"  style="width:70px;"/><i>单位：秒，需重启分诊大屏才能生</i></li>
+     <li><label>候诊分配人数：</label><input name="wait_num" type="text" class="dfinput" value="{$wait_num}"  style="width:70px;"/><i>单位：人</i></li>
+     <li><label>分页数据量：</label><input name="houtai_page_num" type="text" class="dfinput" value="{$houtai_page_num}"  style="width:70px;"/><i>单位：条</i></li>
+      <li><label>HIS库编码：</label>
+        <div class="vocation">
+     	 <select class="select3" name="his_code">
+      	<option value="GBK" <if condition="$his_code eq 'GBK'">selected="selected"</if>>GBK</option>
+        <option value="UTF8" <if condition="$his_code eq 'UTF8'">selected="selected"</if>>UTF8</option>
+      </select>
+      </div>
+      </li>
+      
+      <li><label>候诊分配模式：</label>
+        <div class="vocation">
+     	 <select class="select1" name="fptype">
+      	<option value="1" <if condition="$fptype eq 1">selected="selected"</if>>报到立即插入队列（不管是否超过设定候诊人数）</option>
+        <option value="2" <if condition="$fptype eq 2">selected="selected"</if>>报到需要根据设定候诊人数来决定是否插入队列</option>
+      </select>
+      </div>
+      </li>
+     
+     
+    <div class="formtitle" style="clear:both"><span>功能开关</span></div>
+      <li><label>分 诊：</label><cite><input name="t_fenzhen" type="radio" value="y"  <if condition="$t_fenzhen eq 'y'"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="t_fenzhen" type="radio" value="n" <if condition="$t_fenzhen eq 'n'"> checked="checked" </if> /> 关</cite></li>
+       <li><label>报到机多记录弹窗：</label><cite><input name="is_tc" type="radio" value="1"  <if condition="$is_tc eq 1"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="is_tc" type="radio" value="0" <if condition="$is_tc eq 0"> checked="checked" </if> /> 关</cite></li>
+     <li><label>转医生：</label><cite><input name="t_doc" type="radio" value="y"  <if condition="$t_doc eq 'y'"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="t_doc" type="radio" value="n" <if condition="$t_doc eq 'n'"> checked="checked" </if> /> 关</cite></li>
+      <li><label>转科室：</label><cite><input name="t_dept" type="radio" value="y"  <if condition="$t_dept eq 'y'"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="t_dept" type="radio" value="n" <if condition="$t_dept eq 'n'"> checked="checked" </if> /> 关</cite></li>
+       <li><label>复 诊：</label><cite><input name="t_fuzhen" type="radio" value="y"  <if condition="$t_fuzhen eq 'y'"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="t_fuzhen" type="radio" value="n" <if condition="$t_fuzhen eq 'n'"> checked="checked" </if> /> 关</cite></li>
+       
+        <li><label>插 队：</label><cite><input name="chadui" type="radio" value="y"  <if condition="$chadui eq 'y'"> checked="checked" </if> /> 开&nbsp;&nbsp;&nbsp;&nbsp;<input name="chadui" type="radio" value="n" <if condition="$chadui eq 'n'"> checked="checked" </if> /> 关</cite></li>
+  <!-- 
+   <li><label>关键字</label><input name="" type="text" class="dfinput" /><i>多个关键字用,隔开</i></li>
+    <li><label>是否审核</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li>
+    <li><label>引用地址</label><input name="" type="text" class="dfinput" value="http://www.mycodes.net" /></li
+    
+    -->
+    <div class="formtitle"><span>文字设置</span></div>
+    <li><label>医生站登录页面文字：</label><textarea name="login_txt" cols="" rows="" class="textinput"><?php
+             echo stripslashes(htmlspecialchars_decode($login_txt));
+             ?></textarea></li>
+
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+    
+    </ul>
+    
+    </form>
+    </div>
+
+
+</body>
+
+</html>

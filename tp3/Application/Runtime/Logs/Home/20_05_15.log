@@ -1,0 +1,448 @@
+[ 2020-05-15T14:03:26+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000730s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000830s ]
+
+[ 2020-05-15T14:03:36+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000395s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000694s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000818s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001049s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001191s ]
+
+[ 2020-05-15T14:17:20+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000346s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000457s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000543s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000447s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000529s ]
+
+[ 2020-05-15T14:18:23+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000661s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000971s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001067s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000972s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001056s ]
+
+[ 2020-05-15T14:23:23+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000499s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000463s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000551s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 160 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000628s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000726s ]
+
+[ 2020-05-15T14:24:36+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000491s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000457s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000543s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000470s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000555s ]
+
+[ 2020-05-15T14:25:12+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000366s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000567s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000672s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 157 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000578s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000674s ]
+
+[ 2020-05-15T14:25:47+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000328s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000489s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000577s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000462s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000547s ]
+
+[ 2020-05-15T14:27:24+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000584s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 161 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000724s ]
+
+[ 2020-05-15T14:28:14+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000384s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000555s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000648s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000630s ]
+
+[ 2020-05-15T14:32:19+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000325s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000684s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000788s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000564s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000650s ]
+
+[ 2020-05-15T14:36:03+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000394s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000556s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000653s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000546s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000629s ]
+
+[ 2020-05-15T14:36:03+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000554s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000640s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000634s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000730s ]
+
+[ 2020-05-15T14:36:03+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000366s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000531s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000618s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000632s ]
+
+[ 2020-05-15T14:36:04+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000422s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000549s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000639s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000550s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000635s ]
+
+[ 2020-05-15T14:41:14+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000384s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000552s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000645s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000548s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000633s ]
+
+[ 2020-05-15T14:41:16+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000543s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000630s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000527s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000609s ]
+
+[ 2020-05-15T14:46:43+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000362s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000531s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000619s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 166 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000545s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000630s ]
+
+[ 2020-05-15T14:50:35+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000537s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000575s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000672s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000549s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000634s ]
+
+[ 2020-05-15T14:51:25+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000565s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000707s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000656s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000756s ]
+
+[ 2020-05-15T14:53:00+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000511s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000534s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000621s ]
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 3 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000631s ]
+
+[ 2020-05-15T14:56:04+08:00 ] 127.0.0.1 /home/index/setArr
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000341s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000553s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000641s ]
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 6 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 6 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 6 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 6 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 4 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 5 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+NOTIC: [8] Undefined offset: 6 D:\project\love6\tp3\Application\Home\Controller\IndexController.class.php 第 159 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000571s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000654s ]
+

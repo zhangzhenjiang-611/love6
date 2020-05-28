@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>三级联动</title>
+    <style>
+    select {
+        width: 30%;
+        height: 100px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    select option {
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="distpicker3">
+        <select></select>
+        <select></select>
+        <select></select>
+    </div>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="node_modules/distpicker/dist/distpicker.min.js"></script>
+    <script>
+    $(function() {
+        $("#distpicker3").distpicker({
+            province: "浙江省",
+            city: "杭州市",
+            district: "西湖区"
+        });
+    })
+    </script>
+</body>
+
+</html>

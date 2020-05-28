@@ -6,7 +6,7 @@ return array(
     'USER_AUTH_ON'  =>  true,           //是否开启权限验证
     'USER_AUTH_TYPE' => 1,          //验证类型 1登录验证 2 即时验证
     'USER_AUTH_KEY'  => 'uid',          //用户认证识别号
-    'NOT_AUTH_CONTROLLER' => 'Index',          //无需验证的控制器
+    'NOT_AUTH_MODULE' => 'Message',          //无需验证的控制器
     'NOT_AUTH_ACTION' => 'addUserHandle',          //无需验证的方法
     'RBAC_ROLE_TABLE' => 'hd_role',   //角色表
     'RBAC_USER_TABLE' => 'hd_role_user',   //角色与用户的中间表名称

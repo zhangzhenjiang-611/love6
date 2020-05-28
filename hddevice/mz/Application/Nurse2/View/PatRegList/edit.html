@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Nurse2/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/select-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/editor/kindeditor.js"></script>
+<script language='javascript'>
+function setImagePreview() {
+        var docObj=document.getElementById("thumbnail");
+ 
+        var imgObjPreview=document.getElementById("preview");
+                if(docObj.files &&    docObj.files[0]){
+                        //火狐下，直接设img属性
+                        imgObjPreview.style.display = 'block';
+                        //imgObjPreview.style.width = '260px';
+                                           
+                        //imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+      //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+      imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+
+                }else{
+                        //IE下，使用滤镜
+                        docObj.select();
+                        var imgSrc = document.selection.createRange().text;
+                        var localImagId = document.getElementById("localImag");
+                        //必须设置初始大小
+                        //localImagId.style.width = "300px";
+                        localImagId.style.height = "90px";
+                        //图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+                                localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                        }catch(e){
+                                alert("您上传的图片格式不正确，请重新选择!");
+                                return false;
+                        }
+                        imgObjPreview.style.display = 'none';
+                        document.selection.empty();
+                }
+                return true;
+}
+</script>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__APP__/Nurse2/index/index">首页</a></li>
+    <li><a href="#">医生信息编辑</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+  <div class="formtitle"><span>医生信息编辑</span></div>
+    <ul class="forminfo">
+    <form enctype="multipart/form-data" method="post" action="__URL__/edit_do">
+    <input type="hidden" name="doctor_code" value="{$row['doctor_code']}" />
+	<input type="hidden" name="url" value="{$url}" />
+    
+    <li><label>医生姓名<b>*</b></label><input name="doctor_name" type="text" class="dfinput" value="{$row.doctor_name}"  style="width:218px;"/></li>
+   <li><label>医生编号<b>*</b></label><input name="doctor_code" type="text" class="dfinput" value="{$row.doctor_code}"  style="width:158px;"/></li>
+   <li><label>医生职称<b>*</b></label><input name="doctor_postitle" type="text" class="dfinput" value="{$row.doctor_postitle}"  style="width:158px;"/></li>
+    <li><label>医生照片<b>*</b></label>
+     <if condition="$row['thumbnail'] neq ''">
+    <img src="{$row['thumbnail']}"  id="preview" height="90" />
+    <input type="file" name="thumbnail" id="thumbnail" style="margin-top:65px;margin-left:0px;padding-left:0px;" onChange="javascript:setImagePreview();">
+    <else />
+     <img src=""style="display:none;" id="preview" height="90" />
+    <input type="file" name="thumbnail" id="thumbnail" onChange="javascript:setImagePreview();" style="margin-bottom:5px;margin-left:0px; padding-left:0px;float:left;"> 
+    </if>
+    
+    </li>  
+ 
+    <li><label>医生简介<b>*</b></label>
+    
+    
+    
+
+    <textarea id="content7" name="description" style="width:700px;height:250px;visibility:hidden;">{$row['description']}</textarea>
+    
+    </li>
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确定"/></li>
+    </form>
+    </ul>
+ 
+</body>
+
+</html>

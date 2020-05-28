@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="__PUBLIC__/themes/jindong/stye.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div style="background-color:#0e93d7;width: 100%;height:26px;margin-bottom:10px;">当前操作：排班管理</div>
+<table  width="1100px" align="center" border="1px" cellspacing="0px" bordercolor="#0e93d7">
+    <tr>
+        <th>ID</th>
+        <th>排班图片</th>       
+        <th>操作</th>
+    </tr>
+    <foreach name="arr" item="v">
+    <tr>
+        <td>{$v.id}</td>
+        <td><img width="660" height="300" src="__PUBLIC__/upload/{$v.imagename}"/></td>
+        <td><a href="__URL__/update/id/{$v.id}">修改</a>&nbsp;<a href="__URL__/change/id/{$v.id}">删除</a>&nbsp;
+        </td>
+    </tr>
+    </foreach>
+</table>
+<div id="pager">{$pageStr}</div>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<script language="javascript">
+$(function(){
+	run();	
+});
+function run(){
+	interval = setInterval(getInfo,6000); 	
+	interval = setInterval(getDec, 6000);
+}
+ function getInfo(){
+  	  var params = {"room":"<?=$room?>"}; 	
+		$.ajax({
+			url:"__URL__/getSmallScreenInfo", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.have_logout==0){
+					if(data.pat_now_call!="n"){
+						if($("#small_zhezhao").is(":hidden")){
+							$("#small_zhezhao").show();
+							$("#small_zhezhao .one").html(data.pat_now_call[0].reg_seq_no+"号 "+data.pat_now_call[0].pat_name);
+							setTimeout(function(){
+								//setCalls(data.now_calling[0].pat_code); 
+								$("#small_zhezhao").css({"display":"none"}); 
+							
+							}, 8000 );
+						}
+						
+					}
+					//一个专家
+					if(data.expert==1&&data.num==1){
+						$("#one_doctor_expert").css({"height":"1920px"});
+						$("#one_doctor_expert .room_tit").html(data.room);
+						
+						if(data.pat_now!=null){
+						$(".thr_one .right").html(data.pat_now[0].reg_seq_no+data.pat_now[0].pat_name);
+						}else{
+							$(".thr_one .right").html("");
+						}
+						$("#docpic").attr("src",data.thumbnail);
+						if(data.pat_wait!=null){
+							$(".thr_two .right").html("");
+							for(var i=0;i<data.pat_wait.length;i++){
+								$(".thr_two .right").append("<span>"+data.pat_wait[i].reg_seq_no+data.pat_wait[i].pat_name+"</span>"); 
+							}
+						}else{
+							$(".thr_two .right").html("");
+						}
+						$(".uname").html(data.doctor_name);
+						$(".ksna").html(data.dept_name);
+						$(".shanchang .r").html(data.team_info);
+					}
+					//两个专家
+					if(data.expert==1&&data.num==2){
+						$(".small_area").css({"height":"0px"});
+						$("#two_doctor_expert").css({"height":"1920px"});
+						var content = ' <div class="room_tit">诊室：'+data.room+'</div>';
+						var pic_er = "<ul>";
+						var pic_er_ary = data['pic_er']; 
+						if(pic_er_ary!='n'){
+							for(var m=0;m<pic_er_ary.length;m++){
+								pic_er+="<li><img width='120' height='120' src='"+pic_er_ary[m]['pic_url']+"' /><p>"+pic_er_ary[m]['title']+"</p></li>";
+							}
+						}
+						
+						pic_er+="</ul>";
+						
+						var pat = data.pat;
+						for(var m=0;m<pat.length;m++){
+							var twos="";
+							if(m==1){
+								twos="twos";
+							}
+							if(pat[m].shortinfo==null){
+								pat[m].shortinfo="";
+							}
+							if(pat[m].pat_now=="n"){
+								var pat_now_no="";
+								var pat_now_name="";
+							}else{
+								var pat_now_no=pat[m].pat_now[0].reg_seq_no;
+								var pat_now_name=pat[m].pat_now[0].pat_name;
+							}
+							if(pat[m].pat_wait=='n'){
+								var pat_wait_list="";
+							}else{
+								var pat_wait_list="";
+								var pat_wait = pat[m].pat_wait;
+								for(var n=0;n<pat_wait.length;n++){
+									pat_wait_list+="<span>"+pat_wait[n].reg_seq_no+pat_wait[n].pat_name+"</span>"
+								}
+							}
+							content+='<div class="one '+twos+'"><div class="left"><img width="280" id="docpic" src="'+pat[m].thumbnail+'" /><div class="erweima">'+pic_er+'</div></div><div class="right"><p class="tit"><span class="txt">科室名称:</span><span class="uname">'+pat[m]['dept_name']+'</span></p><p class="tit"><span class="txt">医生姓名:</span><span class="uname">'+pat[m]['doctor_name']+'</span></p><p class="shanchang"><span class="r">'+pat[m].shortinfo+'</span></p><div class="pat_now"><h3>当前患者：</h3><span>'+pat_now_no+pat_now_name+'</span></div><div class="pat_wait"><h3>等候患者：</h3><p>'+pat_wait_list+'</p></div></div></div>'; 
+						}
+						$("#two_doctor_expert").html(content);
+					}
+					//一个普诊
+					if(data.expert==0&&data.num==1){
+						$(".small_area").css({"height":"0px"});
+						$("#one_doctor_normal").css({"height":"1920px"});
+						if(data.pat_now=='n'){
+							var pat_now = "";
+						}else{
+							pat_now = data.pat_now[0].reg_seq_no+data.pat_now[0].pat_name;
+						}
+						$("#one_doctor_normal .room_tit").html("诊室："+data.room);
+						$("#one_doctor_normal .doc_name span").html(data.doctor_name);
+						//$("#one_doctor_normal .doc_zc span").html(data.shortinfo);
+						$("#one_doctor_normal .pat_now span").html(pat_now);
+						$(".o_ksname span").html(data.dept_name);
+						var pic_er = "";
+						var pic_er_ary = data['pic_er']; 
+						if(pic_er_ary!='n'){
+							for(var m=0;m<pic_er_ary.length;m++){
+								pic_er+="<span><img width='150' height='150' src='"+pic_er_ary[m]['pic_url']+"' /><p>"+pic_er_ary[m]['title']+"</p></span>";
+							}
+						}
+						$("#one_doctor_normal .erma").html(pic_er);
+					}
+					//两个普诊
+					if(data.expert==0&&data.num==2){
+						$(".small_area").css({"height":"0px"});
+						$("#two_doctor_normal").css({"height":"1920px"});
+						$("#two_doctor_normal .room_tit").html("诊室："+data.room);
+						var pat = data.pat;
+						for(var m=0;m<pat.length;m++){
+							if(pat[m].pat_now!='n'){
+								var pat_now = pat[m].pat_now[0].reg_seq_no+pat[m].pat_now[0].pat_name; 
+							}else{
+								var pat_now="";
+							}
+							if(m==0){
+								$("#two_doctor_normal .ones .doc_name span").html(pat[m].doctor_name);
+								$("#two_doctor_normal .ones .doc_zc span").html(pat[m].dept_name);
+								$("#two_doctor_normal .ones .pat_now span").html(pat_now);
+							}
+							if(m==1){
+								$("#two_doctor_normal .twos .doc_name span").html(pat[m].doctor_name);
+								$("#two_doctor_normal .twos .doc_zc span").html(pat[m].dept_name);
+								$("#two_doctor_normal .twos .pat_now span").html(pat_now);
+							}
+						}
+						
+						var pic_er = "";
+						var pic_er_ary = data['pic_er']; 
+						if(pic_er_ary!='n'){
+							for(var m=0;m<pic_er_ary.length;m++){
+								pic_er+="<span><img width='150' height='150' src='"+pic_er_ary[m]['pic_url']+"' /><p>"+pic_er_ary[m]['title']+"</p></span>";
+							}
+						}
+						$("#two_doctor_normal .erma").html(pic_er);
+					}
+					//$("#demo1").html(data.description);
+					
+				}else{
+					$(".small_area").css({"height":"0px"});
+					$("#default").css({"height":"1920px"});	
+					
+					
+				}
+				
+			}
+		})	
+  }
+  
+  function getDec(){
+  	  var params = {"room":"<?=$room?>"}; 	
+		$.ajax({
+			url:"__URL__/getDec", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				$("#demo1").html(data.description);
+				$("#demo2").html(data.description);
+			}
+		})	
+  }
+</script>
+<title>小屏信息</title>
+</head>
+
+<body>
+<div class="small_zhezhao" id="small_zhezhao">
+	<div class="one">454号 张则棣</div>
+<div class="two">请进入诊室就诊</div></div>
+</div>
+<div class="small_area" id="one_doctor_expert" style="overflow:hidden; height:0px;">
+	<div class="room_tit">诊室-科室</div>
+    <div class="one" style="height:525px; margin-bottom:15px;" style="height:0px;">
+    	        <img width="300" id="docpic" src="/Uploads/2015-04-28/553e934dad071.jpg"> 
+                 <p class="tit"><span class="txt">科室名称:</span><span class="ksna"></span></p> 
+                       <p class="tit"><span class="txt">医生姓名:</span><span class="uname">医生姓名</span></p>  
+        <p class="shanchang"><span class="txt txt2"></span><span class="r">医生职称</span></p>
+        <div class="erweima" id="er_one_expert" style="overflow:hidden;" >
+                	<!-- <ul>
+                    	<li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                        <li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                    </ul> -->
+                </div>
+    </div>
+   <div class="two">
+    	<h3>个人介绍</h3>
+        <div id="demo" class="intro">
+        	<table align="top"> 
+<tbody><tr> 
+<td valign="top" id="demo1">
+</td> 
+</tr> 
+<tr> 
+<td valign="top" id="demo2">
+</td> 
+</tr> 
+</tbody></table>  
+     
+   <script> 
+var speed=30
+demo2.innerHTML=demo1.innerHTML//克隆demo1为demo2 
+function Marquee(){ 
+if(demo2.offsetHeight-demo.scrollTop<=0)//当滚动至demo1与demo2交界时 
+demo.scrollTop-=demo1.offsetHeight//demo跳到最顶端 
+else{ 
+demo.scrollTop++  //如果是横向的 将 所有的 height top 改成 width left 
+} 
+} 
+var MyMar=setInterval(Marquee,speed)//设置定时器 
+</script> 
+            
+        </div>
+    </div>
+    
+    <div class="thr">
+    	<ul class="thr_one">
+        	<li class="left">当前患者：</li>
+            <li class="right"></li>
+        </ul>
+        <ul class="thr_two">
+        	<li class="left">等候患者：</li>
+            <li class="right"></li>
+        </ul>
+    </div>
+</div>
+<!----------------------------------------以下为两个医生带照片（专家）---------------------------------------------->
+<div class="small_area" id="two_doctor_expert" style="height:0px;">
+	 
+      <div class="one">
+    	     <div class="left">   <img width="300" id="docpic" src="/Uploads/2015-04-28/553e934dad071.jpg"> 
+             	<div class="erweima" >
+                	<!-- <ul>
+                    	<li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                        <li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                    </ul> -->
+                </div>
+             </div>
+             <div class="right">
+					 
+                    <p class="tit"><span class="txt">医生姓名:</span><span class="uname"></span></p>  
+      				<p class="shanchang"><span class="txt txt2"></span><span class="r">职称</span></p>
+                    <div class="pat_now">
+        	           <h3>当前患者：</h3>
+                       <span>24吕成</span> 
+                    </div>
+                    <div class="pat_wait">
+        	           <h3>等候患者：</h3>
+                       <p></p>
+                    </div>
+             </div>
+    </div>
+    
+    <div class="one twos">
+    	     <div class="left">   <img width="300" id="docpic" src="/Uploads/2015-04-28/553e934dad071.jpg"> 
+             <div class="erweima">
+                	<!-- <ul>
+                    	<li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                        <li><img src="__PUBLIC__/Home/erweima/qr.png" width="100" height="100" /><p>轻松关注</p></li>
+                    </ul> -->
+                </div>
+             </div>
+             <div class="right">
+             
+             
+                    <p class="tit"><span class="txt">医生姓名:</span><span class="uname">袁佳琴</span></p>  
+      				<p class="shanchang"><span class="txt txt2"></span><span class="r">主任医师</span></p>
+                    <div class="pat_now">
+        	           <h3>当前患者：</h3>
+                       <span>24吕成</span> 
+                    </div>
+                    <div class="pat_wait">
+        	           <h3>等候患者：</h3>
+                       <p><span>3韩思雨</span><span>5贾永顺</span><span>6郭立清</span><span>7常香云</span> </p>
+                    </div>
+             </div>
+    </div>
+     
+    
+</div>
+<!---------------------两个医生不带照片--------------------------->
+<div class="small_area two_doc_normal" id="two_doctor_normal" style="height:0px;">
+	<div class="room_tit">
+    	2A101诊室 - 皮肤1科
+    </div>
+ 	<ul class="ones" style="padding-top:150px;">
+    	<li class="doc_zc"><h3>科室名称：</h3><span></span></li>
+        <li class="doc_name"><h3>医生姓名：</h3><span>后惊奇</span></li>
+       <!--  <li class="doc_zc"><h3>医生职称：</h3><span>主治医师</span></li> -->
+        <li class="pat_now"><h3>当前患者：</h3><span>杨培元</span></li>
+    </ul>
+    
+    <ul class="twos">
+    	<li class="doc_zc"><h3>科室名称：</h3><span></span></li>
+        <li class="doc_name"><h3>医生姓名：</h3><span>郑洁</span></li>
+        <!-- <li class="doc_zc"><h3>医生职称：</h3><span>副主任医师</span></li> -->
+        <li class="pat_now"><h3>当前患者：</h3><span>测试一</span></li>
+    </ul>
+   <!--  <div class="erma">
+    	<span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+        
+        <span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+    </div>
+    -->
+   
+</div>
+<!---------------------一个医生不带照片-------------------- ------->
+<div class="small_area two_doc_normal" id="one_doctor_normal" style="height:0px;">  
+	<div class="room_tit">
+    	2A101诊室 - 皮肤1科
+    </div>
+ 	<ul class="ones" style="margin-bottom:30px;">
+    	<li class="doc_name o_ksname"><h3>科室名称：</h3><span></span></li>
+        <li class="doc_name"><h3>医生姓名：</h3><span></span></li>
+       <!--  <li class="doc_zc"><h3>医生职称：</h3><span></span></li> -->
+        <li class="pat_now"><h3>当前患者：</h3><span></span></li>
+    </ul>
+    
+   <div class="intro" id="demo3" style="height:500px;">
+   
+   <table align="top"> 
+<tbody><tr> 
+<td valign="top" id="demo4">
+   		<p>天津市中医药研究院是全国六大中医药科研基地之一。内设附属医院一个及科研业务机构九个，即：临床研究所、中药研究所、基础研究所、实验中心、中医药信息研究所、天津市中医肾病研究所（国家中医药管理局补肾活血法法治疗慢性肾病重点研究室属国家重点实验室）、中西医结合疮疡研究所、中西医结合皮肤病研究所、天津市中医药特色技术和方药筛选评价中心；中国中医药研究促进会肾病分会等14个国家级与市级学术团体挂靠单位。全院在职职工1175人，其中医护技等865人，高级职称238人。</p>
+
+　　<p>附属医院拥有国家中医药管理局中医药Ⅱ级实验室、化妆品厂及符合GDP标准制剂室，天津市性传播疾病诊疗中心，国家卫生部化妆品皮肤病诊断机构、卫生部化妆品人体安全性及功效性检验机构；国家中医药管理局中医药适宜技术推广省级基地；《中国中西医结合皮肤性病学杂志》编辑部、全民胃部重大疾病普查行动诊疗咨询中心设在该院。2012年，“津门医粹”博物馆被国家中医药管理局确定为首批全国中医药文化宣传教育基地。</p>
+
+　　<p> 附属医院做为研究院的临床医院，近年来，医院以树名医、建名科、创名院、做好药的“三名一好”为发展战略，积极落实人才兴院计划。目前，中医药研究院及附属医院拥有一批全国乃至国际著名的中医专家，其中，张大宁教授遴选为国医大师，国际欧亚科学院士；还拥有天津市名中医7名；天津市首批中青年名中医4名；医院现拥有享受政府特贴及授衔专家12人，拥有博士研究生导师4人，硕士研究生导师56人；5个国家级名中医传承工作室，博士后流动站1个设在我院。</p>
+
+　　<p> 医院名科众多，肾病科、中西医结合皮肤病科、针灸科、临床药学为国家卫计委（中医专业）重点专科；拥有国家中医药管理局重点中医专科七个；天津市重点中医专科六个；中药煎煮室被确立为“天津市煎药人员培训中心”；医院设有31个临床科室及8个技术科室。</p>
+
+　<p>医院秉承以人为本、以患者为中心的办院理念，坚持中医方向，以立足天津、面向华北、辐射全国为发展定位，为“做一流中医药研究院、创一流中医综合性医院”为奋斗目标。</p>
+</td> 
+</tr> 
+<tr> 
+<td valign="top" id="demo5">
+</td> 
+</tr> 
+</tbody></table> 
+<script> 
+var speed=30
+demo5.innerHTML=demo4.innerHTML//克隆demo1为demo2 
+function Marquee2(){ 
+if(demo4.offsetHeight-demo3.scrollTop<=0)//当滚动至demo1与demo2交界时 
+demo3.scrollTop-=demo4.offsetHeight//demo跳到最顶端 
+else{ 
+demo3.scrollTop++  //如果是横向的 将 所有的 height top 改成 width left 
+} 
+} 
+var MyMar=setInterval(Marquee2,speed)//设置定时器 
+</script>
+</div>
+  <!--   <div class="erma">
+    	<span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+        
+        <span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+    </div>-->
+   
+</div> 
+<div class="small_area" id="default" style="height:0px;">
+<div class="room_tit">
+    	诊室：<?=$room_name?>
+    </div>
+</div>
+</body>
+</html>

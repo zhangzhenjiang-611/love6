@@ -7,10 +7,14 @@
  */
 namespace Admin\Controller;
 use Think\Controller;
-class RbacController extends BaseController {
+class RbacController extends Controller {
     //用户列表
     public function index() {
+
+        //$user = D('user');
+        //$user = $user->username = 'admin';
         $user = D('UserRelation')->field('password',true)->relation('role')->select();
+        //$user =$user->field('password',true)->relation('role')->select();
         $this->assign('user',$user);
         $this->display();
 

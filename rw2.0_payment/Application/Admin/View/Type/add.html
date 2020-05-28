@@ -1,0 +1,35 @@
+<include file="Base/head" />
+    <div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span>类别添加页面</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <form class="mws-form" action="__URL__/insert" method="post">
+            <input name="_token" value="468DwX3TxLWHloqqfjJxIKM1JTE0BoxlQprDrG6X" type="hidden">
+            <div class="mws-form-inline">
+                <div class="mws-form-row">
+                    <label class="mws-form-label">父类类名</label>
+                    <div class="mws-form-item">
+                        <select class="small" name="pid">
+                            <option value="0">顶级类</option>
+                            <volist name="list" id="v">
+                            <option value='{$v['id']}'>{$v['name']}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">类别名称</label>
+                    <div class="mws-form-item">
+                        <input class="small" name="name" type="text">
+                    </div>
+                </div>  
+            </div>
+            <div class="mws-button-row">
+                <input value="添加" class="btn btn-danger" type="submit">
+                <input value="重置" class="btn " type="reset">
+            </div>
+        </form>
+    </div>      
+</div>
+<include file="Base/foot" />

@@ -1,0 +1,46 @@
+<form action="__URL__/edit_do" method="post" class="definewidth m20" enctype="multipart/form-data">
+<input type="hidden" id="dept_code" value="" />
+<table class="table table-bordered table-hover m10">
+
+     <tr>
+        <td class="tableleft" width="40%">患者姓名</td>
+        <td>
+ 			{$pat_name}
+        </td>
+    </tr> 
+     <tr>
+        <td class="tableleft" width="40%">挂号科室</td>
+        <td>
+ 			{$dept_name}
+        </td>
+    </tr> 
+    <tr>
+        <td class="tableleft" width="40%">调换科室</td>
+        <td>
+        <select name="sssss" id="sssss" onChange="return getmydata()"  m='search'>
+      <option value="-1">请先把调换的科室</option>
+      <volist name="dept_list" id="vo">
+       <option value="{$vo.dept_code}" <if condition="$dept_code eq $vo['dept_code']">selected</if>>{$vo.dept_name}</option>
+      </volist>
+    </select>
+        </td>
+    </tr> 
+    <tr>
+       
+        <td colspan="2">
+            <button type="button" class="btn btn-primary" type="button" id="save">保 存</button><!--  &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid" onClick="tiaozhuan()">返回列表</button> -->
+        </td>
+    </tr>
+</table>
+</form>
+ <script type="text/javascript" src="__PUBLIC__/selectseach/js/jquery1.4.2.js"></script>
+<script type="text/javascript" src="__PUBLIC__/selectseach/js/jquery.selectseach.min.js"></script> 
+<script language="javascript">
+function getmydata(){
+	//alert($('#sssss').val());
+}
+$(function(){
+	 $('select').selectseach(); 
+})
+</script>
+

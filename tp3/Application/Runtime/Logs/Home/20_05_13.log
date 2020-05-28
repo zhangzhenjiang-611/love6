@@ -1,0 +1,91 @@
+[ 2020-05-13T09:45:10+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000476s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000569s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000657s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000738s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000835s ]
+
+[ 2020-05-13T09:45:10+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000296s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000303s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000390s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000316s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000402s ]
+
+[ 2020-05-13T09:46:10+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000425s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000514s ]
+
+[ 2020-05-13T09:46:11+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000345s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000355s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000450s ]
+
+[ 2020-05-13T09:46:43+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000403s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000694s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000790s ]
+
+[ 2020-05-13T09:47:04+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000292s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000300s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000384s ]
+
+[ 2020-05-13T18:47:46+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000409s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000742s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000689s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000791s ]
+
+[ 2020-05-13T18:47:50+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000771s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000890s ]
+NOTIC: [2] simplexml_load_string(): Entity: line 1: parser error : Opening and ending tag mismatch: resultMessage line 1 and response D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string(): ��停用不能走结算服务，请联系管理员！&lt;resultMessage/&gt;&lt;/response&gt; D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string():                                                                                ^ D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string(): Entity: line 1: parser error : Premature end of data in tag resultcode line 1 D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string(): ��停用不能走结算服务，请联系管理员！&lt;resultMessage/&gt;&lt;/response&gt; D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string():                                                                                ^ D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string(): Entity: line 1: parser error : Premature end of data in tag response line 1 D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string(): ��停用不能走结算服务，请联系管理员！&lt;resultMessage/&gt;&lt;/response&gt; D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] simplexml_load_string():                                                                                ^ D:\project\love6\tp3\Application\Common\Common\functions.php 第 21 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\project\love6\tp3\Application\Common\Common\functions.php 第 26 行.
+
+[ 2020-05-13T18:48:08+08:00 ] 127.0.0.1 /home/index/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000360s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000532s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000617s ]
+

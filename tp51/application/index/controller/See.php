@@ -31,4 +31,9 @@ class See extends Controller
        return $this->fetch();
     }
 
+    public function code() {
+        //验证码
+        return $this->fetch();
+    }
+
 }

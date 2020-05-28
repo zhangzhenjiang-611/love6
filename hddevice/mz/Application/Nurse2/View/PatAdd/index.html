@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$row.pat_name}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+    <link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+	.cls{}
+    </style>
+<script language="javascript">
+/**
+* 删除前确认
+* www.jbxue.com
+*/
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+function rtrim(str){
+	var pattern = new RegExp("[//s]+$","gi");
+	return str.replace(pattern,"");
+}
+document.onkeydown = function(){
+	if(window.event&&window.event.keyCode==13){
+		return false;
+	}
+}
+$(function(){
+$("#pat_code").focus();
+$(".yin_tip").bind("click",function(){
+	$("#pat_code").focus();							
+});
+$('#pat_code').bind('input onpropertychange', function(event) { 
+	var pid = $("#pat_code").val();
+	$(".yin_tip").html("");
+	if(pid.length==12){
+		var room = "<?=$room?>";
+		var id = pid;
+		var index_load = "";
+		var params = {"pat_code":$("#pat_code").val(),"zhenqu":"<?=$zhenqu?>"};  
+		$.ajax({
+			url:"__URL__/getPat", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend:function(){
+				index_load = layer.msg('数据请求中,请稍后...', {icon: 16});
+			},
+			success:function(data){
+				layer.close(index_load);
+				if(data.num==0){
+					if(data.success==0){
+						$("#patArea").html("<tr><td colspan='11' class='tips2'><font color='red' style='font-size:22px'>"+data.error+"</font></td></tr>"); 
+					}else{
+						$("#patArea").html("<tr><td colspan='11' class='tips2'><font color='red' style='font-size:22px'>"+data.status_txt+"</font></td></tr>"); 
+					}
+					
+					//layer.msg(data.status_txt ,{shade: 0.3});
+				}
+				else if(data.num==1){
+					if(data.success==1){
+						$("#handcz").hide();
+						//$("#caozuo").show();  
+						var pat = data.pat;
+						$("#patArea").html("<tr><td><input type='checkbox' name='pid[]' checked /></td><td>"+pat.pat_code+"</td><td>"+pat.pat_name+"</td><td>"+pat.pat_sex+"</td><td id='tb_doctor_name'>"+pat.doctor_name+"</td><td id='tb_dept_name'>"+pat.dept_name+"</td><td>"+pat.reg_type+"</td><td>"+pat.reg_seq_no+"</td><td class='status'>"+pat.status_txt+"</td><td>"+pat.reg_time+"</td></tr>");
+						$("#dept_code_hidden").val(pat.dept_code);
+						$("#doctor_code_hidden").val(pat.doctor_code);
+						$("#pat_code_hidden").val(pat.pat_code);
+						if(pat.withdraw_flag==1){
+							layer.msg('患者 '+pat.pat_name+'已退号' ,{shade: 0.3});
+						}else if(data.row[0].is_over==1){
+							if((data.pat.doctor_code!=""&&data.pat.reg_type=="专家"&&data.pat.is_jz==1&&(data.pat.status==1||data.pat.status==3||data.pat.status==5))||(data.pat.reg_type=='普通' &&data.pat.is_jz==1&&(data.pat.status==1||data.pat.status==5))){
+								var index1 = layer.confirm("医生 "+data.row[0].doctor_name+" 已停诊,是否切换接诊医生？",{
+									btn:['切换','不切换']
+									},function(){
+										if(data.row[0].doctor_code==""){
+											var  url = "__URL__/change_doctor/reg_id/"+data.pat.reg_id+"/dept_code/"+data.pat.dept_code+"/zhenqu/<?=$zhenqu?>";
+										}else{
+											var url = "__URL__/change_doctor/doctor_code/"+data.row[0].doctor_code+"/reg_id/"+data.pat.reg_id+"/dept_code/"+data.pat.dept_code+"/zhenqu/<?=$zhenqu?>";
+										}
+							
+										var index2 = layer.open({
+											type: 2,
+											skin: 'layui-layer-lan',
+									
+											title: '患者转医生', 
+											offset:['100px','350px'],
+											//fix: false,
+											shade:0.8,
+											shadeClose: true,
+											// maxmin: false,
+											move: false,
+											area: ['500px'],
+											content: [url,'yes'],
+											end: function(){}
+										});
+										
+										$("#layui-layer-iframe"+index2).css({"height":"250px"});	
+										layer.close(index1);
+									},function(){
+										//layer.msg('', {icon: 1});
+									}	
+								
+								); //end of index1
+																	
+								
+							}else{                 //不符合转医生条件的情况 
+								baodao();
+							}
+						}else{ //非退号 停诊状态
+							$("#patArea").append("<tr><td colspan='11' class='tips2'><font color='green' style='font-size:22px'>"+data.row[0].status_txt+"</font></td></tr>"); 
+							if(data.row[0].fp_doc==1){
+								var index1 = layer.confirm("初诊未报到患者，复诊是否为其分配医生",{
+									btn:['分配','不分配']
+									},function(){
+										if(data.row[0].doctor_code==""){
+											var  url = "__URL__/change_doctor/reg_id/"+data.pat.reg_id+"/dept_code/"+data.pat.dept_code+"/zhenqu/<?=$zhenqu?>";
+										}else{
+											var url = "__URL__/change_doctor/doctor_code/"+data.row[0].doctor_code+"/reg_id/"+data.pat.reg_id+"/dept_code/"+data.pat.dept_code+"/zhenqu/<?=$zhenqu?>";
+										}
+							
+										var index2 = layer.open({
+											type: 2,
+											skin: 'layui-layer-lan',
+									
+											title: '患者转医生', 
+											offset:['100px','350px'],
+											//fix: false,
+											shade:0.8,
+											shadeClose: true,
+											// maxmin: false,
+											move: false,
+											area: ['500px'],
+											content: [url,'yes'],
+											end: function(){}
+										});
+										
+										$("#layui-layer-iframe"+index2).css({"height":"250px"});	
+										layer.close(index1);
+									},function(){
+										//layer.msg('', {icon: 1});
+									}	
+								
+								); //end of index1
+							}else{
+								layer.msg(data.row[0].status_txt ,{icon: 1});
+							}
+							
+						}
+						
+						
+					}else{              //data.success=0 情况下的操作
+					
+						$("#handcz").css({"display":"block"});
+						//$("#caozuo").hide();
+						//layer.msg(data.error,{icon: 2});
+						$("#patArea").html("<tr><td colspan='11' class='tips2'>"+data.error+"</td></tr>");
+						$("#handcz").hide();
+						$("#tips").html("");
+					}
+					
+				}else{           //患者挂号数据返回多于一个的分支
+					$("#handcz").show();
+					//$("#caozuo").hide();
+					var pat = data.pat;
+					var pat_html = "";
+					for(var i=0;i<pat.length;i++){
+						pat_html+="<tr><td><input type='checkbox' name='pid[]' value='"+pat[i].pat_code+"|"+pat[i].times+"' /></td><td>"+pat[i].pat_code+"</td><td>"+pat[i].pat_name+"</td><td>"+pat[i].pat_sex+"</td><td id='tb_doctor_name'>"+pat[i].doctor_name+"</td><td id='tb_dept_name'>"+pat[i].dept_name+"</td><td>"+pat[i].reg_type+"</td><td>"+pat[i].reg_seq_no+"</td><td class='status'>"+pat[i].status_txt+"</td><td>"+pat[i].reg_time+"</td></tr>";
+						$("#patArea").html(pat_html);
+					}
+				}
+				
+				
+			}
+		})
+		$("#pat_code").val("");
+	$(".yin_tip").html(pid);
+	}else{            //当文本框输入少于12个字符时
+		$("#patArea").html("<tr><td colspan='11' class='tips2'><font color='red' style='font-size:22px'>暂无信息</font></td></tr>"); 
+		//$("#caozuo").hide();
+		$("#tips").html("");
+	}	
+	
+})
+$("#baodao").on("click",function(){
+	baodao();
+	$("#pat_code").focus();
+})
+$("#change_dept").on("click",function(){
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '患者转科室', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       // maxmin: false,
+		move: false,
+        area: ['500px'],
+        content: ['__URL__/change_dept/dept_code/'+$("#dept_code_hidden").val()+'/pat_code/'+$("#pat_code_hidden").val()+'/zhenqu/'+$("#zhenqu").val(),'yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"250px"});
+})
+$("#change_doctor").click(function(){
+	var doctor_code = $("#doctor_code_hidden").val();
+	var dept_code = $("#dept_code_hidden").val();
+	var pat_code = $("#pat_code_hidden").val() ;
+	if(doctor_code==""){
+		var  url = "__URL__/change_doctor/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}else{
+		var url = "__URL__/change_doctor/doctor_code/"+doctor_code+"/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '患者转医生', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       // maxmin: false,
+		move: false,
+        area: ['500px'],
+        content: [url,'yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"250px"});
+})
+//插队
+$("#chadui").click(function(){
+	var doctor_code = $("#doctor_code_hidden").val();
+	var dept_code = $("#dept_code_hidden").val();
+	var pat_code = $("#pat_code_hidden").val() ;
+	if(doctor_code==""){
+		var  url = "__URL__/pat_chadui/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}else{
+		var url = "__URL__/pat_chadui/doctor_code/"+doctor_code+"/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '绿色通道', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       // maxmin: false,
+		move: false,
+        area: ['500px'],
+        content: [url,'yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"465px"});
+})
+
+})
+function baodao(){
+	var stu="";
+	$("input[name='pid[]']:checked").each(function(i, n){
+		//var val = n.value.split("|");
+		if(i==0){
+			stu+=n.value;
+		}else{
+			stu+=","+n.value;
+		}											
+	})
+	if(stu==""){
+		layer.msg('请至少选择一项', function(){
+   
+		}); 
+		return;	
+	}
+	var params = {"str":stu,"zhenqu":"<?=$zhenqu?>"};  
+	$.ajax({
+		url:"__URL__/baodao", 
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			var bd_txt = "";
+			if(data[0].is_over==1){
+				layer.msg("医生 "+data[0].doctor_name+" 已停诊",function(){
+					if(data[0].doctor_code==""){
+						var  url = "__URL__/change_doctor/pat_code/"+data[0].pat_code+"/dept_code/"+data[0].dept_code;
+					}else{
+						var url = "__URL__/change_doctor/doctor_code/"+data[0].doctor_code+"/pat_code/"+data[0].reg_id+"/dept_code/"+data[0].dept_code;
+					}
+					var index = layer.open({
+						type: 2,
+						skin: 'layui-layer-lan',
+						
+						title: '患者转医生', 
+						offset:['100px','350px'],
+						//fix: false,
+						shade:0.8,
+						shadeClose: true,
+					   // maxmin: false,
+						move: false,
+						area: ['500px'],
+						content: [url,'yes'],
+						end: function(){
+						   
+						}
+					});	
+					$("#layui-layer-iframe"+index).css({"height":"250px"});									
+				});
+			}else{
+				for(var i=0;i<data.length;i++){
+					if(data[i].success==1){
+						bd_txt+=data[i].status_txt+" <font color='green'>✔</font><br>";
+					}else{
+						bd_txt+="<font color='red' style='font-size:20px;'>"+data[i].error+" ✘</font>";
+					}	
+				}
+				$("#bd_result").html(bd_txt);
+				//layer.msg(bd_txt);
+			}
+			
+			
+		}
+	})
+}
+</script>
+
+<style>
+.page a{ margin-left:5px;}
+.table a{ color:#333;}
+.table button{}
+ul,li{ list-style:none; padding:0px; margin:0px;}
+#mbody{width:100%; padding-bottom:26px;}
+#mleft{width:15%; float:left; padding-top:5px; padding-left:1%; padding-right:1%; height:100%; background:#F3F3F3} 
+#mright{width:83%; float:right;}
+#mleft .titbar{ width:100%; height:30px; line-height:32px; background:#2AAAFA;moz-border-radius: 6px;      /* Gecko browsers */
+    -webkit-border-radius: 6px;   /* Webkit browsers */
+    border-radius:6px;            /* W3C syntax */}
+#mleft .titbar span{ font-weight:bold; margin-left:12px; font-size:16px; color:#fff;}
+.rbox dt{ font-size:14px; padding-left:5px; border-bottom:2px solid #ccc; padding-bottom:8px; width:95%;}
+.rbox dd{ margin-left:4px; padding-top:10px;}
+.patinfo_area{width:96%; margin:auto; margin-top:18px;}
+.patinfo_area ul li{float:left;}
+.pattable{width:100%;}
+.pattable thead{ background:#eee; height:30px;}
+#patArea tr td{ text-align:center; height:58px;}
+#pat_code{ width:350px; height:50px; line-height:50px; padding-left:8px; font-size:28px; color:#000;}
+.pat_txt{ font-size:36px; float:left;height:55px; line-height:55px; display:block; } 
+.patcode_input{width:650px; margin:auto; height:50px; position:relative;}
+#caozuo{display:none;}
+#tips{ font-size:30px; height:0px; line-height:30px; margin-top:15px; color:red; margin-left:10px; display:block; text-align:center; width:100%;}
+.status{ color:green; font-weight:bold;}
+.tips2{font-weight:bold;font-size:18px;height:55px !important;}
+.tips2 b{font-weight:bold;font-size:22px;}
+#baodao{ margin-left:5px; float:left;}
+
+#bd_result{ color:#000; padding-top:3px; float:left; margin-left:30px; font-size:20px;}
+#handcz{ display:none;}
+.pattable {border-top:1px solid #666; border-right:1px solid #666;}
+.pattable tr td,.pattable tr th{border-left:1px solid #666; border-bottom:1px solid #666; font-size:20px; height:50px;}
+.yin_tip {
+  color: #999;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 35px;
+  left: 230px;
+  position: absolute;
+  top: 21px;
+}
+</style>
+</head>
+<body>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">患者报到</a></li>
+    </ul>
+    </div>
+<form class="form-inline definewidth m20" action="" method="post" style="margin-top:25px; margin-bottom:30px;">
+<div class="patcode_input"><span class="pat_txt">患者门诊号： </span><input type="text" name="pat_name" id="pat_code" autocomplete=false class="abc input-default" placeholder=""><br/><div class="yin_tip"></div><span id="tips"></span></div>
+
+</form>
+<div class="patinfo_area">
+<table cellpadding="0" cellspacing="0" border="0" class="pattable ">
+	<thead>
+    <th width="60">选择</th>
+    	<th>患者编号</th>
+        <th>患者姓名</th>
+     
+        <th>性别</th>
+        <th>医生</th>
+        <th>科室</th>
+        <th>挂号类型</th>
+        <th>排队序号</th>
+        <th>状态</th>
+        <th>挂号时间</th>
+       
+    </thead>
+    <tbody id="patArea">
+    	<tr>
+    	<td colspan="11" class="tips2"><font color="red" style="font-size:22px;">暂无信息</font></td>
+	</tr>
+    </tbody>
+    <tbody id="caozuo">
+    	<tr>
+        	<td colspan="11" height="40" style="text-align:center;">
+            	<input type="hidden" id="dept_code_hidden" />
+                <input type="hidden" id="doctor_code_hidden" />
+                <input type="hidden" id="pat_code_hidden" />
+                <input type="hidden" id="zhenqu" value="{$zhenqu}" />
+                
+                <input type="button" value="调科室" id="change_dept" />
+                <input type="button" value="调医生" id="change_doctor"/>
+                <input type="button" value="插队" id="chadui" />
+               
+                
+            </td>
+        </tr>
+    </tbody>
+    <tbody id="handcz">
+    	<tr>
+        	<td colspan="11" valign="middle" style="padding:10px 0px;">
+             <input class="btn btn-primary" type="button" value="确认报到" id="baodao" />
+             <span id="bd_result"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+<script>  
+//禁用右键、文本选择功能、复制按键  
+  /* $(document).bind("contextmenu",function(){return false;});  
+    $(document).bind("keydown",function(e){ 
+e=window.event||e; 
+if(e.keyCode==116){ 
+e.keyCode = 0; 
+return false; 
+} 
+}); */
+
+
+</script>   

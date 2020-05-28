@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Nurse2/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/select-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/editor/kindeditor.js"></script>
+<script language='javascript'>
+function setImagePreview() {
+        var docObj=document.getElementById("thumbnail");
+ 
+        var imgObjPreview=document.getElementById("preview");
+                if(docObj.files &&    docObj.files[0]){
+                        //火狐下，直接设img属性
+                        imgObjPreview.style.display = 'block';
+                        //imgObjPreview.style.width = '260px';
+                                           
+                        //imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+      //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+      imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+
+                }else{
+                        //IE下，使用滤镜
+                        docObj.select();
+                        var imgSrc = document.selection.createRange().text;
+                        var localImagId = document.getElementById("localImag");
+                        //必须设置初始大小
+                        //localImagId.style.width = "300px";
+                        localImagId.style.height = "90px";
+                        //图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+                                localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                        }catch(e){
+                                alert("您上传的图片格式不正确，请重新选择!");
+                                return false;
+                        }
+                        imgObjPreview.style.display = 'none';
+                        document.selection.empty();
+                }
+                return true;
+}
+</script>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+<script language='javascript'>
+	$(function(){
+		$(".btn2").click(function(){
+		var id = $(this).attr("param");
+		var txt = "";
+		if(id==1){
+			txt = $("#daping").val();
+			
+		}
+		if(id==2){
+			txt = $("#wjyy").val();
+		}
+		var params = {"id":id,"txt":txt}; 
+		$.ajax({
+			url:"__URL__/ajax_set_txt", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					alert("设置成功");
+				}else{
+					alert("设置失败");
+				}
+			}
+		})			
+		})
+		$("#sendvoice").click(function(){
+			var params = {"speech":$("#speech").val()}; 
+			$.ajax({
+				url:"__URL__/ajax_send_voice", 
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					alert("发送成功");
+				}
+			})			
+							  
+		})
+		$("#settime").click(function(){
+			var params = {"hours":$("#hour").val(),"minutes":$("#minute").val()}; 
+			$.ajax({
+				url:"__URL__/ajax_set_time", 
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.success==1){
+					alert("设置成功");
+				}else{
+					alert("设置失败");
+				}
+				}
+			})								
+		})
+	})
+</script>
+<style>
+label{ width:106px !important;}
+</style>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">文字设置</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    
+    <div id="usual1" class="usual"> 
+    
+    <div class="itab">
+  	<ul> 
+    <li><a href="#tab1" class="selected">设定文字信息</a></li> 
+   
+  	</ul>
+    </div> 
+    
+  	<div id="tab1" class="tabson">
+    
+    <!-- <div class="formtext">Hi，<b>admin</b>，欢迎您试用信息发布功能！</div> -->
+    
+    <ul class="forminfo">
+    <form enctype="multipart/form-data" method="post" action="__URL__/edit_do">
+    <input type="hidden" name="doctor_code" value="{$row['doctor_code']}" />
+	<input type="hidden" name="url" value="{$url}" />
+    
+    <li><label>大屏底部文字<b>*</b></label><input name="s1" type="text" class="dfinput" value="{$row[0].con}"  style="width:700px;"/></li>
+   <li><label>语音呼叫次数<b>*</b></label><input name="s3" type="text" class="dfinput" value="{$row[2].con}"  style="width:700px;"/></li>
+    <li><label>两专业诊室<b>*</b>：</label><input name="s5" type="text" class="dfinput" value="{$row[4].con}"  style="width:700px;"/></li>
+     <li><label>大屏翻屏时间<b>*</b>：</label><input name="s6" type="text" class="dfinput" value="{$row[5].con}"  style="width:50px;"/> (单位：秒)</li>
+    <li><label>登录界面内容<b>*</b></label>
+    
+    
+    
+
+   <textarea class="textinput" rows="" cols="" name="s2">{$row[1].con}
+</textarea>
+    
+    </li>
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确定"/></li>
+    </form>
+    </ul>
+    
+    </div> 
+    
+    
+  
+ 
+	<script type="text/javascript"> 
+      $("#usual1 ul").idTabs(); 
+    </script>
+    
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+    
+    
+    
+    
+    
+    </div>
+
+
+</body>
+
+</html>

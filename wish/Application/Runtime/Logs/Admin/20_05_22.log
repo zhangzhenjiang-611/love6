@@ -1,0 +1,14 @@
+[ 2020-05-22T23:02:43+08:00 ] 127.0.0.1 /index.php/Admin/Index/log
+ERR: 测试日志
+[ 2020-05-22T23:02:43+08:00 ] 127.0.0.1 /index.php/Admin/Index/log
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000367s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000421s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000515s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000475s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000571s ]
+NOTIC: [2] ini_set(): A session is active. You cannot change the session module's ini settings at this time D:\project\love6\wish\index.php 第 25 行.
+

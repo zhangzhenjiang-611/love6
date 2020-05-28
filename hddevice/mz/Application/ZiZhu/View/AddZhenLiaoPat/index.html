@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="__PUBLIC__/Home/css/jquery.ui.autocomplete.css"/> 
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<script language="javascript">
+$(function(){
+	$("#key").autocomplete({ 
+			source: "__URL__/getTeamKey", 
+			minLength: 1,
+			autoFocus:true,
+			select: function( event, ui ) {
+				var id = ui.item.id;
+				$("#doctor_code").val(id);
+				$("#key").val(ui.item.label);
+			}
+		}); 
+	$("#submit").click(function(){
+		if($("#pat_name").val()==""){
+			alert("患者姓名不能为空");
+			return;
+		}
+		if($("#doctor_code").val()==""){
+			alert("医生不能为空");
+			return;
+		}
+		
+		var params = {"doctor_code":$("#doctor_code").val(),"doctor_name":$("#key").val(),"noon_flag":$("#noon_flag").val(),"pat_name":$("#pat_name").val()}; 	
+		$.ajax({
+			url:"__URL__/addPatToList", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					alert("添加成功");
+				}else{
+					alert("添加失败");
+				}
+			}
+		})						
+	})
+});
+
+</script>
+<style>
+.area{width:500px; height:300px; margin-left:15px;}
+.area ul li{float:left; font-size:14px;}
+.area ul{width:100%; float:left; margin-top:12px;}
+.area ul li.tiptxt{ margin-right:10px; margin-top:3px;}
+.ipts{ width:180px; height:25px; line-height:25px; padding-left:5px;}
+#noon_flag{ height:25px; width:60px;}
+#submit{ width:120px; height:30px; font-size:16px; cursor:pointer; font-weight:bold;}
+</style>
+<title>添加诊疗患者</title>
+</head>
+
+<body>
+
+<div class="area">
+<input type="hidden" id="doctor_code" />
+<ul>
+	<li class="tiptxt">患者姓名:</li>
+    <li class="inputs"><input type="text" class="ipts" id="pat_name"/></li>
+</ul>
+
+<ul>
+	<li class="tiptxt">就诊医生:</li>
+    <li class="inputs"><input type="text" class="ipts" id="key"/></li>
+</ul>
+<ul>
+	<li class="tiptxt">就诊时间:</li>
+    <li class="inputs">
+    	<select id="noon_flag">
+        	<option value="上午">上午</option>
+            <option value="下午">下午</option>
+            <option value="晚上">晚上</option>
+        </select>
+    </li>
+</ul>
+<ul>
+	<input type="button" value="提交" id="submit" /> 
+</ul>
+</div>
+
+
+</body>
+</html>

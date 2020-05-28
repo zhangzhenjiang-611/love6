@@ -1,0 +1,28 @@
+[2016-09-30 16:54:09] 登录传入参数 -- 房间号:11 医生编码:01367 科室编码:0113010 是否专家:0
+登录成功SQL：update client_uid set room_id='11',ip='172.168.0.241',dept='0113010',login_time='2016-09-30 16:54:09' where uid='01367'
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 16:56:47] 顺呼传入参数 -- 房间号:11 医生编码:01367 科室编码:0113010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0113010' and reg_type='普通' and fp_doctor_code='01367' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 16:56:48] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0113010' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 0第一1第二2
+[2016-09-30 16:56:48] 呼叫内容：请老年内科门诊,69号杨淑琴,到第22诊室就诊||s01
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 16:57:22] 顺呼传入参数 -- 房间号:11 医生编码:01367 科室编码:0113010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0113010' and reg_type='普通' and fp_doctor_code='01367' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 16:57:22] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0113010' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 0第一1第二1
+[2016-09-30 16:57:22] 呼叫内容：请老年内科门诊,70号张莉,到第22诊室就诊||s01
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 17:13:52] 顺呼传入参数 -- 房间号:11 医生编码:01367 科室编码:0113010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0113010' and reg_type='普通' and fp_doctor_code='01367' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 17:13:52] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0113010' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 0第一1第二1
+[2016-09-30 17:13:52] 获取自己有几名候诊患者SQL：select count(*) as num from register_assign where fp_doctor_code='01367' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and dept_code='0113010' and reg_type='普通' and withdraw_flag=0
+[2016-09-30 17:13:52] 呼叫内容：请老年内科门诊,69号杨淑琴,到第22诊室就诊||s01
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 17:20:11] 顺呼传入参数 -- 房间号:11 医生编码:01367 科室编码:0113010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0113010' and reg_type='普通' and fp_doctor_code='01367' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-30 17:20:11] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0113010' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 0第一1第二1
+[2016-09-30 17:20:11] 呼叫内容：请老年内科门诊,69号杨淑琴,到第22诊室就诊||s01
+   ---------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,31 @@
+<include file="Base/head" />
+<div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+        <span><i class="icon-table"></i>医院介绍列表</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+        <table class="mws-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th colspan="3" width="750px">内容</th>
+                    <th colspan="2">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{$data.id}</td>
+                    <td colspan="3" width="750px"><?php echo htmlspecialchars_decode($data['title'])?></td>
+                    <td colspan="2">
+                        &nbsp;&nbsp;
+                        <a href="__APP__/Admin/HospitalAdd/delete/id/{$data.id}" class='icon-trash' style='color:black;font-size:20px'></a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="__APP__/Admin/HospitalAdd/edit/id/{$data.id}" class='icon-tools' style='color:black;font-size:20px'></a>
+                        &nbsp;&nbsp;
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<include file="Base/foot" />

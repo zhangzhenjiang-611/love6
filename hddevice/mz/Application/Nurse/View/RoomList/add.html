@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse//Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse//Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse//Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+    
+    <script src="__PUBLIC__/Static/Uploadify/jquery.uploadify-3.1.min.js"></script>
+	<link href="__PUBLIC__/Static/Uploadify/uploadify.css" rel="stylesheet" type="text/css">
+<script language='javascript'>
+function setImagePreview() {
+        var docObj=document.getElementById("thumbnail");
+ 
+        var imgObjPreview=document.getElementById("preview");
+                if(docObj.files &&    docObj.files[0]){
+                        //火狐下，直接设img属性
+                        imgObjPreview.style.display = 'block';
+                        //imgObjPreview.style.width = '260px';
+                                           
+                        //imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+      //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+      imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+
+                }else{
+                        //IE下，使用滤镜
+                        docObj.select();
+                        var imgSrc = document.selection.createRange().text;
+                        var localImagId = document.getElementById("localImag");
+                        //必须设置初始大小
+                        //localImagId.style.width = "300px";
+                        localImagId.style.height = "90px";
+                        //图片异常的捕捉，防止用户修改后缀来伪造图片
+try{
+                                localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                        }catch(e){
+                                alert("您上传的图片格式不正确，请重新选择!");
+                                return false;
+                        }
+                        imgObjPreview.style.display = 'none';
+                        document.selection.empty();
+                }
+                return true;
+}
+function tiaozhuan(){
+	
+		window.open("/index.php/Nurse#1/15");
+}
+$(function(){
+			  
+})
+</script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+    <style>
+<!--
+.red{color:#f03;}
+input[type="checkbox"]{margin-right:5px; width:15px; height:15px; overflow:hidden;}
+.chk_txt{margin-top:2px; margin-right:8px;}
+.left{width:80px; overflow:hidden;}
+.chk_j{ float:left; margin-top:2px;}
+.chk_txt{float:left;}
+.check{display:none; background:#FFFF00; border:1px solid red; padding:2px 3px; position:absolute; left:106px; top:20px}
+span.txt{color:#999;}
+.imagelist{}
+.imagelist li{
+    background: none repeat scroll 0 0 #F0F0F0;
+    border: 1px solid #E0E0E0;
+    display: inline;
+    float: left;
+	margin-right:10px;
+	margin-top:5px;
+    padding: 11px;
+	height:178px;
+	overflow:hidden;
+	position: relative;
+	
+}
+.imagelist img.upimgs{ max-height:120px;}
+.imagelist li em{
+    color: #999999;
+    display: block;
+    line-height: 18px;
+    padding: 8px 0px;
+}
+
+.imagelist li span.txt {
+    color: #FFFFFF;
+    display: block;
+    left: 161px;
+    line-height:25px;
+	height:25px;
+    bottom: 41px;
+	opacity: 0.7;
+}
+.imagelist li span a.actbut{float:left;width:24px; height:24px; margin-top:3px;}
+-->;
+</style>
+<script language="javascript">
+$(function(){
+		
+		$("#upload").uploadify({
+			'formData'      : {'mode' : 'add',"room_id":'0'},
+			height        : 25,
+			swf           : '__PUBLIC__/Static/Uploadify/uploadify.swf',
+			uploader      : '__URL__/imgs_upload',
+			width         : 120,
+			buttonText	  : '选择图片',
+			auto		  : true,
+		
+			removeCompleted: false,
+			'onUploadError' : function(file, errorCode, errorMsg, errorString) { 
+				alert('The file ' + file.name + ' could not be uploaded: ' + errorString); 
+		}, 
+			'onQueueComplete':function(queueData){
+			$('#progress').hide();
+			},
+			onUploadSuccess: function(file, data, response) {
+				
+				var result = $.parseJSON(data);
+				//错误处理。。。
+				if(result.status == 0){
+					alert(result.message);
+					return false;
+				}
+				//上传成功
+				var id = Math.random().toString();
+				id = id.replace('.','_'); //生成唯一标示
+				var pic_url = "//Uploads/"+result['Filedata'].savepath+result['Filedata'].savename;
+				var html = '<li class="imageitem" id="'+id+'">';
+					html+= '<input type="hidden" name="img_small[]" value="'+pic_url+'">'; //隐藏域，是为了把图片地址入库。。
+					html+= '<img height="160" class="upimgs" src="//Uploads/'+result['Filedata'].savepath+result['Filedata'].savename+'" />';
+					html+=  '<span class="txt">';
+					html+=  '<a title="删除" href=javascript:remove("'+pic_url+'","'+id+'");><img src="__PUBLIC__/Static/Uploadify/remove.png" /></a>';
+					
+					html+=  '</span>';
+					html+=  '<em><textarea name="pname[]" style="height:20px;width:115px;">'+result['Filedata'].savename+'</textarea></em>';
+					
+					html+=  '</li>';
+				$('#image_result').append(html);
+			},
+			onUploadStart: function(){
+				$('#progress').text('图片上传中请稍后...');  //用户等待提示。
+			},
+			onInit: function (){  
+				$("#upload-queue").hide(); //隐藏上传队列                
+			}		
+		});
+	})
+	function remove(file,id){
+		var params = {"img_url":file,"id":id};
+		$.ajax({
+				url:"__URL__/delete_obj",
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.flag==1){
+						alert("删除成功");
+					}else{
+						alert("删除失败");
+					}
+				}
+		})
+		$('#'+id).remove();
+		//return false;
+	}
+	function toremove(file){
+		alert('方法写这里了，逻辑自己写。。'+"\r\n"+file);
+	}
+
+
+
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+<form action="__URL__/add_do" method="post" class="definewidth m20" enctype="multipart/form-data">
+<table class="table table-bordered table-hover m10">
+ <tr>
+        <td class="tableleft" width="10%">实地编号</td>
+        <td><input type="text" name="real_id"  /></td> 
+    </tr>
+        <td class="tableleft" width="10%">显示名称</td>
+        <td><input type="text" name="room_name" /></td>
+    </tr>
+      <tr>
+        <td class="tableleft" width="10%">所属科室</td>
+        <td><input type="text" name="dept_name"  /></td>
+    </tr>
+     <tr>
+        <td class="tableleft" width="10%">二级码上传</td>
+        <td>
+        <a href="void(0)" id="upload" style="margin-left:50px;"></a><span id="progress" style="color:red; font-size:14px; position:relative; left:145px; top:-34px;"></span>
+ <div style="margin-left:-18px;margin-top:-1px;">
+                    <p>
+						<ul class="imagelist" id="image_result">
+                            <?php
+                            if($imglist!=""){                         
+                            for($m=0;$m<count($imglist);$m++){
+                            $img_id = str_replace("/","",$imglist[$m]['id']);
+                             $img_id = str_replace(".","_", $img_id);
+                            ?>
+                            	<li class="imageitem" id="{$img_id}">
+                                	<input type="hidden" name="img_small[]" value="{$imglist[$m]['url']}" />
+                                    <img  height="160" src="{$imglist[$m]['url']}"  />
+                                    <span class="txt"><a href="javascript:remove('{$imglist[$m]['title']}','{$img_id}')" title="删除">
+                                    <img src="__PUBLIC__/Static/Uploadify/remove.png"></a>
+                                   </span><em>
+                                    <textarea style="height:20px;width:155px;" name="pname[]"><?=$imglist[$m]['title']?></textarea></em>
+                                   
+                                    
+                           		 </li>
+                            <?php
+                            }
+                            }
+                            ?>
+                            
+                        </ul>
+                    </p>
+                </div></td>
+    </tr>
+   
+        
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <button type="submit" class="btn btn-primary" type="button">保 存</button> &nbsp;&nbsp;<a href="__URL__/index" class="btn btn-success" name="backid" id="backid">返回列表</a>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+				window.location.href="index.html";
+		 });
+
+    });
+</script>

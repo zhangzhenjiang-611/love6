@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+</head>
+<form >
+    支付金额：<input type="text" name="amount" id="amount" placeholder="请输入支付金额" /><br>
+    <input type="submit" id="submit" value="去支付" />
+</form>
+<body>
+<script>
+    $(function () {
+        $('#submit').click(function () {
+            var amount = $('#amount').val();
+           $.ajax({
+               url:'native.php',
+               type:'post',
+               data:{amount:amount},
+               dataType:'json',
+               success:function (ret) {
+                   if (ret.code == 1) {
+                       window.location.href = './pay';
+                   } else {
+                       alert('支付失败');
+                   }
+               }
+           })
+        })
+
+    })
+</script>
+</body>
+</html>

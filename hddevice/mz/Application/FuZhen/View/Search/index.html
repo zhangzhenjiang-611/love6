@@ -1,0 +1,233 @@
+<script language="javascript">
+var str;
+$(function(){
+	$("#key").bind("input propertychange,oninput",function(){
+		if($("#key").val().length<4){
+			return;
+		}
+		var params = {"key":$("#key").val()};	
+		$.ajax({
+			url:"__URL__/getPatInfo",
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data[0].success==1){
+					$("#search_result").html("");
+					$("#txt_name").html("");
+					var str = "";
+					for(var n in data){
+						$("#search_result").append("<ul id='his_"+data[n].reg_id+"'><li>"+data[n].reg_id+"</li><li></li><li>"+data[n].pat_name+"</li><li>"+data[n].inspect_name+"</li><li>"+data[n].wait_no+"</li><li><a href='#' class='his_del' param='"+data[n].reg_id+"'>删除</a></li></ul>");
+						
+						if(n==0){
+							str+=data[n].reg_id+"|"+data[n].ptno+"|"+data[n].pat_id+"|"+data[n].pat_name+"|"+data[n].pat_birthday+"|"+data[n].pat_sex+"|"+data[n].inspect_code+"|"+data[n].inspect_name+"|"+data[n].dept_code+"|"+data[n].dept_name;
+						}else{
+							str+=","+data[n].reg_id+"|"+data[n].ptno+"|"+data[n].pat_id+"|"+data[n].pat_name+"|"+data[n].pat_birthday+"|"+data[n].pat_sex+"|"+data[n].inspect_code+"|"+data[n].inspect_name+"|"+data[n].dept_code+"|"+data[n].dept_name;
+						}
+					}
+					$("#str").val(str);
+					$("#txt_name").html(data[0].pat_name);
+					$("#btn_saves").removeAttr("disabled");
+				}else{
+					$("#btn_saves").attr("disabled","true");
+					$("#search_result").html("");
+					$("#txt_name").html("");
+				}
+				
+			}
+			
+		})							 
+	})
+	$(".his_del").live("click",function(){
+		var reg_id = $(this).attr("param");
+		var str_text = $("#str").val();
+		var str_ary = str_text.split(',');
+		var str_zl = "";
+		for(var i=0;i<str_ary.length;i++){
+			var ttary = str_ary[i].split('|');
+			
+			if(i==0){
+				if(ttary[0]!=reg_id){
+				
+					str_zl+=str_ary[i];
+				}
+					
+				
+			}else{
+				if(ttary[0]!=reg_id){
+				if(str_zl!=""){
+					str_zl+=","+str_ary[i];
+				}else{
+					str_zl+=str_ary[i];
+				}
+				
+				}
+				
+			}
+		}
+		$("#str").val(str_zl);
+		$("#his_"+reg_id).remove();
+		return false;
+	})
+	$("#btn_saves").click(function(){
+		if(str==""){
+			alert("数据为空,加入队列失败");
+			return;
+		}
+		/*if($("#is_santong").val()==""){
+			alert("是否需要散瞳");
+			return;
+		}
+		if($("#reg_type").val()==""){
+			alert("住院还是门诊？");
+			return;
+		}*/
+		var str = $("#str").val();
+		//alert($("#is_santong").attr("checked"));
+		var str_ary = str.split(',');
+		for(var i=0;i<str_ary.length;i++){
+			str_ary[i]+="|"+$("#is_santong").val()+"|"+$("#reg_type").val()+"|"+$("#fieldset01").val();
+		}
+		
+		str = str_ary.join(",");
+		
+		//alert(str);
+		var params = {"str":str,"pat_id":$("#key").val()};	
+		$.ajax({
+			url:"__URL__/addToDL",
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.have_data==1){
+					alert("请不要重复添加");
+					return;
+				}
+				//$("#patlist").html("");
+				$("#search_result").html("");     
+				for(var i in data){
+					var odd="";
+					if(i%2>0){
+						odd = "odd";
+					}
+					$("#patlist").prepend("<ul class='"+odd+"' id='"+data[i].reg_id+"'><li class='one'>"+data[i].gid+"</li><li>"+data[i].pat_name+"</li><li class='pat_id'>"+data[i].pat_id+"</li><li>"+data[i].pat_birthday+"</li><li class='sex'>"+data[i].pat_sex+"</li><li>"+data[i].inspect_name+"</li><li class='reg_type'>"+data[i].reg_type+"</li><li class='st'>"+data[i].santong+"</li><li class='source'>"+data[i].source+"</li><li class='status'>未呼叫</li><li class='op'><a href='#' param='"+data[i].reg_id+"' class='del'>删除</a></li></ul>");
+					
+				  $("#search_result").append("<ul class='first'><li>"+data[i].reg_id+"</li><li>"+data[i].gid+"</li><li>"+data[i].pat_name+"</li><li>"+data[i].inspect_name+"</li><li>"+data[i].wait_no+"</li></ul>");
+				}
+				  var login_data = JSON.stringify({"type":"NurseAddByHand","data":data});
+				  console.log("HIS获取数据成功，发送数据:"+login_data);
+				  ws.send(login_data);	
+				 //$("#str").val("");
+				 //$("#search_result").html("<tr class='odd one'><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr class='odd'><td></td><td></td><td></td></tr>");
+				 //alert("添加成功");
+				
+			}
+		})	
+	})
+
+})
+</script>
+<style>
+.mytable tr th{height:35px;}
+.mytable tr.odd{ background:#dcdcdc;}
+#thetable{}
+#thetable tr.odd{ background:#eee;}
+#thetable tr th{height:35px;}
+#thetable tr td{height:18px;}
+#santong{height:23px; line-height:23px; margin-right:10px;float:left;_display:inline; margin-left:20px;}
+#santong input{float:left; margin-top:10px; margin-left:8px;_display:inlline;}
+#santong .txt{float:left;}
+#txt_name{background:#fff; width:80px; height:17px; line-height:17px; float:left;}
+.txt_name{float:left;_display:inline; margin-left:8px; margin-top:5px;}
+#btn_saves{}
+#is_santong{float:left; margin-top:0px; height:26px;_display:inline; margin-left:5px;}
+.tablescroll tr th{ padding-left:5px;}
+
+.sub_btn {
+	
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	font: 13px/100% Arial, Helvetica, sans-serif;
+	padding: .3em 1em .35em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.6);
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	color: #e8f0de;
+	border: solid 1px #538312;
+	background: #64991e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+	background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+	margin-right:6px;
+	margin-top:-1px;
+	height:25px; overflow:hidden;
+	width:90px;
+}
+.sub_btn:hover {
+	background: #538018;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+	background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+</style>
+<title>患者信息查询</title>
+</head>
+
+
+<input type="hidden" id="str" value="" />
+<table cellpadding="0" cellspacing="0" border="0" width="870">
+	<tr height="55">
+    	<td height="40"><div class="txt_name">门诊号：</div><input type="text" class="ipt fl" id="key" style="width:120px; padding:4px 0px;" /><div class="txt_name">姓  名：</div><div class="ipt" id="txt_name"></div>
+         <div id="santong">
+  <span class="txt">散瞳：</span><select id="is_santong">
+   <option>请选择</option>
+             <volist name="santong" id="vo">
+           	 	<option value="{$vo.id}">{$vo.name}</option>
+             </volist>
+  </select></div>
+   <span class="fl" style="margin-top:4px;">住院/门诊：</span>
+             <select name="reg_type" id="reg_type" class="fl" style="height:24px; margin-right:10px;">
+            	<option value="">请选择</option>
+                <volist name="pat_type" id="vo">
+               <option value="{$vo.name}">{$vo.name}</option>
+               </volist>
+            </select>
+          <!--   
+     <span class="fl" style="margin-top:4px;">附加类型1：</span>
+             <select name="fieldset01" id="fieldset01" class="fl" style="height:24px; margin-right:10px;">
+            	<option value="">请选择</option>
+                <option value="H">H</option>
+               
+            </select> -->
+   <input type="button" id="btn_saves"  class="sub_btn" value="添加到队列" disabled="disabled">
+        </td>
+    </tr>
+</table>
+ <fieldset style="width:898px;">
+    <legend>返回结果</legend>	
+<div class="his_search">
+    <ul class="header">       
+      <li>收费序号</li>
+      <li>队列序号</li>
+      <li>患者姓名</li>
+      <li>检查项目</li>
+      <li>等候人数</li>
+    </ul>
+  <div id="search_result">
+
+ 
+  </div>
+</fieldset> 
+ 
+ 
+

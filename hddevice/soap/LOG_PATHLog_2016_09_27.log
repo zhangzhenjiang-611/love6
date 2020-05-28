@@ -1,0 +1,22 @@
+[2016-09-27 00:48:40] 顺呼传入参数 -- 房间号:1 医生编码:00380 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00380' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 00:48:40] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-27 00:48:40] 呼叫内容：请神经内科门诊,89号刘畅,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 00:49:03] 顺呼传入参数 -- 房间号:2 医生编码:00145 科室编码:0103010 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0103010' and reg_type='普通' and fp_doctor_code='00145' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 00:49:03] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0103010' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-27 00:49:03] 呼叫内容：请神经内科门诊,126号吴伟颂,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 06:28:18] 登录传入参数 -- 房间号:1 医生编码:00380 科室编码:0103010 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00380','1','172.168.0.241','医生','0103010','0','2016-09-27 06:28:18')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 06:28:30] 下线传递参数 - 医生编号：00380 执行SQL：delete from client_uid where uid='00380' and room_id='1' and dept='0103010' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 07:09:05] 登录传入参数 -- 房间号:1 医生编码:00380 科室编码:0103010 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00380','1','172.168.0.241','医生','0103010','0','2016-09-27 07:09:05')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-27 07:09:08] 下线传递参数 - 医生编号：00380 执行SQL：delete from client_uid where uid='00380' and room_id='1' and dept='0103010' and expert=0
+---------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>满意度</title>
+</head>
+<style type="text/css">
+	
+	label{
+		font-size:22px;
+	}
+</style>
+<body style="background:url('__PUBLIC__/Chaxun/img/bg4.png') no-repeat;width:1024px;height:768px;">
+	<div style="margin-top:156px;width:930px;margin-left:36px;">
+		<form action="__URL__/add" method="post" name="diaocha"> 
+			<label>1、选择北京电力医院就诊，您最看重以下哪项？（最多2项）</label><br />
+			<label><input name="kanzhong[]" type="checkbox" value="离家近,方便" />离家近,方便 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="医疗技术水平高" />医疗技术水平高 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="流程合理,等待少" />流程合理,等待少 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="服务态度好" />服务态度好 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="医院环境好" />医院环境好 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="设备先进" />设备先进 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="收费透明" />收费透明 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="医院内有熟人" />医院内有熟人 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="医院有名气" />医院有名气 </label> 
+			<label><input name="kanzhong[]" type="checkbox" value="其它" />其它 </label><br />
+			<label>2.门诊的(预约)挂号是否很方便?（很满意5分、很不满意1分）</label><br />
+			<label><input name="guahao" type="radio" value="5"/>5 </label> 
+			<label><input name="guahao" type="radio" value="" />4 </label> 
+			<label><input name="guahao" type="radio" value="" />3 </label> 
+			<label><input name="guahao" type="radio" value="" />2 </label> 
+			<label><input name="guahao" type="radio" value="" />1 </label><br />
+			<label>3、医生对您的病情解释的是否清楚、耐心（很满意5分、很不满意1分）</label><br />
+			<label><input name="yishengnaixin" type="radio" value="5" />5 </label> 
+			<label><input name="yishengnaixin" type="radio" value="" />4 </label> 
+			<label><input name="yishengnaixin" type="radio" value="" />3 </label> 
+			<label><input name="yishengnaixin" type="radio" value="" />2 </label> 
+			<label><input name="yishengnaixin" type="radio" value="" />1 </label><br />
+			<label>4、对于各项诊疗操作时（打针、输液、换药等）您是否满意（很满意5分、很不满意1分）</label><br />
+			<label><input name="caozuo" type="radio" value="5" />5 </label> 
+			<label><input name="caozuo" type="radio" value="" />4 </label> 
+			<label><input name="caozuo" type="radio" value="" />3 </label> 
+			<label><input name="caozuo" type="radio" value="" />2 </label> 
+			<label><input name="caozuo" type="radio" value="" />1 </label><br />
+			<label>5、以下是您可能接触到的"门诊服务窗口"或"支持科室",您"最满意"的一个是</label><br />
+			<label><input name="zuimanyi" type="radio" value="挂号" />挂号 </label> 
+			<label><input name="zuimanyi" type="radio" value="导诊/咨询" />导诊/咨询 </label> 
+			<label><input name="zuimanyi" type="radio" value="收费" />收费 </label> 
+			<label><input name="zuimanyi" type="radio" value="药房" />药房 </label> 
+			<label><input name="zuimanyi" type="radio" value="检验科" />检验科 </label> 
+			<label><input name="zuimanyi" type="radio" value="放射科" />放射科 </label> 
+			<label><input name="zuimanyi" type="radio" value="功能科" />功能科 </label> 
+			<label><input name="zuimanyi" type="radio" value="核医学科" />核医学科 </label> 
+			<label><input name="zuimanyi" type="radio" value="病理科" />病理科 </label><br />
+			<label>6、以下是您可能接触到的"门诊服务窗口"或"支持科室",您"不最满意"的一个是</label><br />
+			<label><input name="zuibumanyi" type="radio" value="挂号" />挂号 </label> 
+			<label><input name="zuibumanyi" type="radio" value="导诊/咨询" />导诊/咨询 </label> 
+			<label><input name="zuibumanyi" type="radio" value="收费" />收费 </label> 
+			<label><input name="zuibumanyi" type="radio" value="药房" />药房 </label> 
+			<label><input name="zuibumanyi" type="radio" value="检验科" />检验科 </label> 
+			<label><input name="zuibumanyi" type="radio" value="放射科" />放射科 </label> 
+			<label><input name="zuibumanyi" type="radio" value="功能科" />功能科 </label> 
+			<label><input name="zuibumanyi" type="radio" value="核医学科" />核医学科 </label> 
+			<label><input name="zuibumanyi" type="radio" value="病理科" />病理科 </label><br />
+			<label>7、这次看病您对医院整体服务的满意程度（很满意5分、很不满意1分）</label><br />
+			<label><input name="zhengti" type="radio" value="5" />5 </label> 
+			<label><input name="zhengti" type="radio" value="4" />4 </label> 
+			<label><input name="zhengti" type="radio" value="3" />3 </label> 
+			<label><input name="zhengti" type="radio" value="2" />2 </label> 
+			<label><input name="zhengti" type="radio" value="1" />1 </label><br />
+			<label>8、若您/亲友未来仍有就诊需求，是否会还会来/推荐来电力医院就诊就诊</label><br />
+			<label><input name="xuqiu" type="radio" value="会" />会 </label> 
+			<label><input name="xuqiu" type="radio" value="不会" />不会 </label> 
+			<label><input name="xuqiu" type="radio" value="不一定" />不一定 </label>
+			<br />
+			<input type="hidden" value="kahao" name="kahao">
+			<button value="确认提交" style="position:absolute;margin-left:800px;top:664px;font-size:20px;">确认提交</button>
+		</form>
+	</div>
+	<a href="__APP__/Chaxun/Index/index/id/{$id}">
+    	<div style="background:url('__PUBLIC__/Chaxun/img/return.png') no-repeat;width:180px;height:66px;position: absolute;top: 50px;left: 811px;"></div>
+	</a>
+	<input type="hidden" value="{$id}">
+</body>
+</html>

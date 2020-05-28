@@ -1,0 +1,22 @@
+body,html 
+{
+	font-size: 12px;
+	font-family:"ËÎÌו","Arial Black", Gadget, sans-serif;
+	color: #6B506B;	
+	margin: 0px;
+	padding: 0px; 
+	background:#ECE9D8;
+}
+*{
+	margin:0px;
+	 padding:0px;
+	}
+ul,li
+{ 
+	font-style:normal;
+	 border-style:none;
+	  list-style:none;
+	}
+a {
+	color: #6B506B;
+}

@@ -1,0 +1,336 @@
+<?xml version="1.0" ?>
+<definitions name="soap_server" targetNamespace="urn:soap_server" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soap_server" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<types xmlns="http://schemas.xmlsoap.org/wsdl/" />
+<portType name="soap_serverPort"><operation name="barpay">
+<input message="tns:barpayRequest" />
+<output message="tns:barpayResponse" />
+</operation>
+<operation name="getPayUrl">
+<input message="tns:getPayUrlRequest" />
+<output message="tns:getPayUrlResponse" />
+</operation>
+<operation name="getTrade">
+<input message="tns:getTradeRequest" />
+<output message="tns:getTradeResponse" />
+</operation>
+<operation name="getPayStatus">
+<input message="tns:getPayStatusRequest" />
+<output message="tns:getPayStatusResponse" />
+</operation>
+<operation name="cancel">
+<input message="tns:cancelRequest" />
+<output message="tns:cancelResponse" />
+</operation>
+<operation name="refund">
+<input message="tns:refundRequest" />
+<output message="tns:refundResponse" />
+</operation>
+<operation name="getWeiXinPayUrl">
+<input message="tns:getWeiXinPayUrlRequest" />
+<output message="tns:getWeiXinPayUrlResponse" />
+</operation>
+<operation name="getWxPayStatus">
+<input message="tns:getWxPayStatusRequest" />
+<output message="tns:getWxPayStatusResponse" />
+</operation>
+<operation name="getWxPayStatus2">
+<input message="tns:getWxPayStatus2Request" />
+<output message="tns:getWxPayStatus2Response" />
+</operation>
+<operation name="getWeiXinBill">
+<input message="tns:getWeiXinBillRequest" />
+<output message="tns:getWeiXinBillResponse" />
+</operation>
+<operation name="getAliPayBill">
+<input message="tns:getAliPayBillRequest" />
+<output message="tns:getAliPayBillResponse" />
+</operation>
+<operation name="readCsv">
+<input message="tns:readCsvRequest" />
+<output message="tns:readCsvResponse" />
+</operation>
+<operation name="get_zip_originalsize">
+<input message="tns:get_zip_originalsizeRequest" />
+<output message="tns:get_zip_originalsizeResponse" />
+</operation>
+<operation name="curlDownload">
+<input message="tns:curlDownloadRequest" />
+<output message="tns:curlDownloadResponse" />
+</operation>
+<operation name="downfile">
+<input message="tns:downfileRequest" />
+<output message="tns:downfileResponse" />
+</operation>
+<operation name="WxRefused">
+<input message="tns:WxRefusedRequest" />
+<output message="tns:WxRefusedResponse" />
+</operation>
+</portType>
+<binding name="soap_serverBinding" type="tns:soap_serverPort">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+<operation name="barpay">
+<soap:operation soapAction="urn:soap_server#call#barpay" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getPayUrl">
+<soap:operation soapAction="urn:soap_server#call#getPayUrl" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getTrade">
+<soap:operation soapAction="urn:soap_server#call#getTrade" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getPayStatus">
+<soap:operation soapAction="urn:soap_server#call#getPayStatus" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="cancel">
+<soap:operation soapAction="urn:soap_server#call#cancel" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="refund">
+<soap:operation soapAction="urn:soap_server#call#refund" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getWeiXinPayUrl">
+<soap:operation soapAction="urn:soap_server#call#getWeiXinPayUrl" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getWxPayStatus">
+<soap:operation soapAction="urn:soap_server#call#getWxPayStatus" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getWxPayStatus2">
+<soap:operation soapAction="urn:soap_server#call#getWxPayStatus2" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getWeiXinBill">
+<soap:operation soapAction="urn:soap_server#call#getWeiXinBill" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getAliPayBill">
+<soap:operation soapAction="urn:soap_server#call#getAliPayBill" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="readCsv">
+<soap:operation soapAction="urn:soap_server#call#readCsv" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_zip_originalsize">
+<soap:operation soapAction="urn:soap_server#call#get_zip_originalsize" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="curlDownload">
+<soap:operation soapAction="urn:soap_server#call#curlDownload" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="downfile">
+<soap:operation soapAction="urn:soap_server#call#downfile" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="WxRefused">
+<soap:operation soapAction="urn:soap_server#call#WxRefused" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+</binding>
+<service name="soap_server">
+<documentation />
+<port name="soap_serverPort" binding="tns:soap_serverBinding"><soap:address location="http://www.oldpay.cc:80/rwzb_pay_old/soap/Service.php" />
+</port>
+</service>
+<message name="barpayRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="auth_code" type="xsd:string" />
+<part name="total_amount" type="xsd:string" />
+<part name="subject" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="operator_id" type="xsd:string" />
+</message>
+<message name="barpayResponse">
+<part name="barpay" type="xsd:string" />
+</message>
+<message name="getPayUrlRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="total_amount" type="xsd:string" />
+<part name="subject" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="operator_id" type="xsd:string" />
+</message>
+<message name="getPayUrlResponse">
+<part name="getPayUrl" type="xsd:string" />
+</message>
+<message name="getTradeRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="getTradeResponse">
+<part name="getTrade" type="xsd:string" />
+</message>
+<message name="getPayStatusRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="getPayStatusResponse">
+<part name="getPayStatus" type="xsd:string" />
+</message>
+<message name="cancelRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="trade_no" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="cancelResponse">
+<part name="cancel" type="xsd:string" />
+</message>
+<message name="refundRequest">
+<part name="trade_no" type="xsd:string" />
+<part name="total_amount" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="operator_id" type="xsd:string" />
+</message>
+<message name="refundResponse">
+<part name="refund" type="xsd:string" />
+</message>
+<message name="getWeiXinPayUrlRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="total_fee" type="xsd:string" />
+<part name="body" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="getWeiXinPayUrlResponse">
+<part name="getWeiXinPayUrl" type="xsd:string" />
+</message>
+<message name="getWxPayStatusRequest">
+<part name="out_trade_no" type="xsd:string" />
+</message>
+<message name="getWxPayStatusResponse">
+<part name="getWxPayStatus" type="xsd:string" />
+</message>
+<message name="getWxPayStatus2Request">
+<part name="out_trade_no" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="operator_id" type="xsd:string" />
+</message>
+<message name="getWxPayStatus2Response">
+<part name="getWxPayStatus2" type="xsd:string" />
+</message>
+<message name="getWeiXinBillRequest">
+<part name="bill_type" type="xsd:string" />
+<part name="bill_date" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="getWeiXinBillResponse">
+<part name="getWeiXinBill" type="xsd:string" />
+</message>
+<message name="getAliPayBillRequest">
+<part name="bill_type" type="xsd:string" />
+<part name="bill_date" type="xsd:string" />
+<part name="source" type="xsd:string" />
+</message>
+<message name="getAliPayBillResponse">
+<part name="getAliPayBill" type="xsd:string" />
+</message>
+<message name="readCsvRequest">
+<part name="files" type="xsd:string" />
+</message>
+<message name="readCsvResponse">
+<part name="readCsv" type="xsd:string" />
+</message>
+<message name="get_zip_originalsizeRequest">
+<part name="filename" type="xsd:string" />
+<part name="path" type="xsd:string" />
+<part name="id" type="xsd:string" />
+</message>
+<message name="get_zip_originalsizeResponse">
+<part name="get_zip_originalsize" type="xsd:string" />
+</message>
+<message name="curlDownloadRequest">
+<part name="remote" type="xsd:string" />
+<part name="local" type="xsd:string" />
+</message>
+<message name="curlDownloadResponse">
+<part name="curlDownload" type="xsd:string" />
+</message>
+<message name="downfileRequest">
+<part name="url" type="xsd:string" />
+<part name="filename" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="bill_date" type="xsd:string" />
+</message>
+<message name="downfileResponse">
+<part name="downfile" type="xsd:string" />
+</message>
+<message name="WxRefusedRequest">
+<part name="out_trade_no" type="xsd:string" />
+<part name="total_fee" type="xsd:string" />
+<part name="refund_fee" type="xsd:string" />
+<part name="source" type="xsd:string" />
+<part name="operator_id" type="xsd:string" />
+</message>
+<message name="WxRefusedResponse">
+<part name="WxRefused" type="xsd:string" />
+</message>
+</definitions>

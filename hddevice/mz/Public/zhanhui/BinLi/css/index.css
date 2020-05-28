@@ -1,0 +1,51 @@
+@charset "utf-8";
+.mainbody{width:1024px; height:768px; background:url(../img/bg.jpg) no-repeat center top; overflow:hidden; position:relative;}
+.m_left{ width:290px; float:left; overflow:hidden; margin-left:20px;}
+.m_mid {
+  /*border: 1px solid;*/
+  border-radius: 15px;
+  float: left;
+  height: 52px;
+  margin-left: 229px;
+  margin-top: 260px;
+  overflow: hidden;
+  width: 583px;
+}
+.m_mid ul{}
+.m_mid ul li{width:106px; height:93px; float:left; overflow:hidden; margin-left:0px; margin-right:12px; margin-top:8px;}
+.m_mid ul li input{ color:#5d5d5d;}
+.m_mid ul li:hover{ cursor:pointer;}
+.m_mid ul li.one{background:url(../number/1.png) no-repeat center top;}
+.m_mid ul li.two{background:url(../number/2.png) no-repeat center top;}
+.m_mid ul li.thr{background:url(../number/3.png) no-repeat center top;}
+.m_mid ul li.four{background:url(../number/4.png) no-repeat center top;}
+.m_mid ul li.five{background:url(../number/5.png) no-repeat center top;}
+.m_mid ul li.six{background:url(../number/6.png) no-repeat center top;}
+.m_mid ul li.seven{background:url(../number/7.png) no-repeat center top;}
+.m_mid ul li.eight{background:url(../number/8.png) no-repeat center top;}
+.m_mid ul li.nine{background:url(../number/9.png) no-repeat center top;}
+.m_mid ul li.zero{background:url(../number/0.png) no-repeat center top;}
+.m_mid ul li.confirm{background:url(../number/confirm.png) no-repeat center top;}
+.m_mid ul li.del{background:url(../number/del.png) no-repeat center top;}
+#pat_code {
+  background: none;
+  border: none;
+  border-radius: 15px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  height: 52px;
+  line-height: 52px;
+  margin-bottom: 0px;
+  padding: 0 10px;
+  width: 524px;
+  outline: medium;
+}
+.m_right{width:315px; float:left;}
+.m_right h3{ font-size:38px; margin-bottom:10px;}
+.m_right p{ font-size:28px; line-height:150%; margin-bottom:10px;}
+.tips_txt{ font-size:32px; color:red; float:left; width:100%; position:absolute; left:18px; top:695px;}
+.zhezhao{ width:650px;left:180px;padding-top:50px; background:#f0eeff; position:absolute; top:186px; font-weight:bold; text-align:center; font-size:40px;
+ color:red;
+  display:none; 
+  line-height:180%;border-radius: 10px;}

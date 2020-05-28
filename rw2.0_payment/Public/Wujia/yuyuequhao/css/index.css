@@ -1,0 +1,1000 @@
+.main_body{ width:1366px; height:768px; overflow:hidden; background:url(../img/bg.png) no-repeat left top; position:relative;}
+#show_times{ position:absolute; left:1005px; font-size:28px; color:#333; top:69px; font-family:ºÚÌå !important; font-weight:bold; }
+
+/*导航开始*/
+.navigation
+{
+	position:absolute;
+}
+.navigationDaot
+{
+	position:absolute;
+	background:url(../img/zuixin/xian.png) no-repeat 0px 30px;
+	margin-top:110px;
+	margin-left:20px;
+	width:1315px;
+	height:45px;
+}
+.navigationDaot li
+{
+	float:left;
+	background:url(../img/zuixin/nochose.png) no-repeat 0px 17px;
+	width:45px;
+	height:50px;
+	margin-left:225px;
+}
+.navigationBar
+{
+	margin-top:155px;
+	position:absolute;
+	margin-left:20px;
+	width:1315px;
+	height:24px;
+}
+.navigationBar li
+{
+	font-family:黑体;
+	float:left;
+	font-size:21px;
+	color:#666;
+}
+.choseCard{margin-left:192px;}
+.choseRoom{margin-left:149px;}
+.confirmInfo{margin-left:148px;}
+.chosePayType{margin-left:140px;}
+/*导航结束*/
+
+
+/*选择三种卡类型开始*/
+.chose_card_type_area
+{
+	position:absolute;
+	top:189px;
+	left:83px;
+	width:1200px;
+	height:500px;
+}
+.wall
+{
+	background:url(../img/zuixin/wall.png) no-repeat;
+	position:absolute;
+	top:229px;
+	left:47px;
+	width:1118px;
+	height:204px;
+}
+.chose_card_type_area h3
+{
+	font-size:54px;
+	color:#333;
+	position:absolute;
+	top:31px;
+	left:407px;
+	font-weight:normal;
+}
+.allCardType
+{
+	position:absolute;
+	top:230px;
+	left:47px;
+	width:1118px;
+	height:204px;
+}
+.allCardType  li
+{
+	color:white;
+	list-style:none;
+	text-align:center;
+	font:normal 46px/196px 黑体;
+	float:left;
+	margin-left:58px;
+	margin-top:-31px;
+	width:276px;
+	height:196px;
+}
+.ic
+{
+	background:url('../img/zuixin/jzk.png');
+	cursor:pointer;
+}
+.sfz
+{
+	background:url('../img/zuixin/sfz.png');
+	cursor:pointer;
+}
+.yibao
+{
+	background:url('../img/zuixin/ybk.png');
+	cursor:pointer;
+}
+/*选择三种卡类型结束*/
+
+
+
+
+/*退出返回按钮开始*/
+.btn_area
+{
+	position:absolute;
+	top:695px;
+	left:800px;
+	width:600px;
+	height:65px;
+}
+.button1 li
+{
+	color:#F8F8F8;
+	list-style:none;
+	text-align:center;
+	font:bold 40px/140px serif;
+	float:left;
+	margin-left:10px;
+	width:170px;
+	height:60px;
+}
+.queren1
+{
+	background:url('../img/zuixin/queren.png');
+	cursor:pointer;
+}
+.fanhui1
+{
+	background:url('../img/zuixin/fanhui.png');
+	cursor:pointer;
+}
+.tuichu1
+{
+	background:url('../img/zuixin/tuichu.png');
+	cursor:pointer;
+}
+/*退出返回按钮结束*/
+
+
+
+
+
+/*选择就诊卡页面开始*/
+.jiuzhen_op_area{
+	width:900px; 
+	height:390px; 
+	margin-left:243px; 
+	margin-top:80px; 
+	padding:20px; 
+	position:relative;
+}
+.j_keybord_area
+{
+ 	width:831px; 
+	height:258px; 
+ 	margin-left:10px; 
+ 	margin-top:40px;
+}
+
+.j_keybord_area .img_view
+{
+	width:831px; 
+	height:258px; 
+	background:url(../img/zuixin/put_ic.png) no-repeat left top; 
+	float:left;
+	margin-top:3px;
+	margin-left:10px;
+}
+.jiuzhen_op_area h3
+{
+	font-size:54px; 
+	color:#333;
+	display:block; 
+	width:100%; 
+	text-align:center; 
+	font-weight:normal;
+	word-spacing:10px;
+}
+.main_left_2
+{ 
+	width:1366px; 
+	height:768px; 
+	margin-top:115px; 
+	float:left; 
+	overflow:hidden;
+}
+/*选择就诊卡页面结束*/
+
+
+
+/*选择身份证页面开始*/
+.j_keybord_area_sfz
+{
+	width:1270px; 
+	height:480px; 
+	position:relative;
+}
+#img_view_sfz
+{ 
+	 width:379px;
+	 height:330px; 
+	 background:url(../img/zuixin/sfztips.png) no-repeat left top; 
+	 float:left;
+	 margin-left:148px;
+	 margin-top:50px;
+}
+.jiuzhen_op_area_sfz .iptx
+{
+	width:544px;
+	height:56px;
+	background:#fff; 
+	font-size:56px; 
+	margin-top:50px;
+	margin-left:132px;
+	border:2px solid #EEEEEE;
+}
+.j_keybord_area_sfz .key
+{ 
+	margin-top:40px;
+	 width:600px;
+	 float:left;
+	 margin-left:112px;
+}
+.j_keybord_area_sfz .key li
+{
+	width:124px;
+	height:65px;
+	background:url(../img/zuixin/key_no_click.png) no-repeat left top;
+	float:left; 
+	overflow:hidden;
+	line-height:65px;
+	text-align:center;
+	font-size:22px;
+	font-family:黑体, Helvetica, sans-serif; 
+	margin-left:22px;
+	margin-bottom:24px;
+	cursor:pointer
+}
+.j_keybord_area_sfz .key li.del
+{ 
+	width:124px;
+	height:65px;
+	font-size:22px;
+	font-family:黑体;
+	background:url(../img/zuixin/key_no_click.png) no-repeat left top; font-size:24px; font-weight: bold;
+}
+.j_keybord_area_sfz .key li.active
+{
+	background:url(../img/zuixin/key_click.png) no-repeat left top;
+}
+.jiuzhen_op_area_sfz h3
+{
+	margin-top:102px;
+	margin-left:75px;
+	font-size:54px;
+	color:#333;
+	display:block;
+	width:100%;
+	text-align:center;
+	font-weight:normal;
+	word-spacing:10px;
+}
+/*选择身份证页面结束*/
+
+
+
+/*医保卡选择卡类型开始*/
+.yb_op_area,.yb_op_area_guahao
+{
+	width:800px;
+	height:500px;
+	margin-left:260px;
+	margin-top:90px;
+	padding:20px;
+	position:relative;
+	background:url(../img/yb_input.png) no-repeat 210px 140px;
+}
+.yb_op_area h3
+{
+	font-size:54px;
+	color:#333;
+	display:block;
+	width:100%;
+	text-align:center;
+	font-weight:normal;
+	letter-spacing:5px;
+	margin-top:1px;
+}
+/*医保卡选择卡类型结束*/
+
+
+
+
+/*科室页面开始*/
+
+
+.chose_room .page
+{
+	position:absolute;
+	left:-10px;
+	top:506px;
+}
+
+.chose_room .page .prev_ks
+{
+	margin-left:50px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	background:url(../img/fy.png) no-repeat; 
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_room .page .next_ks
+{
+	margin-left:220px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	background:url(../img/fy.png) no-repeat;
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_room .page .total_page
+{
+
+	color:white;
+	font-family:黑体;
+	position:absolute;
+	font-size:30px;
+	left:250px;
+	top:5px;
+	float:left;
+	width:170px
+}
+
+.roomtitle span
+{
+	font-size:36px;
+	color:#0fafb9;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	left:45px;
+	top:25px;
+	position:absolute;
+}
+.chose_room
+{
+	width:1300px;
+	height:500px;
+	margin-left:23px;
+	margin-top:4px;
+	padding:20px;
+	position:relative;
+}
+.chose_room h5
+{
+	font-size:54px;
+	color:#333;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	letter-spacing:5px;
+	margin-top:2px;
+}
+.chose_unit
+{
+	float:left;
+	background:url(../img/zuixin/ft_sss.png) no-repeat;
+	width:291px;
+	height:82px;
+	line-height:82px;
+	color:#333;
+	text-align:center;
+	font-size:36px;
+	font-family:黑体;
+	/*font-weight:bolder;*/
+	margin-left: 20px;
+	margin-top: 12px
+}
+
+/*一级科室结束*/
+
+
+
+/*二级科室开始*/
+
+.roomtitle2 span
+{
+	font-size:36px;
+	color:#0fafb9;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	left:45px;
+	top:25px;
+	position:absolute;
+}
+.roomtitle2 h5
+{
+	font-size:54px;
+	color:#333;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	letter-spacing:5px;
+	left:455px;
+	top:-17px;
+	position:absolute;
+}
+.chose_room2
+{
+	width:1300px;
+	height:500px;
+	margin-left:23px;
+	margin-top:4px;
+	padding:20px;
+	position:relative;
+}
+
+.chose_room2 .page2
+{
+	position:absolute;
+	left:-16px;
+	top:508px;
+}
+.chose_room2 .page2 .prev_ks2
+{
+	margin-left:50px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_room2 .page2 .next_ks2
+{
+	margin-left:220px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_room2 .page2 .total_page2
+{
+	color:white;
+	font-family:黑体;
+	position:absolute;
+	font-size:30px;
+	left:250px;
+	top:5px;
+	float:left;
+	width:170px
+}
+#sub_list2
+{
+	margin-top:85px;
+}
+.chose_unit2
+{
+	float:left;
+	background:url(../img/zuixin/ft_sss.png) no-repeat;
+	width:291px;
+	height:82px;
+	line-height:82px;
+	color:#333;
+	text-align:center;
+	font-size:36px;
+	font-family:黑体;
+	margin-left: 20px;
+	margin-top: 12px
+}
+/*二级科室结束*/
+
+
+
+
+/*选择医生开始*/
+.chose_doctor
+{
+	width:1366px;
+	height:600px;
+	margin-left:1px;
+	margin-top:1px;
+	padding:20px;
+	position:relative;
+ }
+.roomtitle3 span
+{
+	font-size:36px;
+	color:#0fafb9;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	left:74px;
+	top:25px;
+	position:absolute;
+}
+.roomtitle3 h5
+{
+	font-size:54px;
+	color:#333;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	letter-spacing:5px;
+	left:455px;
+	top:12px;
+	position:absolute;
+}
+.doctor_list
+{
+	width:1350px;
+	height:580px;
+	margin-top:65px;
+	margin-left:33px;
+}
+.doctor_list div
+{
+	margin-left:18px;
+	width:230px;
+	height:361px;
+	text-align:left;
+	font-size:18px;
+	float:left;
+	height:380px;
+	margin-top:15px
+}
+.swyh
+{
+	background:url(../img/zuixin/ch_doctor.png) no-repeat;
+}
+.swmh
+{
+	background:url(../img/zuixin/swmh.png) no-repeat;
+}
+.xwyh
+{
+	background:url(../img/zuixin/xwyh.png) no-repeat;
+}
+.xwmh
+{
+	background:url(../img/zuixin/xwmh.png) no-repeat;
+}
+.doctor_list div ul
+{
+	margin-top:55px;
+	margin-left:1px
+}
+.doctor_list div ul li
+{
+	color:#333;
+	font-size:20px;
+	height:38px;
+	font-family:黑体 !important;
+}
+.doctor_list h4
+{
+	text-align:center;
+	color:red;
+	margin-top:10px
+}
+.doctor_list span
+{
+	display:block;
+	text-align:center;
+	width:80px;
+	margin-left:50px;
+	position:absolute;
+	top:325px;
+	background:url(../img/zuixin/ysgh.png) no-repeat;
+	width:134px;
+	height:55px;
+	color:#333;
+	line-height:55px;
+	font-size:27px;
+	font-family:微软雅黑;
+}
+.doctor_list .disabled
+{
+	margin-left:35px;
+	background:url(../img/zuixin/ygw.png) no-repeat right top;
+}
+.chose_doctor .page
+{
+	position:absolute;
+	left:-16px;
+	top:515px;
+}
+
+.chose_doctor .page .prev
+{
+	margin-left:50px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_doctor .page .next
+{
+	margin-left:220px;
+	width:170px;
+	height:60px;
+	line-height:60px;
+	float:left; 
+	color:white; 
+	font-size:30px;
+	text-align:center;
+	font-family:黑体;
+	cursor:pointer;
+}
+.chose_doctor .page .total_page
+{
+	color:white;
+	font-family:黑体;
+	position:absolute;
+	font-size:30px;
+	left:250px;
+	top:5px;
+	float:left;
+	width:170px
+}
+/*选择医生结束*/
+
+
+
+
+/*确认挂号信息页面开始*/
+.guahao_queren h3
+{
+	font-size:54px;
+	color:#333;
+	width:100%;
+	text-align:center;
+	font-weight:normal;
+	margin-top:80px;
+}
+.info_show
+{
+	margin-top:10px;
+	margin-left:28px;
+	width:1315px;
+	height:414px;
+	background:url(../img/zuixin/confirm_bg.png) no-repeat;
+}
+.info_show ul
+{
+	float:left;
+}
+ .info_left
+{
+	/*width:600px;
+	height:300px;*/
+	margin-left:280px;
+	margin-top:87px;
+}
+ .info_right
+{
+	/*width:600px;
+	height:300px;*/
+	margin-left:105px;
+	margin-top:87px;
+}
+ .info_right li,.info_left li
+ {
+ 	line-height:56px;
+ }
+.info_name
+{
+	font-family:黑体;
+	font-size:36px;
+	color:#666;
+	font-weight:normal;
+}
+.info_val
+{
+	font-family:黑体;
+	font-size:36px;
+	color:#333;
+	font-weight:normal;
+}
+.info_money
+{
+	font-family:黑体;
+	font-size:36px;
+	color:#f57336;
+	font-weight:bold;
+}
+/*确认挂号信息页面结束*/
+
+
+
+/******选择支付方式开始*****/
+.chose_pay_type_area
+{ 
+	margin-top:15px;
+	width:1118px;
+	height:489px;
+	margin-left:132px;
+	background:url(../img/zuixin/wall.png) no-repeat 0px 220px; 
+	position:relative;
+}
+.chose_pay_type_area h3
+{
+	font-size:54px;
+	color:#333;
+	width:100%;
+	text-align:center;
+	font-weight:normal;
+	margin-top:85px;
+}
+.chose_pay_type_area ul
+{
+	border:0px solid red;
+	margin-top:117px;
+}
+.chose_pay_type_area ul li
+{ 
+	margin-left:70px;
+	width:276px;
+	height:196px;
+	float:left;
+	overflow:hidden;
+	color:#fff;
+	text-align:center;
+	text-shadow: 0 0 20px #000000;
+	list-style:none;
+	font:normal 46px/196px 黑体;
+}
+.zhifubao{background:url(../img/zuixin/jzk.png) no-repeat right top;}
+.weixin{background:url(../img/zuixin/sfz.png) no-repeat right top;}
+.bank_s{background:url(../img/zuixin/ybk.png) no-repeat right top;}
+/******选择支付方式结束*****/
+
+
+
+
+/*显示二维码开始*/
+.pay_ma_show div
+{ 
+	float:left;
+}
+.pay_ma_show h3
+{
+	font-size:50px;
+	color:#333;
+	text-align:center;
+	font-weight:normal;
+	text-align:center;
+	margin-top:110px; 
+	margin-bottom:18px;
+}
+.personInfo
+{
+	margin-left:235px;
+	width:515px;
+	height:322px;
+	/*border:1px solid red;*/
+	background:url(../img/zuixin/payinfo.png) no-repeat right top;
+}
+.personInfo .p1
+{
+	margin-left:100px;
+	margin-top:28px;
+	font-size:35px;
+	color:#666;
+}
+.personInfo .p2
+{
+	margin-top:55px;
+	margin-left:100px;
+	font-size:35px;
+	color:#666;
+}
+.personInfo li
+{
+	margin-top:20px;
+	margin-left:100px;
+	line-height:40px;
+}
+.pay_ma_show .erweima
+{
+	margin-left:25px;
+	width:353px;
+	height:324px;
+	/*border:1px solid blue;*/
+	background:url(../img/zuixin/codebg.png) no-repeat right top;
+}
+.pay_ma_show .erweima img
+{
+	margin-left:56px;
+	margin-top:28px;
+}
+
+.paynum
+{
+	font-family:黑体;
+	font-size:36px;
+	color:#f57336;
+	font-weight:bold;
+}
+.payname
+{
+	font-family:黑体;
+	font-size:36px;
+	color:#333;
+	font-weight:normal;
+}
+.pay_ma_show .tips
+{
+	margin-left:84px;
+	margin-top:20px;
+	font-family:黑体;
+	font-size:24px;
+	color:#666;
+	font-weight:normal;
+}
+/*显示二维码结束*/
+
+/*操作提示页面开始*/
+.pay_success,.pay_error
+{
+	margin:110px auto 30px;
+	width:500px;
+	height:500px;
+}
+.suc_tipsimg
+{
+	margin:10px auto 30px;
+	width:213px;
+	height:214px;
+	background:url(../img/zuixin/success.png) no-repeat right top;
+}
+.err_tipsimg
+{
+	margin:10px auto 30px;
+	width:213px;
+	height:214px;
+	background:url(../img/zuixin/error.png) no-repeat right top;
+}
+.pay_success h3,.pay_error h3
+{
+	font-size:30px;
+	color:#333;
+	text-align:center;
+	font-weight:normal;
+	text-align:center;
+}
+
+/*操作提示页面结束*/
+
+
+.yuyue_record
+{
+	width:1217px;
+	height:500px;
+	margin-left:10px; 
+	margin-top:10px; 
+	padding:20px; 
+	position:relative;
+}
+#guahao_name
+{
+	font-size:36px;
+	color:#0fafb9;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	left:60px;
+	top:105px;
+	position:absolute;
+}
+.yuyue_record h3
+{
+	font-size:54px; 
+	display:block; 
+	text-align:center; 
+	font-weight:normal; 
+	margin-top:70px;
+	font-family:黑体;
+}
+.yuyue_record .bar_tit
+{
+	width:1217px;
+	height:53px;
+	background:url(../img/zuixin/changtiao.png) no-repeat left top; 
+	margin-left:40px;
+	margin-top:28px;
+}
+.yuyue_record .bar_tit ul li
+{
+	color:#333;
+	float:left;
+	font-size:30px;
+	line-height:50px; 
+	font-family:黑体;
+}
+.yuyue_record .bar_tit ul li.one{ width:220px; margin-left:20px;}
+.yuyue_record .bar_tit ul li.two{ width:110px; margin-left:45px;}
+.yuyue_record .bar_tit ul li.thr{ width:130px;margin-left:120px;}
+.yuyue_record .bar_tit ul li.four{ width:200px;margin-left:160px;}
+
+.yuyue_record .record_list{width:1330px; margin-left:4px; margin-top:20px; height:350px; overflow-y:auto;}
+.yuyue_record .record_list ul{ float:left; width:100%;}
+.yuyue_record .record_list h4{ display:block; text-align:center; width:95%; margin-left:25px; font-size:55px; color:red; font-family:Î¢ÈíÑÅºÚ !important; margin-top:100px;}
+.yuyue_record .record_list ul li
+{
+	color:#333; float:left; font-size:30px; height:50px; font-family:黑体; 
+	font-style:normal; line-height:50px; font-weight:normal;
+}
+.yuyue_record .record_list ul li.one{ width:250px;text-align:center;}
+.yuyue_record .record_list ul li.two{ width:130px;text-align:center;margin-left:43px;}
+.yuyue_record .record_list ul li.thr{width:150px;text-align:center;margin-left:90px;}
+.yuyue_record .record_list ul li.four{ width:170px;text-align:center;margin-left: 160px}
+.yuyue_record .record_list ul li.seven
+{
+	width:134px;
+	background:url(../img/zuixin/ysgh.png) no-repeat;
+	height:55px;
+	line-height:55px;
+	color:#666;
+	text-align:center;
+	font-size:24px;
+	font-family:黑体;
+	margin-left:120px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.j_keybord_area .tips{ width:98%; margin-left:0px; color:red; font-weight:bold;font-size:38px; float:left; text-align:left;}
+.j_keybord_area .key{ width:320px; float:left; margin-left:20px;}
+.j_keybord_area .key li{ width:64px; height:64px; background:url(../img/key_no_click.png) no-repeat left top; float:left; overflow:hidden; line-height:64px; text-align:center; font-size:45px; font-family:Arial, Helvetica, sans-serif; margin-left:15px; margin-bottom:13px; cursor:pointer}
+.j_keybord_area .key li.active{background:url(../img/key_click.png) no-repeat left top;}
+.j_keybord_area .key li.del{ width:64px; height:64px; background:url(../img/key_no_click.png) no-repeat left top; font-size:24px;font-weight: bold;}
+#downcount{ position:absolute; left:780px; top:38px; font-weight:bold; color:red; font-size:42px;}
+.yb_op_area .tips
+{ color:red; font-weight:bold; font-family:ºÚÌå !important; font-size:40px; margin-left:25px; width:98%; text-align:center; margin-top:370px;}
+.bank{width:800px; height:500px; margin-left:25px; margin-top:10px; padding:20px; position:relative; background:url(../img/bank.png) no-repeat 210px 140px;}
+.bank h3{font-size:50px; display:block; width:100%; text-align:center; font-weight:normal; letter-spacing:5px; margin-top:1px; font-weight:bold;}
+.bank .tips{ color:red; font-weight:bold; font-family:ºÚÌå !important; font-size:40px; margin-left:25px; width:98%; text-align:center; margin-top:370px;}
+.bank_password{width:859px; height:500px; margin-left:10px; margin-top:10px; padding:20px; position:relative;}
+.bank_password h3{font-size:55px; display:block; width:100%; text-align:center; font-weight:normal; word-spacing:10px;}
+.bank_password .PinField1{ width:400px; height:35px; padding:5px 10px; border:1px solid #ccc; background:#fff; font-size:28px; margin-left:205px; margin-top:55px;}
+.bank_notice_area{ margin-left:130px; margin-top:40px;}
+.bank_notice_area .tips{ width:98%; margin-left:25px; color:red; font-weight:bold;font-size:38px; float:left; text-align:left;}
+.bank_notice_area .bank_img_view{ width:244px; height:213px; background:url(../img/notice.png) no-repeat left top; float:left; margin-top:3px;}
+.bank_notice_area .bank_lang{margin-left:280px;}
+.bank_notice_area .bank_lang .lang{font-size:26px; color:red; font-family:Î¢ÈíÑÅºÚ !important;height:64px;line-height:64px;}
+.bank_password .tips{ color:red;margin-top:50px;margin-left:320px;font-weight:bold;font-size:30px}
+
+
+.room_list ul{margin-left:180px;}
+#sub_list{margin-top:30px}
+.print_notice{width:98%; text-align:center; margin-top:200px; font-size:60px;}
+
+

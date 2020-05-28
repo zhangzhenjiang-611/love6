@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<script language="javascript">
+$(function(){
+	$("#online").click(function(){
+		var params = {"doctor_code":$("#doctor_code").val(),"dept_code":$("#dept_code").val(),"room":$("#room").val(),"expert":$("#expert").val()}; 
+		$.ajax({
+			url:"__URL__/login", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.Message.Success==1){
+					freshlist($("#doctor_code").val(),$("#dept_code").val(),$("#expert").val());
+					  $(document).attr("title",data.info);
+					$("#tips").html("上线成功");
+					 
+				}else{
+					$("#tips").html("上线失败");
+				}
+			}
+		})		
+	})
+	
+	$("#shunhu").click(function(){
+		var params = {"doctor_code":$("#doctor_code").val(),"dept_code":$("#dept_code").val(),"room":$("#room").val(),"expert":$("#expert").val()}; 
+		$.ajax({
+			url:"__URL__/shun", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					  //$("#tips").html("上线成功,共有待呼患者"+data.patlist.length+"名");
+					  freshlist($("#doctor_code").val(),$("#dept_code").val(),$("#expert").val());
+					 
+					  
+				}
+			}
+		})		
+	})
+	
+	$(".xuanhu").live("click",function(){
+		var params = {"doctor_code":$(this).attr("doctor_code"),"dept_code":$(this).attr("dept_code"),"room":$("#room").val(),"expert":$("#expert").val(),"pat_code":$(this).attr("pat_code")}; 
+		$.ajax({
+			url:"__URL__/xuan", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				freshlist($("#doctor_code").val(),$("#dept_code").val(),$("#expert").val());
+			}
+		})
+		return false;
+	})
+	
+	$("#chonghu").click(function(){
+		var params = {"doctor_code":$("#doctor_code").val(),"dept_code":$("#dept_code").val(),"room":$("#room").val(),"expert":$("#expert").val()}; 
+		$.ajax({
+			url:"__URL__/chong", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					$("#tips").html("重呼成功");
+					 
+				}
+			}
+		})		
+	})
+	
+	$("#offline").click(function(){
+		var params = {"doctor_code":$("#doctor_code").val()}; 
+		$.ajax({
+			url:"__URL__/logout", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					  $("#tips").html("下线成功");
+					 
+				}
+			}
+		})		
+	})
+})
+function freshlist(doctor_code,dept_code,expert){
+    var params = {"doctor_code":doctor_code,"dept_code":dept_code,"room":$("#room").val(),"expert":expert}; 
+	$.ajax({
+		url:"__URL__/getPatList", 
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				 var html="";
+				 
+				 var patlist = data.patlist;
+				 
+				 if(patlist['DeptCode']!=undefined){
+					html+="<tr><td>"+patlist['PatCode']+"</td>";
+					html+="<td>"+patlist['PatName']+"</td>";
+					html+="<td>"+patlist['RegSeqNo']+"</td>";
+					html+="<td>"+patlist['DeptCode']+"</td>";
+					html+="<td>"+patlist['DeptName']+"</td>";
+					html+="<td>"+patlist['DoctorCode']+"</td>";
+					html+="<td>"+patlist['DoctorName']+"</td>";
+					
+					html+="<td>"+patlist['Status']+"</td>";
+					html+="<td><a href='void(0)' class='xuanhu' doctor_code='"+$("#doctor_code").val()+"' dept_code='"+patlist['DeptCode']+"' expert='"+$("#expert").val()+"' pat_code='"+patlist['PatCode']+"'>选呼</a></td></tr>";
+				}else if(patlist.length>1){
+					for(var i=0;i<patlist.length;i++){
+					html+="<tr><td>"+patlist[i]['PatCode']+"</td>";
+					html+="<td>"+patlist[i]['PatName']+"</td>";
+					html+="<td>"+patlist[i]['RegSeqNo']+"</td>";
+					html+="<td>"+patlist[i]['DeptCode']+"</td>";
+					html+="<td>"+patlist[i]['DeptName']+"</td>";
+					html+="<td>"+patlist[i]['DoctorCode']+"</td>";
+					html+="<td>"+patlist[i]['DoctorName']+"</td>";
+					
+					html+="<td>"+patlist[i]['Status']+"</td>";
+					html+="<td><a href='void(0)' class='xuanhu' doctor_code='"+$("#doctor_code").val()+"' dept_code='"+patlist[i]['DeptCode']+"' expert='"+$("#expert").val()+"' pat_code='"+patlist[i]['PatCode']+"'>选呼</a></td></tr>";
+				 }
+				}else{
+					alert("无患者");
+				}
+				 
+				 $("#patlist").html(html);
+			}
+		}
+	})
+
+}
+</script>
+<title>模拟测试</title>
+</head>
+
+<body>
+<table cellpadding="4" cellspacing="2">
+<tr>
+<td height="30">诊室号：</td>
+<td><input type="text" id="room" value="1"/></td>
+<td height="30">科室编码：</td>
+<td><input type="text" id="dept_code" value="0002"/></td>
+<td height="30">医生编码：</td>
+<td><input type="text" id="doctor_code" value="1321" /></td>
+
+<td height="30">是否专家：</td>
+<td>
+<select id="expert">
+<option value="1">是</option>
+<option value="0">否</option>
+</select>
+</td>
+
+<td>
+<input type="button" value="上线" id="online"/>
+<input type="button" value="下线" id="offline" />
+<span id="tips" style="color:red;"></span>
+</td>
+</tr>
+</table>
+<input type="button" value="顺呼" id="shunhu"/>
+<input type="button" value="重呼" id="chonghu"/>
+<table cellpadding="4" cellspacing="2">
+<tbody>
+	<th align="left">HIS编号</th>
+    <th>患者姓名</th>
+    <th>就诊序号</th>
+    <th>科室编码</th>
+    <th align="left">科室名称</th>
+    <th align="left">医生编码</th>
+    <th align="left">医生姓名</th>
+    <th>呼叫状态</th>
+    <th>操作</th>
+</tbody>
+<tbody id="patlist"></tbody>
+<th></th>
+</table>
+</body>
+</html>

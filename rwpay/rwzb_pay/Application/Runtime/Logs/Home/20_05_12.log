@@ -1,0 +1,5 @@
+[ 2020-05-12T10:12:37+08:00 ] 127.0.0.1 /rwpay/rwzb_pay/index.php/Home/Index/loginajax
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000687s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001120s ]
+

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<!-- <script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.autocomplete.js"></script>  -->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<script type="text/javascript" language="javascript">
+$(function(){
+	run();
+})
+function run(){
+	// interval = setInterval(getYaowu, "2000");
+	$(".qingchu").click(function(){
+		  var str=String(document.calculator.numScreen.value); //获得当前显示数据
+			 var params = {"str":str};
+		$.ajax({
+			url:"__URL__/getYaowu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+
+				if(data.success==1){
+
+				$(".text").html("");
+				$(".yema").html("");
+				$(".fourth").html("");
+				// console.log(data['yaowu'].length);
+				console.log('bbb');
+	            $(".yema").append("第"+data['page']+"页/共"+data['pages']+"页");
+				var last_page=parseInt(data['page'])-1;
+				var next_page=parseInt(data['page'])+1;
+				$(".fourth").append("<div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+last_page+")'>上一页</div><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+next_page+")'>下一页</div>");
+				for(var i=1;i<data['yaowu'].length;i++){
+					if(data['yaowu'][i]['drug_name'].length<=0){
+						 // console.log('gggg');
+						var drug_name='';
+					}else{
+						var drug_name=data['yaowu'][i]['drug_name'];
+					}
+					if(data['yaowu'][i]['jixing']=='undefined'){
+						var jixing='';
+					}else{
+						var jixing=data['yaowu'][i]['jixing'];
+					}
+					if(data['yaowu'][i]['guige']=='undefined'){
+						var guige='';
+					}else{
+						var guige=data['yaowu'][i]['guige'];
+					}guige
+					if(data['yaowu'][i]['jijia']=='undefined'){
+						var jijia='';
+					}else{
+						var jijia=data['yaowu'][i]['jijia'];
+					}
+					if(data['yaowu'][i]['jiage']=='undefined'){
+						var jiage='';
+					}else{
+						var jiage=data['yaowu'][i]['jiage'];
+					}
+					if(data['yaowu'][i]['changjia']=='undefined'){
+						var changjia='';
+					}else{
+						var changjia=data['yaowu'][i]['changjia'];
+					}
+					console.log('dddd');
+				
+					$(".text").append("<div class='hang'><div class='one'>"+drug_name+"</div><div class='one1'>"+jixing+"</div><div class='one2'>"+guige+"</div><div class='one3'>"+jijia+"</div><div class='one4'>"+jiage+"</div><div class='one5'>"+changjia+"</div><div class='one6'>无</div><div class='one7'>无</div></div>");
+				
+					// $(".text").append("<div class='hang'><div class='one'>"+data['yaowu'][i]['drug_name']+"</div><div class='one1'>"+data['yaowu'][i]['jixing']+"</div><div class='one2'>"+data['yaowu'][i]['guige']+"</div><div class='one3'>"+data['yaowu'][i]['jijia']+"</div><div class='one4'>"+data['yaowu'][i]['jiage']+"</div><div class='one5'>"+data['yaowu'][i]['changjia']+"</div><div class='one6'>无</div><div class='one7'>无</div></div>");
+				}
+				// console.log('aaa');
+			
+				}
+			}
+		})
+	})
+	$(".zi").click(function()
+	{
+    var str=String(document.calculator.numScreen.value); //获得当前显示数据
+			 var params = {"str":str};
+		$.ajax({
+			url:"__URL__/getYaowu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					// alert('aaaa');
+				$(".text").html("");
+				$(".yema").html("");
+				$(".fourth").html("");
+				  // console.log(data['yaowu'].length);
+				  $(".yema").append("第"+data['page']+"页/共"+data['pages']+"页");
+				var last_page=parseInt(data['page'])-1;
+				var next_page=parseInt(data['page'])+1;
+					$(".fourth").append("<div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+last_page+")'>上一页</div><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+next_page+")'>下一页</div>");
+
+				for(var i=0;i<data['yaowu'].length;i++){
+					$(".text").append("<div class='hang'><div class='one'>"+data['yaowu'][i]['drug_name']+"</div><div class='one1'>"+data['yaowu'][i]['jixing']+"</div><div class='one2'>"+data['yaowu'][i]['guige']+"</div><div class='one3'>"+data['yaowu'][i]['jijia']+"</div><div class='one4'>"+data['yaowu'][i]['jiage']+"</div><div class='one5'>"+data['yaowu'][i]['changjia']+"</div><div class='one6'>无</div><div class='one7'>无</div></div>");
+				}
+			
+				// $(".fourth").append("<a href='../Home/Selectmd/fanye?page="+last_page+"'><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)'>上一页</div></a><a href='../Home/Selectmd/fanye?page="+next_page+"'><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)'>下一页</div></a>");
+		
+				}
+			}
+		})
+	} ) 
+$(".tuige").click(function(){
+	var str=String(document.calculator.numScreen.value); //获得当前显示数据
+			 var params = {"str":str};
+		$.ajax({
+			url:"__URL__/getYaowu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+				$(".text").html("");
+				$(".yema").html("");
+				$(".fourth").html("");
+				// console.log(data['yaowu'].length);
+					$(".yema").append("第"+data['page']+"页/共"+data['pages']+"页");
+				var last_page=parseInt(data['page'])-1;
+				var next_page=parseInt(data['page'])+1;
+		
+				$(".fourth").append("<div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+last_page+")'>上一页</div><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+next_page+")'>下一页</div>");
+				for(var i=0;i<data['yaowu'].length;i++){
+					// console.log(data['yaowu'][i]['drug_name']+'hhhh');
+					if(data['yaowu'][i]['drug_name'].length<=0){
+						 // console.log('gggg');
+						var drug_name='';
+					}else{
+						var drug_name=data['yaowu'][i]['drug_name'];
+					}
+					if(data['yaowu'][i]['jixing']=='undefined'){
+						var jixing='';
+					}else{
+						var jixing=data['yaowu'][i]['jixing'];
+					}
+					if(data['yaowu'][i]['guige']=='undefined'){
+						var guige='';
+					}else{
+						var guige=data['yaowu'][i]['guige'];
+					}guige
+					if(data['yaowu'][i]['jijia']=='undefined'){
+						var jijia='';
+					}else{
+						var jijia=data['yaowu'][i]['jijia'];
+					}
+					if(data['yaowu'][i]['jiage']=='undefined'){
+						var jiage='';
+					}else{
+						var jiage=data['yaowu'][i]['jiage'];
+					}
+					if(data['yaowu'][i]['changjia']=='undefined'){
+						var changjia='';
+					}else{
+						var changjia=data['yaowu'][i]['changjia'];
+					}
+					console.log('dddd');
+				
+					$(".text").append("<div class='hang'><div class='one'>"+drug_name+"</div><div class='one1'>"+jixing+"</div><div class='one2'>"+guige+"</div><div class='one3'>"+jijia+"</div><div class='one4'>"+jiage+"</div><div class='one5'>"+changjia+"</div><div class='one6'>无</div><div class='one7'>无</div></div>");
+				}
+			
+				}
+			}
+		})
+
+})
+
+
+}
+function getYaowu(){
+var str=String(document.calculator.numScreen.value); //获得当前显示数据
+// if(str.length>0){
+	 var params = {"str":str};
+		$.ajax({
+			url:"__URL__/getYaowu", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+					console.log('ssss');
+				
+				if(data.success==1){
+				$(".text").html("");
+				$(".yema").html("");
+				$(".fourth").html("");
+				 // console.log(data['yaowu'].length);
+				for(var i=1;i<data['yaowu'].length;i++){
+					$(".text").append("<div class='hang'><div class='one'>"+data['yaowu'][i]['drug_name']+"</div><div class='one'>"+data['yaowu'][i]['yaowu_py']+"</div><div class='one'>"+data['yaowu'][i]['units']+"</div><div class='one'>"+data['yaowu'][i]['make_add']+"</div><div class='one'>"+data['yaowu'][i]['price']+"</div></div>");
+				}
+				$(".yema").append("第"+data['page']+"页/共"+data['pages']+"页");
+				var last_page=parseInt(data['page'])-1;
+				var next_page=parseInt(data['page'])+1;
+				// $(".fourth").append("<a href='../Home/Selectmd/fanye?page="+last_page+"'><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)'>上一页</div></a><a href='../Home/Selectmd/fanye?page="+next_page+"'><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)'>下一页</div></a>");
+				$(".fourth").append("<div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+last_page+")'>上一页</div><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+next_page+")'>下一页</div>");
+				}
+			}
+		})
+// }
+}
+function tiaozhuan(yema){
+	 // alert(yema);
+	var yema=yema;
+    var str=String(document.calculator.numScreen.value); //获得当前显示数据
+     var params = {"str":str,"page":yema};
+		$.ajax({
+			url:"__URL__/fanye", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+
+				if(data.success==1){
+				$(".text").html("");
+				$(".yema").html("");
+				$(".fourth").html("");
+				$(".yema").append("第"+data['page']+"页/共"+data['pages']+"页");
+				var last_page=parseInt(data['page'])-1;
+				var next_page=parseInt(data['page'])+1;
+				$(".fourth").append("<div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+last_page+")'>上一页</div><div class='fanye' onMouseDown='yema(this)' onmouseup='yemat(this)' onclick='tiaozhuan("+next_page+")'>下一页</div>");
+				 // console.log(data['yaowu'].length);
+				for(var i=0;i<data['yaowu'].length;i++){
+					// $(".text").append("<div class='hang'><div class='one'>"+data['yaowu'][i]['drug_name']+"</div><div class='one'>"+data['yaowu'][i]['yaowu_py']+"</div><div class='one'>"+data['yaowu'][i]['units']+"</div><div class='one'>"+data['yaowu'][i]['make_add']+"</div><div class='one'>"+data['yaowu'][i]['price']+"</div></div>");
+					$(".text").append("<div class='hang'><div class='one'>"+data['yaowu'][i]['drug_name']+"</div><div class='one1'>"+data['yaowu'][i]['jixing']+"</div><div class='one2'>"+data['yaowu'][i]['guige']+"</div><div class='one3'>"+data['yaowu'][i]['jijia']+"</div><div class='one4'>"+data['yaowu'][i]['jiage']+"</div><div class='one5'>"+data['yaowu'][i]['changjia']+"</div><div class='one6'>无</div><div class='one7'>无</div></div>");
+				}
+				console.log('aaa');
+			
+				}
+
+			}
+		})
+
+
+}
+var num=0,result=0,numshow="0";
+var operate=0; //判断输入状态的标志
+var calcul=0; //判断计算状态的标志
+var quit=0;
+function command(num){
+	// alert('aaaa');
+var str=String(document.calculator.numScreen.value); //获得当前显示数据
+// alert(str);
+str=(str!="0") ? ((operate==0) ? str : "") : ""; //如果当前值不是"0"，且状态为0，则返回当前值，否则返回空值;
+str=str + String(num); //给当前值追加字符
+document.calculator.numScreen.value=str; //刷新显示
+operate=0; //重置输入状态
+quit=0; //重置防止重复按键的标志
+}
+function del(){ //退格
+var str=String(document.calculator.numScreen.value);
+str=(str!="") ? str : "";
+str=str.substr(0,str.length-1);
+str=(str!="") ? str : "";
+document.calculator.numScreen.value=str;
+}
+function clearscreen(){ //清除数据
+num=0;
+result=0;
+numshow="0";
+document.calculator.numScreen.value="";
+}
+function jiazai(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/zimu2.png')";
+}
+function jiazait(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/zimu.png')";
+}
+function tui(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/qingchu2.png')";
+}
+function tuit(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/qingchu.png')";
+}
+function yema(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/yema2.png')";
+}
+function yemat(obj){
+	obj.style.backgroundImage = "url('__PUBLIC__/Home/img/yema.png')";
+}
+
+</script>
+<script type="text/javascript"> 
+var t=120;//设定跳转的时间 
+setInterval("refer()",1000); //启动1秒定时 
+function refer(){  
+    if(t==0){ 
+        location="__APP__/ZiZhu"; //#设定跳转的链接地址 
+    } 
+    document.getElementById('show').innerHTML=""+t+""; // 显示倒计时 
+    t--; // 计数器递减 
+    //本文转自： 
+} 
+</script>
+<style>
+.mainbody{
+	width: 1024px;
+	height: 768px;
+	background:url('__PUBLIC__/Home/img/bj.png') no-repeat center top;
+}
+.title{
+	float: left;
+	width: 1023px;
+	height: 105px;
+}
+.title_one{
+	float: left;
+	width: 500px;
+	height: 100px;
+	font-size: 60px;
+	text-align: center;
+	line-height: 100px;
+	margin-left: 250px;
+	color: #000;
+}
+.yaowu{
+	float: left;
+	width: 1023px;
+	height: 345px;
+}
+.title_two{
+	float: left;
+	width: 1002px;
+	height: 51px;
+	margin-left: 10px;
+}
+.title_t{
+	float: left;
+	width: 220px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+.title_t1{
+	float: left;
+	width: 100px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+.title_t2{
+	float: left;
+	width: 120px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+.title_t3{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	/*line-height: 51px;*/
+}
+.title_t4{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	/*line-height: 51px;*/
+}
+.title_t5{
+	float: left;
+	width: 220px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+.title_t6{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+.title_t7{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 51px;
+}
+
+.text{
+	float: left;
+	width: 1002px;
+	height: 257px;
+	margin-left: 10px;
+	font-size: 50px;
+}
+.select{
+	float: left;
+	width: 1002px;
+	height: 35px;
+	margin-left: 10px;
+	border-top: solid 1px #000;
+}
+.yema{
+	float: left;
+	width: 300px;
+	height: 35px;
+	font-size: 25px;
+	color: #333333;
+	text-align: center;
+	line-height: 35px;
+}
+.selected{
+	float: left;
+	width: 170px;
+	height: 35px;
+	color: #000;
+	font-size: 25px;
+	line-height: 35px;
+}
+.selectedt{
+	float: left;
+	width: 500px;
+	height: 35px;
+	color: #000;
+	font-size: 25px;
+	line-height: 35px;
+}
+.anjian{
+	float: left;
+	width: 1023px;
+	height:307px;
+	margin-top: 10px;
+}
+.first{
+	float: left;
+	width: 710px;
+	height:71px;
+	margin-top: 10px;
+	margin-left: 156px;
+}
+.second{
+	float: left;
+	width: 639px;
+	height:71px;
+	/*margin-top: 5px;*/
+	margin-left: 192px;
+}
+.third{
+	float: left;
+	width: 759px;
+	height:71px;
+	/*margin-top: 5px;*/
+	margin-left: 132px;
+}
+.fourth{
+	float: left;
+	width: 302px;
+	height:71px;
+	/*margin-top: 5px;*/
+	margin-left: 360px;
+}
+.zi{
+	float: left;
+	width: 71px;
+	height: 71px;
+	background:url('__PUBLIC__/Home/img/zimu.png') no-repeat center top;
+	text-align: center;
+	line-height: 71px;
+	font-size: 30px;
+	color: #fff;
+}
+.qingchu{
+	float: left;
+	width: 131px;
+	height: 71px;
+	background:url('__PUBLIC__/Home/img/qingchu.png') no-repeat center top;
+	text-align: center;
+	line-height: 71px;
+	font-size: 30px;
+	color: #fff;
+}
+.tuige{
+	float: left;
+	width: 131px;
+	height: 71px;
+	background:url('__PUBLIC__/Home/img/qingchu.png') no-repeat center top;
+	text-align: center;
+	line-height: 71px;
+	font-size: 30px;
+	color: #fff;
+}
+.fanye{
+	float: left;
+	width: 151px;
+	height: 71px;
+	background:url('__PUBLIC__/Home/img/yema.png') no-repeat center top;
+	text-align: center;
+	line-height: 71px;
+	font-size: 30px;
+	color: #fff;
+}
+.hang{
+	float: left;
+	height: 50px;
+	width: 1002px;
+	border-bottom: solid 1px #000;
+}
+
+.one{
+	float: left;
+	width: 220px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}
+.one1{
+	float: left;
+	width: 100px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}
+.one2{
+	float: left;
+	width: 120px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}.one3{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}.one4{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}.one5{
+	float: left;
+	width: 220px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	/*line-height: 51px;*/
+	border-left: solid 1px #000;
+}.one6{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	line-height: 51px;
+	border-left: solid 1px #000;
+}.one7{
+	float: left;
+	width: 50px;
+	height: 51px;
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	line-height: 51px;
+	border-left: solid 1px #000;
+}
+.return{
+	position: absolute;
+	float: left;
+	height: 87px;
+	width: 180px;
+	margin-left: 10px;
+	text-align: center;
+	line-height: 40px;
+	margin-top: 20px;
+	/*background:url('__PUBLIC__/Home/img/return.png') no-repeat center top;*/
+	/*background-color: red;*/
+
+}
+#re_text{
+	width: 150px;
+	height: 80px;
+	border-radius: 10px;
+	font-size: 30px;
+	background-color:transparent;
+	color: #fff;
+}
+#show{
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 400px;
+	font-size:40px;
+	color:red;
+}
+</style>
+<title>药物</title>
+</head>
+<body>
+<div class="mainbody">
+<a href='__APP__/Home/DrugCl'>
+<div class='return'>
+<img src="__PUBLIC__/Home/img/return.png" style="border:none;">
+</div>
+</a>
+	<div class="title">
+		<div class="title_one">
+		<span id="show" >120</span>
+		药品价格
+		</div>
+	</div>
+	<form name="calculator" action="" method="get">
+	<div class="yaowu">
+		<div class="title_two">
+			<div class="title_t">
+		    名称
+		   </div>
+		   <div class="title_t1">
+		    剂型
+		   </div>
+		   <div class="title_t2">
+		    规格
+		   </div>
+		   <div class="title_t3">
+		    计价单位
+		   </div>
+		   <div class="title_t4">
+		    价格(元)
+		   </div>
+		   <div class="title_t5">
+		    生产厂家
+		   </div>
+		   <div class="title_t6">
+		    产地
+		   </div>
+		   <div class="title_t7">
+		    等级
+		   </div>
+			<!-- </div> -->
+			
+			
+		</div>
+		<div class="text">
+		 <div class="hang">
+		 </div>
+		</div>
+		<div class="select">
+			<div class="yema">
+			第&nbsp;页/共&nbsp;页
+			</div>
+			<div class="selected">
+			药品名称拼音:
+			</div>
+			<div class="selectedt">
+			<input type="text" size='60' value="" name="numScreen" name="yaowu_name" id="yaowu_name" onfocus="this.blur();" style="height:25px;">
+			</div>
+		</div>
+	</div>
+	<div class="anjian">
+		<div class="first">
+		     <div class="zi" id="q" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('Q')">
+		     Q
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('W')">
+		     W
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('E')">
+		     E
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('R')">R
+		     
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('T')">T
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('Y')">Y
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('U')">U
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('I')">I
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('O')">O
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('P')">P
+		     </div>
+
+		</div>
+		<div class="second">
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('A')">A
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('S')">S
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('D')">D
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('F')">F
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('G')">G
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('H')">H
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('J')">J
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('K')">K
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('L')">L
+		     </div>
+		</div>
+		<div class="third">
+		     <div class="qingchu" onclick="clearscreen()" onMouseDown="tui(this)" onmouseup="tuit(this)">清除
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('Z')">Z
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('X')">X
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('C')">C
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('V')">V
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('B')">B
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('N')">N
+		     </div>
+		     <div class="zi" onMouseDown="jiazai(this)" onmouseup="jiazait(this)" onclick="command('M')">M
+		     </div>
+		     <div class="tuige" onclick="del()" onMouseDown="tui(this)" onmouseup="tuit(this)">退格
+		     </div>
+		</div>
+		<div class="fourth">
+			<div class="fanye" onMouseDown="yema(this)" onmouseup="yemat(this)">上一页
+			</div>
+			<div class="fanye" onMouseDown="yema(this)" onmouseup="yemat(this)">下一页
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+</body>
+</html>

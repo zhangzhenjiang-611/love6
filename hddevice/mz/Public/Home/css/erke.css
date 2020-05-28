@@ -1,0 +1,36 @@
+/***大屏***/
+.daping_area{width:1366px; height:768px; position:relative; overflow:hidden; background:url(../img/daping2.png) no-repeat center top;}
+#times{ font-size:28px; margin-left:820px; margin-top:30px; color:#000; font-family:黑体; position:absolute;}
+.dp_info{ font-size:35px; margin-top:84px;padding-left:70px; color:yellow;}
+.dp_title{float:left; width:100%; margin-top:35px; padding-left:80px; display:none}
+.dp_title ul li{ font-size:35px; color:#FF5A00; width:120px;font-weight:黑体;float:left;font-weight:bold;}
+.dp_title ul li.one,.dp_body ul li.one{width:128px;}
+.dp_title ul li.level,.dp_body ul li.level{width:100px;color:#FFE10C; font-weight:bold; font-size:36px;}
+.dp_title ul li.two,.dp_body ul li.two{width:205px;} 
+.dp_body ul li.two{width:152px; height:100%;}
+.dp_title ul li.thr,.dp_body ul li.thr{width:208px; font-weight:bold; height:50px; color:yellow;}
+.dp_title ul li.four,.dp_body ul li.four{ width:490px;  font-size:30px;}
+
+.dp_body{float:left;  margin-top:78px; padding-left:52px;}
+.dp_body ul{float:left; height:58px; line-height:58px; margin-top:14px; width:110%; overflow:hidden;}
+.dp_body ul li{float:left;color:#fff; font-size:35px; width:120px;}
+.dp_body ul li.four span{ margin-right:10px; display:inline-block;}
+.dp_body ul li.dept{ width:228px; font-size:35px;}
+/*.dp_bottom_info{ position:absolute;font-size:35px; color:#fff; font-family:黑体; width:1166px; text-align:center; margin-top:10px; left:0px; bottom:10px;}*/
+.dp_bottom_info{ position:absolute;font-size:35px; color:#fff; font-family:黑体; width:1166px; text-align:center; top:672px; left:50px; bottom:10px;}
+.zhezhao{ position:absolute; width:1258px;height:498px; left:7px; top:145px; background:#004135; z-index:100000; font-size:68px; color:#fff; text-align:center; font-family:黑体; display:none;}
+.zhezhao .one{ font-size:98px; font-family:黑体; margin-top:120px; margin-bottom:110px; }
+.dp_bottom_info .right{
+	float: right;
+	display: block;
+	width: 720px;
+	/*margin-top: -1007200px;*/
+
+}
+/*.dp_bottom_info .right #gundong_area{
+	border: 1px solid red;
+	height: 50px;
+	width: 500px;
+	float: left;
+	margin-left: 100px;
+}*/

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<style>
+.iconlist li{ color:red; width:150px; text-align:left; }
+.iconlist li span{ color:#000;}
+.room_list{}
+.room_list ul{ padding-left:20px; padding-top:20px; padding-bottom:20px;}
+	.room_list ul li{ display:inline-block; list-style:none; border:1px solid #ccc; padding:5px 8px; margin-right:10px; margin-bottom:15px;}
+	.room_list ul li.kaizhen{ background:green; color:#fff; font-weight:bold;}
+	.room_list h4{font-size:16px; margin-bottom:5px;}
+	.room_list p{ line-height:150%;}
+</style>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    </ul>
+    </div>
+    
+    <div class="mainindex">
+    
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/Nurse2/images/sun.png" alt="天气" /></span>
+    <b><?=session("uname")?>早上好，欢迎使用分诊管理系统</b>
+    <!-- <a href="#">帐号设置</a> -->
+    </div>
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/Nurse2/images/time.png" alt="时间" /></span>
+    <i>您上次登录的时间：<?=$login_time?></i> （当前时间：<?=date("Y年m月d号")?> {$week}）
+    </div>
+    
+    <div class="xline"></div>
+    <div class="box"></div>
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/Nurse2/images/dp.png" alt="提醒" /></span>
+    <b>基本信息</b>
+    </div>
+    <ul class="iconlist" style="margin-bottom:20px;">
+<li><span>患者总数：</span>{$pat_num}人</li>
+<li><span>专诊数量：</span>{$expert_num}人</li>
+<li><span>普诊数量：</span>{$normal_num}人</li>
+<li><span>已诊患者：</span>{$yes}人</li>
+<li><span>未诊患者：</span>{$no}人</li>
+<li><span>复诊患者：</span>{$fuzhen}人</li>
+            
+    </ul>
+    
+   
+    
+   
+    
+    <div class="xline"></div>
+    
+    <div class="uimakerinfo"><b>诊室概况</b></div>
+    <div class="room_list">
+  
+    <ul>
+    	<volist name="clist" id="vo">
+        	<li><h4>{$vo.room_id}诊室</h4>
+            <p>出诊医生：{$vo.doctor_name}</p>
+            <p>所属科室：{$vo.dept_name}</p>
+            <p>等候患者：{$vo.wait_num}人</p>
+            <p>过号患者：{$vo.guohao_num}人</p>
+            </li>	
+        </volist>
+    	
+    </ul>
+    
+  
+    </div>
+    </div>
+    
+    
+
+</body>
+
+</html>

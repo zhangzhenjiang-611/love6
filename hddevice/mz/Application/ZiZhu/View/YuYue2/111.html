@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zizhu/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zizhu/css/index.css" />
+<script language="javascript" src="__PUBLIC__/zizhu/js/jquery-1.9.1.js" ></script> 
+<script language="javascript" src="__PUBLIC__/zizhu/js/ServerClock.js" ></script>  
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/zizhu/js/my.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/zizhu/js/jquery.qrcode.min.js"></script>
+
+<style type="text/css">
+
+.send-msg{
+    background-color: #F0F1F1;
+    display: block;
+    width:50%;
+    height: 50%;
+    z-index: 99999;
+    position :fixed;
+    top:25%;
+    left:30%;
+    border:solid 1px #12B5E5;
+}
+.send-msg caption{
+    padding-top:10px;
+    padding-bottom: 10px;
+    background:#90C9DA;
+    font-size: 16px;
+    color: #fff;
+}
+.send-msg tr:nth-child(1){
+    margin-top: 100px;
+    margin-left: 40px;
+}
+.send-msg button{
+    padding-top:10px;
+    padding-bottom: 10px;
+    background:#90C9DA;
+    font-size: 16px;
+    margin:25px;
+    margin-top: 20px;
+    padding: 20px;
+    border:solid 1px #12B5E5;
+}
+.send-msg button:first-child{
+    margin-left: 200px;
+}
+#cover {
+    position: fixed;
+    z-index:9999;
+    top:0px;
+    left: 0px;
+    display: none;
+    width:100%;
+    height: 100%;
+    opacity: 0.5;
+    background: #000 none repeat scroll 0% 0%;
+}
+
+</style>
+
+<title>预约挂号</title>
+</head>
+<script type="text/javascript">
+
+
+
+function sendMsg(){
+    $("#send-msg").show();
+    $("#cover").show();
+}
+
+function sendMsghide(){
+    $(".send-msg").hide();
+    $("#cover").hide();
+}
+$("#send-msg").click(function(){
+    sendMsghide();
+})
+
+$(document).ready(function(){
+    $(".send-msg").hide();
+    $("#cover").hide();
+/*    $("#cover").click(function(){
+        $("send-msg").hide();
+        $(this).hide();
+    })*/
+})
+
+$("#xz_ic").click(function(){
+    alert(111);
+})
+
+$("#xz_ic").on("click",function(){
+    alert(111);
+    sendMsg();
+})
+
+
+</script>
+<body>
+<!--添加了病人隐藏域-->
+    <div style="display:block;" id="cover"></div>
+<div class="main_body">
+    <div id="downcount"></div>
+	<div id="show_times">2016年10月12日 星期三 &nbsp;16:51</div>
+    <div class="main_yuyue">
+        <!--预约挂号选择卡类型-->
+        <div id="send-msg" class="send-msg">
+            <table width="100%" border="0">
+                <caption>提示</caption>
+                <tr>
+                    <td style="font-size:30px;"><strong>对不起，本科室只允许自费挂号！请使用就诊卡或身份证进行挂号缴费！是否使用就诊卡或身份证进行挂号缴费？</strong></td>
+                </tr>
+                <tr>
+                    <td class="xz">
+                        <button onclick="send();" class="msgbtn">确定</button>
+                        <button onclick="reset();" class="msgbtn">取消</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="chose_card_type_area mtnum2 ">
+        	<h3>请您选择卡类型</h3>
+            <ul>
+            	<li class="ic" id="xz_ic">就诊卡</li>
+            	<li class="sfz" id="xz_sfz">身份证</li>
+                <li class="yibao" id="xz_yibao">医保卡</li>
+            </ul>
+        </div>
+        <!--预约挂号选择业务类型-->
+        <div class="chose_pat_type mtnum2" style="display:none;">
+        	<h3>请您选择卡类型</h3>
+            <ul>
+            	<li class="yuyue_quhao" id="xz_yu_quhao">预约取号</li>
+            	<li class="bu_guahao" id="xz_bu_guahao">补挂号费</li>
+                <li class="yuyue_guahao" id="xz_yu_guahao">预约挂号</li>
+            </ul>
+        </div>
+        <!--预约取号就诊卡操作界面-->
+        <div class="jiuzhen_op_area_quhao mtnum2" style="display:none;">
+        	<h3>请扫描就诊卡或输入就诊卡号</h3>
+            <input type="text" class="iptx" value="" id="jz_card_no_quhao" />
+            <div class="j_keybord_area_quhao">
+            	<ul class="img_view"></ul>
+
+                <ul class="key">
+                	<li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips_quhao"></div>
+            </div>
+        </div>
+        <!----S身份证操作界面---->
+        <div class="jiuzhen_op_area_sfz mtnum2" style="display:none;">
+            <h3>请刷身份证或输入身份证号</h3>
+            <input type="text" class="iptx" value="" id="jz_card_no_sfz" />
+            <div class="j_keybord_area_sfz">
+                <ul class="img_view" id="img_view_sfz">
+                </ul>
+
+                <ul class="key">
+                    <li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                    <li class="num" param="X">X</li>
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips"></div>
+            </div>
+        </div>
+        <div class="yb_op_area mtnum2" style="display:none;">
+            <h3>请插入您的医保卡</h3>
+            <div class="tips"></div>
+        </div>
+         <!--------处方列表-------->
+        <div class="yuyue_record mtnum2" style="display:none;">
+          <!--------添加了患者的姓名-------->
+          <span style="color:#009FD6;font-size:35px;position:absolute;left:135px;" id="jz_name" ></span>
+            <h3 style="font-size:35px">请确认预约信息</h3>
+            <div class="bar_tit">
+                <ul>
+                    <li class="one">序号</li>
+                    <li class="two">就诊科室</li>
+                    <li class="thr">金额</li>
+                    <li class="four">日期</li>
+                </ul>
+            </div>
+            <div class="chufang_list"></div>
+            <div class="tips"></div>
+        </div>
+
+        <div class="yuyue_record2 mtnum2" style="display:none;">
+          <!--------添加了患者的姓名-------->
+          <span style="color:#009FD6;font-size:35px;position:absolute;left:135px;" id="jz_name1" ></span>
+            <h3 style="font-size:35px">请确认诊间加号信息</h3>
+            <img src="__URL__/tiaoma"/>
+            <div class="bar_tit">
+                <ul>
+                    <li class="one">序号</li>
+                    <li class="two">就诊科室</li>
+                    <li class="thr">金额</li>
+                    <li class="four">日期</li>
+                </ul>
+                
+            </div>
+            <div class="chufang_list"></div>
+            <div class="tips"></div>
+        </div>
+
+         <!--自助挂号选择科室-->
+        <div class="chose_room mtnum2" style="display:none;">
+         <span style="color:#009FD6;font-size:35px;position:absolute;left:135px;top:8px" id="guahao_name" ></span>
+            <h5 style="margin-top:-20px;">请选择科室</h5>
+            <div class="room_list" style="margin-top:20px">
+                <ul id='attr_list' style='height:55px'></ul>
+                <div id='sub_list'></div>
+                <h4></h4>
+            </div>
+        </div>
+
+         <!--预约挂号选择时间-->
+        <div class="chose_time mtnum2" style="display:none;">
+         <span style="color:#009FD6;font-size:35px;position:absolute;left:135px;top:8px;margin-left:-80px" id="yuyue_guahao_name" ></span>
+            <h5 style="margin-top:-20px;">请选择预约挂号的时间</h5>
+            <div id='time_list'></div>
+        </div>
+
+ <!--自助挂号选择医生-->
+         <div class="chose_doctor mtnum2" style="display:none;">
+            <!--<span style="color:#009FD6;font-size:35px;position:absolute;left:105px;" id="keshi_name" ></span>-->
+            <h3>请选择挂号医生</h3>
+            <div class="doctor_list">
+                
+           </div>
+           <div class="page">
+                <span class="total_page"></span>
+                <span class="prev">上一页</span>
+                <span class="next">下一页</span>
+           </div>
+        </div>
+
+
+         <!--预约取号业务流程-->
+        <div class="result_quhao mtnum2" style="display:none">
+        	<h3>请确认挂号信息</h3>
+            <ul>
+            	<li class="p1"><span class="s1">患者ID：</span><span class="s2"></span></li>
+                <li class="p2">
+					<span class="txt txt_1">姓名：</span><span class="uname"></span> <span class="txt">性别：</span><span class="sex"></span>                
+                </li>
+                <li class="p6">
+                	<span class="fj_cz_room">科室：</span><span class="p_cz_room"></span><span class="fj_cz_doctor">医生：</span><span class="p_cz_doctor"></span>
+                </li>
+                <li class="p3">
+                	<span class="txt">总金额：</span><span class="p_chare_totle"></span>
+                </li>
+                <li class="p4"><span class="txt">现金支付：</span><span class="p_cash"></span></li>
+                <li class="p5"><span class="txt yb_txt">医保账户支付：</span><span class="p_zhzf"></span><span class="txt">统筹支付：</span><span class="p_tczf"></span></li>
+                </li>
+               	<li class="p7"><span class="s1">医保个人账户总额：</span><span class="yb_zh"></span></li>
+            </ul>
+        </div>
+
+     <div class="yy_guahao mtnum2" style="display:none">
+            <h3>请确认预约挂号信息</h3>
+            <ul>
+                <li class="p1"><span class="s1">患者ID：</span><span class="s2"></span></li>
+                <li class="p2"><span class="txt txt_1">姓名：</span><span class="uname"></span></li>
+                <li class="p3"><span class="txt">性别：</span><span class="sex"></span></li>
+                <li class="p6"><span class="fj_cz_room">科室：</span><span class="p_cz_room"></span></li>             <li class="p4"><span class="txt">挂号日期：</span><span class="time"></span></li>
+                
+            </ul>
+        </div>
+    
+      
+        <!--预约取号选择支付页面-->
+        <div class="chose_pay_type_area_quhao mtnum2" style="display:none">
+        	<h3>请您选择支付方式</h3>
+            <ul>
+            	<li class="bank_pay" id="pay_bank_guahao">银行卡</li>
+                <li class="zhifubao" id="pay_zhifubao_quhao">支付宝</li>
+            </ul>
+        </div>
+         <!--银行卡-->
+        <div class="bank_guahao mtnum2" style="display:none">
+            <h3>请插入您的银行卡</h3>
+            <div class="tips" id="bank_tips"></div>
+        </div>
+        <div class="bank_password_guahao mtnum2" style="display:none;">
+            <h3>请输入您的银行卡密码</h3>
+            <input type="text" class="PinField1" id="PinFieldGh" />
+            <div class="bank_notice_area_guahao">
+                <ul class="bank_img_view"></ul>
+                <ul class="bank_lang">
+                    <li class="lang">请不要透漏您的密码！</li>
+                    <li class="lang">输入密码时请注意遮挡！</li>
+                    <li class="lang">密码不足六位请按确认键！</li>
+                </ul>
+            </div>
+            <div class="tips"></div>
+        </div>
+        <!--付款成功-->
+         <!--预约取号支付宝二维码页面-->
+        <div class="alipay_ma_show_quhao mtnum2" style="display:none">
+            <h3>扫一扫付款</h3>
+            <div class="pay_val"></div>
+            <div class="erweima">
+            <img src="" width="240" />
+            </div>
+            <div class="tips">请用手机支付宝扫描付款</div>
+        </div>
+        <div class="pay_success mtnum2" style="display:none">
+            <h3></h3>
+        </div>
+    </div>
+    <div class="btn_area">
+   	<ul>
+    	<li id="confirm">确定</li>
+        <li id="fanhui">返回</li>
+        <li id="tuichu">退出</li>
+    </ul>
+   </div>
+   <div id="H-dialog" style="display:none">
+    <a class="close" onclick="popupClose(this)">×</a>
+    <div class="title">提示</div>
+    <div id="msgCont">内容</div>
+    <input type="button" value="确定" />
+    <input type="button" value="取消" />
+</div>
+</div>
+
+<script>
+    function GetDateStr(AddDayCount) {
+
+        var dd = new Date();
+
+        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+
+        var y = dd.getFullYear();
+
+        var m = dd.getMonth()+1;//获取当前月份的日期
+
+        var d = dd.getDate();
+
+        return y+"-"+m+"-"+d;
+
+    }
+
+
+
+    $("#xz_ic").on("click",function(){
+       alert(222);
+       sendMsg();
+    })
+    $("#send-msg").click(function(){
+    sendMsghide();
+})
+
+
+
+/*//获取键值函数
+var time;
+function UMS_GetOnePass()
+{
+    var i;
+   // var iret=window.external.Out_UMS_GetOnePass();
+    if(iret==42)//"*"
+      {PinCounter=PinCounter+1;
+      }
+    else if(iret==8)//退格
+    {
+        if(PinCounter>0)
+            PinCounter=PinCounter-1;            
+    }
+    else if(iret==27)//取消
+    {
+        clearInterval(time);
+        PinCounter=0;
+        window.external.Out_UMS_EjectCard();
+        $("#tuichu").trigger("click");
+    }
+    else if(iret==13)//确认
+    {
+        clearInterval(time);
+        setTimeout(function(){
+          //  var get_pin_flag =window.external.Out_UMS_GetPin();
+            if(get_pin_flag==0){
+            $("#confirm").trigger("click");
+            }
+        },1000)
+    }
+    else if(iret==2)//超时
+    {
+        clearInterval(time);
+        $(".bank_password .tips").html("用户输入超时");
+        setTimeout(function(){
+                       // window.external.Out_UMS_EjectCard();
+                        $("#tuichu").trigger("click");
+                    },1000)
+    }
+    else if(iret==0)
+    {
+        PinCounter=PinCounter;
+    }
+    else
+    {
+    }
+    document.getElementById("PinField").value="";
+    for(i=0;i<PinCounter;i++){
+    document.getElementById("PinField").value=document.getElementById("PinField").value+"*";
+    }
+}
+function UMS_GetOnePassGh()
+{
+    var i;
+   // var iret=window.external.Out_UMS_GetOnePass();
+    if(iret==42)//"*"
+      {PinCounter=PinCounter+1;
+      }
+    else if(iret==8)//退格
+    {
+        if(PinCounter>0)
+            PinCounter=PinCounter-1;            
+    }
+    else if(iret==27)//取消
+    {
+        clearInterval(time);
+        PinCounter=0;
+     //   window.external.Out_UMS_EjectCard();
+        $("#tuichu").trigger("click");
+    }
+    else if(iret==13)//确认
+    {
+        clearInterval(time);
+        setTimeout(function(){
+          //  var get_pin_flag =window.external.Out_UMS_GetPin();
+            if(get_pin_flag==0){
+            $("#confirm").trigger("click");
+            }
+        },1000)
+    }
+    else if(iret==2)//超时
+    {
+        clearInterval(time);
+        $(".bank_password .tips").html("用户输入超时");
+        setTimeout(function(){
+                      //  window.external.Out_UMS_EjectCard();
+                        $("#tuichu").trigger("click");
+                    },1000)
+    }
+    else if(iret==0)
+    {
+        PinCounter=PinCounter;
+    }
+    else
+    {
+    }
+    document.getElementById("PinFieldGh").value="";
+    for(i=0;i<PinCounter;i++){
+    document.getElementById("PinFieldGh").value=document.getElementById("PinFieldGh").value+"*";
+    }
+}
+function PinProcess()
+{
+    document.getElementById("PinFieldGh").value= "";
+    document.getElementById("PinFieldGh").style.display = "block";
+    PinCounter=0;
+    time=setInterval(UMS_GetOnePass,100);        
+}
+function PinProcessGh()
+{
+    document.getElementById("PinFieldGh").value= "";
+    document.getElementById("PinFieldGh").style.display = "block";
+    PinCounter=0;
+    time=setInterval(UMS_GetOnePassGh,100);        
+}*/
+
+
+
+
+
+//格式化金额字符串
+function cash(cash){
+    var money = new Number(cash).toFixed(2);
+    var length =parseInt((money*100)).toString().length;
+    var n = 12-length;
+    var yl_cash="";
+    for(i=0;i<n;i++){
+        yl_cash+="0";
+        }
+        return yl_cash+parseInt((money*100).toFixed(2)).toString();
+    }
+
+    //交易成功返回字符串处理
+if(document.all){
+    document.onselectstart= function(){return false;}; //for ie
+}else{
+    document.onmousedown= function(){return false;};
+    document.onmouseup= function(){return true;};
+}
+document.onselectstart = new Function('event.returnValue=false;');
+   $(document).bind("contextmenu",function(){return false;});  
+    $(document).bind("keydown",function(e){ 
+e=window.event||e; 
+if(e.keyCode==116){ 
+e.keyCode = 0; 
+return false; 
+} 
+});
+</script>
+</body>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT>

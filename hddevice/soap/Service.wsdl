@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<definitions name="soap_server" targetNamespace="urn:soap_server" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soap_server" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<types xmlns="http://schemas.xmlsoap.org/wsdl/" />
+<portType name="soap_serverPort"><operation name="login">
+<input message="tns:loginRequest" />
+<output message="tns:loginResponse" />
+</operation>
+<operation name="logout">
+<input message="tns:logoutRequest" />
+<output message="tns:logoutResponse" />
+</operation>
+<operation name="tingzhen">
+<input message="tns:tingzhenRequest" />
+<output message="tns:tingzhenResponse" />
+</operation>
+<operation name="shunhu">
+<input message="tns:shunhuRequest" />
+<output message="tns:shunhuResponse" />
+</operation>
+<operation name="chonghu">
+<input message="tns:chonghuRequest" />
+<output message="tns:chonghuResponse" />
+</operation>
+<operation name="getPatList">
+<input message="tns:getPatListRequest" />
+<output message="tns:getPatListResponse" />
+</operation>
+<operation name="offline">
+<input message="tns:offlineRequest" />
+<output message="tns:offlineResponse" />
+</operation>
+<operation name="SendVoice">
+<input message="tns:SendVoiceRequest" />
+<output message="tns:SendVoiceResponse" />
+</operation>
+</portType>
+<binding name="soap_serverBinding" type="tns:soap_serverPort">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+<operation name="login">
+<soap:operation soapAction="urn:soap_server#call#login" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="logout">
+<soap:operation soapAction="urn:soap_server#call#logout" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="tingzhen">
+<soap:operation soapAction="urn:soap_server#call#tingzhen" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="shunhu">
+<soap:operation soapAction="urn:soap_server#call#shunhu" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="chonghu">
+<soap:operation soapAction="urn:soap_server#call#chonghu" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="getPatList">
+<soap:operation soapAction="urn:soap_server#call#getPatList" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="offline">
+<soap:operation soapAction="urn:soap_server#call#offline" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="SendVoice">
+<soap:operation soapAction="urn:soap_server#call#SendVoice" />
+<input><soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:soap_server" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+</binding>
+<service name="soap_server">
+<documentation />
+<port name="soap_serverPort" binding="tns:soap_serverBinding"><soap:address location="http://172.168.0.241:80/demo/soap/Service.php" />
+</port>
+</service>
+<message name="loginRequest">
+<part name="room" type="xsd:string" />
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="loginResponse">
+<part name="login" type="xsd:string" />
+</message>
+<message name="logoutRequest">
+<part name="room" type="xsd:string" />
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="logoutResponse">
+<part name="logout" type="xsd:string" />
+</message>
+<message name="tingzhenRequest">
+<part name="doctor_code" type="xsd:string" />
+</message>
+<message name="tingzhenResponse">
+<part name="tingzhen" type="xsd:string" />
+</message>
+<message name="shunhuRequest">
+<part name="room" type="xsd:string" />
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="shunhuResponse">
+<part name="shunhu" type="xsd:string" />
+</message>
+<message name="chonghuRequest">
+<part name="room" type="xsd:string" />
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="chonghuResponse">
+<part name="chonghu" type="xsd:string" />
+</message>
+<message name="getPatListRequest">
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="getPatListResponse">
+<part name="getPatList" type="xsd:string" />
+</message>
+<message name="offlineRequest">
+<part name="room" type="xsd:string" />
+<part name="doctor_code" type="xsd:string" />
+<part name="dept_code" type="xsd:string" />
+<part name="expert" type="xsd:string" />
+</message>
+<message name="offlineResponse">
+<part name="offline" type="xsd:string" />
+</message>
+<message name="SendVoiceRequest">
+<part name="string" type="xsd:string" />
+<part name="sid" type="xsd:string" />
+</message>
+<message name="SendVoiceResponse">
+<part name="SendVoice" type="xsd:string" />
+</message>
+</definitions>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/Public/admin/Css/public.css" />
-    <script type="text/javascript" src="/Public/Js/jquery-1.7.2.min.js"></script>
+    <script src="/Public/admin/Js/jquery-1.7.2.min.js"></script>
 </head>
 <body>
 <table class="table">
@@ -25,4 +25,33 @@
 </table>
 <div class="result page"><center><?php echo ($page); ?></center></div>
 </body>
+<script>
+
+    var lastTime = new Date().getTime();
+    var currentTime = new Date().getTime();
+    var timeOut = 1 * 60 * 1000; //设置超时时间： 10分
+
+    $(function(){
+
+        /* 鼠标移动事件 */
+        $(document).mouseover(function(){
+            lastTime = new Date().getTime(); //更新操作时间
+
+        });
+    });
+
+    function testTime(){
+        currentTime = new Date().getTime(); //更新当前时间
+        if(currentTime - lastTime > timeOut){ //判断是否超时
+           $.ajax({
+               url:<?php echo U('admin/Index/logout');?>
+
+           })
+        }
+    }
+
+    /* 定时器  间隔1秒检测是否长时间未操作页面  */
+    window.setInterval(testTime, 1000);
+
+</script>
 </html>

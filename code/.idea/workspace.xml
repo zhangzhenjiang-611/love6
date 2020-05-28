@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e66e5b78-9fe3-4aee-88ee-5389d3818137" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../rwzb/application/admin/view/hospital/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rwzb/application/admin/view/hospital/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rwzb/application/admin/view/hospital/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rwzb/application/common/validate/Hospital.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/Application/Common/Common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/Application/Common/Common/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/Application/Home/Controller/IndexController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/Application/Home/Controller/IndexController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp3/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/../tp3/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp51/application/index/controller/See.php" beforeDir="false" afterPath="$PROJECT_DIR$/../tp51/application/index/controller/See.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp51/application/index/model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../tp51/application/index/model/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp51/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tp51/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tp51/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../tp51/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Common/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Conf/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Conf/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Controller/ArticleController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Controller/ArticleController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Controller/BaseController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Controller/BaseController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Controller/IndexController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Controller/IndexController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Controller/LoginController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Controller/LoginController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/Controller/RbacController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/Controller/RbacController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Admin/View/Article/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Admin/View/Article/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Common/Conf/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Common/Conf/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/Application/Runtime/Cache/Admin/7a4184ffe8f804b12b2e7f8851dd8f7d.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/Application/Runtime/Cache/Admin/7a4184ffe8f804b12b2e7f8851dd8f7d.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/ThinkPHP/Common/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/ThinkPHP/Common/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/ThinkPHP/Library/Org/Util/Rbac.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/ThinkPHP/Library/Org/Util/Rbac.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wish/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/../wish/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>userL</find>
+      <find>userLi</find>
+      <find>access</find>
+      <find>addNode</find>
+      <find>AccessDecision</find>
+      <find>new</find>
+      <find>deptsta</find>
+      <find>datas</find>
+      <find>datast</find>
+      <find>regStatistics</find>
+      <find>left</find>
+      <find>print_r</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1cW9qNCFjbiAYVyDlC5SxClY6pQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="getRecordAccessList&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e66e5b78-9fe3-4aee-88ee-5389d3818137" name="Default" comment="" />
+      <created>1589261929271</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589261929271</updated>
+      <workItem from="1589261930386" duration="13064000" />
+      <workItem from="1589340365149" duration="23161000" />
+      <workItem from="1589380826522" duration="183000" />
+      <workItem from="1589417384375" duration="15804000" />
+      <workItem from="1589447097049" duration="20000" />
+      <workItem from="1589717743708" duration="73000" />
+      <workItem from="1590133412433" duration="18000" />
+      <workItem from="1590633672850" duration="717000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

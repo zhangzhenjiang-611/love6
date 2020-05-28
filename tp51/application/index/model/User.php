@@ -14,11 +14,43 @@ use think\model\concern\SoftDelete;
 
 class User extends Model
 {
+    //关联模型
+    public function profile() {
+        /*
+         * 一对一
+         * 1 附表关联模型
+         * 2 附表外键
+         * 3 主表主键*/
+        return $this->hasOne('Profile','user_id','id');
+
+        /*
+         * 一对多
+         * */
+       // return $this->hasMany('Profile','user_id','id');
+    }
+
+
+    //多对多
+    public function roles() {
+        return $this->belongsToMany('Role','Access');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     //protected $pk = 'loginip'; //设置主键
 
   //  protected $table = 'hd_role'; //设置其他表
     //引入trait 模型软删除
-    use SoftDelete;
+    /*use SoftDelete;
     protected $deleteTime = 'delete_time';
     //开启自动时间戳
     protected $autoWriteTimestamp =  'datetime';
@@ -108,6 +140,6 @@ class User extends Model
 
     public function scopeNum($query,$value) {
         $query->where('num','>',$value);
-    }
+    }*/
 
 }

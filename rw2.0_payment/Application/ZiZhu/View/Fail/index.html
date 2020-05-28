@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/fail/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/fail/css/index.css" />
+<script language="javascript" src="__PUBLIC__/fail/js/jquery-1.9.1.js" ></script> 
+<script language="javascript" src="__PUBLIC__/fail/js/ServerClock.js" ></script>  
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/fail/js/my.js"></script>
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)
+{
+    var myDate = this;
+    var str = myDate.toLocaleDateString();
+    if (showWeek)  
+    {
+        var Week = ['日','一','二','三','四','五','六'];
+        str += ' 星期' + Week[myDate.getDay()];
+    }
+    return str;
+}
+</SCRIPT>
+<script>
+
+	
+window.onload = function () {
+      //自助缴费选择微信支付
+	$(".tuichu").on("click",function(){
+		 window.external.closeWindow();
+	});
+ 	   
+    }
+
+</script>
+<style type="text/css">
+</style>
+<title>自助程序</title>
+</head>
+
+<body>
+
+<div class="main_body">
+    <div style="width:70px; height:70px;float:left;" id="close"></div>
+	<div id="downcount" style="display:none;"></div>
+	<div id="show_times"></div>
+    <div class="main_left_1">
+	    <div class="tuichu"></div>
+    </div> 
+</div>
+
+</body>
+</html>

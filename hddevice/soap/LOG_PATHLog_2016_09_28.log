@@ -1,0 +1,318 @@
+[2016-09-28 20:25:23] 登录传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00082','1','172.168.0.241','医生','0107020','0','2016-09-28 20:25:23')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:25:41] 登录传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00137','2','172.168.0.241','医生','0107020','0','2016-09-28 20:25:41')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:29:15] 下线传递参数 - 医生编号：00082 执行SQL：delete from client_uid where uid='00082' and room_id='1' and dept='0107020' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:29:24] 登录传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00082','1','172.168.0.241','医生','0107020','0','2016-09-28 20:29:24')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:29:41] 下线传递参数 - 医生编号：00082 执行SQL：delete from client_uid where uid='00082' and room_id='1' and dept='0107020' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:30:30] 下线传递参数 - 医生编号：00082 执行SQL：delete from client_uid where uid='00082' and room_id='1' and dept='0107020' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:30:32] 登录传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00082','1','172.168.0.241','医生','0107020','0','2016-09-28 20:30:32')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:31:15] 下线传递参数 - 医生编号：00082 执行SQL：delete from client_uid where uid='00082' and room_id='1' and dept='0107020' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:31:23] 登录传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00082','1','172.168.0.241','医生','0107020','0','2016-09-28 20:31:23')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:35:58] 下线传递参数 - 医生编号：00137 执行SQL：delete from client_uid where uid='00137' and room_id='2' and dept='0107020' and expert=0
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:36:18] 登录传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00082','1','172.168.0.241','医生','0107020','0','2016-09-28 20:36:18')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:36:29] 登录传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+登录成功SQL：insert into client_uid (uid,room_id,ip,login_type,dept,expert,login_time) values ('00137','2','172.168.0.241','医生','0107020','0','2016-09-28 20:36:29')
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:47:09] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:47:09] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 20:47:09] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1109200176006'
+[2016-09-28 20:47:09] 呼叫内容：请内分泌科门诊,1号吉秀飞,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:47:57] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:47:57] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 20:47:57] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='11081622330011'
+[2016-09-28 20:47:57] 呼叫内容：请内分泌科门诊,2号李战平,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:50:17] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:50:17] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 20:50:17] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1109070020005'
+[2016-09-28 20:50:17] 呼叫内容：请内分泌科门诊,3号白帆,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:53:12] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:53:22] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:54:05] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 20:54:47] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:00:39] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:00:49] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:00:51] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:00:51] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:44:47] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:44:47] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 21:44:47] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1601040335009'
+[2016-09-28 21:44:47] 呼叫内容：请内分泌科门诊,4号孙淑敏,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:50:09] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:50:09] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 21:50:09] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='11090811910012'
+[2016-09-28 21:50:09] 呼叫内容：请内分泌科门诊,6号于东艳,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:51:20] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:51:58] 
+重呼参数--房间编号:1 医生编号:00082 科室编号:0107020是否专家:0
+执行SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and status=1 order by call_time desc
+ -------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:51:58] 呼叫内容：请内分泌科门诊3号,白帆,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:53:39] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:53:39] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:56:24] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 21:57:08] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:18:22] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:18:22] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:18:22] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11083014190015'
+[2016-09-28 22:18:22] 呼叫内容：请内分泌科门诊,号,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:19:11] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:19:11] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:19:11] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11090806470014'
+[2016-09-28 22:19:11] 呼叫内容：请内分泌科门诊,8号蒋树一,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:22:29] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:22:29] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:22:29] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11082415300011'
+[2016-09-28 22:22:29] 呼叫内容：请内分泌科门诊,号,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:23:07] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:23:07] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:23:07] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1108291462007'
+[2016-09-28 22:23:07] 呼叫内容：请内分泌科门诊,29号张桂荣,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:27:31] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:27:31] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:27:31] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11090912510012'
+[2016-09-28 22:27:31] 呼叫内容：请内分泌科门诊,31号莫宝文,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:28:38] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:28:38] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:28:38] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='0000871896001'
+[2016-09-28 22:28:38] 呼叫内容：请内分泌科门诊,40号滕淑珍,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:31:54] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:31:54] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:31:54] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11090812680015'
+[2016-09-28 22:31:54] 呼叫内容：请内分泌科门诊,44号赵淑英,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:40:33] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:40:33] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:40:33] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1109261296008'
+[2016-09-28 22:40:33] 呼叫内容：请内分泌科门诊,47号张兴海,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:42:53] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:42:53] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:42:53] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1205220265009'
+[2016-09-28 22:42:53] 呼叫内容：请内分泌科门诊,7号孙淑焕,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:44:07] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:44:07] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:44:07] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1108301678005'
+[2016-09-28 22:44:07] 呼叫内容：请内分泌科门诊,60号白书通,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:44:45] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:44:45] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:44:45] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1108301678005'
+[2016-09-28 22:44:45] 呼叫内容：请内分泌科门诊,67号季美娟,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:45:39] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:45:39] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:45:39] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1403050303007'
+[2016-09-28 22:45:39] 呼叫内容：请内分泌科门诊,68号刘桢伟,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:51:53] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:51:53] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:51:53] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1403050303007'
+[2016-09-28 22:51:53] 呼叫内容：请内分泌科门诊,66号殷建军,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:52:34] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:52:34] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:52:34] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1403050303007'
+[2016-09-28 22:52:34] 呼叫内容：请内分泌科门诊,41号邱瑞,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:53:08] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:53:08] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:53:08] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='1403050303007'
+[2016-09-28 22:53:08] 呼叫内容：请内分泌科门诊,39号王文祝,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:53:25] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:53:25] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:53:25] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11082419080011'
+[2016-09-28 22:53:25] 呼叫内容：请内分泌科门诊,58号殷智勤,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:56:30] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:56:30] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:56:30] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='11081622330011'
+[2016-09-28 22:56:30] 呼叫内容：请内分泌科门诊,3号白帆,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:56:52] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 22:56:52] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 22:56:52] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1109070020005'
+[2016-09-28 22:56:52] 呼叫内容：请内分泌科门诊,4号孙淑敏,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:30:14] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:30:14] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:30:14] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='11090811910012'
+[2016-09-28 23:30:14] 呼叫内容：请内分泌科门诊,2号李战平,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:31:12] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:31:12] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:31:12] 抓取患者SQL2：update register_assign set room='2',fp_doctor_code='00137',fp_doctor_name='陈芳' where reg_id='11083014190015'
+[2016-09-28 23:31:12] 呼叫内容：请内分泌科门诊,7号孙淑焕,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:31:33] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:31:33] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:31:33] 呼叫内容：请内分泌科门诊,8号蒋树一,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:32:13] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:32:13] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:32:13] 呼叫内容：请内分泌科门诊,10号彭贵荣,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:37:21] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:37:21] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:37:21] 呼叫内容：请内分泌科门诊,11号孟根福,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:40:45] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:40:45] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:40:45] 呼叫内容：请内分泌科门诊,12号徐静,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:43:16] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:43:16] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:43:16] 呼叫内容：请内分泌科门诊,13号冯德福,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:44:26] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:44:26] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:44:26] 呼叫内容：请内分泌科门诊,14号李秀荣,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:47:29] 
+重呼参数--房间编号:2 医生编号:00137 科室编号:0107020是否专家:0
+执行SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and status=1 order by call_time desc
+ -------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:47:29] 呼叫内容：请内分泌科门诊13号,冯德福,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:47:36] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:47:36] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:47:36] 呼叫内容：请内分泌科门诊,14号李秀荣,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:51:28] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:51:28] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:51:28] 抓取患者SQL2：update register_assign set room='1',fp_doctor_code='00082',fp_doctor_name='夏雪培' where reg_id='1205170230004'
+[2016-09-28 23:51:28] 呼叫内容：请内分泌科门诊,6号于东艳,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:53:20] 顺呼传入参数 -- 房间号:2 医生编码:00137 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00137' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:53:20] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:53:20] 呼叫内容：请内分泌科门诊,15号谷嘉瑞,到第6诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:55:19] 顺呼传入参数 -- 房间号:1 医生编码:00082 科室编码:0107020 是否专家:0
+顺呼成功SQL：select * from register_assign where dept_code='0107020' and reg_type='普通' and fp_doctor_code='00082' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) and withdraw_flag='0' and baodao=1 order by noon_flag,wait_no desc,weight asc
+---------------------------------------------------------------------------------------------------------------------
+[2016-09-28 23:55:19] 抓取患者SQL：select * from register_assign where fp_doctor_code='' and withdraw_flag='0' and  dept_code='0107020' and baodao=1 and reg_type='普通' and ((status=5 and is_jz=1) or (status=0 and is_jz=0)) order by noon_flag,wait_no desc,weight asc limit 1第一1第二0
+[2016-09-28 23:55:19] 呼叫内容：请内分泌科门诊,16号王薇茵,到第2诊室就诊||s02
+   ---------------------------------------------------------------------------------------------------------------------

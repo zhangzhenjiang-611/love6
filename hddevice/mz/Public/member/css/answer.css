@@ -1,0 +1,217 @@
+@charset "utf-8";
+.line:after, .clearfix:after {
+  clear: both;
+  content: " ";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size:14px;
+  line-height:26px;
+}
+.f-12, a.f-12 {
+  font-size: 12px;
+}
+.f-blue, a.f-blue {
+  color: #2D64B3;
+  cursor: pointer;
+}
+.inline-block {
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+}
+.qb-section {
+  background: url("../images/ask_205.png") repeat-y scroll right 0 rgba(0, 0, 0, 0);
+  border: 1px solid #E2E2E2;
+  margin:auto;
+  margin-top: 10px;
+  width:1024px;
+  margin-bottom:18px;
+  
+}
+.qb-section .qb-content {
+  background-color: #F9F9F9;
+  width: 735px;
+}
+.addons{width:667px;}
+.wgt-ask {
+  background-color: #FFFFFF;
+  background-image: url("../images/ask_206.png");
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #F1F1F1;
+  padding: 20px 30px 10px;
+}
+
+.wgt-ask h1 {
+  word-break: break-all;
+  margin-bottom:8px;
+}
+.mb-5 {
+  margin-bottom: 5px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+h1, .h1 {
+  font: 700 16px/26px "Microsoft YaHei",SimHei,arial;
+}
+#ask-info{padding-left:30px;}
+.user-name{color:#2D6BBE}
+.wgt-ask h1 .i-status-being {
+  margin-top: 2px;
+  background:url(http://cdn.iknow.bdimg.com/static/question/pkg/aio_z_257bce8.png) -239px -457px no-repeat;
+  display: inline-block;
+  height: 21px;
+  vertical-align: middle;
+  width: 21px;
+}
+.wgt-ask h1 .ask-title {
+  display: inline-block;
+  overflow: hidden;
+  width: 595px;
+}
+.f-aid, a.f-aid {
+  color: #999999;
+  font-size: 12px;
+}
+.wgt-ask .ask-time {
+  text-align: right;
+  width: 165px;
+}
+.grid-r {
+  display: inline;
+  float: right;
+}
+.wgt-ask .f-pipe {
+  margin: 0 7px;
+  color:#ccc;
+}
+.wgt-ask .guide-tip {
+  background: none repeat scroll 0 0 #FEFBED;
+  border: 1px solid #EFEED7;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+  padding: 10px 25px;
+  line-height:24px;
+}
+
+.i-arrow-up {
+  display: inline-block;
+  height: 16px;
+  vertical-align: middle;
+  width: 16px;
+}
+.btn-32-green, a.btn-32-green {
+  background: none repeat scroll 0 0 #45AD00;
+  border: 1px solid #45AD00;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Microsoft Yahei";
+  font-size: 15px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 15px;
+  text-align: center;
+  margin-top:10px;
+}
+.btn-32-green:hover{ background:green;}
+.btn-32-green, a.btn-32-green, .btn-32-green:link, a.btn-32-green:link, .btn-32-green:visited, a.btn-32-green:visited {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.wgt-ask .app-and-share {
+  margin-bottom: -10px;
+  position: relative;
+  z-index: 1;
+}
+#wgt-ask .wgt-share {
+  border-top: 0 none;
+}
+.wgt-ask .app-and-share .wgt-share {
+  height: 40px;
+  padding: 2px 0 0;
+}
+
+/* 答案部分 */
+.wgt-answers {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #F1F1F1;
+  border-right: 0 none;
+  border-top: 1px solid #F1F1F1;
+  padding: 0;
+}
+.wgt-answers .hd {
+  padding: 15px 30px 0;
+}
+.wgt-answers .answer-first {
+  padding-top: 7px;
+}
+.wgt-answers .bd {
+  border-bottom: 1px dashed #CCCCCC;
+  margin: 0 30px;
+  padding: 9px 0 15px;
+}
+.f-pipe {
+  color: #CCCCCC;
+  margin: 0 10px;
+}
+.wgt-answers .content {
+  word-wrap: break-word;
+  padding-top:8px;
+}
+.btn-24-white, a.btn-24-white{
+  background-color: #FFFFFF;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #FDFDFD);
+  background-repeat: repeat-x;
+  border: 1px solid #DBDBDB;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px #F2F2F2;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 15px;
+  text-align: center;
+}
+a.btn-24-white:hover{border:1px solid #ccc;}
+.caina a{ color:#60A506; text-decoration:none;}
+.wgt-best {
+  background-color: #F1FEDD;
+  border-bottom: 1px solid #E9EEE3;
+  border-top: 1px solid #E9EEE3;
+  padding: 0 30px 6px;
+}
+pre {
+  font-size: 14px;
+  line-height: 26px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.answer-best {
+  background:url(http://cdn.iknow.bdimg.com/static/question/pkg/aio_z_763cc61.png) no-repeat -219px -74px;
+  display: inline-block;
+  height: 57px;
+  vertical-align: middle;
+  width: 41px;
+}
+.mt-20{margin-top:20px;}
+.wgt-best .answer-title {
+  margin-left: 10px;
+  margin-top: 24px;
+}
+.grid {
+  display: inline;
+  float: left;
+}
+.h2{font:700 15px/24px "Microsoft YaHei",SimHei,arial}
+

@@ -1,0 +1,35 @@
+.main_body{ width:1024px; height:768px; overflow:hidden; background:url(../img/bg4.png) no-repeat left top; position:relative;}
+/*.main_body_s{ width:1024px; height:768px; overflow:hidden; background:url(../img/bg_s.png) no-repeat left top; position:relative;}*/
+
+.btn_area{ position:absolute; left:810px; top:700px; width:435px;}
+.btn_area ul li{ list-style-type:none; width:144px; height:53px; background:url(../img/ft.png) no-repeat; float:left; color:#fff; font-size:24px; line-height:43px; text-align:center; cursor:pointer;}
+#show_times{ position:absolute; left:700px; font-size:20px; color:#333; top:65px; font-family:黑体 !important; font-weight:bold; }
+.main_left_2,.main_left_guahao{ width:930px; height:607px; background:url(../img/sbg2.png) left top no-repeat; margin-top:146px; float:left; margin-left:50px; overflow:hidden;}
+.title{width:870px; height:527px; margin-top:22px; margin-left:9px; font-size: 30px;overflow:auto;}
+.chose_room{width:859px; height:500px; margin-left:10px; margin-top:10px; padding:20px; position:relative;}
+.chose_room h5{font-size:40px; display:block; width:95%; text-align:center; font-weight:normal; letter-spacing:5px;margin-top:2px;}
+.room_list ul{margin-left:180px;}
+#sub_list{margin-top:30px}
+#sub_list span{background:url(../img/ks.png) no-repeat;width:175px;height:55px;float:left;display:block;text-align:center;color:#FFF;line-height:45px;margin-left:23px;}
+.chose_unit{float:left;background:url(../img/ft.png) no-repeat;width:144px;height:53px;line-height:45px;color:#FFF;text-align:center;font-size:20px}
+#attr_list{background:url(../img/ksdh.png) no-repeat;width:850px;height:55px;margin-left:-18px;text-align:center;}
+#attr_list li{float:left;background:;width:70px;height:50px;line-height:55px;color:white;text-align:center;margin-left:34px;font-family:ËÎÌå;font-size:20px;color:#FFF}
+#attr_list li.current{background:url(../img/cur.png) no-repeat;width:120px;height:65px;line-height:70px;font-size:30px;margin-top:-8px;color:#FFF}
+.chose_room h4{ display:block; text-align:center; width:95%; margin-left:25px; font-size:55px; color:red; font-family:Î¢ÈíÑÅºÚ !important; margin-top:100px;}
+#show{position:absolute; left:590px; top:38px; font-weight:bold; color:red; font-size:42px;}
+.zhuanjia{width:120px;height:54px;list-style-type:none;float: left;margin-left:10px;margin-top:25px;font-size: 30px;color: #FFFFE9;line-height: 54px;text-align:center;font-family: 微软雅黑;}
+.zhuanjia_list{background:url(../img/zhuanjia_list.png) no-repeat;width:251px;height:85px;float: left;margin-top: ;margin-left: 170px;}
+.menu_left{width:290px;height:600px;margin-top: 152px;margin-left:75px;float: left;}
+.menu_right{width:550px;height:560px;float: left;margin-top: 170px;margin-left:45px;overflow:auto;font-size: 30px;color:#000000;}
+.image{margin-top: 180px;margin-left:40px;float: left;}
+
+.image img{border-radius:50%;box-shadow: 10px 10px 20px #000;}
+
+.name{font-size: 37px;margin-top: 150px;margin-left: 190px;float: left;}
+.guige{font-size: 30px;color:#000000;overflow:auto;float: left;width:600px;height:450px;margin-top: 30px;margin-left: 50px;line-height: 40px;}
+.oper{width:530px;height:600px;float: left;margin-top: 125px;margin-left: 50px;}
+.oper .list{width:154px;height:70px;float:left;margin-left: 20px;margin-top:20px;text-align:center;font-size: 30px;}
+.table{margin-top: 130px;font-size: 20px;float: left;}
+#text{font-size: 20px;}
+.paiban_image{margin-top: 150px;margin-left:43px;overflow:auto;width:918px;height:538px;float: left;}
+.keshi{float: left;}

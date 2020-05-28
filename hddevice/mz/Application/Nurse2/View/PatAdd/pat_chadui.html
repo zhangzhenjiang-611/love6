@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>转科室</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+<script language="javascript" src="__PUBLIC__/dragsort/jquery.dragsort-0.5.2.min.js"></script>
+<script language="javascript">
+$(function(){
+	$("#list1, #list2").dragsort({ 
+		dragSelector: "div", 
+		dragBetween: true, 
+		dragEnd: saveOrder, 
+		placeHolderTemplate: "<li class='placeHolder'><div></div></li>" 
+	});   
+	$("#save").click(function(){
+			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+			var params = {"str":$("#list1SortOrder").val(),"dept_code":"<?=$dept_code?>","doctor_code":"<?=$doctor_code?>"};
+			$.ajax({
+				url:"__URL__/ajax_set_patsort",
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.success==1){
+						parent.layer.msg('插队成功',{shade: 0.3});
+						parent.layer.close(index);
+						parent.reload();
+					}
+				}						
+			})				 
+	})
+	$("#close").click(function(){
+		parent.layer.closeAll();						  
+	})
+})
+function saveOrder() {
+	var pat_code_r = "{$pinfo['pat_code']}";
+	var len = $("#list1 li."+pat_code_r+"_r").length;
+	if(len>0){
+		$("."+pat_code_r+"_l").remove();	
+	}
+	
+	var data = $("#list1 li").map(function() {
+				return $(this).data("itemid");
+	}).get();
+	$("input[name=list1SortOrder]").val(data.join("|"));
+};
+
+</script>
+<style type="text/css">
+#doclist{width:95px;float:left; margin-right:10px;}
+#change_doc{float:left;width:120px; padding-left:4px;}
+.p_main_left{width:200px;float:left; height:320px; overflow-y:auto; padding-right:30px;}
+.p_main_right{width:200px; float:left;}
+
+
+#list1, #list2 {list-style-type:none; margin:0px;}
+#list1 li, #list2 li { float:left; padding:5px; width:190px; height:20px; }
+#list1 div, #list2 div { width:190px; height:20px; border:solid 1px black; background-color:#E0E0E0; text-align:center; padding-top:2px; }
+#list2 { float:right; }
+.placeHolder div { background-color:white !important; border:dashed 1px gray !important; }
+</style>
+</head>
+<body>
+<input type="hidden" name="list1SortOrder" id="list1SortOrder" />
+<if condition="$baodao eq 1">
+<table class="table table-bordered table-hover m10">
+<thead>
+<th>就诊队列</th>
+<th>插队患者</th>
+</thead>
+<tr>
+<td><ul id="list1" class="p_main_left">
+        	<volist name='patlist' id="vo">
+            	<li data-itemid="{$vo.reg_id}" class="{$vo.reg_id}_l"><div>{$vo.reg_seq_no}{$vo.pat_name}</div></li>
+            </volist>
+        </ul></td>
+<td><ul id="list2" class="p_main_right">
+        	<li data-itemid="{$pinfo['reg_id']}" class="{$pinfo['reg_id']}_r"><div>{$pinfo['reg_seq_no']}{$pinfo['pat_name']}</div></li>
+        </ul></td>
+</tr>
+<tr>
+<td colspan="2" height="50">
+<button type="button" class="btn btn-danger " type="button" id="close" style="width:80px; margin-left:275px;float:left; margin-top:8px;">关 闭</button>
+ <button type="button" class="btn btn-primary" type="button" id="save" style="width:80px; margin-left:5px; margin-top:8px;" >确 定</button>
+</td>
+</tr>
+<else />
+<center><h1 style="margin-top:100px;">此患者没有报到</h1></center>
+</if>
+</body>
+</html>

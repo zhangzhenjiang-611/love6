@@ -1,0 +1,177 @@
+{include file="public/header" /}
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+
+        <!-- Page Sidebar -->
+        {include file="public/left" /}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-home"></i>&nbsp;医院管理
+                    </li>
+                    <li>
+                        医院添加
+                    </li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="widget radius-bordered">
+                            <div class="widget-header bordered-bottom bordered-themeprimary">
+                                <span class="widget-caption">医院添加</span>
+                            </div>
+                            <div class="widget-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="hos-name" class="col-sm-2 control-label no-padding-right">医院名称</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="hos-name" name="hos-name" placeholder="请输入医院名称" />
+                                            <p class="help-block">请输入医院名称</p>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown" style="margin-left: 100px;">
+
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">选择医院属性
+                                            <span class="caret"></span>
+                                        </button>
+                                        <select name="type" id="type">
+                                            <option>--请选择--</option>
+                                            {foreach $arritudes as $ar}
+                                            <option value="{$ar.type_id}">{$ar.attribute}</option>
+                                            {/foreach}
+                                        </select>
+
+                                    </div>
+                                    <div class="dropdown" style="margin-left: 100px;">
+
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">选择公私属性
+                                            <span class="caret"></span>
+                                        </button>
+                                        <select name="public_type" id="public_type">
+                                            <option>--请选择--</option>
+                                            {foreach $public as $pu}
+                                            <option value="{$pu.type_id}">{$pu.attribute}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+
+                                    <select name="pro" id="pro">
+                                        <option>--请选择--</option>
+                                        {foreach $region as $vo}
+                                        <option value="{$vo.code}">{$vo.name}</option>
+                                        {/foreach}
+                                    </select>
+
+
+                                    <!-- 城市 -->
+                                    <select name="city" id="city">
+                                        <option>--请选择省--</option>
+                                    </select>
+
+
+
+                                    <!-- 区县 -->
+                                    <select name="area" id="area">
+                                        <option>--请选择市--</option>
+                                    </select>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" id="cateAdd" class="btn btn-primary">添加</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+
+    </div>
+    <!-- /Page Container -->
+    <!-- Main Container -->
+
+</div>
+
+{include file="public/js" /}
+<script>
+    $(function () {
+        $('#pro').change(function(){
+            $.ajax({
+                type:"post",
+                url:"{:url('hospital/getCity')}",
+                data:'pro_id='+$('#pro').val(),
+                dataType:"json",
+                success:function(data){
+                    console.log(data);
+                    $('#city').html(data);
+                    $('#area').html('<option>--请选择市--</option>');
+                }
+            });
+        });
+
+        $('#city').change(function(){
+            $.ajax({
+                type:"post",
+                url:"{:url('hospital/getCounty')}",
+                data:'pro_id='+$('#city').val(),
+                dataType:"json",
+                success:function(data){
+                    console.log(data);
+                    $('#area').html(data);
+                }
+            });
+        });
+
+
+        $('#cateAdd').click(function () {
+            var name = $('#hos-name').val();   //医院名称
+            var type = $("#type option:selected").val();  //医院属性
+            var public_type = $("#public_type option:selected").val(); //医院公私属性
+            var pro = $("#pro option:selected").val(); //省级代码
+            var city = $("#city option:selected").val(); //市级代码
+            var area = $("#area option:selected").val(); //县区代码
+
+            $.ajax({
+                url:"{:url('admin/hospital/add')}",
+                type:'post',
+                data:{hos_name:name,type:type,public_type:public_type,pro:pro,city:city,area:area},
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg,{
+                            icon:6,
+                            time:2000
+                        },function () {
+                            location.href = data.url
+                        })
+                    } else {
+                        layer.open({
+                            title:'添加失败',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        })
+                    }
+                }
+            });
+            return false;
+        });
+    })
+</script>
+</body>
+<!--  /Body -->
+</html>

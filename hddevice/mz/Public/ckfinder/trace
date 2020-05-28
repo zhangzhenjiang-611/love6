@@ -1,0 +1,904 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta property="wb:webmaster" content="a3a9e8233665eec3" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+<script language="javascript" src="__PUBLIC__/Js/swfobject.js"></script>
+<script language="javascript" src="__PUBLIC__/Js/news_gd.js"></script>
+<script src="__PUBLIC__/Home/js/jquery.KinSlideshow-1.2.1.min.js" type="text/javascript"></script>
+
+<script language="javascript">
+$(function(){
+	$(".p_3_right_bottom .con ul li").hover(function(){
+		var id = $(this).attr("param");
+		var actionID = "#ext"+id;
+		$(".p_3_right_bottom .con ul li").removeClass("extend");
+		$(this).addClass("extend");
+		$(".ext").hide();
+		$(actionID).css({"display":"block"});
+		$(this).find(".num").addClass("num2");
+		$(this).find(".tits").addClass("tits2")
+	},function(){
+		$(".p_3_right_bottom .con ul li span.num").removeClass("num2");
+		$(".p_3_right_bottom .con ul li span.tits").removeClass("tits2");
+	})	 
+	$(".gushi li a").hover(function(){
+		$(".gushi li").removeClass("extend");
+		$(".gushi li div").css({"display":"none"});
+		//$(this).parent().removeClass("nor");
+		$(this).parent().addClass("extend");
+		
+		$(this).next().css({"display":"block"})
+	},function(){
+		//$(this).parent().removeClass("extend");
+	})
+})
+</script>
+<title>{$sysinfo['cfg_web_name']}</title>
+</head>
+
+<body>
+<taglib name='ali' />
+<div class="topbar">
+	<div class="w1024">
+        <span class="shoucang fr">
+            <a href="javascript:;" onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.webjx.com');">设为首页</a> | 
+            <a href="javascript:window.external.addFavorite('http://www.alinongye.cn','阿里农业网');">加入收藏</a>
+        </span>
+        <span class="welcome fr">阿里农业欢迎您</span>
+    </div>
+</div>
+<div class="w1024">
+<div class="logo_area">
+	<div class="logo"><a href="/index.php" title="阿里农业网"></a></div>
+    <div class="login">
+    	<if condition="session('mid') eq ''">      
+            <span class="s1"><a href="{:U('Member/Public/register')}" class="orange" target="_blank">开通会员</a> 尊享特权</span>
+            <span class="sprite"></span>
+            <span class="s2"><a href="{:U('Member/Public/register')}" class="orange" target="_blank">手机号码注册</a></span>
+            <span class="s3"><a href="{:U('Member/Public/register')}" target="_blank">邮箱注册</a></span>
+            <span class="sprite"></span>
+            <span class="s4"><a href="{:U('Member/Public/login')}" target="_blank">登录</a></span>
+        <else />
+        	<?php
+            echo "<div class='fr'>您好，".session("nickname")."，欢迎登录 <a href='".U('Member/Public/logout')."'>退出</a></div>";
+            ?>
+        </if>
+    </div>
+    <div class="search">
+    	<form action="#" method="post">
+        	<input type="text" class="txt" value="输入您要查找的内容" onClick="javascript:this.value=='输入您要查找的内容'?this.value='':this.value=this.value"/>
+            <input type="submit" class="submit" value="" title="搜索" />
+        </form>
+    </div>
+</div>
+<!----*********--->
+<div class="menu">
+	<div class="left">
+    	<ul>
+        	<li><a href="/Channel/index/id/1" target="_blank">新闻中心</a></li>
+            <li><a href="/Channel/index/id/2" target="_blank">深度评测</a></li>
+        </ul>
+    </div>
+    <div class="mid">
+    	<ul>
+        	<li class="txt"><a href="/Channel/index/id/3" target="_blank">解决方案</a></li>
+            <li class="jia"><a href="#" target="_blank"></a></li>
+            <li class="txt"><a href="/Channel/index/id/4" target="_blank">阿里种业</a></li>
+            <li class="txt"><a href="/Channel/index/id/5" target="_blank">阿里农药</a></li>
+            <li class="txt"><a href="/Channel/index/id/6" target="_blank">阿里肥料</a></li>
+            <li class="txt"><a href="/Channel/index/id/7" target="_blank">阿里农机</a></li>
+            <li class="jia"><a href="#" target="_blank"></a></li>
+            <li class="txt"><a href="/Channel/index/id/47" target="_blank">御农会</a></li>
+        </ul>
+    </div>
+    <div class="right">
+    	<ul>
+        	<li><a href="/Channel/index/id/37" title="" target="_blank">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</a></li>
+            <li><a href="/Channel/index/id/38" title="" target="_blank">智&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;库</a></li>
+            <li><a href="/Channel/index/id/36" title="" target="_blank">视&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;频</a></li>
+            <li><a href="/Channel/index/id/39" title="" target="_blank">种植大户</a></li>
+            <li><a href="/Channel/index/id/40" title="" target="_blank">产&nbsp;品&nbsp;库</a></li>
+            <li><a href="/Channel/index/id/48" title="" target="_blank">品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌</a></li>
+        </ul>
+    </div>
+    
+</div>
+<!---***********--->
+<div class="top_news">
+	<ul>
+    	<ali:arclist row="3" flag='a' titlelen='14' infolen='42' order='weight asc,pubdate desc'> 
+        <li>
+        	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="107" height="90" alt="[field:title]"/></a>
+            <a href="[field:arcurl]" target="_blank" class="tit" title="[field:title]">[field:title_short]</a>
+            <p>
+            [field:info]<a href="[field:arcurl]" target="_blank" class="more">[详细]</a>
+            </p>
+        </li>
+      </ali:arclist>
+        
+    </ul>
+</div>
+<h6 class="clear"></h6>
+<div class="index_ad_one">
+	<a href="http://www.alinongye.cn/special/seconddahui" target="_blank" title="第二届中国品牌农资大会暨种植大户联谊会"><img src="/Uploads/ad/ad20131208.jpg" width="1024" height="90" alt="第二届中国品牌农资大会暨种植大户联谊会"/></a>
+</div>
+<!--*******-->
+<div class="index_left">
+	<div class="p_1">
+    <div class="p_1_left">
+    	<div class="flash">
+        <div id="FlashFocusImg"></div>
+<script type="text/javascript" language="javascript">
+linkarr = new Array();
+picarr = new Array();
+textarr = new Array();
+var focus_width=420;
+var focus_height=310 ;
+var text_height=30;
+
+var bgcolor="#E4E4E4";
+var swf_height = focus_height+text_height
+var curhref=document.location.href;
+
+						
+var pics = "";
+var links = "";
+var texts = "";
+//这里设置调用标记
+<ali:arclist flag='f' row='5' field='aid,litpic,title' titlelen='18' suffix='0' typeid='1'>	
+linkarr[[field:autoindex]] = "[field:arcurl]";
+picarr[[field:autoindex]]  = "[field:litpic]";
+textarr[[field:autoindex]] = "[field:title]";
+</ali:arclist>
+for(i=1;i<picarr.length;i++){
+  if(pics=="") pics = picarr[i];
+  else pics += "|"+picarr[i];
+}
+for(i=1;i<linkarr.length;i++){
+  if(links=="") links = linkarr[i];
+  else links += "|"+linkarr[i];
+}
+for(i=1;i<textarr.length;i++){
+  if(texts=="") texts = textarr[i];
+  else texts += "|"+textarr[i];
+}
+var FocusFlash = new sinaFlash("__PUBLIC__/Js/focus1.swf", "focusflash", focus_width, swf_height, "7", bgcolor, false, "High");
+FocusFlash.addParam("allowScriptAccess", "sameDomain");
+FocusFlash.addParam("menu", "false");
+FocusFlash.addParam("wmode", "opaque");
+
+FocusFlash.addVariable("pics", pics);
+FocusFlash.addVariable("links", links);
+FocusFlash.addVariable("texts", texts);
+FocusFlash.addVariable("borderwidth", focus_width);
+FocusFlash.addVariable("borderheight", focus_height);
+FocusFlash.addVariable("textheight", text_height);
+FocusFlash.addVariable("curhref", curhref);
+FocusFlash.write("FlashFocusImg");
+</script>
+
+        
+        </div>
+        <div class="imgnews">
+        	<ul>
+            	<ali:arclist typeid='1' flag='p,c' limit='0,2' noflag='a' field='aid,litpic,description,title' titlelen='10' infolen='26'>            
+                    <li>
+                        <a href="[field:arcurl]" target="_blank"><img src="[field:litpic]" width="202" height="129" /></a>
+                        <a href="[field:arcurl]" class="tit" target="_blank">[field:title_short]</a>
+                        <p>[field:info]<a href="[field:arcurl]" class="more">[详细]</a></p>
+                    </li>
+                </ali:arclist>
+            </ul>
+        </div>
+    </div>
+    <div class="p_1_right">
+    	<div class="comtit">
+        	<span class="txt"></span>
+            <span class="more"><ali:type typeid='8'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></span>
+        </div>
+		<ali:arclist flag='h' limit='0,2' field='aid,title,description' titlelen='14' order='weight,pubdate desc' infolen='50' suffix='0'>
+            <div class="news_box">
+                <a href="[field:arcurl]" class="t" title="[field:title]" target="_blank">[field:title_short]</a>
+                <p>[field:info]...<a href="[field:arcurl]" target="_blank">[详细]</a></p>
+            </div>
+        </ali:arclist>
+         <div class="news_box2">
+            <ul>
+            	<ali:arclist typeid='8' limit='2,3' field='aid,title' titlelen='30' order='aid desc' flag='h'  suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]">· [field:title_short]</a></li>
+               </ali:arclist>     
+            </ul>
+        </div>
+        <div class="news_box3">
+        	<ul>
+            	<ali:arclist row='1' typeid='8' titlelen='20' suffix='0' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">要闻</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+               <ali:arclist row='1' typeid='11' titlelen='20' suffix='0' field='aid,title,typeid' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">种业</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+                <ali:arclist row='1' typeid='12' titlelen='20' suffix='0' field='aid,title,typeid' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">农药</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+                <ali:arclist row='1' typeid='10' titlelen='20' suffix='0' field='aid,title,typeid' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">肥料</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+                <ali:arclist row='1' typeid='9' titlelen='25' suffix='0' field='aid,title,typeid' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">农机</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+                <ali:arclist row='1' typeid='13' titlelen='20' suffix='0' field='aid,title,typeid' noflag='c,a,h'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">展会</a>｜<a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+               
+            </ul>
+        </div>
+        <div class="news_box4">
+        	<ul>
+            	<ali:arclist typeid='1' flag='p,c' noflag='a' field='aid,litpic,title' titlelen='8' limit='2,3' suffix='0'> 
+                    <li><a href="[field:arcurl]"><img src="[field:litpic]" width="123" height="73" alt="[field:title]" /></a>
+                        <a href="[field:arcurl]" target="_blank" title="[field:title]" class="t">[field:title_short]</a>
+                    </li>
+               </ali:arclist>
+               
+            </ul>
+        </div>
+    </div> 
+</div><!--/p_1-->
+<div class="p_2">
+	<div class="comtit">
+        <span class="txt txt2"></span>
+        <span class="more"><a href="/Channel/index/id/2">更多</a></span>
+    </div>
+    <div class="p_2_left">
+    	<div class="flash">
+          <script type="text/javascript">
+			$(function(){
+				$("#KinSlideshow1").KinSlideshow({
+						moveStyle:"right",
+						titleBar:{titleBar_height:50,titleBar_bgColor:"#000",titleBar_alpha:0.5},
+						titleFont:{TitleFont_size:16, TitleFont_family:"微软雅黑", TitleFont_color:"#FFFFFF",TitleFont_weight:"bold"},
+						btn:{btn_bgColor:"#FFFFFF",btn_bgHoverColor:"#db0000",btn_fontColor:"#000000",btn_fontHoverColor:"#FFFFFF",btn_borderColor:"#4d4d4d",btn_borderHoverColor:"#700000",btn_borderWidth:1}
+				});
+			})
+				</script>
+			
+			<div id="KinSlideshow1" style="visibility:hidden;" >
+				<ali:arclist flag='c' row='5' field='aid,litpic,title' titlelen='19' suffix='0' typeid='2'>	
+			  <a href="[field:arcurl]" target="_blank" title="[field:title]"><img style="border: 0px none;" src="[field:litpic]" alt="[field:title_short]" height="285" width="420"></a>
+			  </ali:arclist>
+			</div>
+        </div>
+        <div class="viewbox">
+        	<div class="titbar"><span>深度评测</span></div>
+            <ul>
+            	<ali:arclist typeid='2' flag='p' limit='0,2' field='aid,litpic,description,title' titlelen='10' infolen='26'>            
+                    <li>
+                        <a href="[field:arcurl]"><img src="[field:litpic]" width="202" height="129" /></a>
+                        <a href="[field:arcurl]" class="tit">[field:title_short]</a>
+                        <p>[field:info]<a href="[field:arcurl]" class="more">[详细]</a></p>
+                    </li>
+                </ali:arclist>
+            </ul>
+        </div>
+    </div>
+    <div class="p_2_right">
+    	<div class="titbar"><span>评测中心</span></div>
+        <div class="ku_box">
+        	<ali:arclist typeid='14' limit='0,1' field='aid,title,typeid'>
+        	<ul class="top">
+            	<li><a href="[field:typeurl]" class="ku_fenlei" target="_blank">种业</a><a class="ku_imp" href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+            </ul>
+            </ali:arclist>
+            <ul class="bottom">
+            	<ali:arclist typeid='14' limit='1,3' field='aid,title,typeid'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">评测</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+               </ali:arclist>
+            </ul>
+        </div>
+        
+         <div class="ku_box">
+        	<ali:arclist typeid='15' limit='0,1' field='aid,title,typeid'>
+        	<ul class="top">
+            	<li><a href="[field:typeurl]" class="ku_fenlei ku_fenlei2">农药</a><a class="ku_imp" href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+            </ul>
+            </ali:arclist>
+            <ul class="bottom">
+            	<ali:arclist typeid='15' limit='1,3' field='aid,title,typeid'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">评测</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+               </ali:arclist>
+            </ul>
+        </div>
+        
+         <div class="ku_box">
+        	<ali:arclist typeid='16' limit='0,1' field='aid,title,typeid'>
+        	<ul class="top">
+            	<li><a href="[field:typeurl]" class="ku_fenlei ku_fenlei3" target="_blank">肥料</a><a class="ku_imp" href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+            </ul>
+            </ali:arclist>
+            <ul class="bottom">
+            	<ali:arclist typeid='16' limit='1,3' field='aid,title,typeid'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">评测</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+               </ali:arclist>
+            </ul>
+        </div>
+        
+         <div class="ku_box">
+        	<ali:arclist typeid='17' limit='0,1' field='aid,title,typeid'>
+        	<ul class="top">
+            	<li><a href="[field:typeurl]" class="ku_fenlei ku_fenlei4" target="_blank">农机</a><a class="ku_imp" href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+            </ul>
+            </ali:arclist>
+            <ul class="bottom">
+            	<ali:arclist typeid='17' limit='1,3' field='aid,title,typeid'>
+            	<li><a href="[field:typeurl]" target="_blank" title="" class="channel">评测</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></li>
+               </ali:arclist>
+            </ul>
+        </div>
+    </div>
+</div><!--/p_2-->
+<div class="p_3">
+	<div class="comtit">
+        <span class="txt txt3"></span>
+        <span class="tip">专业问题，专业解决</span>
+        <span class="more"><ali:type typeid='3'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></span>
+    </div>
+    <div class="bgs">
+    	<div class="news">
+        	<ali:arclist typeid='3' row='1' flag='c' field='aid,title,description' titlelen='16' infolen='37' suffix='0'>
+        	<h3><a href="[field:arcurl]" title="[field:title]" target="_blank">[field:title]</a></h3>
+            <p>[field:info]<a href="[field:arcurl]">详细</a></p>
+            </ali:arclist>
+        </div>
+    </div>
+    <div class="p_3_left">
+    	<dl class="p_3_left_box">
+        	<dt><span>全程解决方案</span></dt>
+            <dd>
+            	<img src="__PUBLIC__/Home/images/fa_01.jpg" width="253" height="51" alt="" />
+            	<ul>
+                	<ali:arclist typeid='18' row='4' field='aid,title' titlelen='17' suffix='0'>
+                    <li><a href="[field:arcurl]" target="_blank" title="[field:title]">· [field:title_short]</a></li>
+                    </ali:arclist>
+                    
+                </ul>
+            </dd>
+        </dl>
+        <dl class="p_3_left_box">
+        	<dt><span>作物解决方案</span></dt>
+            <dd>
+            	<img src="__PUBLIC__/Home/images/fa_02.jpg" width="253" height="51" alt="" />
+            	<ul>
+                	<ali:arclist typeid='20' row='4' field='aid,title' titlelen='17' suffix='0'>
+                    <li><a href="[field:arcurl]" target="_blank" title="[field:title]">· [field:title_short]</a></li>
+                    </ali:arclist>
+                </ul>
+            </dd>
+        </dl>
+        <dl class="p_3_left_box">
+        	<dt><span>病虫害解决方案</span></dt>
+            <dd>
+            	<img src="__PUBLIC__/Home/images/fa_03.jpg" width="253" height="51" alt="" />
+            	<ul>
+                	<ali:arclist typeid='19' row='4' field='aid,title' titlelen='17' suffix='0'>
+                    <li><a href="[field:arcurl]" target="_blank" title="[field:title]">· [field:title_short]</a></li>
+                    </ali:arclist>
+                </ul>
+            </dd>
+        </dl>
+        <dl class="p_3_left_box">
+        	<dt><span>全面解决方案</span></dt>
+            <dd>
+            	<img src="__PUBLIC__/Home/images/fa_04.jpg" width="253" height="51" alt="" />
+            	<ul>
+                	<ali:arclist typeid='21' row='4' field='aid,title' titlelen='17' suffix='0'>
+                    <li><a href="[field:arcurl]" target="_blank" title="[field:title]">· [field:title_short]</a></li>
+                    </ali:arclist>
+                </ul>
+            </dd>
+        </dl>
+    </div><!--/p_3_left-->
+    <div class="p_3_right">
+    	<div class="p_3_right_top">
+        	<span class="question"><a href="#">水稻收割机如何检修？</a></span>
+            <span class="answer">传动胶带疲劳拉长或有其他损
+坏的，一律更换......<a href="#">详细</a></span>
+			<span class="answerser">回答者：xxxx</span>
+            <ul>
+            	<li><a href="#" target="_blank" title="">夏秋棚菜管理应如何施肥？</a></li>
+                <li><a href="#" target="_blank" title="">如何使瓜类蔬菜种子发芽快而齐？</a></li>
+            </ul>
+            <span class="barbottom">
+            	<a href="{:U('ask')}" class="btn_ask">我要提问</a>
+                <a href="{:U('ask')}" class="btn_ask">详细解答</a>
+            </span>
+        </div>
+        <div class="p_3_right_bottom">
+        	<div class="titbar">案例中心</div>
+            <div class="con">
+            	<ul>
+                	<ali:arclist typeid='22' row='4' field='aid,title,litpic,description' titlelen='15' infolen='25' suffix='0'>
+                        <li class="normal <if condition='[field:autoindex] eq 1'>extend</if>" param="[field:aid]">
+                       
+                            <span class="num <if condition='[field:autoindex] eq 1'>num2</if>">[field:autoindex]</span>
+                            <span class="tits <if condition='[field:autoindex] eq 1'>tits2</if>"><a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title]</a></span>
+                            <span class="ext" id="ext[field:aid]" style="<if condition='[field:autoindex] eq 1'>display:block</if>">
+                                <a href="[field:arcurl]" class="imgs" target="_blank" title="[field:title]"><img src="[field:litpic]" width="72" height="57" alt="[field:titel]" /></a>
+                                <p>
+                                    [field:info]...<a href="#">详细</a>
+                                </p>
+                            </span>
+                        </li>
+                     </ali:arclist>
+                </ul>
+            </div>
+        </div>
+    </div><!--/p_3_right-->
+</div><!--/p_3-->
+<div class="p_4">
+	<div class="comtit">
+        <span class="txt txt4"></span>
+        <span class="more"><ali:type typeid='4'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></span>
+    </div>
+    <div class="p_4_left">
+    	<div class="p_4_left_titbar"><span>品牌种业</span></div>
+        <div class="p_4_left_box">
+        	<ul class="one">
+            	<li class="o">品牌企业</li>
+                <li class="t"><ali:type typeid='23'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></li>
+            </ul>
+            <ul class="two">
+            	<ali:arclist typeid='23' field='aid,litpic,title' row='3' titlelen='5' suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]" class="imgs"><img src="[field:litpic]" alt="[field:title]" /></a>
+                	<a href="[field:arcurl]"  target="_blank" title="[field:title]"class="titts">● [field:title_short]</a>
+                </li>
+                </ali:arclist>
+              
+            </ul>
+            <ul class="one">
+            	<li class="o b">品牌产品</li>
+                <li class="t b"><ali:type typeid='24'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="three">
+            	<ali:arclist typeid='24' field='aid,litpic,title' row='3' titlelen='10' suffix='0'>
+            	<li>
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="119" height="51" alt="[field:title]" /></a>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]" class="tcts" target="_blank" title="[field:title]">[field:title_short]</a>
+                </li>
+               </ali:arclist>
+               <alic
+            </ul>
+        </div>
+    </div>
+    <div class="p_4_right">
+    	<div class="titbar"><span>行业要闻</span></div>
+        <div class="box">
+        	<ul class="top">
+            	<ali:arclist typeid='25' flag='c' field='aid,title,litpic,description' titlelen='14' suffix='0' row='1' infolen='48'>
+                    <li class="l"><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" alt="[field:title]" width="100" height="74" /></a></li>
+                    <li class="r">
+                        <a href="[field:arcurl]" target="_blank" title="[field:title]" class="bignews">[field:title_short]</a>
+                        <p>[field:info]...<a href="[field:arcurl]" target="_blank">详细</a></p>
+                    </li>
+                </ali:arclist>
+            </ul>
+            <ul class="bottom">
+            <ali:arclist typeid='25' field='aid,title,typeid' row='10' titlelen='14' suffix='1'>
+            	<li><a href="[field:typeurl]" class="channel" target="_blank" title="新闻">新闻</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+            </ali:arclist>    
+                   
+            </ul>
+        </div>
+    </div>
+</div><!--/p_4-->
+<!--**** 农药 ***-->
+<div class="p_4 p_5">
+	<div class="comtit">
+        <span class="txt txt5"></span>
+        <span class="more"><ali:type typeid='5'><a href="[field:typeurl]">更多</a></ali:type></span>
+    </div>
+    <div class="p_4_left">
+    	<div class="p_4_left_titbar"><span>品牌农药</span></div>
+        <div class="p_4_left_box">
+        	<ul class="one">
+            	<li class="o">品牌企业</li>
+                <li class="t t2"><ali:type typeid='26'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="two">
+            	<ali:arclist typeid='26' field='aid,litpic,title' row='3' titlelen='5' suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]" class="imgs"><img src="[field:litpic]"  alt="[field:title]" /></a>
+                	<a href="[field:arcurl]"  target="_blank" title="[field:title]"class="titts">● [field:title_short]</a>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="one">
+            	<li class="o b">品牌产品</li>
+                <li class="t t2 b"><ali:type typeid='27'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="three">
+            	<ali:arclist typeid='27' field='aid,litpic,title' row='3' titlelen='10' suffix='0'>
+            	<li>
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="119" height="51" alt="[field:title]" /></a>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]" class="tcts" target="_blank" title="">[field:title_short]</a>
+                </li>
+               </ali:arclist>
+            </ul>
+        </div>
+    </div>
+    <div class="p_4_right">
+    	<div class="titbar"><span>行业要闻</span></div>
+        <div class="box">
+        	<ul class="top">
+            	<ali:arclist typeid='28' flag='c' titlelen='14' suffix='0' row='1' infolen='48'>
+                <li class="l"><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" alt="[field:title]" width="100" height="74" /></a></li>
+                <li class="r">
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]" class="bignews">[field:title_short]</a>
+                    <p>[field:info]<a href="[field:arcurl]" target="_blank">详细</a></p>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="bottom">
+            <ali:arclist typeid='28' field='aid,title,typeid' titlelen='14' suffix='1' row='10'>
+            	<li><a href="[field:typeurl]" class="channel" target="_blank" title="新闻">新闻</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+            </ali:arclist>    
+                   
+            </ul>
+        </div>
+    </div>
+</div><!--/p_5-->
+<!--**** 肥料 ***-->
+<div class="p_4 p_6">
+	<div class="comtit">
+        <span class="txt txt6"></span>
+        <span class="more"><ali:type typeid='6'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></span>
+    </div>
+    <div class="p_4_left">
+    	<div class="p_4_left_titbar"><span>品牌肥料</span></div>
+        <div class="p_4_left_box">
+        	<ul class="one">
+            	<li class="o">品牌企业</li>
+                <li class="t t3"><ali:type typeid='29'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="two">
+            	<ali:arclist typeid='29' field='aid,litpic,title' row='3' titlelen='5' suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]"  class="imgs"><img src="[field:litpic]" alt="[field:title]" /></a>
+                	<a href="[field:arcurl]"  target="_blank" title="[field:title]"class="titts">● [field:title_short]</a>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="one">
+            	<li class="o b">品牌产品</li>
+                <li class="t t3 b"><ali:type typeid='30'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="three">
+            	<ali:arclist typeid='30' field='aid,litpic,title' row='3' titlelen='10' suffix='0'>
+            	<li>
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="119" height="51" alt="[field:title]" /></a>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]" class="tcts" target="_blank" title="">[field:title_short]</a>
+                </li>
+               </ali:arclist>
+            </ul>
+        </div>
+    </div>
+    <div class="p_4_right">
+    	<div class="titbar"><span>行业要闻</span></div>
+        <div class="box">
+        	<ul class="top">
+            	<ali:arclist typeid='31' flag='c' titlelen='14' suffix='0' row='1' infolen='48'>
+                <li class="l"><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" alt="[field:title]" width="100" height="74" /></a></li>
+                <li class="r">
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]" class="bignews">[field:title_short]</a>
+                    <p>[field:info]<a href="[field:arcurl]" target="_blank">详细</a></p>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="bottom">
+            <ali:arclist typeid='31' field='aid,title,typeid' titlelen='14' suffix='1' row='10'>
+            	<li><a href="[field:typeurl]" class="channel" target="_blank" title="新闻">新闻</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+            </ali:arclist>    
+                   
+            </ul>
+        </div>
+    </div>
+</div><!--/p_4-->
+<!--**** 农机 ***-->
+<div class="p_4 p_7">
+	<div class="comtit">
+        <span class="txt txt7"></span>
+        <span class="more"><ali:type typeid='7'><a href="[field:typeurl]" target="_blank">更多</a></ali:type></span>
+    </div>
+    <div class="p_4_left">
+    	<div class="p_4_left_titbar"><span>品牌农机</span></div>
+        <div class="p_4_left_box">
+        	<ul class="one">
+            	<li class="o">品牌企业</li>
+                <li class="t t4"><ali:type typeid='32'><a href="[field:typeurl]">更多</a></ali:type></li>
+            </ul>
+            <ul class="two">
+            	<ali:arclist typeid='32' field='aid,litpic,title' row='3' titlelen='5' suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="50" height="50" alt="[field:title]" /></a>
+                	<a href="[field:arcurl]"  target="_blank" title="[field:title]"class="titts">● [field:title_short]</a>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="one">
+            	<li class="o b">品牌产品</li>
+                <li class="t t4 b"><ali:type typeid='33'><a href="[field:typeur]">更多</a></ali:type></li>
+            </ul>
+            <ul class="three">
+            	<ali:arclist typeid='33' field='aid,litpic,title' row='3' titlelen='5' suffix='0'>
+            	<li>
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="119" height="51" alt="[field:title]" /></a>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]" class="tcts" target="_blank" title="">[field:title_short]</a>
+                </li>
+               </ali:arclist>
+            </ul>
+        </div>
+    </div>
+    <div class="p_4_right">
+    	<div class="titbar"><span>行业要闻</span></div>
+        <div class="box">
+        	<ul class="top">
+            	<ali:arclist typeid='34' flag='c' titlelen='14' suffix='0' row='1' infolen='50'>
+                <li class="l"><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" alt="[field:title]" width="100" height="74" /></a></li>
+                <li class="r">
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]" class="bignews">[field:title_short]</a>
+                    <p>[field:info]...<a href="[field:arcurl]" target="_blank">详细</a></p>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="bottom">
+            <ali:arclist typeid='34' field='aid,title,typeid' titlelen='14' suffix='1' row='10'>
+            	<li><a href="[field:typeurl]" class="channel" target="_blank" title="新闻">新闻</a> | <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+            </ali:arclist>    
+                   
+            </ul>
+        </div>
+    </div>
+</div><!--/p_4-->
+</div><!--/index_left-->
+<div class="index_line"></div>
+<div class="index_right">
+	<dl class="loginbox">
+    	<dt><span>御农会</span></dt>
+        <dd>
+        	<ul>
+            	<li class="one"><a href="{:U('/member/public/register')}" target="_blank" title="">注 册 会 员</a></li>
+                <li class="two"><a href="#" target="_blank" title="">入 会 流 程</a></li>
+                <li class="thr"><a href="#" target="_blank" title="">会 员 权 益</a></li>
+                <li class="four"><a href="#" target="_blank" title="">V I P 会 员</a></li>
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box">
+    	<dt class="rtbox_titbar"><span>专题</span> <a href="#" class="more"></a></dt>
+        <dd>
+        	<ul class="one">
+            	<ali:arclist typeid='37' row='2' flag='p' field='aid,litpic,title' titlelen='12' suffix='0'>
+            	<li>
+                	<img src="[field:litpic]" width="174" height="49" alt="[field:title]" />
+                    <span></span>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a>
+                </li>
+                </ali:arclist>
+            </ul>
+            <ul class="two">
+            	<ali:arclist typeid='37' row='3' noflag='p' field='aid,title' titlelen='14' suffix='0'>
+            	<li><a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+               </ali:arclist>
+            </ul>
+        </dd>
+    </dl>
+    
+     <dl class="rt_box rt_box2">
+    	<dt class="rtbox_titbar"><span>项目</span> <a href="#" class="more"></a></dt>
+        <dd>
+        	<ul class="one">
+            	<ali:arclist typeid='35' row='1' flag='p' field='aid,title,litpic' titlelen='12' suffix='0'>
+                <li>
+                	<img src="[field:litpic]" width="174" height="49" alt="[field:title]" />
+                    <span></span>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a>
+                </li>
+             	</ali:arclist>
+            </ul>
+            
+            <ul class="two">
+            	<ali:arclist typeid='35' row='3' noflag='p' field='aid,title' titlelen='12' suffix='1'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]">》[field:title_short]</a></li>
+               </ali:arclist>
+            </ul>
+        </dd>
+    </dl>
+    
+    <dl class="rt_box3">
+    	<dt>
+        	<span>视频</span>
+            <a href="#">
+            	
+            </a>
+        </dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='36' row='4' field='aid,title,litpic,jumpurl' titlelen='12' suffix='0'>
+            	<li>
+                	<a href="[field:arcurl]" class="imgs" target="_blank" title="[field:title]"><img src="[field:litpic]" width="73" height="63" alt="[field:title]" /></a>
+                    <a href="[field:jumpurl]" class="tit" target="_blank" title="[field:title]">[field:title_short]</a>
+                    <span>播放数:1245次</span>
+                </li>
+               </ali:arclist>
+               
+               
+            </ul>
+        </dd>
+    </dl>
+    
+    <dl class="rt_box4">
+    	<dt class="rt_common_titbar">
+        	<span class="s1">智库</span>
+        </dt>
+        <dd>
+        	<div class="switchbox">
+            	<ul class="s_con">
+                	<ali:arclist typeid='38' limit='0,3' field='aid,title,litpic' titlelen='3' suffix='0'>
+                    <li><a href="[field:arcurl]" target="_blank"  title="[field:title]"><img src="[field:litpic]" width="51" height="46" alt="[field:title]" /></a><a href="[field:arcurl]" target="_blank" class="tit">[field:title_shrot]</a></li>
+                   </ali:arclist>
+                </ul>
+                <ul class="s_box">
+                	<li class="current"> </li>
+                    <li> </li>
+                    <li> </li>
+                </ul>
+            </div>
+            <div class="txt_box" style="margin-top:10px;">
+            	<ul>
+                	<ali:arclist typeid='38' limit='0,1' titlelen='10' suffix='0' infolen='21'>
+                        <li class="imp"><a href="[field:arcurl]" target="_blank" title="[field:title]">◆ [field:title_short]</a>
+                        <p>[field:info]<a href="[field:arcurl]">［详细］</a></p>
+                        </li>
+                    </ali:arclist>
+                    <ali:arclist typeid='38' limit='1,2' titlelen='10' suffix='0'>
+                    <li class="nor"><a href="[field:arcurl]">◆ [field:title_short]</a></li>
+                    </ali:arclist>
+                </ul>
+            </div>
+        </dd>
+    </dl>
+    <dl class="rt_box5">
+    	<dt class="rt_common_titbar">
+        	<span class="s2">大户</span>
+        </dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='39' flag='p' row='1' titlelen='11' suffix='0'>
+            	<li class="imgs"><a href="[field:arcurl]"><img src="[field:litpic]" width="171" height="129" alt="[field:title]" /></a><a href="[field:arcurl]" class="tit" target="_blank" title="[field:title]">[field:title_short]</a></li>
+                </ali:arclist>
+                <ali:arclist typeid='39' row='3' titlelen='14' suffix='1'>
+                <li class="txt"><a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+               </ali:arclist>
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box6">
+    	<dt class="rt_common_titbar">
+        	<span class="s6">农产品展示</span>
+            <a href="#" class="a6">更多</a>
+        </dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='40' row='6' titlelen='6' suffix='0'>
+                <li><a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="85" height="55" alt="[field:title]"/></a>
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]" class="tit">[field:title_short]</a>
+                </li>
+                </ali:arclist>
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box7">
+    	<dt class="rt_common_titbar">
+        	<span class="s7">公益<font color="green">农资</font></span>
+            <a href="#" class="a7">更多</a>
+        </dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='41' row='1' titlelen='12' suffix='0' infolen='20'>
+                    <li class="big">
+                        <img src="[field:litpic]" width="173" height="61" alt="[field:title]" />
+                        <span></span>
+                        <a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a>
+                        <p>[field:info]</p>
+                    </li>
+                </ali:arclist>
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box8">
+    	<dt class="rtbox_titbar"><span>展会</span> <a class="more" href="#"></a></dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='42' flag='p' row='1' titlelen='14' suffix='0'>
+            	<li class="imgs">
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="59" height="45" alt="[field:title]" /></a>
+                    <a href="[field:arcurl]" target="_blank" title="[field:title]" class="tit">[field:title_short]</a>
+                </li>
+                </ali:arclist>
+                <ali:arclist typeid='42' row='3' titlelen='12' noflag='p' suffix='1'>
+                 <li class="nor"><a href="[field:arcurl]" target="_blank" title="[field:title]">》[field:title_short]</a></li>
+                </ali:arclist>
+                
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box9">
+    	<dt class="rt_common_titbar">
+        	<span class="s9">调查</span>
+            <a href="#" class="a7">更多</a>
+        </dt>
+        <dd>
+        		<ul>
+                <ali:arclist typeid='44' flag='p' row='1' titlelen='14' suffix='0'  infolen='26'>
+            	<li class="imgs">
+                	<a href="[field:arcurl]" target="_blank" title="[field:title]"><img src="[field:litpic]" width="173" height="81" alt="[field:title]" /></a>
+                    <p>[field:info]...</p>
+                </li>
+                </ali:arclist>
+                <ali:arclist typeid='44' noflag='p' row='3' titlelen='12' suffix='1'>
+                 <li class="nor"><a href="[field:arcurl]" target="_blank" title="[field:title]">[field:title_short]</a></li>
+               </ali:arclist>
+                
+            </ul>
+            <div class="vote">
+            	<a href="#" class="vo">投票</a>
+                <a href="#" class="view">查看</a>
+            </div>
+        </dd>
+    </dl>
+    <dl class="rt_box10">
+    	<dt>
+        	<span class="txt">龙头企业</span>
+            <span class="d_switch">
+            	<i class="current"></i>
+                <i></i>
+                <i></i>
+            </span>
+        </dt>
+        <dd>
+        	<ul>
+            	<ali:arclist typeid='43'  row='11' titlelen='12' suffix='1'>
+            	<li><a href="[field:arcurl]" title="[field:title]" target="_blank">[field:title_short]</a></li>
+                </ali:arclist>
+               
+            </ul>
+        </dd>
+    </dl>
+    <dl class="rt_box11">
+    	<dt class="rt_common_titbar">
+        	<span class="s11">故事会</span>
+            <a href="#" class="a7">更多</a>
+        </dt>
+        <dd>
+        	<ul class="gushi">
+            	<ali:arclist typeid='45' row='11' titlelen='12' suffix='1'  infolen='23'>
+            	<li class="<if condition='[field:autoindex] eq 1'>extend</if>"><a href="[field:arcurl]" title="[field:title]" target="_blank">[field:title_short]</a>
+                	<div style="<if condition='[field:autoindex] eq 1'>display:block</if>">
+                    [field:info]...
+                    </div>
+                </li>
+                </ali:arclist>
+               
+                           
+            </ul>
+        </dd>
+    </dl>
+</div>
+<div class="ad_bottom">
+	<a href="#"><img src="__PUBLIC__/Home/images/demo/02.jpg" width="1023" height="87" /></a>
+</div>
+	
+</div><!--/w1024-->
+<include file="Public:footer"/>
+</body>
+</html>

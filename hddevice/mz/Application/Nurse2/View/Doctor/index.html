@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>医生管理</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script language="javascript">
+$(function(){	
+	//导航切换
+	$(".imglist li").click(function(){
+		$(".imglist li.selected").removeClass("selected")
+		$(this).addClass("selected");
+	})	
+})	
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+<style>
+.page{ padding-bottom:28px; float:right; width:480px;}
+.page span{ float:left;}
+.page a{ margin-left:6px; display:block; width:20px; height:20px; line-height:20px; float:left; border:1px solid #ccc; text-align:center;}
+.page .current{width:20px; background:#0098C6; margin-left:6px; color:#fff; height:20px; line-height:20px; border:1px solid #0098C6; text-align:center;	}
+.page a.next,.page a.prev,.page a.end{ width:45px; line-height:22px;}
+</style>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="/mz/Nurse2/index/main">首页</a></li>
+    <li><a href="#">医生列表</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    <!-- 
+    	<ul class="toolbar">
+        <li class="click"><span><img src="__PUBLIC__/Nurse2/images/t01.png" /></span>添加</li>
+        <li class="click"><span><img src="__PUBLIC__/Nurse2/images/t02.png" /></span>修改</li>
+        <li><span><img src="__PUBLIC__/Nurse2/images/t03.png" /></span>删除</li>
+        <li><span><img src="__PUBLIC__/Nurse2/images/t04.png" /></span>统计</li>
+        </ul>
+        
+        
+        <ul class="toolbar1">
+        <li><span><img src="__PUBLIC__/Nurse2/images/t05.png" /></span>设置</li>
+        </ul>
+     -->
+     <form class="form-inline definewidth m20" action="__URL__/index/flag/search" method="post">
+         <input name="keywords" type="text" class="dfinput" value="请输入医生姓名" onclick="this.value=''">
+         <input name="" type="submit" class="btn" value="开始搜索">  
+     </form>
+    </div>
+    
+    
+    <table class="tablelist">
+    
+    <thead>
+    <tr>
+    <th width="50">
+    <input type="checkbox" checked="checked" value="" name="">
+    </th>
+    <th>医生姓名</th>
+    <th>医生职称</th>
+ <th>医生编号</th>
+    <th>操作</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+     <volist name="list" id="vo">
+    <tr <if condition="$i%2 eq 0">class="odd"</if>>
+    <td>
+    <input type="checkbox" value="" name="">
+    </td>
+    <td><a href="#">{$vo.doctor_name}</a></td>
+    <td>{$vo.doctor_postitle}</p></td>
+<td>{$vo.doctor_code}</p></td>
+    <td><a href="__URL__/edit/doctor_code/{$vo.doctor_code}/url/<?=base64_encode(curPageURL())?>">编辑</a></td>
+    </tr>
+    </volist>
+    
+    
+    </tbody>
+    
+    </table>
+    
+    
+    
+    
+    
+   
+    <div class="pagin page">
+    	{$page}
+       
+    </div>
+    
+    
+    <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="__PUBLIC__/Nurse2/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+    
+    
+    
+    
+    </div>
+    
+    <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="__PUBLIC__/Nurse2/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+    
+<script type="text/javascript">
+	$('.imgtable tbody tr:odd').addClass('odd');
+	</script>
+    
+</body>
+
+</html>

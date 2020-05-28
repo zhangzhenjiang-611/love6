@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="__PUBLIC__/admin/js/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="__PUBLIC__/admin/js/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/admin/js/kindeditor/lang/zh_CN.js"></script>
+    <script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="guige"]', {
+		allowFileManager : true
+	});				
+});
+</script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("[name=typeid]").val('{$pArr.typeid}');
+	
+})
+function delImage(imageid,imagename){
+	$.ajax({
+		url:'__URL__/delimage',
+		data:'id='+imageid+"&name="+imagename,
+		success:function(re){
+			if(re==1){
+				//删除p元素
+				$("#image_"+imageid).remove();
+			}
+		}
+	})
+	
+}
+</script>
+</head>
+<body>
+<div style="background-color:#0e93d7;width: 100%;height:26px;margin-bottom:10px;">当前操作：修改信息</div>
+<form action="__URL__/usave" method="post" enctype="multipart/form-data" >
+<table width="500px" align="center" border="1px" cellspacing="0px" bordercolor="#0e93d7">
+	<tr>
+		<td>专家姓名：</td>
+		<td><input type="hidden" name="id" value="{$pArr.id}"/><input value="{$pArr.title}" type="text" name="title"/></td>
+	</tr>
+	<tr>
+		<td>专家职位：</td>
+		<td><input type="text" value="{$pArr.rank}" name="rank" /></td>
+	</tr>
+	<!-- <tr>
+		<td>科室分类：</td>
+		<td><select name="typeid">
+		<option>请选择</option>
+		<foreach name="arr" item="v">
+		<option value='{$v.id}'>{$v.tname}</option>
+		</foreach>
+		</select></td>
+	</tr> -->
+	<tr>
+		<td>产品图片：</td>
+		<td>
+		<input multiple='multiple' type="file" name="upload[]"/>
+		<hr/>
+		<foreach name='imageArr' item='v'>
+		<p id="image_{$v.id}">
+		<img style="width:80px;margin-bottom:10px;" src="__PUBLIC__/upload/{$v.imagename}"/>
+		&nbsp;&nbsp;<a href="javascript:delImage({$v.id},'{$v.imagename}')">删除</a>
+		</p>
+		</foreach>
+		</td>
+	</tr>
+	<tr>
+		<td>专家介绍：</td>
+		<td><textarea name="guige" style="width:100%;height:300px;visibility:hidden;">{$pArr.guige}</textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" value="提交"/></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

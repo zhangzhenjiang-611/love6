@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码</title>
+</head>
+<body>
+<div>{:captcha_img()}</div>
+<!--<div><img src="{:captcha_src()}" alt="captcha"></div>-->
+<!--<div><img src="../code/show" alt="captcha"></div>-->
+<form action="../code" method="post">
+    <input type="text" name="code" />
+    <input type="submit" name="" id="" value="提交" />
+</form>
+</body>
+</html>

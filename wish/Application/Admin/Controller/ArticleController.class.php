@@ -35,4 +35,8 @@ class ArticleController extends BaseController {
         }
 
     }
+
+    public function add() {
+        echo  'add';
+    }
 }

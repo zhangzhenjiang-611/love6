@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echars/echarts.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+			
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+	
+    </style>
+<script language="javascript">
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+$(function(){
+	$(".guidui").click(function(){
+		var reg_id = $(this).attr("reg_id");
+		var params = {"reg_id":$(this).attr("reg_id"),"doctor_code":$(this).attr("doctor_code"),"dept_code":$(this).attr("dept_code")}; 
+		$.ajax({
+			url:"__APP__/Nurse/PatList/guidui", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					$("#"+reg_id).find(".guidui").remove();
+					layer.msg("归队成功");
+				}else{
+					layer.msg("归队失败");
+				}
+			}
+		})			
+	})
+
+})
+</script>
+<style>
+body,html{ padding:0px; margin:0px;}
+#bar_left{ width:210px; float:left; overflow:hidden; height:580px; overflow:hidden; background:#eee; margin-top:10px; margin-left:8px;}
+#bar_left ul{ }
+#bar_left ul li{ list-style:none; height:35px; line-height:35px; border-bottom:1px solid #ccc; width:70%; cursor:pointer; background:#ccc; margin-bottom:6px; padding-left:10px;
+background: #BBE9F2 none repeat scroll 0 0;
+  border-radius: 6px; font-size:14px; 
+}
+#bar_left ul li:hover{ background:#CC9966; color:#fff;}
+#bar_left h3 {
+  background: #2aaafa none repeat scroll 0 0;
+  border-radius: 6px;
+  height: 30px;
+  line-height: 32px; 
+  width:80%; margin:auto;margin-top:12px; margin-bottom:10px; 
+  font-size:18px; font-family:黑体; color:#fff; padding-left:20px;
+}
+#bar_right{ float:left; width:80%; margin-left:12px; margin-top:8px;}
+#bar_right .topbar{ width:100%; border-bottom:1px solid #dcdcdc; height:45px;}
+#bar_right .topbar .cz{ width:200px; float:left; margin-top:8px;}
+#bar_right .topbar .cz a{ float:left; margin-left:10px;}
+#bar_right .topbar .box{ float:right; margin-top:6px;}
+#bar_right .topbar .box ul li{ list-style:none; float:left; background:#2AAAFA; color:#fff; width:35px; height:32px; line-height:32px; font-weight:bold; text-align:center; margin-left:5px;border-radius: 6px; cursor:pointer;}
+#echars_box{ width:100%; height:530px; }
+#year_box{ width:270px; padding-bottom:6px;background:#4B6866; position:absolute; right:10px; top:55px;}
+#year_box a{ display:block; width:60px; height:25px; line-height:25px;background:#2AAAFA; color:#fff; font-weight:bold; text-align:center; display:block; float:left; margin-left:5px; margin-top:5px;}
+#year_box a:hover{ text-decoration:none; background:#BBE9F2; color:#333;}
+</style>
+</head>
+<body>
+<div id="bar_left">
+<h3>统计项目</h3>
+<ul>
+	<!-- <volist name="dept_list" id="vo">
+    	<li>{$vo.dept_name}</li>
+    </volist>
+    -->
+    <li>初诊患者</li>
+    <li>复诊患者</li>
+    <li>过号患者</li>
+    <li>退号患者y</li>
+    <li>预约患者</li>
+    <li>自助机挂号患者</li>
+</ul>
+</div>
+<div id="bar_right">
+ <div class="topbar">
+	<div class="box">
+    	<ul>
+        	<li >实时</li>
+            <li>日</li>
+            <li>周</li>
+            <li>月</li>
+            <li>季</li>
+            <li style="background:#E6A400">年</li>
+        </ul>
+    </div>
+  
+	<div class="cz">
+    	<a href="#" class="btn btn-primary">打印</a>
+        <a href="#" class="btn btn-primary">导出</a>
+         <a href="#" class="btn btn-primary">刷新 </a>
+    </div>
+</div>
+<div id="echars_box">
+	
+</div>
+</div>
+
+<div id="year_box" style="display:block;">
+	<a href="#">2019</a>
+    <a href="#">2018</a>
+    <a href="#">2017</a>
+    <a href="#">2016</a>
+    <a href="#" style="background:#BBE9F2">2015</a>
+    <a href="#">2014</a>
+    <a href="#">2013</a>
+    <a href="#">2012</a>
+    <a href="#">2011</a>
+    <a href="#">2009</a>
+    <a href="#">2008</a>
+    <a href="#">2007</a>
+    <a href="#">2006</a>
+    <a href="#">2005</a>
+    <a href="#">2004</a>
+    <a href="#">2003</a>
+</div>
+<div id="month_box"></div>
+</body>
+</html>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echars_box'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '初诊患者'
+            },
+            tooltip: {},
+            legend: {
+                data:['门诊量']
+            },
+            xAxis: {
+                data: ["1","2","3","4","5","6","7","8","9","10","11","12(月)"]
+            },
+            yAxis: {},
+			//color:['#0065CC'],
+            series: [{
+                name: '门诊量',
+                type: 'line',
+                data: [1100, 1270, 1458, 1689, 1890, 976,689,1390,1799,1120,2190]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>

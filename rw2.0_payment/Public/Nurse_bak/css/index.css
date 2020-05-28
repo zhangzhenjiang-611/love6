@@ -1,0 +1,62 @@
+@charset "utf-8";
+.fl{float:left;}
+.fr{float:right;}
+#main{width:960px; height:680px; border:1px solid #ccc;}
+#main_left{width:160px; height:100%; border-right:1px solid #ccc;}
+#main_left ul li{cursor:pointer;float:left; width:150px; line-height:35px; padding-left:10px;}
+#main_left ul li.active{ border:1px solid #ccc; border-right:none; background:#fff;}
+.main_con{display:none;}
+
+#main_right{width:779px; float:right; background:#fff; padding-left:20px; height:100%; overflow:hidden;}
+#top_data{width:100%;}
+#his_data{width:100%; float:left; overflow:hidden;}
+#hand_data{width:100%; overflow:hidden; float:right;}
+.tab_switch{width:705px; border-bottom:1px solid #ccc; margin-top:10px; height:30px; line-height:30px;}
+.tab_switch li{float:left; cursor:pointer; padding:0px 10px;}
+.tab_switch li.active{ border:1px solid #ccc; border-bottom:none; background:#fff;}
+.data_area{display:none;}
+
+.hand_add_table{}
+.hand_add_table span{ margin-top:3px; margin-left:8px;}
+.hand_add_table .ipt{margin-right:2px;}
+.hand_add_table select{height:24px; margin-left:6px; margin-right:12px;}
+.xm_list ul{ margin-left:26px; margin-top:10px;}
+.xm_list ul li{float:left;_display:inline; margin-left:10px;}
+.xm_list ul li input{float:left; margin-top:2px;}
+
+
+fieldset {
+    padding:10px;
+    width:270px;
+    color:#333; 
+    border:#ccc solid 1px;
+	 font-size:14px;
+} 
+legend {
+    color:#06c;
+    font-weight:800; 
+    background:#fff;
+} 
+
+.data_header{width:100%; height:40px; line-height:40px;}
+.data_header ul{padding-left:18px;}
+.data_header ul li{float:left; font-weight:bold; font-size:14px; width:80px; text-align:left;}
+.data_header ul li.one{width:50px;}
+#patlist ul li.one{ padding-left:8px; width:42px;}
+.data_header ul li.sex{width:50px;}
+#patlist ul li.sex{width:43px; padding-left:7px;}
+.data_header ul li.reg_type,#patlist ul li.reg_type{width:50px;}
+.data_header ul li.source{width:50px;}
+#patlist ul li.source{width:47px; padding-left:3px;}
+.data_header ul li.st{width:50px;}
+#patlist ul li.st{width:45px; padding-left:5px;}
+.data_header ul li.pat_id,#patlist ul li.pat_id{width:100px;}
+
+#patlist ul{ padding-left:18px;}
+#patlist ul.odd{ background:#dcdcdc;}
+#patlist ul li{float:left;width:80px; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; height:25px; line-height:25px;}
+#patlist ul li.odd{background:#dcdcdc}
+#patlist ul li.s{width:50px;}
+#patlist tr.td_click{background:#3399FF; }
+#patlist tr.td_click td{color:#fff;}
+

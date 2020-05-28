@@ -1,0 +1,4 @@
+#show_times{ position:absolute; left:949px; font-size:25px; color:width; top:46px; font-family:黑体 !important; font-weight:bold; }
+/*#show{font-size:40px;color:red;position: absolute;left: 850px}*/
+.list{width:1276px; height:599px;  background:url(../images/list.png) no-repeat left top; position:relative;margin-top: 110px;margin-left: 30px;}
+.name_s{float: left;margin-top: 40px;font-size: 28px;color:333333;margin-left: 70px;width:130px; height:50px;  background:url(../images/name.png) no-repeat left top;text-align: center;}

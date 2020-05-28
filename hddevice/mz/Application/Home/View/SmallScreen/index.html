@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<script language="javascript">
+$(function(){
+	run();	
+});
+function run(){
+	interval = setInterval(getInfo,5000); 	
+	interval = setInterval(getDec, 6000);
+	interval = setInterval(tanchuang, 3000);
+}
+function tanchuang(){
+
+ var params = {"room":"<?=$room?>"}; 	
+	$.ajax({
+		url:"__URL__/tanchuang", 
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.pat_now_call!="n"&&data.pat_now_call!=false){
+				if($("#small_zhezhao").is(":hidden")){
+					$("#small_zhezhao").show();
+					$("#small_zhezhao .one").html(data.pat_now_call[0].reg_seq_no+"号 "+data.pat_now_call[0].pat_name);
+					setTimeout(function()
+										{
+						//setCalls(data.now_calling[0].pat_code); 
+						$("#small_zhezhao").css({"display":"none"}); 
+					
+					}, 8000 );
+				}
+			}
+		}
+	})
+
+}
+ function getInfo(){
+  	  var params = {"room":"<?=$room?>"}; 	
+		$.ajax({
+			url:"__URL__/getSmallScreenInfo", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.have_logout==0){
+					//两科室一诊室
+					if(data.two_dept){
+					$(".small_area").css({"height":"0px"});
+						$("#two_dept").css({"background":"url(__PUBLIC__/Home/xiaoping/sbg2.png) -35px top","height":"1920px"})
+						var pat = data.pat;
+						$("#two_dept .room_id").text("第"+data.room_id+"诊室");
+						for(var i=0;i<pat.length;i++){
+							var kztype = "普通";
+							if(pat[i].expert==1){
+								kztype="专家";
+							}
+							switch (i){
+								case 0:
+								$("#two_dept_one .dept").html(pat[i].dept_name);
+								$("#two_dept_one .tit .r").text(pat[i].doctor_name);
+								$("#two_dept_one .zhicheng .r").text(kztype);
+								$("#two_dept_one .dept").text(pat[i].dept_name);
+								if(pat[0].pat_now!="n"){
+									var pat_now = pat[0].pat_now[0];
+									$("#two_dept_one .pat_now .r").html(pat_now['pat_name']+"("+pat_now['reg_seq_no']+"号)");
+								}else{
+									$("#two_dept_one .pat_now .r").text("");
+								}
+								if(pat[0].pat_wait!="n"){
+									var pat_wait = pat[0].pat_wait;
+									var html="";
+									for(var m=0;m<pat_wait.length;m++){
+										html+="<i>"+pat_wait[m]['pat_name']+"("+pat_wait[m]['reg_seq_no']+"号)</i>"
+									}
+									$("#two_dept_one .pat_wait .r").html(html);
+								}else{
+									$("#two_dept_one .pat_wait .r").text("");
+								}
+								break;
+								
+								case 1:
+								$("#two_dept_two .dept").html(pat[i].dept_name);
+								$("#two_dept_two .tit .r").text(pat[i].doctor_name);
+								$("#two_dept_two .zhicheng .r").text(kztype);
+								$("#two_dept_two .dept").text(pat[i].dept_name);
+								if(pat[1].pat_now!="n"){
+									var pat_now = pat[1].pat_now[0];
+									$("#two_dept_two .pat_now .r").html(pat_now['pat_name']+"("+pat_now['reg_seq_no']+"号)");
+								}else{
+									$("#two_dept_two .pat_now .r").text("");
+								}
+								if(pat[1].pat_wait!="n"){
+									var pat_wait = pat[1].pat_wait;
+									var html="";
+									for(var m=0;m<pat_wait.length;m++){
+										html+="<i>"+pat_wait[m]['pat_name']+"("+pat_wait[m]['reg_seq_no']+"号)</i>"
+									}
+									$("#two_dept_two .pat_wait .r").html(html);
+								}else{
+									$("#two_dept_two .pat_wait .r").text("");
+								}
+								break;
+							}
+						}
+						
+					}
+					//一个专家
+					else if(data.expert==1&&data.num==1){
+						$(".small_area").css({"height":"0px"});
+						$("#one_doctor_expert").css({"height":"1920px"});
+						$("#one_doctor_expert .room_tit").html(data.room);
+						$("#one_doctor_expert .room_id").html("第"+data.room_id+"诊室");
+						$(".ksna").html(data.zhicheng);
+						if(data.pat_now!=null&&data.pat_now!=false){
+						$(".thr_one .right").html(data.pat_now[0].reg_seq_no+data.pat_now[0].pat_name);
+						}else{
+							$(".thr_one .right").html("");
+						}
+						$("#docpic").attr("src",data.thumbnail);
+						if(data.pat_wait!=null){
+							$(".thr_two .right").html("");
+							for(var i=0;i<data.pat_wait.length;i++){
+								$(".thr_two .right").append("<span>"+data.pat_wait[i].reg_seq_no+data.pat_wait[i].pat_name+"</span>"); 
+							}
+						}else{
+							$(".thr_two .right").html("");
+						}
+						$(".uname").html(data.doctor_name);
+						$(".ksna").html(data.zhicheng);
+						$(".shanchang .r").html(data.team_info);
+					}
+					//两个专家
+					else if(data.expert==1&&data.num==2){
+						$(".small_area").css({"height":"0px"});
+						$("#two_doctor_expert").css({"height":"1920px"});
+						var content = ' <div class="room_tit">'+data.room+'</div>';
+					
+						
+						var pat = data.pat;	
+						for(var m=0;m<pat.length;m++){
+							var twos="";
+							if(m==1){
+								twos="twos";
+							}
+							if(pat[m].shortinfo==null){
+								pat[m].shortinfo="";
+							}
+							if(pat[m].pat_now=="n"){
+								var pat_now_no="";
+								var pat_now_name="";
+							}else{
+								var pat_now_no=pat[m].pat_now[0].reg_seq_no; 
+								var pat_now_name=pat[m].pat_now[0].pat_name;
+							}
+							if(pat[m].pat_wait=='n'){
+								var pat_wait_list="";
+							}else{
+								var pat_wait_list="";
+								var pat_wait = pat[m].pat_wait;
+								for(var n=0;n<pat_wait.length;n++){
+									pat_wait_list+="<span>"+pat_wait[n].reg_seq_no+pat_wait[n].pat_name+"</span>"
+								}
+							}
+							var kztype = "";
+							if(pat[m]['expert']==1){
+								kztype="专家";
+							}else{
+								kztype="普通";
+							}
+							content+='<div class="room_id">第'+data.room_id+'诊室</div> <div class="one '+twos+'"><div class="right"><p class="tit"><span class="txt">医生姓名:</span><span class="uname">'+pat[m]['doctor_name']+'</span></p><p class="tit"><span class="txt">看诊类型:</span><span class="uname">'+kztype+'</span></p><div class="pat_now"><h3>当前就诊：</h3><span>'+pat_now_no+pat_now_name+'</span></div><div class="pat_wait"><h3>等候就诊：</h3><p>'+pat_wait_list+'</p></div></div></div>'; 
+						}
+						$("#two_doctor_expert").html(content);
+					}
+					//一个普诊
+					else if(data.expert==0&&data.num==1){
+						$(".small_area").css({"height":"0px"});
+						$("#one_doctor_normal").css({"height":"1920px"});
+						if(data.pat_now=='n'){
+							var pat_now = "";
+						}else{
+							pat_now = data.pat_now[0].reg_seq_no+data.pat_now[0].pat_name;
+						}
+						$("#one_doctor_normal .room_tit").html(data.room);
+						$("#one_doctor_normal .room_id").html("第"+data.room_id+"诊室");
+						$("#one_doctor_normal .doc_name span").html(data.doctor_name);
+						//$("#one_doctor_normal .doc_zc span").html(data.shortinfo);
+						$("#one_doctor_normal .pat_now span").html(pat_now);
+						$(".o_ksname span").html(data.dept_name);
+						var pat_wait_html ="";
+						var pat_wait=data.pat_wait;
+						if(pat_wait!="n"){
+							for(var i=0;i<pat_wait.length;i++){
+								pat_wait_html+="<div>"+pat_wait[i].reg_seq_no+" "+pat_wait[i].pat_name+"</div>"
+							}
+							$(".pat_normal_wait_one_right").html(pat_wait_html);
+						}else{
+							$(".pat_normal_wait_one_right").html("");
+						}
+						
+						
+						
+					}
+					//两个普诊
+					else if(data.expert==0&&data.num==2){
+						$(".small_area").css({"height":"0px"});
+						$("#two_doctor_normal").css({"height":"1920px"});
+						$("#two_doctor_normal .room_id").html("第"+data.room_id+"诊室");
+						$("#two_doctor_normal .room_tit").html(data.room);
+						var pat = data.pat;
+						for(var m=0;m<pat.length;m++){
+							if(pat[m].pat_now!='n'){
+								var pat_now = pat[m].pat_now[0].reg_seq_no+pat[m].pat_now[0].pat_name; 
+							}else{
+								var pat_now="";
+							}
+							var pat_wait="";
+							if(pat[m].pat_wait!='n'){
+								pat_wait = pat[m].pat_wait;
+							}else{
+								pat_wait="";
+							}
+							var vs = "";
+							if(pat_wait!=""){
+								for(var n=0;n<pat_wait.length;n++){
+									vs+="<span>"+pat_wait[n].reg_seq_no+pat_wait[n].pat_name+"</span>";	
+								}
+							}
+							var kztype = "";
+							if(pat[m].expert==1){
+								kztype = "专家";
+							}else{
+								kztype = "普通";
+							}
+							if(m==0){
+								$("#two_doctor_normal .ones .doc_name span").html(pat[m].doctor_name);
+								$("#two_doctor_normal .ones .pat_now span").html(pat_now);
+								$("#two_doctor_normal .ones .doctor_postitle span").html(kztype);
+								
+								$("#two_doctor_normal .ones .pat_wait_list").html(vs);
+								
+							}
+							if(m==1){
+								$("#two_doctor_normal .twos .doc_name span").html(pat[m].doctor_name);
+								$("#two_doctor_normal .twos .doctor_postitle span").html(kztype);
+								$("#two_doctor_normal .twos .pat_now span").html(pat_now);
+								$("#two_doctor_normal .twos .pat_wait_list").html(vs);
+
+							}
+						}
+						
+					}
+					//$("#demo1").html(data.description);
+					
+				}else{
+					$(".small_area").css({"height":"0px"});
+					
+					$("#default").css({"height":"1920px"});	
+					
+					
+				}
+				
+			}
+		})	
+  }
+  
+  function getDec(){
+  	  var params = {"room":"<?=$room?>"}; 	
+		$.ajax({
+			url:"__URL__/getDec", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.description!=""){
+					$("#demo1").html(data.description);
+					$("#demo2").html(data.description);
+				}else{
+					$("#demo1").html("暂无");
+				}
+				
+			}
+		})	
+  }
+</script>
+<title>小屏信息</title>
+<style>
+.two_doc_normal .pat_wait{ margin-top:-5px;}
+.two_doc_normal .pat_wait span{ font-size:70px;display:block; width:500px;color:#fff; line-height:150%; margin-bottom:15px; margin-left:-15px; white-space:nowrap;}
+.two_doc_normal .pat_wait h3{}
+</style>
+</head>
+
+<body>
+<div class="small_zhezhao" id="small_zhezhao" style=" height:1350px; margin-top:190px">
+	<div class="one"></div>
+<div class="two">请进入诊室就诊</div></div>
+</div>
+<div class="small_area" id="one_doctor_expert" style="overflow:hidden; height:0px;">
+<div class="room_id"></div>
+	<div class="room_tit" <if condition="$small_txt eq 1">style="font-size:90px;"</if>>诊室-科室</div>
+    <div class="one" style="height:465px; margin-bottom:15px; margin-top:520px;">
+    	        <img width="280" id="docpic" src="/Uploads/2015-04-28/553e934dad071.jpg"> 
+                
+                       <p class="tit"><span class="txt">医生:</span><span class="uname">医生姓名</span></p> 
+                        <p class="tit"><span class="txt">职称:</span><span class="ksna"></span></p>  
+
+    </div>
+   <div class="two">
+    	<h3>擅长</h3>
+        <div id="demo" class="intro">
+        	<table align="top"> 
+<tbody><tr> 
+<td valign="top" id="demo1">
+</td> 
+</tr> 
+
+</tbody></table>  
+
+            
+        </div>
+    </div>
+    
+    <div class="thr">
+    	<ul class="thr_one">
+        	<li class="left">当前患者：</li>
+            <li class="right"></li>
+        </ul>
+        <ul class="thr_two">
+        	<li class="left">等候患者：</li>
+            <li class="right"></li>
+        </ul>
+    </div>
+</div>
+<!----------------------------------------以下为一个诊室两个科室---------------------------------------------->
+<style>
+#two_dept .one .dept{ width:910px; height:145px; line-height:145px; color:#fff; font-size:100px; text-align:center; font-family:黑体; font-weight:bold;}
+#two_dept .one{ margin-top:245px; height:755px; border:none;}
+#two_dept .twos{ margin-top:35px;}
+#two_dept .one p{font-size:80px; padding-left:20px;float:left; display:block;height:120px; line-height:120px;font-family:黑体;}
+#two_dept .one p.dept{ margin-bottom:21px;}
+#two_dept .one p.tit{ margin:0px;}
+#two_dept .one p span.txt{}
+#two_dept .one p span.txt,#two_dept .one p span.r{font-size:75px;}
+#two_dept .one p.pat_now{color:yellow; padding-left:20px;}
+#two_dept .one p.pat_now span{ color:yellow;}
+#two_dept .one .pat_wait{}
+#two_dept .one .pat_wait h3{ float:left; font-size:75px; font-family:黑体; float:left; padding-left:20px; color:#fff; display:block; width:383px;}
+#two_dept .one .pat_wait .r{ width:500px; float:left;}
+#two_dept .one .pat_wait .r i{ font-size:75px; color:#fff; font-style:normal; display:block;}
+</style>
+<div class="small_area" id="two_dept" style="height:0px;">
+	 <div class="room_id"></div>
+      <div class="one" id="two_dept_one">
+      		<p class="dept">XX门诊</p>		 
+            <p class="tit"><span class="txt">医生姓名:</span><span class="r">XXX</span></p>  
+            <p class="zhicheng"><span class="txt">看诊类型:</span><span class="r">XXX</span></p>
+            <p class="pat_now">
+               <span class="txt">当前就诊:</span>
+               <span class="r">XX(24号)</span> 
+            </p>
+            <div class="pat_wait">
+               <h3>等候就诊:</h3>
+               <div class="r">
+               <i>王臧要(5号)</i>
+               <i>王臧要(6号)</i>
+            	</div>
+            </div>
+    </div>
+    <div class="one twos" id="two_dept_two">
+			<p class="dept">XX门诊</p>		 
+            <p class="tit"><span class="txt">医生姓名:</span><span class="r">XXX</span></p>  
+            <p class="zhicheng"><span class="txt">看诊类型:</span><span class="r">XXXX</span></p>
+            <p class="pat_now">
+               <span class="txt">当前就诊:</h3>
+               <span class="r">XX(XX号)</span> 
+            </p>
+            <div class="pat_wait">
+               <h3>等候就诊：</h3>
+               <div class="r">
+               <i>XX</i>
+               <i>xx</i>
+            	</div>
+            </div>
+           
+    </div>
+     
+    
+</div>
+<!----------------------------------------以下为两个专家---------------------------------------------->
+<div class="small_area" id="two_doctor_expert" style="height:0px;">
+	 
+      <div class="one">
+    	   
+             <div class="right">
+					 
+                    <p class="tit"><span class="txt">医生姓名:</span><span class="uname"></span></p>  
+      				<p class="shanchang"><span class="txt txt2"></span><span class="r">看诊类型</span></p>
+                    <div class="pat_now">
+        	           <h3>当前就诊：</h3>
+                       <span>24吕成</span> 
+                    </div>
+                    <div class="pat_wait">
+        	           <h3>等候患者：</h3>
+                       <p></p>
+                    </div>
+             </div>
+    </div>
+    
+    <div class="one twos">
+
+             <div class="right">
+             
+             
+                    <p class="tit"><span class="txt">医生姓名:</span><span class="uname">袁佳琴</span></p>  
+      				<p class="shanchang"><span class="txt txt2"></span><span class="r">主任医师</span></p>
+                    <div class="pat_now">
+        	           <h3>当前就诊：</h3>
+                       <span>24吕成</span> 
+                    </div>
+                    <div class="pat_wait">
+        	           <h3>等候患者：</h3>
+                       <p><span>3韩思雨</span><span>5贾永顺</span><span>6郭立清</span><span>7常香云</span> </p>
+                    </div>
+             </div>
+    </div>
+     
+    
+</div>
+<!---------------------两个医生不带照片--------------------------->
+<div class="small_area two_doc_normal" id="two_doctor_normal" style="height:0px;">
+	<div class="room_id"></div>
+    <div class="room_tit" <if condition="$small_txt eq 1">style="font-size:90px;"</if>> 	
+    </div>
+ 	<ul class="ones" style="padding-top:50px; height:600px;  padding-bottom:10px; margin-top:450px;"> 	
+        <li class="doc_name"><h3>医生姓名：</h3><span>后惊奇</span></li>
+         <li class="doctor_postitle"><h3>看诊类型：</h3><span>普通</span></li>
+        <li class="pat_now"><h3>当前就诊：</h3><span>杨培元</span></li>
+         <li class="pat_wait">
+         <table cellpadding="0" cellspacing="0">
+         	<tr>
+            <td valign="top"><h3>等候就诊：</h3></td>
+            <td class="pat_wait_list"></td>
+         
+            </tr>
+         </table>
+         </li>
+    </ul>
+    <ul class="twos">
+    	
+        <li class="doc_name"><h3>医生姓名：</h3><span>郑洁</span></li>
+        <li class="doctor_postitle"><h3>看诊类型：</h3><span>普通</span></li>
+        <li class="pat_now"><h3>当前就诊：</h3><span>测试一</span></li>
+        <li class="pat_wait">
+         <table cellpadding="0" cellspacing="0">
+         	<tr>
+            <td valign="top"><h3>等候就诊：</h3></td>
+            <td class="pat_wait_list"></td>
+         
+            </tr>
+         </table>
+        </li>
+    </ul>
+   <!--  <div class="erma">
+    	<span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+        
+        <span>
+        <img src="__PUBLIC__/Home/erweima/qr.png" width="150" height="150" />
+        <p>扫描关注</p>
+        </span>
+    </div>
+    -->
+   
+</div>
+<!---------------------一个医生不带照片-------------------- ------->
+<style>
+.pat_normal_wait_one_left{ border-bottom:none !important;width:450px !important;color: #fff;font-weight:bold;
+float: left;
+font-family: 黑体; line-height:120% !important; font-size:105px !important;}
+.pat_normal_wait_one_right div{color:#fff; font-family:黑体; margin-top:-10px; line-height:170%; font-size:92px; white-space:nowrap;}
+.pat_normal_wait_one_right{border-bottom:none !important;}
+.pat_normal_wait_one_left h3{ font-size:80px;}
+#one_doctor_normal ul li{ line-height:150% !important;}
+</style>
+<div class="small_area two_doc_normal" id="one_doctor_normal" style="height:0px;">  
+	<div class="room_id"></div>
+    <div class="room_tit" <if condition="$small_txt eq 1">style="font-size:90px;"</if> >
+    	
+    </div>
+ 	<ul class="ones" style="margin-bottom:60px; height:345px;">
+  
+        <li class="doc_name"><h3>医生姓名：</h3><span></span></li>
+       <!--  <li class="doc_zc"><h3>医生职称：</h3><span></span></li> -->
+        <li class="pat_now"><h3>当前就诊：</h3><span></span></li>
+       
+    </ul>
+    <ul class="twos">
+     <table cellpadding="0" cellspacing="0">
+         	<tr>
+            <td valign="top" class="pat_normal_wait_one_left"><h3>等候就诊:</h3></td>
+            <td class="pat_normal_wait_one_right">
+            <div>1 张文楼</div>
+        <div>2 黄小灯</div>
+        <div>3 王文唐</div>
+            </td>
+         
+            </tr>
+         </table>
+    
+    
+    </ul>
+    
+  
+   
+</div> 
+<div class="small_area" id="default" style="height:0px;">
+<div class="room_id">第{$real_id}诊室</div>
+<div class="room_tit" <if condition="$small_txt eq 1">style="font-size:90px;"</if>>
+    
+    </div>
+    <div style="color:#fff; line-height:200px; font-size:140px; font-family:楷体; width:50px; font-weight:bold; margin-left:430px; margin-top:550px;">祝您早日康复</div>
+</div>
+</body>
+</html>

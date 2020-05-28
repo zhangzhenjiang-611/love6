@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>管理登录-护士站管理系统</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link href="__PUBLIC__/Home/css/admin_login.css" type="text/css" rel="stylesheet">
+<script src="__PUBLIC__/Home/js/jquery.js" type="text/javascript" charset="utf-8" language="JavaScript"></script>
+<script>
+function loginok(form){
+	if (form.login_name.value==""){
+		alert("用户名不能为空！");
+		form.login_name.focus();
+		return (false);
+	}
+	if (form.login_pwd.value==""){
+		alert("密码不能为空！");
+		form.login_pwd.focus();
+		return (false);
+	}
+	return (true);
+}
+if(self!=top){
+	top.location=self.location;
+}
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="title">&nbsp;</div>
+  <div class="login">
+    <form onsubmit="return loginok(this)" name="gxcms" id="login_form" method="post" action="__URL__/login">
+     <input type="hidden" name="dopost" value="login_do" />
+      <?php
+    if($page!=""){
+    ?>
+    <input type="hidden" name="page" value="<?=$page?>" />
+    <?php
+    }
+    ?>
+      <div class="inputbox">
+        <dl>
+          <dd>用户名：</dd>
+          <dd>
+            <input type="text" onblur="this.style.borderColor='#dcdcdc'" onfocus="this.style.borderColor='#fc9938'" size="25" id="login_name" name="uname">
+          </dd>
+          <dd>密码：</dd>
+          <dd>
+            <input type="password" onblur="this.style.borderColor='#dcdcdc'" onfocus="this.style.borderColor='#fc9938'" size="25" id="login_pwd" name="password">
+          </dd>
+          <dd>
+            <input type="submit" class="input" value="" name="submit">
+          </dd>
+        </dl>
+      </div>
+      <div class="butbox">
+        <dl>
+          <dd>北京国医堂护士站管理系统</dd>
+        </dl>
+      </div>
+      <div style="clear:both"></div>
+    <input type="hidden" value="43a9256a0ec61b9bf06024047259e56d" name="__hash__"></form>
+  </div>
+</div>
+<div class="copyright"> 
+	Powered by <a target="_blank" href="http://zisha.iincn.net/">zisha.iincn.net beta</a> Copyright &copy;2010-2011 
+</div>
+
+</body></html>

@@ -11,7 +11,10 @@ class LoginController extends Controller {
      * 后台登录页面
      * */
     public function index(){
-       // echo  session_id();die();
+      //  session_destroy();
+       //echo  C('SESSION_AUTO_START');
+        //exit;
+       //echo  session_id();die();
         $this->display();
     }
 
@@ -27,6 +30,8 @@ class LoginController extends Controller {
         }
         $username = I('username','');
         $password = I('password','','md5');
+        //$username = 'admin';
+        //$password = md5('admin');
         $user = M('User')->where(array('username'=>$username))->find();
         if(!$user || $user['password'] != $password) {
             $this->error('账号或密码错误');
@@ -40,7 +45,10 @@ class LoginController extends Controller {
            'loginip'  => get_client_ip()
        );
        $res = M('User')->save($data);
+
+        //dump($user);
        if($res) {
+
            session(C('USER_AUTH_KEY'),$user['id']);
            session('username',$user['username']);
            session('logintime',date('Y-m-d H:i:s',$user['logintime']));
@@ -49,8 +57,10 @@ class LoginController extends Controller {
            if($user['username'] == C('RBAC_SUPERADMIN') ) {
                session(C('ADMIN_AUTH_KEY'),true);
            }
+           //print_r($_SESSION);
            //读取用户权限
-           Rbac::saveAccessList();
+          Rbac::saveAccessList();
+          //dump($access);
            $this->redirect('Index/index');
        }
 
@@ -62,8 +72,10 @@ class LoginController extends Controller {
     public function verify() {
         $config = array(
             'fontSize' => 19, // 验证码字体大小
-            'length' => 4, // 验证码位数
-           'imageH' => 34
+            'length' => 1, // 验证码位数
+           'imageH' => 34,
+            'useNoise'    =>    false,
+            'imageW'  => 100
         );
          $Verify = new Verify($config);
          $Verify->entry();

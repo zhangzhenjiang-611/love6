@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<script language="javascript">
+$(function(){
+	$("#submit").click(function(){
+	params = {"pat_name":$("#pat_name").val(),"doctor_code":$("#doctor").val(),"noon_flag":$("#noon_flag").val()};
+		$.ajax({
+				url:"__URL__/guahao_do",
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					if(data.success==1){
+						$("#tips").html("<font color='red'>挂号成功，时间为"+data.data.reg_time+"</font>");
+					}else{
+						$("#tips").html("<font color='red'>发生错误</font>");
+					}
+					
+				}						
+		})							
+})		  
+})
+</script>
+<title>模拟挂号</title>
+</head>
+
+<body>
+<form action="#" method="post">
+<table cellpadding="0" cellspacing="0">
+	<TR>
+    	<td height="38">姓名：</td>
+        <td><input type="text" name="pat_name" id="pat_name" /></td>
+        
+    </TR>
+    <tr>
+    <td>医生：</td>
+        <td>
+        <select name="doctor" id="doctor">
+        	<volist name="doctorList" id="vo">
+            	<option value="{$vo.doctor_code}"><?php echo $vo['doctor_name'];?></option>
+            </volist>
+        </select>
+        </td>
+    </tr>
+    <tr height="40">
+     <td>时间：</td>
+        <td>
+        <select name="noon_flag" id="noon_flag">
+        	
+            	<option value="1">上午</option>
+                <option value="2">下午</option>
+                <option value="3">晚上</option>
+           
+        </select>
+        </td>
+    </tr>
+    <tr>
+    	<td colspan="2" height="60"><input type="button" id="submit" value="提交挂号信息" /></td>
+    </tr>
+    <tr>
+    	<td colspan="2" id="tips">
+        	
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

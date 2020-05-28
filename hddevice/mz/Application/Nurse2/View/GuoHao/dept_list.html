@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$row.pat_name}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/boxy/js/jquery.boxy.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/boxy/css/boxy.css" charset="utf-8"/>
+    
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="__PUBLIC__/Home/css/jquery.ui.autocomplete.css"/> 
+    
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+	.cls{}
+    </style>
+<script language="javascript">
+/**
+* 删除前确认
+* www.jbxue.com
+*/
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+function tj(dept_code_old,pat_code){
+	//alert(dept_code+"**"+pat_code);
+	var dept_code_new = $("#sssss").val();
+	var params = {"dept_code_new":dept_code_new,"dept_code_old":dept_code_old,"pat_code":pat_code};
+	var tr ="#"+pat_code+"_"+dept_code_old; 
+	$.ajax({
+		url:"__URL__/ajax_change_dept",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				//alert("转科成功！");
+				$(tr).find(".dept_name").html(data.dept_name);
+				$(tr).css({"background":"yellow"});
+				$(tr).find(".change_dept").attr("dept_code",dept_code_new);
+				//$(ta).remove();
+			}else{
+				alert("转科失败");
+			}
+		}						
+	})
+}
+
+function chadui(dept_code_old,pat_code){
+	//alert(dept_code+"**"+pat_code);
+	var dept_code_new = $("#targ").val();
+	var position = $("#position").val();
+
+	var params = {"position":position,"dept_code_new":dept_code_new,"dept_code_old":dept_code_old,"pat_code":pat_code};
+	var tr ="#"+pat_code+"_"+dept_code_old; 
+	$.ajax({
+		url:"__URL__/ajax_chadui",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				alert("插队成功");
+				
+			}else{
+				alert("插队失败");
+			}
+		}						
+	})
+}
+
+function save_doc(dept_code,doctor_code_old,pat_code){
+	//alert(dept_code+"**"+pat_code);
+	var params = {"doctor_code_new":$("#doctor_code").val(),"dept_code":dept_code,"pat_code":pat_code,"doctor_code_old":doctor_code_old};
+	var tr ="#"+pat_code+"_"+dept_code; 
+	$.ajax({
+		url:"__URL__/ajax_change_doctor",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				$(tr).find(".doctor_name").html(data.doctor_name);
+				$(tr).css({"background":"#B3874E"});
+				//$(ta).remove();
+			}else{
+				alert("转科失败");
+			}
+		}						
+	})
+}
+
+$(function(){
+$("#doctor").autocomplete({ 
+	source: "__URL__/getDcotorKey", 
+	minLength: 1,
+	autoFocus:true,
+	mustMatch:true,
+	select: function( event, ui ) {
+		$("#doctor_code_search").val(ui.item.id);
+	}
+})
+$(".change_dept").click(function(){
+	var dept_code = $(this).attr("dept_code");
+	var pat_code = $(this).attr("pat_code");
+	
+	Boxy.load('__URL__/change_dept/dept_code/'+dept_code+'/pat_code/'+pat_code,{title:'调科室',afterShow:function(){
+																						
+			 	$("#save").click(function(){
+					tj(dept_code,pat_code);
+					$(".boxy-wrapper").remove();	
+				})
+			 },unloadOnHide:true});
+})
+
+$(".chadui").click(function(){
+	var dept_code = $(this).attr("dept_code");
+	var pat_code = $(this).attr("pat_code");
+	
+	Boxy.load('__URL__/chadui/dept_code/'+dept_code+'/pat_code/'+pat_code,{title:'插队',afterShow:function(){
+																						
+			 	$("#save2").click(function(){
+					chadui(dept_code,pat_code);
+					$(".boxy-wrapper").remove();	
+				})
+			 },unloadOnHide:true});
+})
+
+$(".change_doctor").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var pat_code = $(this).attr("pat_code");
+	if(doctor_code==""){
+		var  url = "__URL__/change_doctor/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}else{
+		var url = "__URL__/change_doctor/doctor_code/"+doctor_code+"/pat_code/"+pat_code+"/dept_code/"+dept_code;
+	}
+	Boxy.load(url,{title:'调医生',afterShow:function(){
+																						
+		$("#change_doc").autocomplete({ 
+		source: "__URL__/getTeamKey", 
+		minLength: 1,
+		autoFocus:true,
+		mustMatch:true,
+		select: function( event, ui ) {
+			$("#doctor_code").val(ui.item.id);
+			
+		}
+		
+	}); 
+		
+		$("#save_doc").click(function(){
+			save_doc(dept_code,doctor_code,pat_code);
+			$(".boxy-wrapper").remove();	
+		})
+			 },unloadOnHide:true});
+})
+$(".fuzhen").click(function(){
+	var params = {"pat_code":$(this).attr("pat_code"),"doctor_code":$(this).attr("doctor_code"),"dept_code":$(this).attr("dept_code")};
+	var tr ="#"+$(this).attr("pat_code")+"_"+$(this).attr("dept_code"); 
+	$.ajax({
+		url:"__URL__/fuzhen",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				$(tr).find(".status").html("<font color='red'>已复诊</font>");
+				$(tr).css({"background":"#CC9966"});
+				alert("复诊成功");
+				//$(ta).remove();
+			}else{
+				alert(data.txt);
+			}
+		}						
+	})						
+})
+$(".guidui").click(function(){
+	var params = {"pat_code":$(this).attr("pat_code"),"doctor_code":$(this).attr("doctor_code"),"dept_code":$(this).attr("dept_code")};
+	var tr ="#"+$(this).attr("pat_code")+"_"+$(this).attr("dept_code"); 
+	$.ajax({
+		url:"__URL__/guidui",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				$(tr).find(".status").html("<font color='red'>已归队</font>");
+				$(tr).css({"background":"#CC9966"});
+				alert("归队成功");
+				//$(ta).remove();
+			}else{
+				alert(data.txt);
+			}
+		}						
+	})						
+})
+$(".del").click(function(){
+		var pat_code = $(this).attr("param");
+		var ledger_sn = $(this).attr("param2");
+		var order_no = $(this).attr("param3");
+		var params = {"pat_code":pat_code,"ledger_sn":ledger_sn,"order_no":order_no}; 
+		if(p_del()){
+		$.ajax({
+			url:"__URL__/setStatus", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					$("#"+pat_code+"_"+ledger_sn+"_"+order_no).remove();
+					alert("删除成功");
+				}else{
+					alert("删除失败");
+				}
+			}
+		})	
+		}
+})
+
+})
+
+</script>
+
+<style>
+.page a{ margin-left:5px;}
+.table a{ color:#333;}
+.table button{}
+#mbody{width:100%;}
+#mleft{width:23%; float:left; padding-top:25px; margin-left:1.5%;}
+#mright{width:75%; float:right;}
+#mleft .titbar{ width:100%; height:30px; line-height:32px; background:#2AAAFA;moz-border-radius: 6px;      /* Gecko browsers */
+    -webkit-border-radius: 6px;   /* Webkit browsers */
+    border-radius:6px;            /* W3C syntax */}
+#mleft .titbar span{ font-weight:bold; margin-left:12px; font-size:16px; color:#fff;}
+.rbox dt{ font-size:14px; padding-left:5px; border-bottom:2px solid #ccc; padding-bottom:8px; width:95%;}
+.rbox dd{ margin-left:4px; padding-top:10px;}
+</style>
+</head>
+<body>
+<div id="mbody">
+<div id="mleft">
+<div class="titbar"><span>科室概况</span></div>
+<volist name="dept_list" id="vo">
+<dl class="rbox">
+<dt>{$vo.dept_name}<font color="red">({$vo.total})</font></dt>
+<dd>
+<p>普诊患者：{$vo.normal_total} | 专诊患者：{$vo.zj_total}	</p>
+<volist name="vo.doclist" id="vo2">
+<a href="#">{$vo2.doctor_name}</a><br>
+</volist>
+</dd>
+</dl>
+</volist>
+</div>
+<div id="mright">
+<form class="form-inline definewidth m20" action="__URL__/index/flag/search" method="post">
+    <input type="hidden" id="doctor_code_search" name="doctor_code_search" value="" />
+    患者姓名 / 4位编号：
+    <input type="text" name="pat_name" id="pat" style="width:150px; padding-left:5px;"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;   <!-- 
+    就诊医生：
+    <input type="text" id="doctor" style="width:80px; padding-left:5px;"class="abc input-default" placeholder="" value="">&nbsp;&nbsp; 
+    选择科室：
+    <select id="dept" name="dept" style="font-size:12px; width:105px;">
+    	<option value="">请选择科室</option>
+        <volist name="dept_list" id="vo">
+        	<option value="{$vo.dept_code}"  <if condition="$vo['dept_code'] eq cookie('search_dept_code')">selected</if>>{$vo.dept_name}</option>
+        </volist>
+    </select> -->&nbsp;&nbsp;   
+    <button type="submit" class="btn btn-primary">查询</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        
+        <th>患者编号</th>
+        <th>患者姓名</th>
+         <th>性 别</th>
+        <th>科 室</th>
+        <th>医 生</th>
+        <th>诊 室</th>
+        <th>当前状态</th>
+  
+        <th width="28%">管理操作</th>
+    </tr>
+    </thead>
+        <volist name="list" id="vo">
+        <tr class="cls" bgcolor="{$vo.bgcolor}" id="{$vo.pat_code}_{$vo.dept_code}">
+                <td>{$vo.pat_code}</td>
+                <td>{$vo.pat_name}</td>
+                <td>{$vo.pat_sex}</td>
+                <td class="dept_name">{$vo.dept_name}</td>
+                <td class="doctor_name">{$vo.doctor_name}</td>
+                <td class="doctor_name">{$vo.room_name}</td>
+                <td class="status">{$vo.status_txt}</td> 
+              <td>
+              <if condition="$t_dept eq 'y'">
+              <input type="button" value="调科室" class="change_dept" dept_code="{$vo.dept_code}" pat_code="{$vo.pat_code}" />
+              </if>
+              <if condition="$t_doc eq 'y'">
+          <input type="button" value="调医生" class="change_doctor" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" pat_code="{$vo.pat_code}" />
+          </if>
+           <if condition="$t_fuzhen eq 'y'">
+          <input type="button" value="复诊" class="fuzhen" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" pat_code="{$vo.pat_code}" />
+          </if>
+          <input type="button" value="归队"  class="guidui" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" pat_code="{$vo.pat_code}" />
+          <if condition="$chadui eq 'y'">
+          <input type="button" value="插队"  class="chadui" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" pat_code="{$vo.pat_code}" /> 		  </if>
+                <!-- <a href="__URL__/edit/pat_code/{$vo.pat_code}/dept_code/{$vo.dept_code}">编辑</a> 
+                 <input class="del" type="button" value="删除" param="{$vo.pat_code}" param2="{$vo.ledger_sn}" param3="{$vo.order_no}" />-->
+                </td>
+               
+            </tr>
+     </volist>  
+     <tr>
+     	<td colspan="8"></td>
+     </tr>     
+     </table>
+<div class="inline pull-right page">
+        {$page} </div>
+        </div>
+        </div>
+</body>
+</html>
+
+<script>
+    $(function () {
+
+
+		$('#addnew').click(function(){
+
+				window.location.href="add.html";
+		 });
+
+
+    });
+	
+</script>

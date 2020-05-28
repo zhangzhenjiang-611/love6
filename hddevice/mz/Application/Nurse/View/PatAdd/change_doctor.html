@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>转科室</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="__PUBLIC__/Home/css/jquery.ui.autocomplete.css"/> 
+<script language="javascript">
+$(function(){
+$("#change_doc").autocomplete({ 
+		source: "__URL__/getTeamKey", 
+		minLength: 1,
+		autoFocus:true,
+		mustMatch:true,
+		select: function( event, ui ) {
+			$("#doctor_code_new").val(ui.item.id);
+			
+		}
+})
+$("#save").live("click",function(){
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	var params = {"doctor_code_new":$("#doclist").val(),"dept_code":$("#dept_code").val(),"pat_code":$("#pat_code").val(),"reg_id":$("#reg_id").val(),"doctor_code_old":$("#doctor_code_old").val()};
+	var tr ="#"+$("#pat_code").val()+"_"+$("#dept_code").val(); 
+	$.ajax({
+		url:"__URL__/ajax_change_doctor",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				parent.layer.msg('转医生成功',{shade: 0.3})
+				var source = "<?=$source?>";
+				if(source=="patlist"){
+					parent.$("#doctor_name_"+$("#pat_code").val()).text(data.doctor_name);
+					parent.$(".act_e a").text("展开");
+					parent.$("#doctor_code").val($("#doctor_code_new").val());
+					parent.$(".act_area").hide();
+				}else{
+					parent.$("#tb_doctor_name").text(data.doctor_name);
+					parent.$(".status").text("转医生成功");
+				}
+				parent.layer.close(index);
+			}else{
+				parent.$(".status").text("转医生失败");
+				parent.layer.close(index);
+			}
+		}						
+	})									
+})	
+$("#doclist").change(function(){
+	var doctor_code = $(this).val();
+	var params = {"doctor_code":doctor_code};
+	$.ajax({
+		url:"__URL__/ajax_get_doctorname",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			$("#doctor_code_new").val(doctor_code);
+			$("#change_doc").val(data.doctor_name);
+		}						
+	})
+})
+$("#close").click(function(){
+		parent.layer.closeAll();						  
+})
+})
+
+</script>
+<style type="text/css">
+#doclist{width:95px;float:left; margin-right:10px;}
+#change_doc{float:left;width:120px; padding-left:4px;}
+</style>
+</head>
+<body>
+<form action="__URL__/edit_do" method="post" class="definewidth m20">
+<input type="hidden" id="doctor_code_old" value="{$doctor_code}" />
+<input type="hidden" id="dept_code" value="{$dept_code}" />
+<input type="hidden" id="pat_code" value="{$pat_code}" />
+<input type="hidden" id="reg_id" value="{$reg_id}" />
+
+<table class="table table-bordered table-hover m10">
+
+     <tr>
+        <td class="tableleft" width="40%">患者编号</td>
+        <td>
+ 			{$pat_code}
+        </td>
+    </tr> 
+    <tr>
+        <td class="tableleft" width="40%">患者姓名</td>
+        <td>
+ 			{$pat_name}
+        </td>
+    </tr> 
+     <tr>
+        <td class="tableleft" width="40%">挂号科室</td>
+        <td>
+ 			{$dept_name}
+        </td>
+    </tr> 
+    <tr>
+        <td class="tableleft" width="40%">医生姓名</td>
+        <td>
+              <input type="text" id="change_doc" value="{$doctor_name}" readonly />
+             <select id="doclist">
+             	<volist name='doclist' id="vo">
+             	<option value="{$vo.doctor_code}" <if condition="$doctor_code eq $vo['doctor_code']">selected</if> >{$vo.doctor_name}</option>
+                </volist>
+             </select>
+            
+        </td>
+    </tr> 
+    <tr>
+     
+        <td colspan="2"  height="40">
+          <button type="button" class="btn btn-primary" type="button" id="save" style="width:80px; margin-left:240px;float:left; margin-top:3px;" >确 定</button>
+<button type="button" class="btn btn-danger " type="button" id="close" style="  width:80px; margin-left:5px; margin-top:3px;">关 闭</button>
+
+        </td>
+    </tr>
+</table>
+</form>
+
+</body>
+</html>

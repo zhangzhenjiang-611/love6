@@ -1,0 +1,39 @@
+<include file="Base/head" />
+     <link rel="stylesheet" href="__PUBLIC__/admin/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="__PUBLIC__/admin/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/admin/kindeditor/lang/zh_CN.js"></script>
+    <div class="mws-panel grid_8">
+        <div class="mws-panel-header">
+            <span>添加医院介绍</span>
+        </div>
+        <div class="mws-panel-body no-padding">
+            <form class="mws-form" action="__URL__/insert" method="post" enctype="multipart/form-data">
+                <div class="mws-form-inline">
+                    <if condition="$tips EQ 0 ">
+                        
+                    <else />
+                       <div class="mws-form-message success">
+                            {$tips}
+                        </div>
+                    </if>
+                    <div class="mws-form-row">
+                      
+                        <script type="text/javascript">
+                            var editor;
+                            KindEditor.ready(function(K) {
+                                editor = K.create('textarea[name="title"]', {
+                                    allowFileManager : true
+                                });             
+                            });
+                        </script>
+                        <textarea name="title" style="width:100%;height:300px;visibility:hidden;"></textarea>
+                    </div>
+                </div>
+                <div class="mws-button-row">
+                    <input value="提交" class="btn btn-danger" type="submit">
+                    <input value="重置" class="btn " type="reset">
+                </div>
+            </form>
+        </div>      
+    </div>
+<include file="Base/foot" />

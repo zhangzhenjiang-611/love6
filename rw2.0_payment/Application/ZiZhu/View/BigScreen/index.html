@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main2.css" />
+<if condition="$id eq s02 or $id eq s03 or $id eq s04">  
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/erke.css" />
+<else />
+<!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main2.css" /> -->
+
+</if>
+
+
+<script language="javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js" ></script> 
+<script language="javascript" src="__PUBLIC__/Home/js/ServerClock.js" ></script>  
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)  
+{   
+    var myDate= this;  
+    var str = myDate.toLocaleDateString();  
+    if (showWeek)  
+    {   
+        var Week = ['日','一','二','三','四','五','六'];  
+        str += ' 星期' + Week[myDate.getDay()];  
+    }  
+    return str;  
+}  
+<!-- 
+//window.onerror=function(){return true;} 
+// --> 
+</SCRIPT> 
+<script language="javascript">
+ window.onload = function () {
+        stime();
+    }
+    var c = 0;
+	<?php
+	$weekary = array("日","一","二","三","四","五","六");
+	$W = $weekary[date("w")];
+	?>
+    var Y =<?php echo date('Y')?>, M =<?php echo date('n')?>, D =<?php echo date('j')?>;
+    function stime() {
+        c++
+        sec = <?php echo time() - strtotime(date("Y-m-d"))?>+c;
+        H = Math.floor(sec / 3600) % 24
+        I = Math.floor(sec / 60) % 60
+        S = sec % 60
+        if (S < 10) S = '0' + S;
+        if (I < 10) I = '0' + I;
+        if (H < 10) H = '0' + H;
+        if (H == '00' & I == '00' & S == '00') D = D + 1; //日进位
+        if (M == 2) { //判断是否为二月份******
+            if (Y % 4 == 0 && !Y % 100 == 0 || Y % 400 == 0) { //是闰年(二月有28天)
+                if (D == 30) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //非闰年(二月有29天)
+                if (D == 29) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        else { //不是二月份的月份******
+            if (M == 4 || M == 6 || M == 9 || M == 11) { //小月(30天)
+                if (D == 31) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //大月(31天)
+                if (D == 32) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        if (M == 13) {
+            Y += 1;
+            M = 1;
+        } //年份进位
+        setTimeout("stime()", 1000);
+        $("#times").html(Y + '年' + M + '月' + D + '日 ' + H + ':' + I + ':' + S) 
+    }
+</script>
+<script  language="javascript">
+
+
+function Refresh(){  
+     /* var year = new Date().getFullYear();
+		var month = new Date().getMonth()+1;
+		if(month<10){
+			month = "0"+month;
+		}
+		var day = new Date().getDate();
+		var hour = new Date().getHours();
+		var minutes = new Date().getMinutes();
+		if(minutes<10){
+			minutes = "0"+minutes;
+		}
+		var seconds = new Date().getSeconds();
+		if(seconds<10){
+			seconds = "0"+seconds;
+		}
+		var noon = "";
+		if(hour < 6){noon="凌晨"}
+		else if(hour<9){noon="早上"}
+		else if(hour<12){noon="上午"}
+		else if(hour<14){noon="中午"}
+		else if(hour<17){noon="下午"}
+		else if(hour<19){noon="傍晚"}
+	
+        $("#times").html(year+"年"+month+"月"+day+"号 "+hour+":"+minutes+":"+seconds+' 星期'+'日一二三四五六'.charAt(new Date().getDay()));
+	  */
+	 
+	   //setTimeout("Refresh()",1000);  
+		// $("#times").html(srvClock);
+    }  
+var timer=setTimeout("Refresh()",1000);  
+$(function(){
+	run();
+	 
+});
+function run(){
+	interval = setInterval(getInfo, "<?=$ftimes?>000");  
+	interval = setInterval(tanchuang, "3000");  
+	interval = setInterval(getGuoHao, "8000"); 
+}
+function getGuoHao(){
+		 var params = {"sid":"<?=$id?>"}; 	
+		$.ajax({
+			url:"__URL__/AjaxGetGuoHao", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				var html="";
+				if(data.gh_list!="n"){
+					var gh_list = data.gh_list;
+					
+					for(var i=0;i<gh_list.length;i++){
+						html+="<i> "+gh_list[i]['reg_seq_no']+gh_list[i]['pat_name']+" </i>";
+					}
+					$("#gundong_area").html(html);
+				}else{
+					$("#gundong_area").html("");
+				}
+			} 
+		})	
+  }
+function setCalls(pat_code,noon_flag){ 
+	var params = {"pat_code":pat_code};
+	$.ajax({
+		url:"__URL__/setCalls", 
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			
+		}
+	})
+}
+
+function tanchuang(){
+ var params = {"id":"<?=$id?>"}; 
+ $.ajax({
+			url:"__URL__/tanchuang", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				
+				//(data.now_calling[0].room_txt);
+				var room_txt = "";
+				if(data.now_calling[0].room_txt!=null&&data.sid_now.indexOf(data.sid)!=-1){ 
+					
+		
+						room_txt = data.now_calling[0].room_txt;
+						
+					
+					if($(".zhezhao").is(":hidden"))
+					{
+						$(".zhezhao").css({"display":"block"});
+						$(".dp_info").html("请"+data.now_calling[0].reg_seq_no+"号 "+data.now_calling[0].pat_name+",到"+room_txt+"就诊");
+						$(".zhezhao .one").html(data.now_calling[0].reg_seq_no+"号 "+data.now_calling[0].pat_name);
+						$(".zhezhao .two").html("请到"+room_txt+" "+data.now_calling[0].room_id+"诊室就诊");
+										
+						//alert("当前患者"+data.now_calling[0].pat_name);
+						setTimeout(function(){
+							setCalls(data.now_calling[0].reg_id); 
+							$(".zhezhao").css({"display":"none"}); 
+							
+						}, 8000 );
+					}
+				
+				}else{
+					$(".dp_info").html("祝您早日康复");
+				}
+				
+				
+			}
+		})	
+}
+ function getInfo(){
+  	  var params = {"id":"<?=$id?>"}; 	
+		$.ajax({
+			url:"__URL__/getBigScreenInfo", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				$(".dp_body").html("");
+				if(data['pat_list']!="n"){
+					for(var i=0;i<data['pat_list'].length;i++){
+						var pat_list = data['pat_list'][i];
+						var pat_wait  = pat_list.pat_wait;
+						var wait_list ="";
+						if(pat_list.pat_now!=null&&pat_list.pat_now!=false){
+							var pat_now_reg_id = pat_list.pat_now[0].reg_seq_no;
+							var pat_now_pat_name = pat_list.pat_now[0].pat_name;
+						}else{
+							var pat_now_reg_id = "";
+							var pat_now_pat_name = "";
+						}
+						
+						if(pat_wait!="n"&&pat_wait!=null){
+	
+							for(var a=0;a<pat_wait.length;a++){
+								wait_list+="<span>"+pat_wait[a].reg_seq_no+pat_wait[a].pat_name+" </span>";
+							}
+							
+							
+						}
+						
+						
+						$(".dp_body").append('<ul><li class="dept">'+pat_list.dept_name+'</li><li class="one">'+pat_list.room+'诊室</li><li class="level">'+pat_list.level+'</li><li class="two">'+pat_list.doctor_name+'</li><li class="thr" >'+pat_now_reg_id+''+pat_now_pat_name+'</li><li class="four">'+wait_list+'</li></ul>');
+						
+						
+					}
+				}
+			}
+		})	
+  }
+  
+</script>
+<style type="text/css">
+.zhezhao2{position:absolute; left:1200px; top:698px; width:200px; height:70px;}
+.zhezhao2 .one{ margin-left:22px; margin-right:12px; color:#fff; float:left;}
+.zhezhao2 .two{ color:#fff;}
+.zhezhao2 .one p,.zhezhao2 .two p{letter-spacing:2px; display:block;margin-top:2px;}
+</style>
+<title>大屏信息</title>
+</head>
+
+<body>
+<div class="daping_area">
+<span id="times"></span>
+	<div class="dp_info">祝您早日康复!</div>
+    <div class="dp_title">
+    	<ul>
+        	<li class="one">诊室</li>
+            <li class="two">医生姓名</li>
+            <li class="thr">当前患者</li>
+            <li class="four">等候患者</li>
+        </ul>
+    </div>
+    <div class="dp_body">
+    	<ul>
+        	
+        </ul>
+      
+    </div>
+     <div class="dp_bottom_info"><span class="left">请过号患者到报到机报到：</span><span class="right"><marquee id="gundong_area"></marquee></span></div>
+       <div class="zhezhao" ><div class="one">3号 王小亮</div>
+<div class="two">请到呼吸消化内科1诊室就诊</div></div>
+     <div class="zhezhao2" id="zhezhao2">
+
+	 </div>
+</div>
+</body>
+</html>

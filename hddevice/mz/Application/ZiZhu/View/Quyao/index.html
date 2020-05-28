@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/quyao.css" />
+<if condition="$id eq 's01'">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/floor_one.css" />
+</if>
+<script language="javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js" ></script> 
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)  
+{   
+    var myDate= this;  
+    var str = myDate.toLocaleDateString();  
+    if (showWeek)  
+    {   
+        var Week = ['日','一','二','三','四','五','六'];  
+        str += ' 星期' + Week[myDate.getDay()];  
+    }  
+    return str;  
+}  
+<!-- 
+window.onerror=function(){return true;} 
+// --> 
+</SCRIPT> 
+<script language="javascript">
+function Refresh(){  
+        $("#times").html(new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay()));  
+        setTimeout("Refresh()",1000);  
+    }  
+var timer=setTimeout("Refresh()",1000); 
+$(function(){
+	run();
+	 
+});
+function run(){
+	interval = setInterval(getInfo, "3000");  
+}
+ function getInfo(){
+  	  var params = {"time":"<?=time()?>"}; 	
+		$.ajax({
+			url:"__URL__/getQuYaoList", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				$(".in").html("");
+				var str="";
+				for(var i=0;i<data.length;i++){
+					str+='<div class="qbox"><div class="qnum">'+data[i].pat_code+'</div><div class="name">'+data[i].pat_name+'</div></div>';
+				}
+				$(".in").html(str);
+			}
+		})	
+  }
+</script>
+<style type="text/css">
+
+</style>
+<title>大屏取药信息</title>
+</head>
+
+<body>
+<div class="daping_area">
+<div class="tips">请以下患者到窗口取药</div>
+<div class="in">
+<!--
+<div class="qbox">
+    	<div class="qnum">2345</div>
+        <div class="name">李敏高</div>
+    </div>
+-->
+	
+    
+</div>
+</div>
+</body>
+</html>

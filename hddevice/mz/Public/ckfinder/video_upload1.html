@@ -1,0 +1,389 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="http://www.915net.com/Public/user/jq.tab.js"></script>
+<script src="__PUBLIC__/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.915net.com/Public/autocomplete/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="http://www.915net.com/Public/autocomplete/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="http://www.915net.com/Public/autocomplete/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="http://www.915net.com/Public/autocomplete/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="http://www.915net.com/Public/autocomplete/jquery.ui.autocomplete.css"/> 
+
+<link rel="stylesheet" type="text/css" href="http://www.915net.com/Public/user/member.css" charset="utf-8"/>
+
+
+<script language="javascript" type="text/javascript">
+function addTeam(){
+	if($("#key").val()==""){
+		alert("舞队名称不能为空");
+		return false;
+	}
+	var params = {"uid":<?=session("uid")?>,"tname":$(".iptx2").val()};
+		$.ajax({
+				url:"__URL__/addTeam",
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+					$("#team").append("<option value='"+data.tid+"' selected>"+data.tname+"</option>");
+					$("#atm").html("<a href='void(0)' >添加舞队</a>");
+				}						
+		})	
+}
+function fcs(){
+	$(".iptx2").val("");
+}
+$(function(){
+$(".btn_save_set").click(function(){
+	if($("#vtitle").val()==""){
+		alert("视频名称不能为空");
+		$("#vtitle").focus();
+		return false;
+	}
+
+	if($("#vpath").val()==""){
+		alert("视频地址不能为空");
+		$("#vpath").focus();
+		return false;
+	}
+	
+	/* else{
+		var videoUrl = $("#vpath").val();
+		if(videoUrl.indexOf("tudou.com")=="-1"||videoUrl.indexOf("baidu.com")=="-1"){
+			var checkUrl = $("#vpath").val().indexOf(".html");
+			if(checkUrl=="-1"){
+				alert("视频地址不合法");
+				return false;
+			}
+		}
+	}*/
+	if($("#vpath").val().indexOf(".com")<0){
+		alert("视频地址不合法");
+		$("$vpath").val("");
+		$("$vpath").focus();
+		return false;
+	}
+	if($("#hard_level").val()==""){
+		alert("难易程度不能为空");
+		$("#hard_level").focus();
+		return false;
+	}
+	if($("#speed_level").val()==""){
+		alert("舞蹈速度不能为空");
+		$("#speed_level").focus();
+		return false;
+	}
+	if(editor.document.getBody().getText()==""){
+		alert("视频介绍不能为空");
+		$("#editor1").focus();
+		return false;
+	}
+	var a = document.getElementsByName("TypeID[]");
+	var n = a.length;
+    var k = 0;
+    for (var i=0; i<n; i++){
+        if(a[i].checked){
+            k = 1;
+			if(a[i].value==1){
+				if($("#team").val()==""){
+					alert("没有选择舞队");
+					return false;
+				} 
+			}
+        }
+    }
+	
+	if(k!=1){
+		alert("舞蹈类型不能为空");
+		return false;
+	}
+	$("#videoShare").submit();
+	
+
+})
+var tab = new $.fn.tab({
+		tabList:".uc_tabs a",
+		contentList:".user_info",
+		eventType:"click",
+		tabActiveClass:"current",
+		tabDisableClass:"noActive"	 
+	});	
+	$("#atm a").live('click',function(){
+		$("#atm").html('<input class="iptx2" id="key" name="key" type="text" onclick="fcs()" value="请输入舞队名称" />&nbsp;&nbsp;<input type="button" onclick="addTeam()" value="提交" style="cursor:pointer"/>'	
+		
+			);
+		$("#key").autocomplete({ 
+			source: "__URL__/getTeamKey", 
+			minLength: 1,
+			autoFocus:true
+		}); 
+	
+		return false;
+	})
+
+	$(".mp3type").click(function(){
+		if($(this).attr("checked")==true){
+			if($(this).val()==1){
+				$("#choose_team").show();
+			}
+		}else{
+			if($(this).val()==1){
+				$("#choose_team").hide();
+			}
+		}
+		
+	})
+
+	$("#sign_in_btn").hover(function(){
+		$(".hover_tips").show();
+	},function(){
+		$(".hover_tips").hide();
+	})
+	$(".name_tab").hover(function(){
+		$(".name_tab").addClass("cur");	
+		$(".name_tab .sub_menu").removeClass("hidden");
+	},function(){
+		$(".name_tab").removeClass("cur");
+		$(".name_tab .sub_menu").addClass("hidden");
+	})	
+	
+	$(".info_tab").hover(function(){
+		$(this).addClass("cur");	
+		$(".info_tab .sub_menu").removeClass("hidden");
+	},function(){
+		$(this).removeClass("cur");
+		$(".info_tab .sub_menu").addClass("hidden");
+	})
+})
+</script>
+<style>
+.iptx2{padding:2px 5px; width:100px; color:#666;}
+</style>
+<title><?=session('nickname')?>_分享视频_会员中心_广舞网</title>
+</head>
+
+<body>
+
+<div class="i_header" id="hTopMenu">
+	<include file="Member:header" />
+</div><!--/i_header-->
+
+<div class="uc_container no_right_side">
+    	<div class="inner">
+        	<div class="inner2">
+            	<div class="main_con">
+            	<div class="main_con_in">
+                    
+                	<div class="title">
+                        <h2>分享视频</h2>
+                    </div>
+               
+                <div class="personal">
+                    <style>
+<!--
+.contact .list_title .t_last, .work .list_title .t_last, .edu .list_title .t_last {
+	width : auto;
+}
+.contact .c_last, .work .list .c_last, .edu .list .c_last {
+	width : auto;
+}
+.info_table th{ background:none;}
+-->
+</style>
+									<!--= tabbar -->
+									<div class="uc_tabs">
+										
+										
+                                        <a href="void(0)" onclick="return false;" class="current">视频分享</a>
+										<a href="void(0)" onclick="return false;" >视频上传</a>
+										
+									</div><!--=/ tabbar-->
+																		<!--= toolbar -->
+								
+									                    <!--= user_info -->
+                 
+                    <div class="user_info" style="height:580px;display:block">
+                    	  <div style="color:red;margin-left:46px;">注意：在这里可以分享您在56或优酷网的视频给大家看，如果您要提交参加活动的视频，请回到首页，
+<a href="/act" target="_blank">活动专区</a> 上传</div>
+                         <form method="post" action="/index.php/Member/video_upload_do" id="videoShare">
+                        	<input name="uid" value="<?=session("uid")?>" type="hidden">
+                            <!--== info_table -->
+								<table class="info_table base" style="border:none;">
+                                    <tbody style="display:block">
+                                        <tr>
+                                        	<td width="80"><label>视频名称：</label></td>
+                                            <td class="c1" height="30">                                           
+                                              <input id="vtitle" name="vtitle" class="inp_txt" type="text">
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                        	<td><label>播放地址：</label></td>
+                                            <td class="c1">
+                                             
+                                              <input id="vpath" name="vpath" class="inp_txt" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="c1" align="left">
+                                            <span style="color:red;margin-left:80px;display:block">暂时只支持56和优酷网的播放地址；播放地址的格式如：
+    http://www.56.com/u50/v_OTI5ODU1MDM.html</span>
+                                            <td>
+										</tr>
+                                         <tr>
+                                       		<td><label>舞蹈类型：</label> </td>
+                                            <td class="c1" valign="middle" style="width:635px; line-height:24px;">
+                                               <?php
+                                               	for($i=0;$i<count($dt_list);$i++){
+                                                	echo "<input type='checkbox' class='mp3type' name='TypeID[]' value='".$dt_list[$i]['id']."' />&nbsp;".$dt_list[$i]['name']."&nbsp;&nbsp;";
+                                                }
+                                               ?>
+                                            </td>
+                                        </tr>
+                                        
+										</tbody>
+                                       <tbody id="choose_team" style="display:none">
+                                        <tr>
+                                        	<td><label>舞队选择：</label></td>
+                                            <td class="c1">
+                                               <?php
+                                                if(session("group")==1||session("group")==2){
+                                                	echo '<select name="team" id="team">';
+                                                    echo "<option value=''>请选择所属舞队</option>";
+                                                    for($i=0;$i<count($tlist);$i++){
+                                                    	echo '<option value="'.$tlist[$i]["TeamID"].'">'.$tlist[$i]["tname"].'</option>';
+                                                    }
+                                                    
+                                                    echo '</select>';
+                                                }else{
+                                                	echo '<select name="team" id="team">'; 
+                                                    echo "<option value=''>请选择所属舞队</option>";
+                                                    for($i=0;$i<count($tlist);$i++){
+                                                    	echo "<option value='".$tlist[$i]["TeamID"]."'>".$tlist[$i]["tname"]."</option>";
+                                                      
+													}
+                                                    echo '</select>';
+                                                }
+                                                ?>
+												&nbsp;&nbsp;<span id="atm"><a href="void(0)">添加舞队</a></span>
+                                            </td>
+                                        </tr>
+                                        
+                                      
+                                    </tbody>
+                                    <tbody style="display:block">
+                                      <tr>
+                                        	<td><label>难易程度：</label></td>
+                                            <td>
+                                            <select name="hard_level" id="hard_level">
+                                            	<option value="">请选择难易程度</option> 
+                                            	<option value="简单">简单</option> 
+                                                <option value="中等">中等</option>
+                                                <option value="较难">较难</option>
+                                            </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        	<td><label>舞蹈速度：</label></td>
+                                            <td>
+                                            <select name="speed_level" id="speed_level">
+                                            	<option value="">请选择舞蹈速度</option>
+                                            	<option value="慢速">慢速</option>
+                                                <option value="中速">中速</option>
+                                                <option value="快速">快速</option>
+                                            </select>
+                                            </td>
+                                        </tr>
+                                      <tr>
+                                         	<td><label>视频介绍：</label></td>
+                                            <td class="c1">
+                                             <textarea id="editor1" name="desc"> 
+                                                  <?php
+                                                     echo stripslashes(htmlspecialchars_decode($videoInfo[0]['desc']));
+                                                  ?>
+                                              </textarea>
+                                            <script>
+												var editor = CKEDITOR.replace('editor1',{
+													toolbar : 'MyToolbar',
+													height:"200",
+													width:"636"
+												});
+												
+												
+                                            </script>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <!--== info_table End -->
+                            <div class="btn">
+                                <input class="btn_save_set" value="保存设置" type="button">
+                            </div>
+                        </form>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <!--/ ============================================================================== 修改密码 --> 
+                
+                
+                
+                  <div class="user_info" >
+                        
+                          <?php
+                       require_once  $_SERVER['DOCUMENT_ROOT']."/Public/56/demo/Open.php";
+                        $css='cDElM0RwMSUyNm9uJTNEb24lMjZvbiUzRG9uJTI2b24lM0RvbiUyNm9uJTNEb24lMjZwbyUzRHBvJTI2bCUzRGNuJTI2YyUzRHAxMSUyNnclM0Q3NDAlMjZpJTNEMQ';
+                        $sid = session("uid");
+                        $fields = 'title,content';
+                        $ourl = 'http://www.915net.com/index.php/Member/video_upload_success';
+                        $rurl = 'http://www.915net.com/index.php/Member/video_upload_error';
+                        $params = array(
+                            'fields'=>$fields,
+                            'sid'=>$sid,
+                            'css'=>$css,
+                            'ourl'=>$ourl,
+                            'rurl'=>$rurl,
+						);  
+                       
+                          ?>
+                         <iframe scrolling="no" frameborder="0" src="<?php echo Open::GetPluginApi('Video/CustomEasy',$params);?>" id="theatre-panel" style="height: 500px; width:758px;"  allowtransparency="true" style="background-color=transparent"></iframe>
+                        
+                    </div>
+                    <!--= user_info End --> 
+              
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            	</div><!--/main_con_in-->
+            </div>
+            	
+                
+            
+             <div id="hLeftSide" class="uc_sidebar uc_sidebar_noright">
+        		<include file="Member:left" />
+			</div><!--/uc_sidebar-->
+            </div><!--/inner2-->
+        </div>
+ 
+      
+        
+
+        
+        
+        
+    </div><!--/uc_container-->
+   <div class="user_center_footer">
+	<p>Copyright&copy;2013 915net.com版权所有</p>
+</div>
+</body>
+</html>

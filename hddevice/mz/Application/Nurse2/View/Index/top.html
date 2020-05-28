@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" /> 
+<script language="JavaScript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script type="text/javascript">
+function left(url){  
+	var child_document = window.parent.frames[2].document.title;
+    window.parent.document.title=child_document;  
+	window.parent.frames[1].location = url;
+	
+}
+$(function(){	
+	//顶部导航切换
+	$(".nav li a").click(function(){
+		$(".nav li a.selected").removeClass("selected")
+		$(this).addClass("selected");
+	})	
+})	
+</script>
+
+
+</head>
+
+<body style="background:url(__PUBLIC__/Nurse2/images/topbg.gif) repeat-x;">
+
+    <div class="topleft">
+    <a href="main.html" target="_parent"><img src="__PUBLIC__/Nurse2/images/logo.png" title="系统首页" /></a>
+    </div>
+        
+    <ul class="nav">
+   
+    
+   <if condition="session('uname')  eq 'admin'">
+    <li><a href="/mz/index.php/Nurse2/PatAdd/index/zhenqu/<?=$zhenqu?>" target="rightFrame" onclick="left('__URL__/left/id/fenzhen');"><img src="__PUBLIC__/Nurse2/images/icon01.png" title="分诊管理" /><h2>分诊管理</h2></a></li>
+    <li><a href="__APP__/Nurse2/Index/gnsz" target="rightFrame"  onclick="left('__URL__/left/id/sysconfig');"><img src="__PUBLIC__/Nurse2/images/icon06.png" title="分诊管理" /><h2>系统设置</h2></a></li>
+   
+   <li><a href="__APP__/Nurse2/PatRegList" target="rightFrame" onclick="left('__URL__/left/id/rizhi');"><img src="__PUBLIC__/Nurse2/images/icon03.png" title="日志管理" /><h2>日志管理</h2></a></li>
+   <else />
+    <li><a href="#" target="rightFrame" onclick="return false;"><img src="__PUBLIC__/Nurse2/images/icon01.png" title="分诊管理" /><h2>分诊管理</h2></a></li>
+   </if>
+   <!--  <li><a href="#" onclick="return false;" target="rightFrame" ><img src="__PUBLIC__/Nurse2/images/icon03.png" title="文件管理" /><h2>文件管理</h2></a></li>
+   
+    
+    <li><a href="imgtable.html" target="rightFrame"><img src="__PUBLIC__/Nurse2/images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
+    <li><a href="imglist.html"  target="rightFrame"><img src="__PUBLIC__/Nurse2/images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
+    <li><a href="tools.html"  target="rightFrame"><img src="__PUBLIC__/Nurse2/images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
+    <li><a href="computer.html" target="rightFrame"><img src="__PUBLIC__/Nurse2/images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
+    <li><a href="tab.html"  target="rightFrame"><img src="__PUBLIC__/Nurse2/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
+    -->
+    </ul>
+            
+    <div class="topright">    
+    <ul>
+    <li><span><img src="__PUBLIC__/Nurse2/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
+    <li><a href="#">关于</a></li>
+    <li><a href="__APP__/nlogin/<?=session('zhenqu')?>" target="_parent">退出</a></li>
+    </ul>
+     
+    <div class="user">
+    <span><?=session("uname")?></span>
+   
+    </div>    
+    
+    </div>
+
+</body>
+</html>

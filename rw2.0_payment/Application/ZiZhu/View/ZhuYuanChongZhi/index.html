@@ -1,0 +1,1663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zhuyuanchongzhi/css/base.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/zhuyuanchongzhi/css/index.css" />
+<script language="javascript" src="__PUBLIC__/zhuyuanchongzhi/js/jquery-1.9.1.js" ></script> 
+<script language="javascript" src="__PUBLIC__/zhuyuanchongzhi/js/ServerClock.js" ></script>  
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/laydate/laydate.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/zhuyuanchongzhi/js/my.js"></script>
+<SCRIPT language=javascript> 
+//+---------------------------------------------------  
+//| 日期输出字符串，重载了系统的toString方法  
+//+---------------------------------------------------  
+Date.prototype.toString = function(showWeek)  
+{   
+    var myDate= this;  
+    var str = myDate.toLocaleDateString();  
+    if (showWeek)  
+    {   
+        var Week = ['日','一','二','三','四','五','六'];  
+        str += ' 星期' + Week[myDate.getDay()];  
+    }  
+    return str;  
+}  
+<!-- 
+//window.onerror=function(){return true;} 
+// --> 
+</SCRIPT> 
+<script language="javascript">
+    window.onload = function (){
+        stime();
+        // daojishi(60);
+        $(".btn_area").show();
+        $("#confirm").css({"visibility":"visible"});
+        $("#fanhui").css({"visibility":"visible"});
+        $("#tuichu").css({"visibility":"visible"});
+        $("#business_type").val("住院充值");
+        $("#op_code").val(new Date().Format("yyyyMMddhhmmssS")/*GetRandomNum(10000,99999)*/);
+        $("#op_now").val("zhuyuanhao_shuru");
+        $("#zhuyuanhao").val("");
+        $(card_code).val("2");
+        // var re = window.external.getUserId();
+        //  $("#zzj_id").val(re);
+        $("#zzj_id").val("zzj001");
+        writeLog("住院充值");
+        
+       
+
+    }
+    var c = 0;
+    <?php
+        $weekary = array("日","一","二","三","四","五","六");
+        $W = $weekary[date("w")];
+    ?>
+    var Y =<?php echo date('Y')?>, M =<?php echo date('n')?>, D =<?php echo date('j')?>;
+    function stime(){
+        c++
+        sec = <?php echo time() - strtotime(date("Y-m-d"))?>+c;
+        H = Math.floor(sec / 3600) % 24
+        I = Math.floor(sec / 60) % 60
+        S = sec % 60
+        if (S < 10) S = '0' + S;
+        if (I < 10) I = '0' + I;
+        if (H < 10) H = '0' + H;
+        if (H == '00' & I == '00' & S == '00') D = D + 1; //日进位
+        if (M == 2) { //判断是否为二月份******
+            if (Y % 4 == 0 && !Y % 100 == 0 || Y % 400 == 0) { //是闰年(二月有28天)
+                if (D == 30) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //非闰年(二月有29天)
+                if (D == 29) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+        else { //不是二月份的月份******
+            if (M == 4 || M == 6 || M == 9 || M == 11) { //小月(30天)
+                if (D == 31) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+            else { //大月(31天)
+                if (D == 32) {
+                    M += 1;
+                    D = 1;
+                } //月份进位
+            }
+        }
+       $.ajax({
+            url:"__URL__/getdangqian_timme", 
+            type:'post',
+            dataType:'json',
+            success:function(data){
+                $("#show_times").html(data['rq']+"<span style='margin-right:34px;'>"+data['xq']+"</span>"+data['sj'])
+            }
+        })
+        /********************改为一秒执行一次***********************/
+        setTimeout("stime()", 30000); 
+    }
+</script>
+<script  language="javascript">
+    function setCalls(pat_code,noon_flag){
+        var params = {"pat_code":pat_code};
+        $.ajax({
+            url:"__URL__/setCalls", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){
+                
+            }
+        })
+    }
+</script>
+<script language="javascript">
+var data,datarow;
+var interval = "";
+var interval2 = new Array();
+var interval3 = new Array();
+var countdown = 60;
+var jzk_flag = 0;
+var page = 1;//分页显示第一页
+var page_ks = 1;//分页显示第一页
+var pagedata = null;//排版每页显示记录数
+var pagedata_ks = null;//科室每页显示记录数
+var pagedata = null;
+var ocx;
+var cardNum;
+var now_time = null;
+var moring_time = null;
+var moon_time = null;
+function settime(val) {
+    if (countdown == 1) { 
+        $("#tuichu").trigger("click");
+        countdown = 0; 
+        clearTimeout(interval2);
+        return;
+    } else { 
+        countdown--; 
+        $("#downcount").show().text(countdown);
+    } 
+    
+    var in2 = setTimeout(function() { 
+        settime(val) 
+    },1000);
+    interval2.push(in2);
+    
+} 
+/***
+***倒计时函数
+********/
+function daojishi(etime){
+    for(var key in interval2){
+        clearTimeout(interval2[key]);
+    }
+    countdown = etime;
+    settime(etime);
+}
+function backspace(){ //退格
+    var vals = $("#jz_card_no").val();
+    var vals2 = vals.substring(0,vals.length-1)
+    key_value2 = vals2;
+    $("#jz_card_no").val(key_value2);
+}//取长度为原长度减一的串，实现退格效
+/*******金属密码键盘明文调用开始***************/
+var key_value2 = "";
+function secr_c(str){
+    switch(str){
+    case "ENTER":
+    $("#confirm").trigger("click");
+    break;
+    case "CLEAR":
+    backspace()
+    break;
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+    case "0":
+    case "00":
+    key_value2+=str;
+    break;
+    }
+    $("#jz_card_no").val(key_value2); 
+}
+
+//获取打印纸的状态
+function print_status(zzj_id){
+    var params = {"zzj_id":zzj_id};
+    $.ajax({
+        url:"__URL__/print_status", 
+        type:'post',
+        dataType:'json',
+        data:params,
+        success:function(data){
+        }
+    })
+}
+
+function Transaction(original_cost,current_price){
+    // patient_id    患者id
+    // user_name     患者姓名
+    // out_trade_no  订单号
+    // transaction_type  交易类型
+    // transaction_mode  支付方式
+    // transaction_conente  交易内容
+    // original_cost 原价
+    // current_price 现价
+    // zzj_id        自助机id
+    // alert( $("#patient_id").val()+"患者id");
+    // alert( $("#patient_name").val()+"患者姓名");
+    // alert( $("#stream_no").val()+"订单号");
+    // alert( $("#card_code").val()+"交易类型");
+    // alert($("#pay_type").val()+"支付方式");
+    // alert( $("#business_type").val()+"交易内容");
+    // alert( original_cost+"原价");
+    // alert(current_price+"现价");
+    // alert($("#zzj_id").val()+"自助机id");
+   
+    var params = {"patient_id":$("#patient_id").val(),"user_name":$("#patient_name").val(),"out_trade_no":$("#stream_no").val(),"transaction_type":$("#card_code").val(),"transaction_mode":$("#pay_type").val(),"transaction_conente":$("#business_type").val(),"original_cost":original_cost,"current_price":current_price,'zzj_id':$("#zzj_id").val()};
+    $.ajax({
+        url:"__URL__/transaction_logs",
+        type:'post',
+        dataType:'json',
+        data:params,
+        success:function(data){}
+    })
+
+   
+}
+/*******金属密码键盘明文调用结束***********************/
+$(function(){
+// print_status($("#zzj_id").val());
+/*******数字键盘区开始*******************************************************************************/
+var key_value = "";
+$(".j_keybord_area .key li.num").on("mousedown",function(){
+    //$(".j_keybord_area .key li").removeClass("active");
+    // $(this).addClass("active");
+    // key_value+=$(this).attr("param");
+    // $("#jz_card_no").val(key_value);
+    var jz_card_no=$("#jz_card_no").val();
+    var key_value="";
+    if(jz_card_no.length>0){
+        var key_value=jz_card_no.substr(0,jz_card_no.length+1);
+    }
+    //alert(key_value);
+    $(this).addClass("active");
+    key_value+=$(this).attr("param");
+    //alert(key_value);
+    $("#jz_card_no").val(key_value);
+
+})
+$(".j_keybord_area .key li.del").on("click",function(){
+    var jz_card_no=$("#jz_card_no").val();
+     var a="";
+     if(jz_card_no.length>0){
+     var a=jz_card_no.substr(0,jz_card_no.length-1);
+    }
+    $("#jz_card_no").val(a);    
+    key_value="";
+    key_value2="";
+})
+$(".j_keybord_area .key li").on("mouseup",function(){
+    $(".j_keybord_area .key li").removeClass("active");
+    //$(this).addClass("active");
+})
+/*******数字键盘区结束********************************************************************************/
+/*******建卡数字键盘区开始*******************************************************************************/
+var key_value = "";
+$(".jianka_phone_area .key li.num").on("mousedown",function(){
+    //$(".j_keybord_area .key li").removeClass("active");
+    $(".jianka_phone_area .tips_jianka").text("");
+    $(this).addClass("active");
+    var key_value=$("#jianka_phone").val();
+    key_value+=$(this).attr("param");
+    $("#jianka_phone").val(key_value);
+    $("#jk_phone").val(key_value);
+
+})
+$(".jianka_phone_area .key li.del").on("click",function(){
+    $(".jianka_phone_area .tips_jianka").text("");
+    var jianka_phone=$("#jianka_phone").val();
+    var a="";
+    if(jianka_phone.length>0){
+        var a=jianka_phone.substr(0,jianka_phone.length-1);
+    }
+    $("#jianka_phone").val(a);
+    $("#jk_phone").val(a); 
+    key_value="";
+    key_value2="";
+})
+$(".jianka_phone_area .key li").on("mouseup",function(){
+    $(".jianka_phone_area .key li").removeClass("active");
+    //$(this).addClass("active");
+})
+/*******身份证数字键盘开始********************************************************************************/
+$(".j_keybord_area_sfz .key li.num").on("mousedown",function(){
+    //$(".j_keybord_area .key li").removeClass("active");
+    /*$(this).addClass("active");
+    key_value+=$(this).attr("param");
+    $("#jz_card_no_sfz").val(key_value);*/
+    //$(".j_keybord_area .key li").removeClass("active");
+    var jz_card_no_sfz=$("#jz_card_no_sfz").val();
+    var key_value="";
+    if(jz_card_no_sfz.length>0){
+        var key_value=jz_card_no_sfz.substr(0,jz_card_no_sfz.length+1);
+    }
+    //alert(key_value);
+    $(this).addClass("active");
+    key_value+=$(this).attr("param");
+    //alert(key_value);
+    $("#jz_card_no_sfz").val(key_value);
+
+})
+$(".j_keybord_area_sfz .key li.del").on("click",function(){
+    var jz_card_no_sfz=$("#jz_card_no_sfz").val();
+     var a="";
+     if(jz_card_no_sfz.length>0){
+     var a=jz_card_no_sfz.substr(0,jz_card_no_sfz.length-1);
+    }
+    $("#jz_card_no_sfz").val(a);
+})
+$(".j_keybord_area_sfz .key li").on("mouseup",function(){
+    $(".j_keybord_area_sfz .key li").removeClass("active");
+    //$(this).addClass("active");
+})
+/*******住院输入充值金额数字键盘开始********************************************************************************/
+var key_value1 = "";
+$(".j_keybord_area_chongzhi_shuru .key li.num").on("mousedown",function(){
+
+    //$(".j_keybord_area .key li").removeClass("active");
+      var chongzhi_money=$("#chongzhi_money").val();
+      
+    var key_value1="";
+    if(chongzhi_money.length>0){
+        var key_value1=chongzhi_money.substr(0,chongzhi_money.length+1);
+    }
+    $(this).addClass("active");
+    key_value1+=$(this).attr("param");
+    $("#chongzhi_money").val(key_value1);
+
+})
+$(".j_keybord_area_chongzhi_shuru .key li.del").on("click",function(){
+    var chongzhi_money=$("#chongzhi_money").val();
+    var a="";
+    if(chongzhi_money.length>0){
+        var a=chongzhi_money.substr(0,chongzhi_money.length-1);
+    }
+    $("#chongzhi_money").val(a); 
+
+    
+})
+$(".j_keybord_area_chongzhi_shuru .key li").on("mouseup",function(){
+    $(".j_keybord_area_chongzhi_shuru .key li").removeClass("active");
+    //$(this).addClass("active");
+})
+/*******住院输入住院号键盘开始********************************************************************************/
+var key_value1 = "";
+$(".zhuyuanhao_j_keybord_area .key li.num").on("mousedown",function(){
+
+    //$(".j_keybord_area .key li").removeClass("active");
+    // $(this).addClass("active");
+    // key_value1+=$(this).attr("param");
+    // $("#chongzhi_money").val(key_value1);
+
+    var zhuyuanhao=$("#zhuyuanhao").val();
+    var key_value="";
+    if(zhuyuanhao.length>0){
+        var key_value=zhuyuanhao.substr(0,zhuyuanhao.length+1);
+    }
+    //alert(key_value);
+    $(this).addClass("active");
+    key_value+=$(this).attr("param");
+    //alert(key_value);
+    $("#zhuyuanhao").val(key_value);
+
+})
+$(".zhuyuanhao_j_keybord_area .key li.del").on("click",function(){
+    var zhuyuanhao=$("#zhuyuanhao").val();
+    var a="";
+    if(zhuyuanhao.length>0){
+        var a=zhuyuanhao.substr(0,zhuyuanhao.length-1);
+    }
+    $("#zhuyuanhao").val(a);    
+    
+})
+/*******住院输入充值金额数字键盘结束********************************************************************************/
+$("#tuika").click(function(){
+    window.external.MoveOutCard();
+    //禁止进卡
+    window.external.DisAllowCardIn();
+})
+
+$('#jz_card_no').keydown(function(e){
+    if(e.keyCode==13){
+        $("#confirm").trigger("click");
+    }
+});
+
+$('#jz_card_no_sfz').keydown(function(e){
+    if(e.keyCode==13){
+      $("#confirm").trigger("click");
+    }
+});
+
+
+
+//格式化金额字符串
+function cash(cash){
+    var money = new Number(cash).toFixed(2);
+    var length =parseInt((money*100)).toString().length;
+    var n = 12-length;
+    var yl_cash="";
+    for(i=0;i<n;i++){
+        yl_cash+="0";
+        }
+        return yl_cash+parseInt((money*100).toFixed(2)).toString();
+    }
+//选择银行卡支付
+$("#pay_bank").on("click",function(){
+    $("#op_now").val("xz_yhkpay");
+     window.external.send(1,2); //开启银行卡灯带
+    $("#pay_type").val("yhk");
+    writeLog("选择了银行卡");
+    
+   var total_amount = cash($("#cash").val());
+    $("#total_amount").val(total_amount);
+    bank_info  = window.external.CreditTrans("0000"+$("#zzj_id").val()+"0000"+$("#zzj_id").val()+"C"+total_amount+"");  
+   writeLog("银行卡交易串："+bank_info); //日志
+   var out_trade_no = $("#zzj_id").val()+'cz'+new Date().Format("yyyyMMddhhmmssS");  //银行交易单号
+       $("#stream_no").val(out_trade_no); 
+   var  RespCode = bank_info.slice(0,2); //交易成功码 
+    
+   if(RespCode == "00"){
+         $(".mtnum2").hide();
+        $(".pay_ma_show").hide();
+        $(".pay_success").show();
+        for(var key in interval2){
+          clearTimeout(interval2[key]);
+           }
+
+        $(".pay_success h3").show().html("费用确认中,请稍候..."); 
+        $("#fanhui").css({"visibility":"hidden"});
+            $("#confirm").css({"visibility":"hidden"});
+            $("#tuichu").css({"visibility":"hidden"});
+         var  patient_name  = $("#patient_name").val();
+         var  total_amount  = $("#cash").val();
+         var  patient_id  = $("#patient_id").val();
+
+    if( patient_name !=undefined || total_amount != ""  || patient_id != "" ){
+
+        var params = {"bank_info":bank_info,"total_amount":$("#cash").val(),"subject":"患者"+$("#patient_name").val()+"住院充值","out_trade_no":out_trade_no,"patient_id":$("#patient_id").val()}; 
+            var index_load = "";
+            $.ajax({
+                url:"__URL__/yhk_pay", 
+                type:'post',
+                dataType:'json',
+                data:params,              
+                success:function(data){  
+                    for(var key in interval2){
+                clearTimeout(interval2[key]);
+                  }         
+                    window.external.send(1,4); //关闭灯带
+                    if(data["RespCode"]=="00"){
+                            // 买家银行卡账号写入隐藏域
+                                // alert(data['idCard']+"卡号");
+                                // alert(data['ck_no']+"参考号");
+                                // 买家银行卡交易号写入隐藏域
+                                $("#idCard").val(data['idCard']);
+                                 // 买家银行卡凭证号写入隐藏域
+                                $("#Auth").val(data['pz_no']);
+                                 // 买家银行卡授权号写入隐藏域
+                                 if( data['sc_no'] != undefined){
+                                     $("#Memo").val(data['sc_no']);
+                                 }else{
+                                    $("#Memo").val("无");
+                                 }
+                               
+                                 // 买家银行卡交易日期时间写入隐藏域
+                                $("#TransDate").val(data['jy_no']);
+                                 //银行卡交易状态写入隐藏域
+                                $("#trade_no").val(data["ck_no"]); 
+                               
+                                 /****开始调用缴费确认接口***/
+                                $("#PayStatus").val("银行卡支付成功");
+                               
+                          
+                          writeLog("银行卡支付成功");                      
+                          paySuccessSendToHis($("#card_code").val());
+
+                    }
+
+                }
+            })
+        }else{
+
+              
+            var params = {"bank_info":bank_info,"total_amount":$("#cash").val(),"subject":"患者"+$("#patient_name").val()+"住院充值","out_trade_no":out_trade_no,"patient_id":$("#patient_id").val()}; 
+            var index_load = "";
+            $.ajax({
+                url:"__URL__/yhk_pay", 
+                type:'post',
+                dataType:'json',
+                data:params,              
+                success:function(data){  
+                    for(var key in interval2){
+                clearTimeout(interval2[key]);
+                  }         
+                    window.external.send(1,4); //关闭灯带
+                    if(data["RespCode"]=="00"){
+                            // 买家银行卡账号写入隐藏域
+                                // alert(data['idCard']+"卡号");
+                                // alert(data['ck_no']+"参考号");
+                                // 买家银行卡交易号写入隐藏域
+                                $("#idCard").val(data['idCard']);
+                                 // 买家银行卡凭证号写入隐藏域
+                                $("#Auth").val(data['pz_no']);
+                                 // 买家银行卡授权号写入隐藏域
+                                 if( data['sc_no'] != undefined){
+                                     $("#Memo").val(data['sc_no']);
+                                 }else{
+                                    $("#Memo").val("无");
+                                 }
+                               
+                                 // 买家银行卡交易日期时间写入隐藏域
+                                $("#TransDate").val(data['jy_no']);
+                                 //银行卡交易状态写入隐藏域
+                                $("#trade_no").val(data["ck_no"]); 
+                               
+                                 /****开始调用缴费确认接口***/
+                                $("#PayStatus").val("银行卡支付成功");
+                               
+                          
+                          writeLog("银行卡支付成功");                      
+                         
+
+                    }
+
+                }
+            })
+
+
+        }
+
+   }else{
+        writeLog("银行卡支付失败");
+         $("#tuichu").trigger("click");
+        window.external.send(1,4); //关闭灯带
+   }
+
+
+
+
+   
+})
+
+
+
+//选择支付宝支付 
+$("#pay_zhifubao").on("click",function(){
+     window.external.send(1,4); //关闭灯带
+    $("#op_now").val("xz_alipay");
+    $("#pay_type").val("alipay");
+    writeLog("选择了支付宝");
+    var out_trade_no = $("#zzj_id").val()+'cz'+new Date().Format("yyyyMMddhhmmssS");
+    $("#stream_no").val(out_trade_no);
+    //  $("#cash").val("0.01");
+    var total_amount = $("#cash").val();
+    var params = {"out_trade_no":out_trade_no,"total_amount":total_amount,"subject":"患者"+$("#patient_name").val()+"住院充值","pay_type":$("#pay_type").val()}; 
+    var index_load = "";
+    $.ajax({
+        url:"__URL__/ajaxGetPayUrl", 
+        type:'post',
+        dataType:'json',
+        data:params,
+        beforeSend:function(){
+            index_load = layer.msg('支付二维码请求中,请稍候...', {icon: 16,time:20000});
+        },
+        success:function(data){
+            layer.close(index_load);
+            daojishi(180);
+            $(".mtnum2").hide();
+            $(".pay_ma_show").show();
+            $("#fanhui").css({"visibility":"hidden"});
+            $("#confirm").css({"visibility":"hidden"});
+            $("#tuichu").css({"visibility":"hidden"});
+            $("#stream_no").val(out_trade_no);
+            $(".pay_ma_show h3").text("支付宝扫一扫付款");
+            $(".pay_ma_show .pay_val").text("￥"+total_amount);
+            $(".pay_ma_show .erweima").html("<img src='http://172.18.1.23/"+data['message']['imgurl']+"' width='240px' />");
+            s1 = setInterval(function(){
+                getResult(out_trade_no);                             
+            },5000); 
+            interval2.push(s1);
+        }
+    })
+})
+
+//选择微信支付 
+$("#pay_weixin").on("click",function(){
+   // window.external.send(1,4); //关闭灯带
+    $("#op_now").val("xz_weixin");
+
+    $("#pay_type").val("wxpay");
+    writeLog("选择了微信");
+    var out_trade_no = $("#zzj_id").val()+"cz"+new Date().Format("yyyyMMddhhmmssS");
+    $("#stream_no").val(out_trade_no);
+    // $("#cash").val("0.01");
+    var total_amount = $("#cash").val();
+    var params = {"out_trade_no":out_trade_no,"total_amount":total_amount,"subject":"患者"+$("#patient_name").val()+"住院充值","pay_type":$("#pay_type").val()}; 
+    var index_load = "";
+    $.ajax({
+        url:"__URL__/ajaxGetPayUrl", 
+        type:'post',
+        dataType:'json',
+        data:params,
+        beforeSend:function(){
+            index_load = layer.msg('支付二维码请求中,请稍候...', {icon: 16,time:20000});
+        },
+        success:function(data){
+            layer.close(index_load);
+            $(".mtnum2").hide();
+            $(".pay_ma_show").show();
+            $("#fanhui").css({"visibility":"hidden"});
+            $("#confirm").css({"visibility":"hidden"});
+            $("#tuichu").css({"visibility":"hidden"});
+            daojishi(180);
+            $("#stream_no").val(out_trade_no);
+             $(".pay_ma_show h3").text("微信扫一扫付款");
+            $(".pay_ma_show .pay_val").text("￥"+total_amount);
+            $(".pay_ma_show .erweima").html("<img src='http://172.18.1.23/"+data['message']['imgurl']+"' width='240px' />");
+            s1 = setInterval(function(){
+                getResult(out_trade_no,s1);                             
+            },5000); 
+            interval2.push(s1);
+        }
+    }) 
+})
+/***轮询调用查询接口是否支付成功**/
+function getResult(out_trade_no,s1){
+    var pay_type = $("#pay_type").val();
+    var params = {"out_trade_no":out_trade_no,"pay_type":pay_type};  
+    $.ajax({
+        url:"__URL__/ajaxGetPayStatus", 
+        type:'post',
+        dataType:'json',
+        data:params,
+        success:function(data){
+            switch(pay_type){
+                case "alipay":
+                    if(data.message.PayStatus=="WAIT_BUYER_PAY"){ 
+                        // $("#erweima_show .tips2").hide();
+                        $(".pay_ma_show .tips").show().html("<p>等待患者付款中，请在三分钟内完成付款....</p>");
+                    }
+                    if(data.message.PayStatus=="TRADE_SUCCESS" && data.message.OutTradeNo == $("#stream_no").val()){
+                        // 买家支付宝账号写入隐藏域
+                        $("#idCard").val(data['message']['BuyerLogonId']);
+                        // 买家支付宝交易号写入隐藏域
+                        $("#trade_no").val(data.message.TradeNo);
+                        //支付宝交易状态写入隐藏域
+                        $("#PayStatus").val("支付宝支付成功");
+                        /****开始调用缴费确认接口***/
+                        $(".pay_ma_show").hide();
+                        $(".pay_success").show();
+                        $(".pay_success h3").show().html("费用确认中,请稍候...");
+                        for(var key in interval2){
+                            clearTimeout(interval2[key]);
+                        }
+                        writeLog("支付宝支付成功");
+                        //通知HIS保存
+                        paySuccessSendToHis($("#card_code").val());
+                    }
+                break;
+                case "wxpay":
+                    if(data.message.return_code=="SUCCESS" && data.message.result_code=="SUCCESS" && data.message.out_trade_no == $("#stream_no").val()){
+                        switch(data.message.PayStatus){
+                            case "NOTPAY":
+                                $("#erweima_show .tips2").hide();
+                                // $("#erweima_show .tips").show().html("<p>等待用户付款中，请在三分钟内完成付款....</p>");
+                            break;
+                            case "SUCCESS":
+                                // $("#erweima_show .pic").hide();
+                                $("#erweima_show .tips").html("").hide();
+                                $("#erweima_show .tips2").hide();
+                                $("#erweima_show .jine").hide();
+                                // 买家微信账号openid(用户在商户appid下的唯一标识)写入隐藏域
+                                $("#idCard").val(data['message']['openid']);
+                                // 买家微信订单号写入隐藏域
+                                $("#trade_no").val(data.message.transaction_id);
+                                //微信交易状态写入隐藏域
+                                $("#PayStatus").val("微信支付成功");
+                                /****开始调用缴费确认接口***/
+                                $(".pay_ma_show").hide();
+                                $(".pay_success").show();
+                                $(".pay_success h3").show().html("费用确认中,请稍候...");
+                                for(var key in interval2){
+                                    clearTimeout(interval2[key]);
+                                }
+                                writeLog("微信支付成功");
+                                //通知HIS保存
+                                paySuccessSendToHis($("#card_code").val());
+                            break;
+                        }
+                    }
+                break;
+            }
+        }
+    })      
+}
+/***支付成功回写HIS库***/
+function paySuccessSendToHis(){
+    if($("#business_type").val()=="住院充值"){
+        var card_code = "2";
+        switch(card_code){
+            case '2':
+                var index_load="";
+                var riqi = new Date().Format("yyyy-MM-dd hh:mm:ss");//缴费时间
+                // alert($("#patient_name").val());
+                var params = {"card_code":$("#card_code").val(),"card_no":$("#card_no").val(),"patient_id":$("#patient_id").val(),"pname":$("#patient_name").val(),"zyh": $("#zhuyuan_no").val(),"interid":$("#paysns").val(),"prefee":$("#cash").val(),"pay_type":$("#pay_type").val(),"predate":riqi,"bankno":$("#idCard").val(),"stream_no":$("#stream_no").val(),"op_code":$("#op_code").val(),"zzj_id":$("#zzj_id").val()};
+                $.ajax({
+                    url:"__URL__/chongzhi_save", 
+                    type:'post',
+                    dataType:'json',
+                    data:params,
+                    success:function(data){
+                        if(data["head"]["succflag"]=="1"){
+                            writeLog("住院充值支付成功");
+                            $(".pay_success h3").html("支付成功"+"<br>请收好您的充值凭证。");
+                             //开始往数据库添加数据
+                            Transaction($("#charge_total").val(),$("#cash").val());
+                            var zyh = data["body"]["payinfo"]["zyh"];//病人ID
+                            var paysns = data["body"]["payinfo"]["paysns"];//收据号
+                            var riqi = new Date().Format("yyyy-MM-dd hh:mm:ss");//缴费时间
+                            $("#zhuyuan_no").val(zyh);
+                            var s1="";
+                            var pos = 0;
+                            s1 = "<?xml version='1.0' encoding='utf-8'?>" + "<print_info width='300' height='500'>";
+                           s1 += "<tr font='黑体' size='12' x='10' y='" + (pos += 10) + "' >北京大学第三医院延庆区医院(住院充值)</tr>";                          
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 85) + "' >---------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >患者姓名:"+$("#patient_name").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >住院号:"+$("#zhuyuan_no").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >充值流水号:"+paysns +"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 15) + "' >---------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >实收:"+$("#cash").val()+"元</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >机器编号:"+$("#zzj_id").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >住院充值时间:"+riqi+"</tr>";
+                            if($("#pay_type").val()=="alipay"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付宝帐号："+$("#idCard").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付宝单号："+$("#stream_no").val()+"</tr>";
+                                }
+                            if($("#pay_type").val()=="yhk"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行卡号："+$("#idCard").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行交易单号："+$("#stream_no").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行凭证号："+$("#Auth").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行授权号："+$("#Memo").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行交易时间："+$("#TransDate").val()+"</tr>";
+                                }
+                            if($("#pay_type").val()=="wxpay"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >微信单号："+$("#stream_no").val()+"</tr>";
+                                }
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付状态:"+$("#PayStatus").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >流水号："+$("#trade_no").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >充值成功,请妥善保管好您的充值凭证</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 40) + "' >.</tr>";
+                            s1 += "</print_info>";
+                           window.external.paint(s1,$("#card_no").val(),135,55,80,30);
+                        }else{
+                            $(".pay_success h3").show().html("支付成功,充值失败,请去收费窗口处理");
+                            //保存失败
+                            var riqi = new Date().Format("yyyy-MM-dd hh:mm:ss");//缴费时间;
+                            var s1="";
+                            var pos = 0;
+                            s1 = "<?xml version='1.0' encoding='utf-8'?>" + "<print_info width='300' height='500'>";
+                            s1 += "<tr font='黑体' size='12' x='10' y='" + (pos += 10) + "' >北京大学第三医院延庆区医院(住院充值)</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 85) + "' >--------------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >患者姓名:"+$("#patient_name").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 10) + "' >---------------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='25' x='80' y='" + (pos += 30) + "' >充值失败</tr>";
+                            s1 += "<tr font='黑体' size='25' x='45' y='" + (pos += 40) + "' >请保存此凭证</tr>";
+                            s1 += "<tr font='黑体' size='25' x='10' y='" + (pos += 40) + "' >请去缴费窗口处理</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 40) + "' >---------------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >实收:"+$("#cash").val()+"元</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >机器编号:"+$("#zzj_id").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >住院充值时间:"+riqi+"</tr>";
+                            if($("#pay_type").val()=="alipay"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付宝帐号："+$("#idCard").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付宝单号："+$("#stream_no").val()+"</tr>";
+                                }
+                            if($("#pay_type").val()=="yhk"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行卡号："+$("#idCard").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行交易单号："+$("#stream_no").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行凭证号："+$("#Auth").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行授权号："+$("#Memo").val()+"</tr>";
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >银行交易时间："+$("#TransDate").val()+"</tr>";
+                                }
+                            if($("#pay_type").val()=="wxpay"){
+                                s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >微信单号："+$("#stream_no").val()+"</tr>";
+                                }
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >支付状态:支付成功</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >流水号："+$("#trade_no").val()+"</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 10) + "' >---------------------------------------------</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 20) + "' >*温馨提示：请保存此凭证，做为退款凭证</tr>";
+                            s1 += "<tr font='黑体' size='10' x='10' y='" + (pos += 40) + "' >.</tr>";
+                            s1 += "</print_info>";
+                            // alert(s1);
+                             window.external.paint(s1,$("#card_no").val(),135,55,80,30);
+                            
+                        }
+                        
+                        //开始记录交易信息
+                        var business_type = $("#business_type").val();
+                        // 卡类型(0是就诊卡 1是医保卡)
+                        var card_type = $("#card_code").val();
+                        // 就诊卡卡号或者医保卡号
+                        var pat_card_no = $("#card_no").val();
+                        // 买家支付宝账号
+                        var id_card_no = $("#idCard").val();
+                        // 病人ID
+                        var pat_id = $("#patient_id").val();
+                        // 病人姓名
+                        var pat_name = $("#patient_name").val();
+                        // 病人性别
+                        var pat_sex = $("#patient_sex").val();
+                        // 自费加医保支付总金额
+                        var charge_total = $("#charge_total").val();
+                        // 支付宝,微信支付金额
+                        var cash = $("#cash").val();
+                        // 医保个人封闭账号支付
+                        var zhzf = 0;
+                        // 医保统筹支付
+                        var tczf = $("#charge_total").val()-$("#cash").val();
+                        // 支付宝微信交易状态
+                        var trading_state = $("#PayStatus").val();
+                        // HIS状态
+                        var his_state = data['head']['retcode'];;
+                        // 买家支付宝，微信交易号
+                        var trade_no = $("#trade_no").val();
+                        // 自助机id
+                        var zzj_id =$("#zzj_id").val();
+                        // 订单支付时传入的商户订单号
+                        var stream_no = $("#stream_no").val();
+                        // 支付方式(如alipay,wxpay)
+                        var pay_type = $("#pay_type").val();
+                        pay_record(business_type,card_type,pat_card_no,id_card_no,pat_id,pat_name,pat_sex,charge_total,cash,zhzf,tczf,trading_state,his_state,trade_no,zzj_id,stream_no,pay_type);
+                        daojishi(10);
+                        // setTimeout(function(){
+                        //  $("#fanhui").trigger("click"); 
+                        // },10000);
+                    }
+                });
+            break;
+            default:
+                layer.msg("未知错误", {icon: 14,time:2000});
+            break;
+        }
+    }
+}
+/***退出按钮事件***/
+$("#tuichu").on("click",function(){
+    // var patinfo1 = window.external.YYT_YB_GET_PATI($("#zzj_id").val());
+    // var patinfo = window.external.yb_refund($("#MedInsurTranNo").val(),$("#zzj_id").val());
+    // alert(patinfo);
+    // print_status($("#zzj_id").val());
+    // window.external.send(1,4);
+    writeLog("点击退出退到主界面");
+    // $(".main_left_1").show();
+    // $(".main_right_1").show();
+    $(".mtnum2").hide();
+    $("#jz_card_no").val("");
+    $("#jz_card_no_guahao").val("");
+    $("#jz_card_no_guahao_sfz").val("");
+    $("#jz_card_no_sfz").val("");
+    $(".btn_area").hide();
+    $(".op_now").val("");
+      <!--------添加了用户的姓名-------->
+    $("#jz_name").html("");
+    $("#guahao_name").html("");
+    $("#keshi_name").html("");
+    $("#attr_list").html("");
+    $("#sub_list").html("");
+    $(".chose_room h4").html("");
+    $(".tips").html("");
+    $(".pay_ma_show .tips").html("请用手机支付宝扫描付款");
+    $(".pay_ma_show_guahao .tips").html("请用手机支付宝扫描付款");
+    $(".pay_ma_show_guahao .erweima").html("");  
+    $(".pay_ma_show .erweima").html(""); 
+    $(".pay_ma_show .pay_val").html("");
+    $(".pay_ma_show_guahao .pay_val").html("");
+    $(".chufang_list").html("<h4></h4>");
+    $(".yb_op_area .tips").html('');
+    $(".yb_op_area_guahao .tips_guahao").html('');
+    key_value="";
+    key_value2="";
+   
+    window.external.MoveOutCard();
+    window.external.DisAllowCardIn();
+ 
+    //window.external.KeyBoardComClose();
+    //window.external.keybord_close();
+    
+    //UMS_EjectCard();
+    //UMS_CardClose();
+    $(".inhide").val("");
+    $("#downcount").hide();
+    for(var key in interval2){
+        clearTimeout(interval2[key]);
+    }
+    for(var key in interval3){
+        clearInterval(interval3[key]);
+    }
+    /*************************判断明泰读卡器是否需要弹卡开始**********************/
+   
+ 
+    window.location.href="__APP__/ZiZhu/Index";
+    // window.external.webBrowserNavigateHome();
+    
+});
+
+//退出程序
+$("#close").on("click",function(){ 
+  
+    window.external.closeWindow();
+})
+
+
+//选择充值项,显示确认充值信息
+// $(document).on("click",".doctor_list .sure_chongzhi",function(){
+
+//    daojishi(180);
+
+//     var paysns = $(this).attr("paysns");//账单号  充值流水号
+//     var prepaydate = $(this).attr("prepaydate");  //日期
+//     var prepay = $(this).attr("prepay");   //金额
+//     $("#paysns").val(paysns);
+//     $("#prepaydate").val(prepaydate);
+//     $("#prepay").val(prepay);
+      
+//     $("#op_now").val("chongzhi_shuru");
+//     $("#confirm").css({"visibility":"visible"});
+//     $("#fanhui").css({"visibility":"visible"});
+//     $("#tuichu").css({"visibility":"visible"});
+//     $(".mtnum2").hide();
+//     $(".zhuyuanhao_op_area").hide();
+//     $(".chongzhi_shuru").show();
+//     $("#chongzhi_money").val("");//清空充值金额
+   
+//     $(".chongzhi_shuru .one_list").html( $("#patient_name").val());
+//     $(".chongzhi_shuru .thr_list").html($("#zhuyuan_no").val());
+//     $(".chongzhi_shuru .four_list").html( $("#prepay").val()+"元");
+   
+   
+   
+// });
+/*****确定按钮点击事件**********/
+$("#confirm").on("click",function(){
+    var op_now = $("#op_now").val();
+    //alert(op_now);
+    for(var key in interval3){
+        clearInterval(interval3[key]);
+    }
+    /**获取就诊卡患者信息**/
+    switch(op_now){
+        case "zf_pay_bank":
+            daojishi(120);
+            $("#op_now").val("write_bank_password");
+            $(".mtnum2").hide();
+            $(".bank_password").show();
+            $("#confirm").css({"visibility":"hidden"});
+            $(".PinField").focus();
+            pin_flag=window.external.UMS_StartPin();
+            if(pin_flag==0){
+                PinProcess();
+            }
+        break;
+       
+        case "zhuyuanhao_shuru":
+            $(".zhuyuanhao_op_area .tips").text("");
+            //获取住院号
+            var zhuyuanhao = $("#zhuyuanhao").val();
+            if( zhuyuanhao.length=="" ||zhuyuanhao.length !="8"){
+                $(".zhuyuanhao_op_area .tips").text("输入有误,请重新输入");
+                return;
+            }
+            //将此数值放入隐藏域
+            $("#patient_id").val(zhuyuanhao);
+            $("#card_no").val(zhuyuanhao);
+             var params = {"zyh":$("#zhuyuanhao").val(),"patient_id":$("#patient_id").val(),"card_no":$("#card_no").val(),"op_code":$("#op_code").val(),"card_code":$("#card_code").val(),"zzj_id":$("#zzj_id").val()};
+            $.ajax({
+                url:"__URL__/zyyj_chaxun",
+                type:'post',
+                dataType:'json',
+                data:params,
+                beforeSend:function(){
+                    index_load = layer.msg('患者数据查询中,请稍候...', {icon: 16,time:20000});
+                    $("#fanhui").css({"visibility":"hidden"});
+                    $("#confirm").css({"visibility":"hidden"});
+                    $("#tuichu").css({"visibility":"hidden"});
+                },
+                success:function(data){
+                    layer.close(index_load);
+                    if(data["head"]["succflag"]=="1"){
+                        daojishi(60);
+                        $("#op_now").val("chongzhi_list");
+                        $("#confirm").css({"visibility":"visible"});
+                        $("#fanhui").css({"visibility":"visible"});
+                        $("#tuichu").css({"visibility":"visible"});
+                        $(".mtnum2").hide();
+                        $(".zhuyuanhao_op_area").hide();
+                        $(".chose_doctor").show();
+                        var zhuyuan_no =  data['body']["zyh"];//住院号     
+                        var patient_name =  data['body']['pname'];//患者姓名
+                        $("#zhuyuan_no").val(zhuyuan_no); // 住院号放入隐藏域
+                        $("#patient_name").val(patient_name); // 病人姓名放入隐藏域
+                        $(".chose_doctor #jz_name").text(patient_name);
+                         var zhuyuan_list = data['body']["regrecordInfos"]["list"];
+                         
+                        var html="";
+                        if(zhuyuan_list!=undefined || zhuyuan_list!="" || zhuyuan_list.length > 0){
+                    
+                             for(var i=0;i<zhuyuan_list.length;i++){
+                                 html+="<ul><li class='one'>"+zhuyuan_list[i]['paysns']+"</li><li class='two'>"+zhuyuan_list[i]['prepaydate']+"</li><li class='thr'>"+zhuyuan_list[i]['prepay']+"</li><li class='four sure_chongzhi'  paysns='"+zhuyuan_list[i]['paysns']+"' prepaydate='"+zhuyuan_list[i]['prepaydate']+"' prepay='"+zhuyuan_list[i]['prepay']+"' ></li></ul>";
+                                   }
+                             $(".doctor_list").html(html);
+
+                        }else{
+                             $(".doctor_list h4").html("暂无预交费用信息");
+                        }
+                       
+                       
+
+                       
+                    }else{
+                        $("#confirm").css({"visibility":"visible"});
+                        $("#fanhui").css({"visibility":"visible"});
+                        $("#tuichu").css({"visibility":"visible"});
+                        $(".zhuyuanhao_op_area .tips").text(data['head']["retmsg"]);
+                        $("#patient_id").val("")
+                    }
+                }
+            });
+            
+        break;
+        case"chongzhi_list":
+                daojishi(180);
+
+                var paysns = $(this).attr("paysns");//账单号  充值流水号
+                var prepaydate = $(this).attr("prepaydate");  //日期
+                var prepay = $(this).attr("prepay");   //金额
+                $("#paysns").val(paysns);
+                $("#prepaydate").val(prepaydate);
+                $("#prepay").val(prepay);
+                  
+                $("#op_now").val("chongzhi_shuru");
+                $("#confirm").css({"visibility":"visible"});
+                $("#fanhui").css({"visibility":"visible"});
+                $("#tuichu").css({"visibility":"visible"});
+                $(".mtnum2").hide();
+                $(".zhuyuanhao_op_area").hide();
+                $(".chongzhi_shuru").show();
+                $("#chongzhi_money").val("");//清空充值金额
+               
+                $(".chongzhi_shuru .one_list").html( $("#patient_name").val());
+                $(".chongzhi_shuru .thr_list").html($("#zhuyuan_no").val());
+                $(".chongzhi_shuru .four_list").html( $("#prepay").val()+"元");
+
+        break;
+       
+        case "chongzhi_shuru":
+            // 获取充值金额
+            var czje = $("#chongzhi_money").val();
+            var reg = /^[1-9]\d*$/;
+            if(!reg.test(czje)){
+                $(".chongzhi_shuru .tips").text("输入有误"); 
+                return;
+            }else{
+                $(".chongzhi_shuru .tips").text(""); 
+            }
+            // 将充值金额放入隐藏域
+            $("#czje").val(czje);
+            // alert($("#czje").val());
+            // 将充值金额放入隐藏域
+            $("#cash").val(czje);
+            $(".mtnum2").hide();
+            $(".chongzhi_queren").show();
+            var riqi =  new Date().Format("yyyy-MM-dd");
+            $(".chongzhi_queren .p1 .uname").text($("#patient_name").val());
+            $(".chongzhi_queren .p6 .zyh").text($("#zhuyuan_no").val());
+            $(".chongzhi_queren .p6 .pid").text($("#patient_id").val());
+            $(".chongzhi_queren .p6 .czje").text($("#czje").val()+"元");
+            $(".chongzhi_queren .p6 .czsj").text(riqi);
+            $("#op_now").val("chongzhi_queren");
+            daojishi(120);
+        break;
+        case "chongzhi_queren":
+            $(".mtnum2").hide();
+            $(".chongzhi_queren").hide();
+            $(".chose_pay_type_area").show();
+            $("#confirm").css({"visibility":"hidden"});
+            $("#op_now").val("chose_pay_type");
+        break;
+        default:
+            return false;
+        break;
+    }
+        return false;
+})
+/******
+**返回按钮功能处理
+****/
+$("#fanhui").on("click",function(){
+    //alert($("#op_now").val());
+    switch($("#op_now").val()){
+        //从选择卡类型界面返回到首页
+        case "zhuyuanhao_shuru":
+            $("#op_now").val("zhuyuanhao_shuru");
+            window.location.href="__APP__/ZiZhu/Index";
+            // window.external.webBrowserNavigateHome();
+        break;
+         // 输入充值列表返回到输入住院号
+        case "chongzhi_list":
+            $("#chongzhi_money").val("");
+            $("#zhuyuanhao").val("");
+            $(".mtnum2").hide();
+            $(".chose_doctor").hide();
+            $(".zhuyuanhao_op_area").show();
+            $("#fanhui").css({"visibility":"visible"});
+            $("#tuichu").css({"visibility":"visible"});
+            $("#confirm").css({"visibility":"visible"});
+            $("#op_now").val("zhuyuanhao_shuru");
+             daojishi(60);
+        break;
+        // 输入充值金额返回到充值列表
+        case "chongzhi_shuru":
+            $("#chongzhi_money").val("");
+            $("#zhuyuanhao").val("");
+            $(".mtnum2").hide();
+            $(".chongzhi_shuru").hide();;
+            $(".chose_doctor").show();
+            $("#fanhui").css({"visibility":"visible"});
+            $("#tuichu").css({"visibility":"visible"});
+            $("#confirm").css({"visibility":"visible"});
+            $("#op_now").val("chongzhi_list");
+             daojishi(60);
+        break;
+        // 从充值确认返回到输入充值金额
+        case "chongzhi_queren":
+             daojishi(60)
+            $(".mtnum2").hide();
+            $(".chongzhi_queren").hide();
+            $(".chongzhi_shuru").show();
+            $("#op_now").val("chongzhi_shuru");
+            $("#fanhui").css({"visibility":"visible"});
+            $("#tuichu").css({"visibility":"visible"});
+            $("#confirm").css({"visibility":"visible"});
+        break;
+        // 从选择支付方式返回到充值信息确认页面
+        case "chose_pay_type":
+            daojishi(60)
+            $(".mtnum2").hide();
+            $(".chose_pay_type_area").hide();
+            $(".chongzhi_queren").show();
+            $("#op_now").val("chongzhi_queren");
+            $("#fanhui").css({"visibility":"visible"});
+            $("#tuichu").css({"visibility":"visible"});
+            $("#confirm").css({"visibility":"visible"});
+           /* $(".guahao_queren .p1 .uname").text($("#patient_name").val());
+            $(".guahao_queren .p2 .card_no").text($("#card_no").val());
+            $(".guahao_queren .p6 .hbmc").text($("#hbmc").val());
+            $(".guahao_queren .p6 .ksmc").text($("#ksmc").val());
+            $(".guahao_queren .p6 .ysxm").text($("#ysxm").val());
+            $(".guahao_queren .p6 .ysfwf").text($("#ysfwf").val());
+            $(".guahao_queren .p6 .czsj").text($("#czsj").val());
+            $(".guahao_queren .p6 .charge_total").text($("#charge_total").val());
+            $(".guahao_queren .p6 .cash").text($("#cash").val());
+            $(".guahao_queren .p6 .ybzf").text($("#tczf").val());*/
+        break;
+    }                              
+})
+})
+
+/**
+*日志记录函数
+**/
+function writeLog(logtxt,logtype){
+    var params = {"log_txt":logtxt,"log_type":logtype,"card_code":$("#card_code").val(),"card_no":$("#card_no").val(),"patient_id":$("#patient_id").val(),"direction":"操作步骤","op_code":$("#op_code").val(),"zzj_id":$("#zzj_id").val()};
+    $.ajax({
+            url:"__URL__/writeLogs", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){}
+    })
+}
+
+/********交易记录*******/
+function pay_record(business_type,card_type,pat_card_no,id_card_no,pat_id,pat_name,pat_sex,charge_total,cash,zhzf,tczf,trading_state,his_state,trade_no,zzj_id,stream_no,pay_type){
+        //alert(dept_code+","+dept_name+","+doctor_code+","+doctor_name+","+card_type+","+business_type+","+pat_card_no+","+healthcare_card_no+","+id_card_no+","+pat_id+","+pat_name+","+pat_sex+","+charge_total+","+cash+","+zhzf+","+tczf+","+trading_state+","+healthcare_card_trade_state+","+his_state+","+bank_card_id+","+reg_info+","+trade_no+","+zzj_id+","+stream_no);
+        var params = {"business_type":business_type,"card_type":card_type,"pat_card_no":pat_card_no,"id_card_no":id_card_no,"pat_id":pat_id,"pat_name":pat_name,"pat_sex":pat_sex,"charge_total":charge_total,"cash":cash,"zhzf":zhzf,"tczf":tczf,"trading_state":trading_state,"his_state":his_state,"trade_no":trade_no,"zzj_id":zzj_id,"stream_no":stream_no,"pay_type":pay_type}; 
+        //alert("开始记录交易数据");
+        $.ajax({
+            url:"__URL__/witeJyRecordToDataBase", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){
+                
+            }
+        })
+}
+
+function pay_record_bank(){
+        var params = {"RespCode":$("#RespCode").val(),"RespInfo":$("#RespInfo").val(),"idCard":$("#idCard").val(),"Amount":$("#Amount").val(),"trade_no":$("#trade_no").val(),"Batch":$("#Batch").val(),"TransDate":$("#TransDate").val(),"Ref":$("#Ref").val(),"pat_id":$("#patient_id").val(),"subject":$("#subject").val(),"business_type":$("#business_type").val(),"out_trade_no":$("#stream_no").val()}; 
+        $.ajax({
+            url:"__URL__/witeJyRecordToDataBaseBank", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){
+            }
+        })
+}
+
+function bank_refund(){
+        var params = {"out_trade_no":$("#stream_no").val(),"refund_status":$("#refund_bank").val()}; 
+        $.ajax({
+            url:"__URL__/witeJyRecordToDataBaseRefundBank", 
+            type:'post',
+            dataType:'json',
+            data:params,
+            success:function(data){
+            }
+        })
+}
+
+//ocx控件方法
+//初始化控件
+
+// 对Date的扩展，将 Date 转化为指定格式的String
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+// 例子： 
+// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
+// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+Date.prototype.Format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+</script>
+<style type="text/css">
+</style>
+<title>住院充值</title>
+</head>
+<body>
+ <!--主题 -->
+<input type="hidden" class="inhide" id="subject"  value="" />
+ <!--患者住院号 -->
+<input type="hidden" class="inhide" id="zhuyuan_no"  value="" />
+<!--患者入院时间 -->
+<input type="hidden" class="inhide" id="ruyuan_time"  value="" />
+<!--患者预交账单号-->
+<input type="hidden" class="inhide" id="paysns"  value="" />
+<!--患者预交日期-->
+<input type="hidden" class="inhide" id="prepaydate"  value="" />
+<!--患者预交金额-->
+<input type="hidden" class="inhide" id="prepay"  value="" />
+<!--患者预交金剩余额 -->
+<input type="hidden" class="inhide" id="shengyu_money"  value="" />
+<!--患者充值金额 -->
+<input type="hidden" class="inhide" id="czje"  value="" />
+<!--京医通缴费前账户余额 -->
+<input type="hidden" class="inhide" id="jyt_balancebefore"  value="" />
+<!--京医通缴费后账户余额 -->
+<input type="hidden" class="inhide" id="jyt_balanceafter"  value="" />                                       
+<!--京医通余额 -->
+<input type="hidden" class="inhide" id="jyt_balance"  value="" />
+<!--京医通生成新的交易流水号 -->
+<input type="hidden" class="inhide" id="jyt_tradeno"  value="" />
+<!--医保分解流水号 -->
+<input type="hidden" class="inhide" id="MedInsurTranNo"  value="" />
+<!--医保保存返回xml -->
+<input type="hidden" class="inhide" id="TradeInfo"  value="" />
+<!--医保分解返回xml -->
+<input type="hidden" class="inhide" id="DivideInfo"  value="" />
+<!--医保类型 -->
+<input type="hidden" class="inhide" id="FundType"  value="" />
+<!--HIS返回的挂号时间 -->
+<input type="hidden" class="inhide" id="riqi"  value="" />
+<!-- 自助机ID -->
+<input type="hidden" id="zzj_id"  value="{$zzj_id}" />
+
+<!-- 医保读卡返回串 -->
+<input type="hidden" class="inhide" id="yibao_patinfo" />
+<!--医保自助建卡电话-->
+<input type="hidden" class="inhide" id="jk_phone" />
+<!-- JIS产生就诊序号 -->
+<input type="hidden" class="inhide" id="VisitNo" />
+
+<!-- 日期+号别+时间 -->
+<input type="hidden" class="inhide" id="rq_hb_sj" />
+<!-- 候诊地点/科室位置 -->
+<input type="hidden" class="inhide" id="location_info" />
+<!-- 预约日期 -->
+<input type="hidden" class="inhide" id="yuyue_riqi" />
+<!-- 一级科室代码 -->
+<input type="hidden" class="inhide" id="yjksdm" />
+<!-- 二级科室代码 -->
+<input type="hidden" class="inhide" id="ksdm" />
+<!-- 二级科室名称 -->
+<input type="hidden" class="inhide" id="ksmc" />
+<!-- 医生姓名 -->
+<input type="hidden" class="inhide" id="ysxm" />
+<!-- 医生代码 -->
+<input type="hidden" class="inhide" id="ysdm" />
+<!-- 挂号级别代码 号别编码 -->
+<input type="hidden" class="inhide" id="hbbm" />
+<!-- 挂号级别名称 号别名称 -->
+<input type="hidden" class="inhide" id="hbmc" />
+<!-- 上下午代码 -->
+<input type="hidden" class="inhide" id="sxw" />
+<!-- 上下午名称 -->
+<input type="hidden" class="inhide" id="apm" />
+<!-- 出诊时间 -->
+<input type="hidden" class="inhide" id="czsj" />
+<!--添加了号源类别的隐藏域 1是专家号,2是普通号-->
+<input type="hidden" class="inhide" id="hao_type" />
+<!-- 预约ID -->
+<input type="hidden" class="inhide" id="yyid" />
+<!-- 操作码 -->
+<input type="hidden" class="inhide" id="op_code" value=""/>
+<input type="hidden" class="inhide" id="dingshi" value=""/>
+<!-- 卡号 -->
+<input type="hidden" class="inhide" id="card_no" value=""/>
+<!-- 卡类型 -->
+<input type="hidden" class="inhide" id="card_code" value=""/>
+
+<input type="hidden" class="inhide" id="times" value="" />
+<!--添加了病人ID-->
+<input type="hidden" class="inhide" id="patient_id" />
+<!-- 病人姓名 -->
+<input type="hidden" class="inhide" id="patient_name" value="" />
+<!--病人性别  -->
+<input type="hidden" class="inhide" id="patient_sex" value="" />
+<!-- 病人年龄 -->
+<input type="hidden" class="inhide" id="patient_age" value="" />
+<!-- 医事服务费 -->
+<input type="hidden" class="inhide" id="ysfwf" value=""/>
+<!-- 医保,自费总金额 -->
+<input type="hidden" class="inhide" id="charge_total" value=""/>
+<!-- 自费金额 -->
+<input type="hidden" class="inhide" id="cash" />
+<!-- 账户支付金额 -->
+<input type="hidden" class="inhide" id="zhzf" />
+<!-- 医保支付金额 -->
+<input type="hidden" class="inhide" id="tczf" />
+<!-- 账户支付 -->
+<input type="hidden" class="inhide" id="zhzf" value=""/>
+<input type="hidden" class="inhide" id="pay_seq" value=""/>
+<!--本地交易流水号-->
+<input type="hidden" id="stream_no" value=""/> 
+<!-- 买家支付宝，微信交易流水号 -->
+<input type="hidden" class="inhide" id="trade_no" value=""/>
+<!-- 买家支付宝,微信账号 -->
+<input type="hidden" class="inhide" id="idCard" value=""/>
+<!-- 支付宝，微信交易状态 -->
+<input type="hidden" class="inhide" id="PayStatus" value=""/>
+<input type="hidden" class="inhide" id="times_order_no"  value=""/>
+<input type="hidden" class="inhide" id="dept_code" value=""/>
+<input type="hidden"  class="inhide" id="tansType" value="00"  />
+<input type="hidden" class="inhide" id="reponse_name" value="" />
+<input type="hidden" id="daojishi" class="inhide" value=""/>
+<input type="hidden" id="business_type" class="inhide" value=""/>
+<input type="hidden" id="pay_type" class="inhide" value=""/>
+<input type="hidden" id="yb_flag" class="inhide" value=""/>
+<input type="hidden" id="record_sn" class="inhide" value=""/>
+<input type="hidden" id="bank_card_num" class="inhide" value=""/>
+<input type="hidden" id="personcount" class="inhide" value=""/>
+<!--银联隐藏域-->
+<input type="hidden" id="refund_bank" class="inhide" value=""/>
+<input type="hidden" id="T_RespCode" class="inhide" value=""/>
+<input type="hidden" id="RespCode" class="inhide" value=""/>
+<input type="hidden" id="RespInfo" class="inhide" value=""/>
+<input type="hidden" id="CardNo" class="inhide" value=""/>
+<input type="hidden" id="Amount" class="inhide" value=""/>
+<input type="hidden" id="Trace" class="inhide" value=""/>
+<input type="hidden" id="Batch" class="inhide" value=""/>
+<input type="hidden" id="TransDate" class="inhide" value=""/>
+<input type="hidden" id="TransTime" class="inhide" value=""/>
+<input type="hidden" id="Ref" class="inhide" value=""/>
+<input type="hidden" id="Auth" class="inhide" value=""/>
+<input type="hidden" id="Memo" class="inhide" value=""/>
+<input type="hidden" id="Lrc" class="inhide" value=""/>
+
+<input type="hidden" id="bank_success" value=""/>
+<!-- 记录当前操作步骤 -->
+<input type="hidden" id="op_now" />
+<div class="main_body">
+    <div style="width:70px; height:70px;float:left;" id="close"></div>
+    <div id="downcount"></div>
+    <div id="show_times">{$riqi} {$xq} &nbsp;{$sj}</div>
+    
+   <div class="main_left_2"  calss="block">
+        <div class="print_notice mtnum2" style="display:none">
+            <h3>打印机缺纸请联系工作人员</h3>
+        </div>
+        <!--选择卡类型-->
+        <div class="chose_card_type_area mtnum2" style="display:none;">
+            <h3>请您选择卡类型</h3>
+            <ul>
+                <li class="ic" id="xz_ic"></li>
+                <li class="jyt" id="xz_jyt"></li>
+                <li class="yibao" id="xz_yibao"></li>
+            </ul>
+        </div>
+        <!--------------输入电话号码操作界面-------------->
+        <div class="jianka_input_phone mtnum2" style="display:none;">
+            <h3>为了您的资金安全,请输入常用手机号码</h3>
+            <input type="text" class="iptx" value="" id="jianka_phone" />
+            <div class="jianka_phone_area">
+                <ul class="img_view"></ul>
+                <ul class="key">
+                    <li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips_jianka"></div>
+            </div>
+        </div>
+        <!----就诊卡操作界面---->
+        <div class="jiuzhen_op_area mtnum2" style="display:none;">
+            <h3>请按图示插入就诊卡</h3>
+            <h3>正面向上，磁条向右向下</h3>
+            <div class="j_keybord_area">
+                <ul class="img_view"></ul>
+                <div class="tips" style="display:block;"></div>
+            </div>
+        </div>
+        <!----S身份证操作界面---->
+        <div class="jiuzhen_op_area_sfz mtnum2" style="display:none;">
+            <h3>请刷身份证或输入身份证号</h3>
+            <input type="text" class="iptx" value="" id="jz_card_no_sfz" />
+            <div class="j_keybord_area_sfz">
+                <ul class="img_view" id="img_view_sfz">
+                </ul>
+                <ul class="key">
+                    <li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                    <li class="num" param="x">x</li>
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips"></div>
+            </div>
+        </div>
+        <!---------------医保卡插入操作界面-------------------->
+        <div class="yb_op_area mtnum2" style="display:none;">
+            <h3>请插入您的医保卡</h3>
+            <div class="tips"></div>
+        </div>
+        <!---------------京医通插入操作界面-------------------->
+        <div class="jyt_op_area mtnum2" style="display:none;">
+            <h3>请插入您的京医通卡</h3>
+            <div class="tips"></div>
+        </div>
+        <!----输入住院号---->
+        <div class="zhuyuanhao_op_area mtnum2" style="display:block;">
+            <h3>请输入住院号</h3>
+            <input type="text" class="iptx" value="" id="zhuyuanhao" />
+            <div class="zhuyuanhao_j_keybord_area">
+                <ul class="img_view"></ul>
+                <ul class="key">
+                    <li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips"></div>
+            </div>
+        </div>
+        <!-- 充值列表 -->
+        <div class="chose_doctor mtnum2" style="display:none;">
+          <!--------添加了患者的姓名-------->
+          <span style="color:#009FD6;font-size:35px;position:absolute;left:35px;" id="jz_name" ></span>
+            <h3 style="font-size:35px">充值记录，点击确认继续充值</h3>
+            <div class="bar_tit">
+                <ul>
+                    <li class="one">充值流水号</li>
+                    <li class="two">预交日期</li>
+                    <li class="thr">预交金额</li>
+                   <!--  <li class="four">预交</li> -->
+                </ul>
+            </div>
+            <div class="doctor_list"> <h4></h4></div>
+        </div>
+          <!-- 住院记录 -->
+        <div class="chongzhi_shuru mtnum2" style="display:none;">
+          <!--------添加了患者的姓名-------->
+          <span style="color:#006f6a;font-size:35px;position:absolute;left:295px;" class="jz_name" ></span>
+            <h3 style="font-size:35px">请输入充值金额</h3>
+            <div class="bar_tit">
+                <ul>
+                    <li class="one">患者姓名:</li>
+                    <li class="one_list"></li>
+                    <li class="thr">住院号:</li>
+                    <li class="thr_list"></li>
+                   <!--  <li class="four">预交金额:</li>
+                    <li class="four_list"></li> -->
+                </ul>
+            </div>
+           <!--  <h3>请输入充值金额</h3> -->
+            <h4>温馨提示：输入格式为整数，如充值100元，输入100</h3>
+            <input type="text" class="iptx" value="" id="chongzhi_money" />
+            <div class="j_keybord_area_chongzhi_shuru">
+                <ul class="img_view" id="img_view_chongzhi">
+                </ul>
+                <ul class="key">
+                    <li class="num" param="1">1</li>
+                    <li class="num" param="2">2</li>
+                    <li class="num" param="3">3</li>
+                    <li class="num" param="4">4</li>
+                    <li class="num" param="5">5</li>
+                    <li class="num" param="6">6</li>
+                    <li class="num" param="7">7</li>
+                    <li class="num" param="8">8</li>
+                    <li class="num" param="9">9</li>
+                    <li class="num" param="0">0</li>
+                   <!--  <li class="num" param=".">.</li> -->
+                    <li class="del">删除</li>
+                </ul>
+                <div class="tips"></div>
+            </div>
+        </div>
+        <!-- 充值确认 -->
+        <div class="chongzhi_queren mtnum2" style="display:none">
+            <h3>请确认充值信息</h3>
+            <ul>
+                <li class="p1"> <span class="txt txt_1">姓名：</span><span class="uname"></span></li>
+                <li class="p6">
+                    <span class="txt">住院号：</span><span class="zyh" ></span>
+                </li>
+                <li class="p6">
+                   <span class="txt">病人ID：</span><span class="pid"></span>
+                </li>
+                <li class="p6">
+                    <span class="txt">收费类别：</span><span class="sflb">住院充值</span>
+                </li>
+                <li class="p6">
+                    <span class="txt">充值金额：</span><span class="czje"></span>
+                </li>
+                <li class="p6">
+                    <span class="txt">日期：</span><span class="czsj"></span>
+                </li>
+            </ul>
+        </div>
+        <!--选择支付方式-->
+        <div class="print_notice mtnum2" style="display:none">
+            <h3>打印机缺纸请联系工作人员</h3>
+        </div>
+        <!--选择卡类型-->
+        <div class="chose_pay_type_area mtnum2" style="display:none">
+            <h3>请选择支付方式</h3>
+            <div style="font-size:20px;"><b>挂号提示：</b><br>
+                1、请选择支付宝,微信，银行卡三种方式进行支付。
+                2、为避免无效支付，请在计时结束前完成支付。
+                3、支付后未打印回执单，请去窗口咨询。
+                4、银联卡,医保卡如有变形会造成不退卡，请去窗口办理业务。
+                </div>
+            <ul>
+                <li id="pay_zhifubao" class="zhifubao">支付宝</li>
+                <li id="pay_weixin" class="weixin">微信</li>
+                <li id="pay_bank" class="bank_s">银行卡</li>
+            </ul>
+        </div>
+        <!--支付宝二维码显示区-->
+        <div class="pay_ma_show mtnum2" style="display:none">
+            <h3>扫一扫付款</h3>
+            <div class="pay_val"></div>
+            <div class="erweima">
+                <img src="" width="240" />
+            </div>
+            <div class="tips">请在五分钟内付款</div>
+        </div>
+        <!--银行卡-->
+        <div class="bank mtnum2" style="display:none">
+            <h3>请插入您的银行卡</h3>
+            <div class="tips" id="bank_tips"></div>
+        </div>
+        <div class="bank_password mtnum2" style="display:none;">
+            <h3>请输入您的银行卡密码</h3>
+            <input type="password" class="PinField1" id="PinField" />
+            <div class="bank_notice_area">
+                <ul class="bank_img_view"></ul>
+                <ul class="bank_lang">
+                    <li class="lang">请不要透漏您的密码！</li>
+                    <li class="lang">输入密码时请注意遮挡！</li>
+                    <li class="lang">密码不足六位请按确认键！</li>
+                </ul>
+            </div>
+            <div class="tips"></div>
+        </div>
+        <!--------------付款成功-------------->
+        <div class="pay_success mtnum2" style="display:none">
+            <h3>操作完毕 !</h3>
+        </div>
+   </div>
+    <div class="btn_area" style="display:none;">
+    <ul>
+        <li id="confirm">确认</li>
+        <li id="fanhui">返回</li>
+        <li id="tuichu">退出</li>
+    </ul>
+    </div>
+</div>
+</div>
+<script> 
+</script> 
+</body>
+</html>

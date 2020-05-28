@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<title>jQuery json省市区街道四级联动地址选择插件</title>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/jianka/chengji/css/address.css">
+
+</head>
+<body>
+
+<label for="Addr" id="areaLabel" class="address">
+	<span>所在地区</span>
+	<input type="text" name="Addr" id="Addr" readonly placeholder="请选择地区">
+</label>
+<div id="addressSelectWrapper">
+	<div id="addressSelect">
+		<div class="tip">
+			<h3>所在地区</h3>
+			<button type="button" id="cancel"></button>
+		</div>
+		<div id="address">
+			<ul class="selected-address">
+				<li class="lastarea" id="lastprovince">请选择</li>
+				<li class="lastarea" id="lastcity">请选择</li>
+				<li class="lastarea" id="lastarea">请选择</li>
+				<!-- <li class="lastarea" id="lasttown">请选择</li> -->
+			</ul>
+			<div class="address-content">
+				<ul id="province"></ul>
+				<ul id="city"></ul>
+				<ul id="area"></ul>
+				<ul id="town"></ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__PUBLIC__/jianka/chengji/js/jquery.min.js"></script>
+<script src="__PUBLIC__/jianka/chengji/js/city.js"></script>
+<script>
+	$(function(){
+		// 地址选择器遮罩层打开与关闭
+		$("#areaLabel").click(function(e){
+			$("#addressSelectWrapper").show();
+			e.stopPropagation();
+		});
+		$(document).click(function () {
+			$("#addressSelectWrapper").hide();
+		});
+		$("#cancel").click(function () {
+			$("#addressSelectWrapper").hide();
+		});
+		$("#addressSelect").click(function (e) {
+			e.stopPropagation();
+		});
+
+		initAddress();
+	});
+
+	//初始化地址选择
+	function initAddress() {
+		$("#Addr").cityLinkage({
+			containerId: 'addressSelectWrapper',
+			getSelectedCode:function(){return $("#Addr").data("code");},
+			callback:function(data) {
+				$("#Addr").val(data.addr).data("code",data.town.code);
+			}
+		});
+	}
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
+<p>来源：<a href="http://www.lanrenzhijia.com/" target="_blank">懒人</a></p>
+</div>
+</body>
+</html>

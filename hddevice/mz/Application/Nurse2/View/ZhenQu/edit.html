@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Nurse2/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/select-ui.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="__PUBLIC__/autocomplete/jquery.ui.autocomplete.css"/>  
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+ 
+	$("#dept_name").autocomplete({ 
+			source: "__URL__/getDeptKey", 
+			minLength: 1,
+			autoFocus:true,
+			mustMatch:true,
+			select: function( event, ui ) {
+				$("#dept_code").val(ui.item.id);
+			}
+			
+	});		
+	$("#dept_area span").live("click",function(){
+		if($(this).attr("have_click")==1){
+			$(this).attr("have_click","0");
+			$(this).find("input").removeAttr("checked");
+			$(this).css({"background":"none","color":"#333333"});
+			$(this).find("i").css({"color":"#333333"});
+			
+		}else{
+			$(this).find("input").attr("checked","checked");
+			$(this).attr("have_click","1");
+			$(this).css({"background":"#5D9019","color":"#ffffff"});
+			$(this).find("i").css({"color":"#ffffff"});
+		}							
+    }) 
+});
+</script>
+<style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+.fl{float:left;}
+#dept_area{ float:left;margin-left:0px;}
+#dept_area span{ display:block;list-style:none; float:left; color:#333; cursor:pointer; margin:5px 0px; margin-right:15px; padding:0px 6px; padding:5px 8px;}
+#dept_area span i{ font-style:normal; margin-left:-15px;color:#333;}
+#dept_area span .chk{ margin-top:3px; color:#fff; float:left;}
+    </style>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__APP__/Nurse2/index/index">首页</a></li>
+    <li><a href="#">诊区信息编辑</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+   
+    
+  <div class="formtitle"><span>编辑诊区信息</span></div>
+    
+  
+    <ul class="forminfo">
+    <form  method="post" action="__URL__/edit_do">
+    <input type="hidden" name="dept_code" />
+<input type="hidden" name="id" value="{$row.id}" />
+    <input type="hidden" name="url" value="{$url}" />
+    
+    <li><label>诊区名称<b>*</b></label><input name="name" type="text" class="dfinput" value="{$row.name}"  style="width:218px;"/></li>
+   <li><label>大屏ID<b>*</b></label><input name="BigScreenID" id="BigScreenID" type="text" class="dfinput" value="{$row.BigScreenID}"  style="width:158px;"/></li>
+    <li><label>语音IP<b>*</b></label><input name="VoiceIP" id="VoiceIP" type="text" class="dfinput" value="{$row.VoiceIP}"  style="width:158px;"/></li>
+     <li><label>报到机语音IP<b>*</b></label><input name="VoiceIP2" id="VoiceIP" type="text" class="dfinput" value="{$row.VoiceIP2}"  style="width:158px;"/></li>
+     <li><label>包含诊室<b>*</b></label><input name="room" id="room" type="text" class="dfinput" value="{$row.room}"  style="width:558px;"/></li>
+   <li style="float:left;"><label>包含科室<b>*</b></label>
+   
+  		<div id="dept_area">
+            	<volist name="dept" id="vo">
+            		<span <if condition="$vo['h'] eq 1">have_click="1" style="background:#5d9019; color:#fff;"</if>><input type="checkbox" value="{$vo.dept_code}"  <if condition="$vo['h'] eq 1">checked</if> name="dept[]" class="fl chk" /><i <if condition="$vo['h'] eq 1">style="color:#fff;"</if>>{$vo.dept_name}</i></span>
+                </volist>
+            </div>
+   </li>
+    
+ 
+   <li><label>所在位置<b>*</b></label><input name="position" id="position" type="text" class="dfinput" value="{$row.position}"  style="width:158px;"/></li>
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确定"/></li>
+    </form>
+    </ul>
+    
+    </div> 
+
+
+
+</body>
+
+</html>

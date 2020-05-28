@@ -1,0 +1,396 @@
+[2020-05-08 13:23:38] 微信支付传入参数：test1588915418,0.01,测试请忽略,hos001
+[2020-05-08 13:23:38] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:28:42] 微信支付传入参数：test1588919322,0.01,测试请忽略,hos001
+[2020-05-08 14:28:42] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:33:43] 微信支付传入参数：test1588919623,0.01,测试请忽略,hos001
+[2020-05-08 14:33:43] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:37:48] 微信支付传入参数：test1588919868,0.01,测试请忽略,hos001
+[2020-05-08 14:37:48] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:37:49] 微信支付传入参数：test1588919869,0.01,测试请忽略,hos001
+[2020-05-08 14:37:49] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:37:49] 微信支付传入参数：test1588919869,0.01,测试请忽略,hos001
+[2020-05-08 14:37:49] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:38:07] 微信支付传入参数：test1588919887,0.01,测试请忽略,hos001
+[2020-05-08 14:38:07] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:38:21] 微信支付传入参数：test1588919901,0.01,测试请忽略,hos001
+[2020-05-08 14:38:21] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:38:36] 微信支付传入参数：test1588919916,0.01,测试请忽略,hos001
+[2020-05-08 14:38:36] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:44:27] 微信支付传入参数：test1588920267,0.01,测试请忽略,hos001
+[2020-05-08 14:44:27] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:49:34] 微信支付传入参数：test1588920574,0.01,测试请忽略,hos001
+[2020-05-08 14:49:34] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:49:36] 微信支付传入参数：test1588920576,0.01,测试请忽略,hos001
+[2020-05-08 14:49:36] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:50:23] 微信支付传入参数：test1588920623,0.01,测试请忽略,hos001
+[2020-05-08 14:50:23] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 14:56:20] 微信支付传入参数：test1588920980,0.01,测试请忽略,hos001
+[2020-05-08 14:56:20] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:03:31] 微信支付传入参数：test1588935811,0.01,测试请忽略,hos001
+[2020-05-08 19:03:31] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:50] 微信支付传入参数：test1588935890,0.01,测试请忽略,hos001
+[2020-05-08 19:04:50] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:53] 微信支付传入参数：test1588935893,0.01,测试请忽略,hos001
+[2020-05-08 19:04:53] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:53] 微信支付传入参数：test1588935893,0.01,测试请忽略,hos001
+[2020-05-08 19:04:53] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:53] 微信支付传入参数：test1588935893,0.01,测试请忽略,hos001
+[2020-05-08 19:04:53] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:54] 微信支付传入参数：test1588935894,0.01,测试请忽略,hos001
+[2020-05-08 19:04:54] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:54] 微信支付传入参数：test1588935894,0.01,测试请忽略,hos001
+[2020-05-08 19:04:54] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:04:54] 微信支付传入参数：test1588935894,0.01,测试请忽略,hos001
+[2020-05-08 19:04:54] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:06:20] 微信支付传入参数：test1588935980,0.01,测试请忽略,hos001
+[2020-05-08 19:06:20] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:06:20] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[zmndse7sg6di4a9r64aawhonz45q2f4v]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588935980]]></out_trade_no><product_id><![CDATA[test1588935980]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[5DBC3AD7D8233EFA6868B36312D6A86B]]></sign></xml>
+
+[2020-05-08 19:06:21] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[XoifrK8FhEdf3p7r]]></nonce_str>
+<sign><![CDATA[9F7733045B95FBD2397B70ABCF36AC58]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08190621727295d8e7ae54961716910800]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=KbZBTdg]]></code_url>
+</xml>
+
+[2020-05-08 19:06:22] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588935980.png</imgurl></Message></root>
+[2020-05-08 19:41:32] 微信支付传入参数：test1588938092,0.01,测试请忽略,hos001
+[2020-05-08 19:41:33] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:41:33] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[x3piuerj7c9henkx2ukl7ligu376nwiq]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588938092]]></out_trade_no><product_id><![CDATA[test1588938092]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[D539BCE543BD6429CA5479B14456CDA8]]></sign></xml>
+
+[2020-05-08 19:41:33] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[KA8OisRwAoZT7Lo6]]></nonce_str>
+<sign><![CDATA[2FAC0A3F3FDB55B694A92C7A89073A89]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx0819413332615299fa3316c31969714800]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=nkCiTtI]]></code_url>
+</xml>
+
+[2020-05-08 19:41:33] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588938092.png</imgurl></Message></root>
+[2020-05-08 19:52:00] 微信支付传入参数：test1588938720,0.01,测试请忽略,hos001
+[2020-05-08 19:52:00] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:52:00] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[5odakwgw07mcszcjti8whwueec02g1ks]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588938720]]></out_trade_no><product_id><![CDATA[test1588938720]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[3E0CA26E89632AC91B6F734E5EEDBEA3]]></sign></xml>
+
+[2020-05-08 19:52:01] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[Rkezc1VLx9tvOOdi]]></nonce_str>
+<sign><![CDATA[638CA54034400CC0B0F9AED7EA030872]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08195201102227de518ef7f41365044900]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=6l82jKm]]></code_url>
+</xml>
+
+[2020-05-08 19:52:01] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588938720.png</imgurl></Message></root>
+[2020-05-08 19:52:01] 支付宝支付传入参数 test1588938721,0.01,测试请忽略,hos001,
+[2020-05-08 19:52:03] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 19:52:41] 微信支付传入参数：test1588938761,0.01,测试请忽略,hos001
+[2020-05-08 19:52:41] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 19:52:41] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[hk1puf3ms5e5yap48xyucjwscmb2qeal]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588938761]]></out_trade_no><product_id><![CDATA[test1588938761]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[417C12C1574B839D99316E63BCB15C4F]]></sign></xml>
+
+[2020-05-08 19:52:42] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[HbBz2SqGvZLJf4V5]]></nonce_str>
+<sign><![CDATA[4E6B0AA12A0A66D85D4662152DD598E8]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx0819524205282002cd23e1e21010789700]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=SCCJxPT]]></code_url>
+</xml>
+
+[2020-05-08 19:52:42] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588938761.png</imgurl></Message></root>
+[2020-05-08 19:52:42] 支付宝支付传入参数 test1588938762,0.01,测试请忽略,hos001,
+[2020-05-08 19:52:42] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:05:35] 微信支付传入参数：test1588939535,0.01,测试请忽略,hos001
+[2020-05-08 20:05:35] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:05:35] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[794m22lgje9wskxus7eymt32rzmpa8i4]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588939535]]></out_trade_no><product_id><![CDATA[test1588939535]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[22E97DBC0A3DB6EBBBBCB5AEC2B0813B]]></sign></xml>
+
+[2020-05-08 20:05:36] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[k4XsjjHpDK131mzV]]></nonce_str>
+<sign><![CDATA[F9625DA3E3B64CE4C587A4956DDE059F]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08200536079885d07c773bcf1219183500]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=dr1MxfT]]></code_url>
+</xml>
+
+[2020-05-08 20:05:36] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588939535.png</imgurl></Message></root>
+[2020-05-08 20:05:36] 支付宝支付传入参数 test1588939536,0.01,测试请忽略,hos001,
+[2020-05-08 20:05:37] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:06:07] 微信支付传入参数：test1588939567,0.01,测试请忽略,hos001
+[2020-05-08 20:06:07] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:06:07] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[92pdi1wugl1n94bg9wn6osr53t9vyq6w]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588939567]]></out_trade_no><product_id><![CDATA[test1588939567]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[5B9092DA1AD06CF4463BBA85860AC226]]></sign></xml>
+
+[2020-05-08 20:06:08] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[NMkAyTRvvYsN5toT]]></nonce_str>
+<sign><![CDATA[0B2C2BA0557C9B5F7BBC5EB0AE875803]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx082006080040792f1ffa52501649058800]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=U7UQYcF]]></code_url>
+</xml>
+
+[2020-05-08 20:06:08] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588939567.png</imgurl></Message></root>
+[2020-05-08 20:06:08] 支付宝支付传入参数 test1588939568,0.01,测试请忽略,hos001,
+[2020-05-08 20:06:09] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:07:20] 支付宝支付传入参数 test1588939640,0.01,测试请忽略,hos001,
+[2020-05-08 20:07:20] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:09:03] 微信支付传入参数：test1588939743,0.01,测试请忽略,hos001
+[2020-05-08 20:09:03] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:09:03] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[kzqvqfams4urf9nfwk4g9ygfz8yf6hid]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588939743]]></out_trade_no><product_id><![CDATA[test1588939743]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[0630FA4E29E634FB43DA3E1630DD8A32]]></sign></xml>
+
+[2020-05-08 20:09:04] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[mJn3STTuKcl3fbel]]></nonce_str>
+<sign><![CDATA[50108A6215E2BC865D679098D94CE13D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08200904221029f2d9dfcbb01133558100]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=C2a9wzo]]></code_url>
+</xml>
+
+[2020-05-08 20:09:04] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588939743.png</imgurl></Message></root>
+[2020-05-08 20:09:04] 支付宝支付传入参数 test1588939744,0.01,测试请忽略,hos001,
+[2020-05-08 20:09:05] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:11:04] 微信支付传入参数：test1588939864,0.01,测试请忽略,hos001
+[2020-05-08 20:11:04] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:11:04] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[1uchclbbcobkn6sulzzuvoluo8bemqfv]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588939864]]></out_trade_no><product_id><![CDATA[test1588939864]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[49443C01B0CCF954D3617C269D18C9F2]]></sign></xml>
+
+[2020-05-08 20:11:04] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[H3EJCieGSQkyq9UC]]></nonce_str>
+<sign><![CDATA[C139400CF17C30D1447B2B6786CE985C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx0820110428938924733543ea1967291700]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=ejk7jzz]]></code_url>
+</xml>
+
+[2020-05-08 20:11:04] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588939864.png</imgurl></Message></root>
+[2020-05-08 20:11:57] 微信支付传入参数：test1588939917,0.01,测试请忽略,hos001
+[2020-05-08 20:11:57] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:11:57] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[5m1shle332m07zkvco8nku6pfyvhzp0l]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588939917]]></out_trade_no><product_id><![CDATA[test1588939917]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[0D0663DE2C5F06D02372B8BF10EAEB0D]]></sign></xml>
+
+[2020-05-08 20:11:57] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[cq4YBzqichxvNiEH]]></nonce_str>
+<sign><![CDATA[4EC980ABCDBBDCE6982907F11C02F912]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx082011577318290cebaa07a31861185500]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=MrKMUcP]]></code_url>
+</xml>
+
+[2020-05-08 20:11:57] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588939917.png</imgurl></Message></root>
+[2020-05-08 20:11:57] 支付宝支付传入参数 test1588939917,0.01,测试请忽略,hos001,
+[2020-05-08 20:11:58] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:13:27] 微信支付传入参数：test1588940007,0.01,测试请忽略,hos001
+[2020-05-08 20:13:27] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:13:27] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[dufywywq0zz0jeg8kq4nxmmzwc09e3b3]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588940007]]></out_trade_no><product_id><![CDATA[test1588940007]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[ECA17D3E710F99845ABD1F00374F7BFE]]></sign></xml>
+
+[2020-05-08 20:13:28] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[QnO1FS5vHdjUB6k2]]></nonce_str>
+<sign><![CDATA[8823964479A43D599F42C9B0B9DEA25E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08201328224456e5637700021377381500]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=PrL5kXa]]></code_url>
+</xml>
+
+[2020-05-08 20:13:28] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588940007.png</imgurl></Message></root>
+[2020-05-08 20:13:28] 支付宝支付传入参数 test1588940008,0.01,测试请忽略,hos001,
+[2020-05-08 20:13:29] 支付宝支付返回参数:stdClass::__set_state(array(
+   'alipay_trade_precreate_response' => 
+  stdClass::__set_state(array(
+     'code' => '40003',
+     'msg' => 'Insufficient Conditions',
+     'sub_code' => 'isv.missing-signature-config',
+     'sub_msg' => '应用未配置对应签名算法的公钥或者证书',
+  )),
+))
+[2020-05-08 20:14:29] 微信支付传入参数：test1588940069,0.01,测试请忽略,hos001
+[2020-05-08 20:14:29] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:14:29] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[1inj2t6snsb6rqhrl2ijkorfwa143uxl]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588940069]]></out_trade_no><product_id><![CDATA[test1588940069]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[007624D5E8DFB653370AEAC42B5771D5]]></sign></xml>
+
+[2020-05-08 20:14:30] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[lrc8mT3h8LAoPeSg]]></nonce_str>
+<sign><![CDATA[563E69F1D64AEBFF48B9CC4AAD2600CB]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx08201430140030acca868dfe1919161700]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=1z222LO]]></code_url>
+</xml>
+
+[2020-05-08 20:14:30] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588940069.png</imgurl></Message></root>
+[2020-05-08 20:15:25] 微信支付传入参数：test1588940125,0.01,测试请忽略,hos001
+[2020-05-08 20:15:25] 
+/******************************************************/
+开始调用 微信 支付
+[2020-05-08 20:15:25] CURL参数xml:<xml><appid><![CDATA[wx4d486e67ef61836e]]></appid><attach><![CDATA[测试请忽略]]></attach><body><![CDATA[测试请忽略]]></body><goods_tag><![CDATA[test]]></goods_tag><mch_id>1409139702</mch_id><nonce_str><![CDATA[zzfg56xxczt9t9r09mpwibqc4vhfaw82]]></nonce_str><notify_url><![CDATA[http://211.159.153.49/mz/Home/AliPay/getWeiXinSynInfo/source/hos001]]></notify_url><out_trade_no><![CDATA[test1588940125]]></out_trade_no><product_id><![CDATA[test1588940125]]></product_id><spbill_create_ip><![CDATA[127.0.0.1]]></spbill_create_ip><sub_mch_id><![CDATA[]]></sub_mch_id><total_fee>1</total_fee><trade_type><![CDATA[NATIVE]]></trade_type><sign><![CDATA[3069AA4AC5EEAE7A102C6CA8C361A4A5]]></sign></xml>
+
+[2020-05-08 20:15:25] CURL返回data:<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx4d486e67ef61836e]]></appid>
+<mch_id><![CDATA[1409139702]]></mch_id>
+<nonce_str><![CDATA[nbhj1IZWG2TC7FFk]]></nonce_str>
+<sign><![CDATA[5235D59D598E45ADE0728CABC1E21006]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx082015255703050ec11cedfc1230671400]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=3ZAL5os]]></code_url>
+</xml>
+
+[2020-05-08 20:15:25] <?xml version="1.0" encoding="utf8"?><root><Message><imgurl>http://localhost:80/rwzb_pay_old/pay_hos001/erweima/test1588940125.png</imgurl></Message></root>

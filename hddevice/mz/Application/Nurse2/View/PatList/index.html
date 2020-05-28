@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$row.pat_name}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+     <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+    
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+	.cls{}
+    </style>
+<script language="javascript">
+/**
+* 删除前确认
+* www.jbxue.com
+*/
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+
+
+
+$(function(){
+$("#pat").focus();
+$("#doctor_code").val("");
+$("#dept_code").val("");
+$("#pat_code").val("");
+
+$(".change_dept").click(function(){
+	var doctor_code = $("#doctor_code").val();
+	var dept_code = $("#dept_code").val();
+	var pat_code = $("#pat_code").val();
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '患者转科室', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       // maxmin: false,
+		move: false,
+        area: ['500px'],
+        content: ['__APP__/Nurse2/PatAdd/change_dept/dept_code/'+dept_code+'/pat_code/'+pat_code+'/zhenqu/<?=$zq?>/source/patlist','yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"250px"});
+})
+
+$(".chadui").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var reg_id = $(this).attr("reg_id");
+	if(doctor_code==""){
+		var  url = "__APP__/Nurse2/PatAdd/pat_chadui/reg_id/"+reg_id+"/dept_code/"+dept_code;
+	}else{
+		var url = "__APP__/Nurse2/PatAdd/pat_chadui/doctor_code/"+doctor_code+"/reg_id/"+reg_id+"/dept_code/"+dept_code;
+	}
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '绿色通道', 
+		offset:['10px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       maxmin: false,
+		move: true,
+        area: ['500px'],
+        content: [url,'yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"465px"});
+})
+
+$(".change_doctor").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var reg_id = $(this).attr("reg_id");
+	if(doctor_code==""){
+		var  url = "__APP__/Nurse2/PatAdd/change_doctor/reg_id/"+reg_id+"/dept_code/"+dept_code+"/source/patlist/zhenqu/{$zhenqu}";
+	}else{
+		var url = "__APP__/Nurse2/PatAdd/change_doctor/doctor_code/"+doctor_code+"/reg_id/"+reg_id+"/dept_code/"+dept_code+"/source/patlist/zhenqu/{$zhenqu}";
+	}
+	var index = layer.open({
+        type: 2,
+        skin: 'layui-layer-lan',
+		
+        title: '患者转医生', 
+		offset:['100px','350px'],
+        //fix: false,
+		shade:0.8,
+        shadeClose: true,
+       // maxmin: false,
+		move: false,
+        area: ['500px'],
+        content: [url,'yes'],
+        end: function(){
+           
+        }
+    });	
+	$("#layui-layer-iframe"+index).css({"height":"250px"});
+})
+$(".fuzhen").click(function(){
+	var doctor_code = $("#doctor_code").val();
+	var dept_code = $(this).attr("dept_code");
+	var pat_code = $("#pat_code").val();
+	var params = {"doctor_code":$(this).attr("doctor_code"),"dept_code":dept_code,"reg_id":$(this).attr("reg_id")};
+	$.ajax({
+		url:"__URL__/fuzhen",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				layer.msg('复诊成功',{icon:1})
+			}else{
+				layer.msg(data.txt,{icon:2})
+			}
+		}						
+	})
+})
+$(".guidui").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var reg_id = $(this).attr("reg_id");
+	var params = {"doctor_code":doctor_code,"dept_code":dept_code,"reg_id":reg_id};
+	$.ajax({
+		url:"__URL__/guidui",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){
+			if(data.success==1){
+				layer.msg('归队成功',{icon:1})
+			}else{
+				layer.msg(data.txt,{icon:2})
+			}
+		}						
+	})
+})
+
+$("#fresh").click(function(){
+	location.reload();						  
+})
+$(".act_e").click(function(){
+	var doctor_code = $(this).attr("doctor_code");
+	var dept_code = $(this).attr("dept_code");
+	var reg_id = $(this).attr("reg_id");
+	if($("#reg_id").val()==""){
+		$("#reg_id").val(reg_id);	
+	}
+	if($("#dept_code").val()==""){
+		$("#dept_code").val(dept_code);	
+	}
+	if($("#doctor_code").val()==""){
+		$("#doctor_code").val(doctor_code);	
+	}
+	if($(this).next(".act_area").is(":visible")){
+		$(this).find("a").text("展开");
+		$(this).next(".act_area").hide();
+	}else{
+		$(this).next(".act_area").show();
+		$(this).find("a").text("收起");
+	}
+	
+	
+})
+$("#submit").click(function(){
+	if($("#pat").val()==""){
+		alert("搜索关键字不能为空");
+		return false;
+	}			
+	return true;
+})
+$(".tablelist tr").mousedown(function(e){ 
+	$("#show_menu").hide();
+	$(".tablelist tr").removeClass("click_style");
+	$("#show_menu .change_doctor").attr({"reg_id":$(this).attr("reg_id"),"dept_code":$(this).attr("dept_code"),"doctor_code":$(this).attr("doctor_code")});
+	$("#show_menu .fuzhen").attr({"reg_id":$(this).attr("reg_id"),"dept_code":$(this).attr("dept_code"),"doctor_code":$(this).attr("doctor_code")});
+	$("#show_menu .guidui").attr({"reg_id":$(this).attr("reg_id"),"dept_code":$(this).attr("dept_code"),"doctor_code":$(this).attr("doctor_code")});
+	$("#show_menu .chadui").attr({"reg_id":$(this).attr("reg_id"),"dept_code":$(this).attr("dept_code"),"doctor_code":$(this).attr("doctor_code")});
+    if(3 == e.which){ 
+  	   $(this).addClass("click_style");
+  	   var x = $(this).position().left;
+	   var y = $(this).position().top;
+	   var xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+	   var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
+       $("#show_menu").show().css({"left":xx+"px","top":yy+"px"});
+   
+    }else if(1 == e.which){ 
+  		$("#show_menu").hide();
+		$(this).addClass("click_style")
+		/*var reg_id = $(this).attr("reg_id");
+		var params = {"reg_id":reg_id};
+		$.ajax({
+			url:"__URL__/ajax_getPatInfo",
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend:function(){
+				$(".pat_info_area").hide();
+				$("#load_area").show();
+			},
+			success:function(data){
+				$("#load_area").hide();
+				$(".pat_info_area").show();
+				var patinfo = data['patinfo'];
+				$("#s_reg_id").html(patinfo['pat_code']);
+				$("#s_pat_name").html(patinfo['pat_name']);
+				$("#s_dept_name").html(patinfo['dept_name']);
+				$("#s_reg_type").html(patinfo['reg_type']);
+				$("#s_baodao").html(patinfo['baodao']);
+				$("#s_jz").html(patinfo['jz_txt']);
+				$("#s_reg_time").html(patinfo['reg_time']);
+			}						
+		}) 
+		*/
+  } 
+})
+$("#show_menu li a").click(function(){
+	$("#show_menu").hide();
+})
+})
+
+</script>
+
+<style>
+body{
+-moz-user-select: none; /*火狐*/
+-webkit-user-select: none; /*webkit浏览器*/
+-ms-user-select: none; /*IE10*/
+-khtml-user-select: none; /*早期浏览器*/
+user-select: none;
+}
+.page a{ margin-left:5px;}
+.table a{ color:#333;}
+.table button{}
+ul,li{ list-style:none; padding:0px; margin:0px;}
+#mbody{width:100%; padding-bottom:26px;}
+#mleft{width:15%; float:left; padding-top:5px; padding-left:1%; padding-right:1%; max-height:1107px; border-bottom:1px solid #ccc; overflow-y:auto;} 
+#mright{width:83%; float:right;}
+#mleft .titbar{ width:100%; height:30px; line-height:32px; background:#2AAAFA;moz-border-radius: 6px;      /* Gecko browsers */
+    -webkit-border-radius: 6px;   /* Webkit browsers */
+    border-radius:6px;            /* W3C syntax */}
+#mleft .titbar span{ font-weight:bold; margin-left:12px; font-size:16px; color:#fff;}
+.rbox dt{ font-size:14px; padding-left:5px; border-bottom:2px solid #ccc; padding-bottom:8px; width:95%;}
+.rbox dd{ margin-left:4px; padding-top:10px;}
+.patinfo_area{width:96%; margin:auto; margin-top:18px;}
+.patinfo_area ul li{float:left;}
+.pattable{width:100%;}
+#patArea tr td{ text-align:center;}
+#caozuo{display:none;}
+.act_e a{display:block; width:100%; height:100%;}
+.act_area{display:none; position:absolute; background:#344D80; border:1px solid #39406D; padding:5px 8px; z-index:9999;}
+
+.page{ padding-bottom:28px; float:right; width:480px;}
+.page span{ float:left;}
+.page a{ margin-left:6px; display:block; width:20px; height:20px; line-height:20px; float:left; border:1px solid #ccc; text-align:center;}
+.page .current{width:20px; background:#0098C6; margin-left:6px; color:#fff; height:20px; line-height:20px; border:1px solid #0098C6; text-align:center;	}
+.page a.next,.page a.prev,.page a.end{ width:45px; line-height:22px;}
+.pat_info_area{ background:#fcfcfc;}
+#pat_table tr td{font-size:14px; height:14px; line-height:14px;}
+#pat_table select{ margin:0px;}
+.bod{ font-weight:bold; color:blue;}
+.search_bt{ font-size:14px; margin-left:10px; float:left; line-height:32px;}
+#show_menu{ width:160px; background:#F0F0F0; position:absolute; display:none;-webkit-box-shadow: 3px 3px 3px;  
+  -moz-box-shadow: 3px 3px 3px;  
+  box-shadow: 3px 3px 3px; border:1px solid #dcdcdc;  }
+#show_menu H3{ font-size:13px; display:block; border-bottom:1px solid #ccc; margin-top:0px;}
+#show_menu ul li{ }
+#show_menu ul li a{border-bottom:1px solid #E0E0E0; border-top:1px solid #fff;display:block; height:30px; line-height:31px; width:130px; background:url(__PUBLIC__/Nurse2/images/dot1.gif) no-repeat 10px 9px; padding-left:30px; font-family:Arial, Helvetica, sans-serif; font-size:13px;}
+#show_menu ul li a.one{ border-top:none;}
+#show_menu ul li a:hover{ background:gray;background:url(__PUBLIC__/Nurse2/images/dot2.gif) no-repeat 10px 9px #E9EFF6;}
+</style>
+</head>
+<body>
+<input type="hidden" id="pat_code" />
+<input type="hidden" id="dept_code" />
+<input type="hidden" id="doctor_code" />
+<input type="hidden" id="reg_id" />
+<div id="show_menu">
+	
+	<ul>
+    	<li><a href="#" class="one change_doctor">调医生</a></li>
+        <li><a href="#" class="fuzhen">复诊</a></li>
+        <li><a href="#" class="guidui">过号归队</a></li>
+        <li><a href="#" class="chadui">插队就诊</a></li> 
+    </ul>
+</div>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">患者管理</a></li>
+    </ul>
+    </div>
+<div id="mbody">
+<div id="mleft">
+<div class="titbar" style="margin-bottom:10px;"><span>诊区科室</span></div>
+
+<volist name="dept_list" id="vo">
+<dl class="rbox">
+<dt><a href="__URL__/index/flag/search/dept_code/{$vo.dept_code}/zhenqu/{$zq}" style="color:#333; margin-right:4px;">{$vo.dept_name}</a><font color="red">({$vo.total})</font></dt>
+<dd>
+<!-- <p>已到患者：<font color="green" size="3"><b>{$vo.bd_yes}</b></font> </p> -->
+<volist name="vo.doclist" id="vo2">
+<a href="__URL__/index/flag/search/doctor_code/{$vo2.fp_doctor_code}/zhenqu/{$zq}">{$vo2.doctor_name}<if condition="$vo2['counts'] neq 0"><font color="blue"><b>({$vo2.counts})</b></font></if></a><br>
+</volist>
+</dd>
+</dl>
+</volist>
+</div>
+<div id="mright">
+
+ <div class="tools" style="margin-top:8px;">
+    <form class="form-inline definewidth" action="__URL__/index/flag/search/zhenqu/{$zq}" method="post" id="myform2">
+    <input type="hidden" id="doctor_code_search" name="doctor_code_search" value="" />
+    <span class="search_bt">患者姓名 / 号条编码：</span>
+    <input type="text" name="pat_name" id="pat" style="width:200px; height:24px; padding-left:5px;"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    </select>   
+    <button type="submit" id="submit" class="btn btn-primary">查询</button>
+ 
+</form>
+ </div>
+ <style type="text/css">
+ #load_area{ width:100%; border:1px solid #ccc; height:200px; text-align:center; font-size:30px; line-height:200px; background:#fcfcfc; margin-bottom:15px; display:none; }
+ </style>
+
+<table class="tablelist">
+    <thead>
+    <tr>
+        
+        <th width="50">HIS编号</th>
+        <th width="60">患者姓名</th>
+        <th width="40">序号</th>
+         <th width="35">性 别</th>
+        <th width="80">科 室</th>        <th width="40">医 生</th>
+        <th width="40">类 型</th>
+         <th width="60">接诊状态</th>
+          <th width="60">报到状态</th>
+        <th width="50">诊 室</th>
+        <th width="120">挂号时间</th>
+       
+        <th width="60">呼叫状态</th>
+  
+        <th width="50" align="center">操作</th>
+    </tr>
+    </thead>
+    	<if condition="$list neq ''">
+        <volist name="list" id="vo">
+        <tr reg_id="{$vo.reg_id}"  bgcolor="{$vo.bgcolor}"  id="{$vo.pat_code}_{$vo.dept_code}" dept_code="{$vo.dept_code}" doctor_code="{$vo.fp_doctor_code}">
+                <td>{$vo.pat_code}</td>
+                <td>{$vo.pat_name}</td>
+                <td>(<switch name="vo['noon_flag']">
+                     <case value="a">上</case>
+                     <case value="p">下</case>
+                      <case value="%">全</case>
+                     </switch>){$vo.reg_seq_no}</td>
+                <td>{$vo.pat_sex}</td>
+                <td class="dept_name" id="dept_name_{$vo.pat_code}">{$vo.dept_name}</td>
+                <td class="doctor_name" id="doctor_name_{$vo.pat_code}">{$vo.doctor_name}</td>
+                <td>{$vo.reg_type}</td>
+                <td>{$vo.jz_status}</td>
+                <td>{$vo.bd_status}</td>
+                <td class="room_name"><if condition="$vo['room'] gt 0">第{$vo.room}诊室<else /></if></td>
+                <td class="reg_time">{$vo.reg_time}</td>
+               
+                <td class="status">{$vo.status_txt}</td> 
+              <td>
+              <div class="act_e" dept_code="{$vo.dept_code}" reg_id="{$vo.reg_id}" pat_code="{$vo.pat_code}"  doctor_code="{$vo.doctor_code}"><a href="#">展开</a></div>
+              <div class="act_area">
+                  <ul>
+                 
+                  <if condition="$t_doc eq 'y'">
+                  <li><input type="button" value="调医生" class="change_doctor" dept_code="{$vo.dept_code}" doctor_code="{$vo.fp_doctor_code}" reg_id="{$vo.reg_id}" /></li>
+              </if>
+               <if condition="$t_fuzhen eq 'y'">
+               <li><input type="button" value="复诊" class="fuzhen" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" reg_id="{$vo.reg_id}" /></li>
+              </if>
+              <li><input type="button" value="归队"  class="guidui" dept_code="{$vo.dept_code}" doctor_code="{$vo.doctor_code}" reg_id="{$vo.reg_id}" /></li>
+              <if condition="$chadui eq 'y'">
+              <li><input type="button" value="插队"  class="chadui" dept_code="{$vo.dept_code}" doctor_code="{$vo.fp_doctor_code}" reg_id="{$vo.reg_id}" /></li>
+              </if>
+              </ul>
+              </div>
+              
+                <!-- <a href="__URL__/edit/pat_code/{$vo.pat_code}/dept_code/{$vo.dept_code}">编辑</a> 
+                 <input class="del" type="button" value="删除" param="{$vo.pat_code}" param2="{$vo.ledger_sn}" param3="{$vo.order_no}" />-->
+                </td>
+               
+            </tr>
+     </volist>  
+     <else />
+      <tr>
+     	<td colspan="11" align="center"  style="text-align:center"><font color="red">无相关患者信息</font></td>
+     </tr>  
+     </if>
+       
+     </table>
+ <div class="pagin page">
+    	{$page}
+       
+    </div>
+        </div>
+        </div>
+</body>
+</html>
+<script>  
+
+//禁用右键、文本选择功能、复制按键  
+  /* $(document).bind("contextmenu",function(){return false;});  
+    $(document).bind("keydown",function(e){ 
+e=window.event||e; 
+if(e.keyCode==116){ 
+e.keyCode = 0; 
+return false; 
+} 
+}); 
+
+*/
+</script>   

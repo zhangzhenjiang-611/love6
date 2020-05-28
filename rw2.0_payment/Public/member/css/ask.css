@@ -1,0 +1,86 @@
+@charset "utf-8";
+.ask_box{width:1022px; margin:auto; border:1px solid #ccc;margin-top:12px; padding-bottom:15px; margin-bottom:20px;}
+.ask_left{width:710px; float:left; overflow:hidden; padding-left:25px;}
+.ask_left .tit{margin:20px auto;}
+.ask_left .tit h3{display:block;width:235px; float:left; overflow:hidden; background:url(../images/ask.png) left -206px no-repeat; font-size:18px; color:#666; font-family:"Microsoft YaHei",SimHei,arial,"宋体"; font-weight:normal; padding-left:34px;} 
+.ask_title_box{ position:relative;}
+.ask_left textarea.ask_title {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #D6D6D6;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #F8F8F8 inset;
+  display: block;
+  font-size: 16px;
+  height: 20px;
+  line-height: 20px;
+  outline: 0 none;
+  overflow: hidden;
+  padding: 12px;
+  resize: none;
+  width: 668px;
+  color:#666;
+  margin-bottom:30px;
+}
+.ask_left textarea.focus {
+  border: 2px solid #50B30E;
+  padding: 11px;
+  color:#000;
+}
+
+.ask_left .count {
+  bottom: 3px;
+  color: #999999;
+  font-family: "宋体";
+  font-size: 12px;
+  height: 14px;
+  line-height: 14px;
+  position: absolute;
+  right: 20px;
+  text-align: right;
+}
+.ask_left .count b{font-weight:normal;}
+.ask_left .count b.error{color:red; font-weight:800};
+.f-gray, a.f-gray {
+  color: #666666;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+h4, .h4 {
+  font: 700 12px arial,"宋体",SimHei; color:#555;
+}
+.detail-note {
+  color: #B1B1B1;
+  font-weight: 400;
+  margin-left: 3px;
+}
+.f-12, a.f-12 {
+  font-size: 12px;
+}
+.ask_con{
+background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #D6D6D6;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #F8F8F8 inset;
+  display: block;
+  font-size: 14px;
+  height: 120px;
+  line-height: 20px;
+  outline: 0 none;
+  overflow: hidden;
+  padding: 12px;
+  resize: none;
+  width: 668px;
+  color:#666;	
+  margin-bottom:15px;
+}
+.xx{line-height:40px;}
+.xx .l{float:left; width:60px; font-size:14px;_display:inline; margin-left:3px;}
+#verify{float:left; border:1px solid #888; width:50px; height:23px; line-height:25px; margin-top:7px; padding:0px 5px; margin-right:5px;}
+#verifyImg{margin-top:7px !important;}
+.block-info{position:relative;}
+.block-info span.bcg{ display:block; width:250px; height:26px; background:#000; position:absolute; left:1px; top:170px; filter: Alpha(opacity=70); -moz-opacity:.7;opacity:0.7; z-index:10}
+.block-info a.titc{position:absolute; left:5px; top:175px; z-index:50; color:#fff;}

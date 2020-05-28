@@ -1,0 +1,201 @@
+<!doctype html>
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/quyao.css" />
+<SCRIPT language=javascript> 
+
+<!-- 
+window.onerror=function(){return true;} 
+// --> 
+</SCRIPT> 
+<script type="text/javascript">
+function run(){
+	interval = setInterval(getInfo, "5000"); 
+}
+$(function(){
+    run();
+	$('#qcode').bind('input propertychange', function() { 
+		var vals = $(this).val().length;
+		if(vals>=16){
+			var params = {"vals":$("#qcode").val()}; 
+			$.ajax({
+				url:"__URL__/ajaxAddQy", 
+				type:'post',
+				dataType:'json',
+				data:params,
+				success:function(data){
+						if(data.success==1){
+							$(".tipss").html(data.status_txt+"，姓名："+data.pinfo.pat_name+"，处方号："+data.pinfo.order_no+"，总数："+data.total+"，剩余："+data.shengyu);
+						if(data.pinfo.pat_code!=""&&data.pinfo.pat_code!=null){
+							$("#pat_code").val(data.pinfo.pat_code);
+						}
+						if(data.pinfo.pat_name!=""&&data.pinfo.pat_name!=null){
+							$("#pat_name").val(data.pinfo.pat_name);
+						}
+						if(data.pinfo.ledger_sn!=""&&data.pinfo.ledger_sn!=null){
+							$("#ledger_sn").val(data.pinfo.ledger_sn);
+						}
+						if(data.pinfo.order_no!=""&&data.pinfo.order_no!=null){
+							$("#order_no").val(data.pinfo.order_no);
+						}
+						
+						
+						}else{
+							$(".tipss").html(data.status_txt);
+						}
+						fresh_list(data.data);
+					 if(data.data!="n"){
+				$("#cinfo .num").html(data.wait_num);
+			}else{
+				$("#cinfo .num").html("0");
+			}
+				}
+			})	
+		}
+	 
+	 });
+	$("#shunhu").click(function(){
+		
+		
+		
+		var params = {"pat_code":$("#pat_code").val(),"pat_name":$("#pat_name").val(),"ledger_sn":$("#ledger_sn").val(),"order_no":$("#order_no").val()}; 
+		$.ajax({
+			url:"__URL__/shangDp",  
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				
+					//fresh_list(data);
+				
+			}
+		})	
+	})
+	$(".btn_call").live("click",function(){
+		var params = {"pat_name":$(this).attr("param")}; 
+		$.ajax({
+			url:"__URL__/ajax_sendvoice",  
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				
+					//fresh_list(data);
+				
+			}
+		})						
+	})
+}) 
+	function getInfo(){
+		var params = {"time":"<?=time()?>"}; 
+		$.ajax({
+			url:"__URL__/getData", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				
+					fresh_list(data);
+				
+			}
+		})	
+	}
+	function fresh_list(data){
+		  //$("#patList").html("");
+		
+		  var str= "";
+		  if(data!="n"){
+			  for(var i=0;i<data.length;i++){
+			    var hujiao_txt = "";
+				if(data[i].medicine_status==5){
+					hujiao_txt = "<li class='six'><input type='button' class='btn_call' value='重呼' param='"+data[i].pat_name+"' /></li>";
+				}
+		  	   str+="<ul style='background:"+data[i].backcolor+"' id='"+data[i].id+"'><li class='one'>"+data[i].id+"</li><li class='two'>"+data[i].pat_name+"</li><li class='thr status'>"+data[i].pat_sex+"</li><li class='four'>"+data[i].order_no+"</li><li class='five'>"+data[i].status_txt+"</li>"+hujiao_txt+"</ul>";	
+			 }
+		  }
+		 
+		  
+		  $("#patList").html(str);
+		   
+		 	
+		  
+		 
+		 
+		  
+		 
+	}
+	
+	
+</script>
+<title>取药排队系统</title>
+</head>
+
+<body>
+<!-- <div id="zhezhao">数据加载中...</div> -->
+<input type="hidden" id="pat_code" />
+<input type="hidden" id="pat_name" />
+<input type="hidden" id="ledger_sn" />
+<input type="hidden" id="order_no" />
+<div class="mainbody">
+<div class="button">
+	<span class="b_in">
+	<div id="shunhu" class="sub_btn3">呼叫</div>
+    <div id="recall" class="sub_btn3">刷新</div>
+    </span>
+</div>
+
+<div class="patlist">
+<input type="text" id="qcode" value="" />
+ <div class="tipss"></div>
+	<div id="cinfo" style=" padding-right:12px;">
+   当前有 <span class="num" style="color:red; font-weight:bold"><?=$wait_num?></span> 名患者在等候
+    <p style="float:right" id="chonghuinfo"></p>
+    </div>
+   
+    <div class="patlist_tit">
+    	<ul>
+        	<li class="one">顺序号</li>
+            <li class="two">患者姓名</li>
+            <li class="thr">性别</li>
+            <li class="four">处方号</li>
+            <li class="five">取药状态</li>
+            <li class="six">呼叫</li>
+        </ul>
+    </div>
+
+<div class="patlist_con" id="patList">
+	<volist name="list" id="vo">
+    	<ul style="background:{$vo.backcolor}">
+        	<li class="one">{$vo.id}</li>
+            <li class="two">{$vo.pat_name}</li>
+            <li class="thr status">{$vo.pat_sex}</li>
+            <li class="four">{$vo.order_no}</li>
+            <li class="five">{$vo.status_txt}</li>
+            <li class="six">
+            <if condition="$vo['medicine_status'] eq 5">
+            <input type="button" class="btn_call" value="重呼" param="{$vo.pat_name}" /></li>
+            </if>
+        </ul>
+    </volist>
+   
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>  
+
+
+
+</script>   
+
+</body>
+</html>

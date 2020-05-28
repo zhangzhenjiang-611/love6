@@ -1,0 +1,142 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/css/common.css" />
+<script type="text/javascript" language="javascript" src="__PUBLIC__/Home/js/jquery.tablescroll.js"></script>
+<script language="javascript">
+var str;
+$(function(){
+	$("#key").bind("input propertychange,oninput",function(){
+		var params = {"key":$("#key").val()};	
+		$.ajax({
+			url:"__URL__/getPatInfo",
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data[0].success==1){
+					$("#search_result").html("");
+					$("#txt_name").html("");
+					var str = "";
+					for(var n in data){
+						if(n==0){
+							$("#search_result").append("<tr bgcolor='#FFA500' class='first'><td width='80'>"+data[n].reg_id+"</td><td width='100'>"+data[n].pat_name+"</td><td>"+data[n].inspect_name+"</td></tr>");
+						}else{
+							$("#search_result").append("<tr bgcolor='#FFA500'><td width='80'>"+data[n].reg_id+"</td><td width='100'>"+data[n].pat_name+"</td><td>"+data[n].inspect_name+"</td></tr>");
+						}
+						
+						if(n==0){
+							str+=data[n].reg_id+"|"+data[n].ptno+"|"+data[n].pat_id+"|"+data[n].pat_name+"|"+data[n].pat_birthday+"|"+data[n].pat_sex+"|"+data[n].inspect_code+"|"+data[n].inspect_name+"|"+data[n].dept_code+"|"+data[n].dept_name;
+						}else{
+							str+=","+data[n].reg_id+"|"+data[n].ptno+"|"+data[n].pat_id+"|"+data[n].pat_name+"|"+data[n].pat_birthday+"|"+data[n].pat_sex+"|"+data[n].inspect_code+"|"+data[n].inspect_name+"|"+data[n].dept_code+"|"+data[n].dept_name;
+						}
+					}
+					$("#str").val(str);
+					$("#txt_name").html(data[0].pat_name);
+					
+				}else{
+					$("#search_result").html("");
+					$("#txt_name").html("");
+				}
+			}
+		})							 
+	})
+	$("#btn_saves").click(function(){
+		var str = $("#str").val();
+		//alert($("#is_santong").attr("checked"));
+		str+="|"+$("#is_santong").val();
+		str+="|"+$("#reg_type").val();
+		
+		if(str==""){
+			alert("数据为空,加入队列失败");
+			return;
+		}
+		//alert(str);
+		var params = {"str":str};	
+		$.ajax({
+			url:"__URL__/addToDL",
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.have_data==1){
+					alert("请不要重复添加");
+					return;
+				}
+				$("#patlist").html("");
+				for(var i in data){
+					var odd="";
+					if(i%2>0){
+						odd = "odd";
+					}
+					$("#patlist").append("<ul class='"+odd+"'><li class='one'>"+data[i].id+"</li><li>"+data[i].pat_name+"</li><li class='pat_id'>"+data[i].pat_id+"</li><li>"+data[i].pat_birthday+"</li><li class='sex'>"+data[i].pat_sex+"</li><li>"+data[i].inspect_name+"</li><li class='reg_type'>"+data[i].reg_type+"</li><li class='st'>"+data[i].santong+"</li><li class='source'>"+data[i].source+"</li><li>未呼叫</li></ul>");
+				}
+				
+				 $("#str").val("");
+				 $("#search_result").html("<tr class='odd one'><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr class='odd'><td></td><td></td><td></td></tr>");
+				 //alert("添加成功");
+				
+			}
+		})	
+	})
+	
+	$('#thetable').tableScroll({
+			width:694,
+			height:28
+		});
+})
+</script>
+<style>
+.mytable tr th{height:35px;}
+.mytable tr.odd{ background:#dcdcdc;}
+#thetable{}
+#thetable tr.odd{ background:#eee;}
+#thetable tr th{height:35px;}
+#thetable tr td{height:18px;}
+#santong{height:23px; line-height:23px; margin-right:10px;float:left;_display:inline; margin-left:20px;}
+#santong input{float:left; margin-top:10px; margin-left:8px;_display:inlline;}
+#santong .txt{float:left;}
+#txt_name{background:#fff; width:80px; height:17px; line-height:17px; float:left;}
+.txt_name{float:left;_display:inline; margin-left:8px; margin-top:5px;}
+#btn_saves{display:block;height:23px; line-height:23px; margin-top:1px; background:green; color:#fff; float:left; padding:0px 8px;}
+#is_santong{float:left; margin-top:0px; height:26px;_display:inline; margin-left:5px;}
+.tablescroll tr th{ padding-left:5px;}
+</style>
+<title>患者信息查询</title>
+</head>
+
+
+<input type="hidden" id="str" value="" />
+<table cellpadding="0" cellspacing="0" border="0" width="700">
+	<tr height="55">
+    	<td height="40"><div class="txt_name">门诊号：</div><input type="text" class="ipt fl" id="key" style="width:120px; padding:4px 0px;" /><div class="txt_name">姓  名：</div><div class="ipt" id="txt_name"></div>
+         <div id="santong">
+  <span class="txt">散瞳：</span><select id="is_santong"><option value="">请选择</option><option value="0">不需要</option><option value="1">需要</option></select></div>
+   <span class="fl" style="margin-top:4px;">类型：</span>
+             <select name="reg_type" id="reg_type" class="fl" style="height:24px; margin-right:10px;">
+            	<option value="">请选择</option>
+                <option value="门诊">门诊</option>
+                <option value="住院">住院</option>
+            </select>
+   <a href="#" id="btn_saves">添加到队列</a>
+        </td>
+    </tr>
+</table>
+ <table cellpadding="0" cellspacing="0" id="thetable" class="tablescroll" width="700">
+  <thead>
+    <tr>       
+      <th width="80" height="30" align="left">就诊号</th>
+      <th width="100" align="left">患者姓名</th>
+      <th  align="left">检查项目</th>
+      
+    </tr>
+  </thead>
+  <tbody id="search_result">
+  	<tr class="first">
+    	<td>暂无数据</td>
+    </tr>
+  </tbody>
+
+ 
+  </table>
+ 
+ 
+ 
+

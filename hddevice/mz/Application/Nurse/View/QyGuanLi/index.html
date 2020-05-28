@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Nurse/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Nurse/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+<script language="javascript">
+/**
+* 删除前确认
+* www.jbxue.com
+*/
+function p_del() {
+    var msg = "真的要删除吗？\n\n请确认！";
+    if (confirm(msg)==true){
+        return true;
+     }else{
+        return false;
+     }
+}
+
+$(function(){
+$(".del").click(function(){
+		var pat_code = $(this).attr("param");
+		var ledger_sn = $(this).attr("param2");
+		var order_no = $(this).attr("param3");
+		var params = {"pat_code":pat_code,"ledger_sn":ledger_sn,"order_no":order_no}; 
+		if(p_del()){
+		$.ajax({
+			url:"__URL__/setStatus", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			success:function(data){
+				if(data.success==1){
+					$("#"+pat_code+"_"+ledger_sn+"_"+order_no).remove();
+					alert("删除成功");
+				}else{
+					alert("删除失败");
+				}
+			}
+		})	
+		}
+	})		
+})
+
+</script>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="__URL__/index/flag/search" method="post">
+    患者姓名：
+    <input type="text" name="keywords" id="menuname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp; 
+    <button type="submit" class="btn btn-primary">查询</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        
+        <th>患者HIS号</th>
+        <th>患者姓名</th>
+         <th>性 别</th>
+        <th>处方号</th>
+        <th>排序（付）</th>
+        <th>当前状态</th>
+        <th>缴费时间</th>
+        <th>管理操作</th>
+    </tr>
+    </thead>
+        <volist name="list" id="vo">
+        <tr bgcolor="{$vo.bgcolor}" id="{$vo.pat_code}_{$vo.ledger_sn}_{$vo.order_no}">
+                <td>{$vo.pat_code}</td>
+                <td>{$vo.pat_name}</td>
+                <td>{$vo.pat_sex}</td>
+                <td>{$vo.ledger_sn}</td>
+                <td>{$vo.order_no}</td>
+                <td>{$vo.status_txt}</td>
+                <td>{$vo.price_data}</td>
+               
+           		</if>
+                <td><a href="#" class="del" param="{$vo.pat_code}" param2="{$vo.ledger_sn}" param3="{$vo.order_no}">删除</a></td>
+            </tr>
+     </volist>       
+     </table>
+
+</body>
+</html>
+<script>
+    $(function () {
+        
+
+		$('#addnew').click(function(){
+
+				window.location.href="add.html";
+		 });
+
+
+    });
+	
+</script>

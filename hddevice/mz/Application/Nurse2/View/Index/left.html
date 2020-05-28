@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>菜单栏目</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="__PUBLIC__/Nurse2/js/jquery.js"></script>
+
+<script type="text/javascript">
+$(function(){	
+	//导航切换
+	$(".menuson li").click(function(){
+		$(".menuson li.active").removeClass("active")
+		$(this).addClass("active");
+	});
+	
+	$('.title').click(function(){
+		var $ul = $(this).next('ul');
+		$('dd').find('ul').slideUp();
+		if($ul.is(':visible')){
+			$(this).next('ul').slideUp();
+		}else{
+			$(this).next('ul').slideDown();
+		}
+	});
+	$(".menuson li a").click(function(){
+		window.parent.document.title = $(this).text();	
+	
+	})
+})	
+</script>
+
+
+</head>
+
+<body style="background:#f0f9fd;">
+	<div class="lefttop"><span></span>功能列表</div>
+    <dl class="leftmenu">
+    <switch name="id">
+    <case value="sysconfig">
+         <dd>
+       		<div class="title">
+        		<span><img src="__PUBLIC__/Nurse2/images/leftico01.png" /></span>系统设置
+        	</div>
+            <ul class="menuson">
+            	<li class="active"><cite></cite><a href="__APP__/Nurse2/Index/gnsz" target="rightFrame">分诊设置</a><i></i></li>
+            	
+            </ul>  
+            
+               
+        </dd>
+        <dd>
+       		<div class="title">
+        		<span><img src="__PUBLIC__/Nurse2/images/leftico04.png" /></span>用户管理
+        	</div>
+            <ul class="menuson">
+            	<li class="active"><cite></cite><a href="__APP__/Nurse2/UserList/add" target="rightFrame">添加用户</a><i></i></li>
+            	<li><cite></cite><a href="__APP__/Nurse2/UserList" target="rightFrame">用户列表</a><i></i></li>
+                <li><cite></cite><a href="__APP__/Nurse2/GroupList" target="rightFrame">用户组列表</a><i></i></li>
+                <li><cite></cite><a href="__APP__/Nurse2/GroupList/add" target="rightFrame">添加用户组</a><i></i></li>
+                <li><cite></cite><a href="__APP__/Nurse2/Index/gnsz" target="rightFrame">角色列表</a><i></i></li>
+                <li><cite></cite><a href="__APP__/Nurse2/Index/gnsz" target="rightFrame">添加角色</a><i></i></li>
+            </ul>  
+            
+               
+        </dd>
+    </case>
+    <case value='fenzhen'>
+    <dd>
+   		<div class="title">
+    		<span><img src="__PUBLIC__/Nurse2/images/leftico02.png" /></span>分诊管理
+    	</div>
+    	<ul class="menuson">
+        	<li><cite></cite><a href="__APP__/Nurse2/Doctor/index/" target="rightFrame">系统主页</a><i></i></li>
+        	<li><cite></cite><a href="__APP__/Nurse2/Index/gnsz" target="rightFrame">基本设置</a><i></i></li>
+         	<li><cite></cite><a href="__APP__/Nurse2/Doctor/index" target="rightFrame">医生列表</a><i></i></li>
+          	<li><cite></cite><a href="__APP__/Nurse2/JianKong" target="rightFrame">诊室监控</a><i></i></li>
+            <li><cite></cite><a href="__APP__/Nurse2/PatList/index/zhenqu/<?=session('zhenqu')?>" target="rightFrame">患者管理</a><i></i></li>
+       		<li class="active"><cite></cite><a href="__APP__/Nurse2/PatAdd/index/zhenqu/<?=session('zhenqu')?>" target="rightFrame">患者报到</a><i></i></li>
+        	<li><cite></cite><a href="__APP__/Nurse2/CustomDept" target="rightFrame">科室维护</a><i></i></li>
+         	<li><cite></cite><a href="__APP__/Nurse2/RoomList" target="rightFrame">诊室维护</a><i></i></li>
+         	<li><cite></cite><a href="__APP__/Nurse2/ZhenQu" target="rightFrame">诊区管理</a><i></i></li>
+         	<li><cite></cite><a href="__APP__/Nurse2/PatRegList" target="rightFrame">患者报到日志</a><i></i></li>
+            <li><cite></cite><a href="__APP__/Nurse2/DoctorOpList" target="rightFrame">医生操作日志</a><i></i></li>
+        </ul>    
+    </dd>
+    </case>
+    <case value='rizhi'>
+    <dd>
+   		<div class="title">
+    		<span><img src="__PUBLIC__/Nurse2/images/leftico02.png" /></span>日志管理
+    	</div>
+    	<ul class="menuson">
+         	<li class="active"><cite></cite><a href="__APP__/Nurse2/PatRegList" target="rightFrame">患者报到日志</a><i></i></li>
+            <li><cite></cite><a href="__APP__/Nurse2/DoctorOpList" target="rightFrame">医生操作日志</a><i></i></li>
+        </ul>    
+    </dd>
+    </case>
+    <case value="xxfb">
+     <dd>
+    <div class="title">
+    <span><img src="__PUBLIC__/Nurse2/images/leftico01.png" /></span>护士站
+    </div>
+    	<ul class="menuson">
+        <li class="active"><cite></cite><a href="index.html" target="rightFrame">系统主页</a><i></i></li>
+       
+        </ul>    
+    </dd>
+    </case>
+    <default />
+    <dd>
+    <div class="title">
+    <span><img src="__PUBLIC__/Nurse2/images/leftico03.png" /></span>常用操作
+    </div>
+    	<ul class="menuson">
+      <li class="active"><cite></cite><a href="__APP__/Nurse2/Index/index/zhenqu/<?=$zhenqu?>" target="rightFrame">系统首页</a><i></i></li>
+          <li ><cite></cite><a href="__APP__/Nurse2/JianKong" target="rightFrame">诊室监控</a><i></i></li>
+          
+            <li><cite></cite><a href="__APP__/Nurse2/PatList/index/zhenqu/<?=session('zhenqu')?>" target="rightFrame">患者管理</a><i></i></li>
+        <li><cite></cite><a href="__APP__/Nurse2/PatAdd/index/zhenqu/<?=session('zhenqu')?>" target="rightFrame">患者报到</a><i></i></li>
+         <li><cite></cite><a href="__APP__/Nurse2/GuoHao/index/zhenqu/<?=session('zhenqu')?>" target="rightFrame">过号队列</a><i></i></li>
+         <li><cite></cite><a href="__APP__/Nurse2/ZhenQu" target="rightFrame">诊区管理</a><i></i></li>
+       
+        </ul>    
+    </dd>
+    </switch>
+   <!--     
+   
+    <dd>
+    <div class="title">
+    <span><img src="__PUBLIC__/Nurse2/images/leftico02.png" /></span>大屏设置
+    </div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">编辑内容</a><i></i></li>
+        <li><cite></cite><a href="#">发布信息</a><i></i></li>
+        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+        </ul>     
+    </dd> 
+    
+    
+    <dd><div class="title"><span><img src="__PUBLIC__/Nurse2/images/leftico03.png" /></span>小屏设置</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">自定义</a><i></i></li>
+        <li><cite></cite><a href="#">常用资料</a><i></i></li>
+        <li><cite></cite><a href="#">信息列表</a><i></i></li>
+        <li><cite></cite><a href="#">其他</a><i></i></li>
+    </ul>    
+    </dd>  
+    
+    
+    <dd><div class="title"><span><img src="__PUBLIC__/Nurse2/images/leftico04.png" /></span>数据库管理</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">自定义</a><i></i></li>
+        <li><cite></cite><a href="#">常用资料</a><i></i></li>
+        <li><cite></cite><a href="#">信息列表</a><i></i></li>
+        <li><cite></cite><a href="#">其他</a><i></i></li>
+    </ul>
+    
+    </dd>   
+   --> 
+    </dl>
+    
+</body>
+</html>

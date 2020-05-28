@@ -1,0 +1,418 @@
+<!doctype html>
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.9.1.js"></script>		
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/FuZhen/css/bass.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/FuZhen/css/index.css" />
+<script language="javascript" type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script type="text/javascript">
+<!--
+t_num = "";
+function backspace(){ //退格
+var vals = $("#pat_code").val();
+var vals2 = vals.substring(0,vals.length-1)
+t_num = vals2;
+$("#pat_code").val(t_num);
+}//取长度为原长度减一的串，实现退格效果。
+function run(){
+	interval = setInterval(getCardNo, "1000"); 
+} 
+function getCardNo(){
+	
+	var card_no = window.CallCSharpMethod("GetCardNo","");
+	if(card_no!=""){
+		window.CallCSharpMethod("Beep","");
+		$("#pat_code").val(card_no); 
+	}
+}
+
+function sendVoice(sid,speech){
+	var params = {"sid":sid,"speech":speech};	
+	$.ajax({
+		url:"__APP__/FuZhen/index///sendVoice",
+		type:'post',
+		dataType:'json',
+		data:params,
+		success:function(data){}
+	})
+}
+function keydownEvent() {
+
+         var e = window.event || arguments.callee.caller.arguments[0];
+         if (e && e.keyCode == 13 ) {
+			 t_num = "";
+			 //$("#pat_code").val(t_num);
+			 bao_d();
+			 //$("#pat_code").focus(); 
+
+         }
+
+}
+function showMessages(status_txt,seconds,num){
+	seconds = 3000;
+	switch(num){
+		case 2:
+		$(".zhezhao").css({"font-size":"30px"})
+		break;
+		case 3:
+		case 4:
+		$(".zhezhao").css({"font-size":"25px"})
+		break;
+	}
+	$(".zhezhao").show().html(status_txt);
+	setTimeout(function(){$(".zhezhao").hide();$("#pat_code").val("");$("#pat_code").attr("disabled",false);}, seconds );
+}
+function bao_d(){
+	var pid = $("#pat_code").val();
+	var index_load = "";
+	var params = {"pat_code":$("#pat_code").val(),"zhenqu":"<?=$zhenqu?>"};  
+		$.ajax({
+			url:"__URL__/getPat", 
+			type:'post',
+			dataType:'json',
+			data:params,
+			beforeSend:function(){
+				index_load = layer.msg('数据请求中,请稍后...', {icon: 16,time:20000});
+				//index_load = layer.load(1);
+				$("#pat_code").attr("disabled",true);
+			},
+			success:function(data){
+				layer.close(index_load);
+				if(data.num==0){
+					//$("#patArea").html("<tr><td colspan='11' class='tips2'><font color='red'>"+data.status_txt+"</font></td></tr>"); 
+					showMessages(data.status_txt,2000,1);
+					
+				}
+				else if(data.num==1){
+					if(data.success==1){
+						$("#handcz").hide();
+						//$("#caozuo").show();
+						var pat = data.pat;
+						$("#patArea").html("<tr><td><input type='checkbox' name='pid[]' checked /></td><td>"+pat.pat_code+"</td><td>"+pat.pat_name+"</td><td>"+pat.times+"</td><td>"+pat.pat_sex+"</td><td id='tb_doctor_name'>"+pat.doctor_name+"</td><td id='tb_dept_name'>"+pat.dept_name+"</td><td>"+pat.reg_type+"</td><td>"+pat.reg_seq_no+"</td><td class='status'>"+pat.status_txt+"</td><td>"+pat.reg_time+"</td></tr>");
+						$("#dept_code_hidden").val(pat.dept_code);
+						$("#doctor_code_hidden").val(pat.doctor_code);
+						$("#pat_code_hidden").val(pat.pat_code);
+						if(pat.withdraw_flag==1){
+							//layer.msg('患者 '+pat.pat_name+'已退号' ,{shade: 0.3});
+							showMessages('患者 '+pat.pat_name+'已退号',2000,1);
+						}else if(data.row[0].is_over==1){
+							showMessages("就诊医生已停诊,请咨询分诊台",2000,1);
+							//sendVoice("<?=$sid?>","就诊医生已停诊,请咨询分诊台");
+						}else{ //非退号 停诊状态
+							$("#patArea").append("<tr><td colspan='11' class='tips2'><font color='green'>"+data.row[0].status_txt+"</font></td></tr>"); 
+							//layer.msg(data.row[0].status_txt ,{shade: 0.3});
+							showMessages(data.row[0].status_txt,2000,1);
+							//sendVoice("<?=$sid?>","报到成功");
+						}
+						
+						
+					}else{              //data.success=0 情况下的操作
+						$("#handcz").css({"display":"block"});
+						//$("#caozuo").hide();
+						$("#patArea").html("<tr><td colspan='11' class='tips2'>患者："+data.pat_name+"（"+data.pat_code+"） "+data.error+"</td></tr>");
+						$("#handcz").hide();
+						$("#tips").html("");
+					}
+					
+				}else{           //患者挂号数据返回多于一个的分支
+					<if condition="$is_tc eq 0">
+					var pat = data.pat;
+					var pat_html = "";
+					var chk = "";
+					var stu = "";
+					chk = "checked";
+					for(var i=0;i<pat.length;i++){
+						if(i==0){
+							stu+=pat[i].pat_code+"|"+pat[i].times;
+						}else{
+							stu+=","+pat[i].pat_code+"|"+pat[i].times;
+						}
+				
+					}
+					$("#stu").val(stu);
+					baodao();
+					$("#stu").val("");
+					<else />
+					$(".patinfo_area").show();
+					$("#handcz").show();
+					var pat = data.pat;
+					var pat_html = "";
+					var chk = "";
+					if(data.num==1){
+						chk = "checked";
+					}
+					chk = "checked";
+					for(var i=0;i<pat.length;i++){
+						pat_html+="<tr><td><input type='checkbox' "+chk+" name='pid[]' value='"+pat[i].pat_code+"|"+pat[i].times+"' /></td><td>"+pat[i].pat_name+"</td><td id='tb_doctor_name'>"+pat[i].doctor_name+"</td><td id='tb_dept_name'>"+pat[i].dept_name+"</td><td>"+pat[i].reg_type+"</td><td>"+pat[i].reg_seq_no+"</td></tr>";
+						$("#patArea").html(pat_html);
+					}
+					setTimeout(function(){$(".patinfo_area").hide()}, 30000 );
+					jump(30);
+					</if>
+				}
+				
+				
+			}
+		})
+		
+	$(".yin_tip").html(pid);
+}
+$(function(){
+	run();
+	$("#hand").val("0");
+	$("#pat_code").focus();
+	$(".num").click(function(){
+		var num = $(this).attr("param");
+		t_num+=num.toString();
+		$("#pat_code").val(t_num);
+		$("#pat_code").focus();
+		$("#hand").val("1");
+		////sendVoice($(this).attr("param"));
+			
+		})	
+	$(".del").click(function(){
+		backspace();
+		$("#pat_code").focus();
+	})
+		
+		$(".confirm").click(function(){
+			t_num = "";
+			$("#pat_code").focus();
+			bao_d();
+									  
+		})
+		$(".mainbody").click(function(){
+			$("#pat_code").focus();
+		})
+/******************************************************/
+$('#pat_code').bind('input onpropertychange', function(event) { 
+	var pid = $("#pat_code").val();
+	$(".yin_tip").html("");
+	if((pid.indexOf("H")==0&&pid.length==8)||pid.length==12){
+		var room = "<?=$room?>";
+		var id = pid;
+		if($("#hand").val()==0){
+			bao_d(room,id);
+		}
+	}else{            //当文本框输入少于12个字符时
+		//$("#patArea").html("<tr><td colspan='11' class='tips2'><font color='red'>暂无信息</font></td></tr>"); 
+		//$("#caozuo").hide();
+		//$("#tips").html("");
+	}	
+	
+})
+$("#baodao").on("click",function(){
+	 baodao();
+	$("#pat_code").focus();
+})
+$("#fclose").on("click",function(){
+	$(".patinfo_area").hide();
+	clearTimeout();
+	return false;
+})	
+		
+})
+function baodao(){
+	var stu="";
+	if($("#stu").val()==""){
+		$("input[name='pid[]']:checked").each(function(i, n){
+			//var val = n.value.split("|");
+			if(i==0){
+				stu+=n.value;
+			}else{
+				stu+=","+n.value;
+			}											
+		})
+		if(stu==""){
+			showMessages("请至少选择一项",2000,1);
+			//sendVoice("<?=$sid?>","请至少选择一项");
+			return;	
+		}
+	}else{
+		stu = $("#stu").val();
+	}
+	var index_load = "";
+	var params = {"str":stu,"zhenqu":"<?=$zhenqu?>"};  
+	$.ajax({
+		url:"__URL__/baodao", 
+		type:'post',
+		dataType:'json',
+		data:params,
+		beforeSend:function(){
+				index_load = layer.msg('数据请求中,请稍后...', {icon: 16});
+		},
+		success:function(data){
+			layer.close(index_load);
+			var bd_txt = "";
+			if(data[0].is_over==1){
+				showMessages("已停诊,请到分诊台处理",2000,1);
+				//sendVoice("<?=$sid?>","已停诊,请到分诊台处理");
+			}else{
+				for(var i=0;i<data.length;i++){
+					if(data[i].success==1){
+						bd_txt+=data[i].status_txt;
+						$(".patinfo_area").hide();
+					}else{
+						bd_txt+=data[i].error;
+					}	
+				}
+				//$("#bd_result").html(bd_txt);
+				showMessages(bd_txt,2000,data.length);
+			}
+			
+			
+		}
+	})
+}
+</script>
+<script language="javascript">
+var countdown= parseInt(30)
+var t=null;
+  function jump(count) { 
+                t = window.setTimeout(function(){ 
+                    count--; 
+                    if(count > 0) { 
+                       $("#result_txt").html(count+"秒后关闭");
+                        jump(count); 
+                    } else { 
+                      $(".patinfo_area").hide() 
+					  clearTimeout(t);
+					  return;
+                    } 
+                }, 1000); 
+            } 
+
+</script>
+<style>
+.nodata{ font-size:16px; width:100%; padding-left:10px; line-height:50px; color:red;}
+.zhezhao{ z-index:99999; padding-bottom:50px; padding-left:40px; padding-right:40px;}
+</style>
+<title>患者复诊</title>
+</head>
+
+<body>
+<input type="hidden" id="hand" value="0" />
+<input type="hidden" id="stu" value="" />
+<div class="mainbody">
+	<div class="zhezhao"></div>
+    <div class="m_left">
+    	<img src="__PUBLIC__/FuZhen/demo.png" width="290" style="margin-top:0px;"/>
+    </div>
+    <div class="m_mid">
+    	<input type="text" id="pat_code" onKeyDown="keydownEvent()" autocomplete='off'/>
+        <ul class="b1">
+        	<li class="num one" param="1"><input type="button" value="1" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num two" param="2"><input type="button" value="2" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num thr" param="3"><input type="button" value="3" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+        </ul>
+        <ul class="b1">
+        	<li class="num four" param="4"><input type="button" value="4" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num five" param="5"><input type="button" value="5" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num six" param="6"><input type="button" value="6" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+        </ul>
+        <ul class="b1">
+        	<li class="num seven" param="7"><input type="button" value="7" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num eight" param="8"><input type="button" value="8" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="num nine" param="9"><input type="button" value="9" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+        </ul>
+        <ul class="b1">
+        	<li class="num zero" param="0"><input type="button" value="0" style="width:100%; height:100%; cursor:pointer; font-size:80px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;"/></li>
+            <li class="confirm"><input type="button" value="确定" style="width:100%; height:100%; cursor:pointer; font-size:45px; font-weight:bold; font-family:黑体"/></li>
+            <li class="del"><input type="button" value="删除" style="width:100%; height:100%; cursor:pointer; font-size:45px; font-weight:bold; font-family:黑体"/></li>
+        </ul>
+    </div>
+    <div class="m_right">
+    	<h3>注意事项：</h3>
+        <p>1、初诊患者在此报到方可进行下一步看诊。</p>
+        <p>2、每次您<font color="red"><b>做完检查</b></font>后须在此机进行报到。</p>
+        <p>3、过号患者请在此报到机重新报到。</p>
+        <p>4、报到请扫描您的挂号条上的条码或刷诊疗卡。</p>
+    </div>
+<div class="tips_txt"></div>
+<style>
+.patinfo_area{width:780px; padding-bottom:30px;position:absolute; top:200px; left:120px; background:#fff; border:8px solid orange; box-shadow: 3px 3px 3px;  }
+.patinfo_area ul li{float:left;}
+.pattable{width:100%;}
+.pattable thead{ background:#eee; height:50px;}
+#patArea tr td{ text-align:center; height:42px;}
+.pattable {border-top:1px solid #666; border-right:1px solid #666; width:90%; margin:auto; margin-top:60px;}
+.pattable tr td,.pattable tr th{border-left:1px solid #666; border-bottom:1px solid #666;}
+.yin_tip{ position:absolute;left:190px; top:19px; font-size:30px; font-family:Arial, Helvetica, sans-serif; color:#999;}
+#fclose {
+  background:url(__PUBLIC__/FuZhen/close.png) no-repeat;
+  color: #fff;
+  display: block;
+  font-size: 0px;
+  height: 30px;
+  left: 738px;
+  position: absolute;
+  top: 10px;
+  width: 30px;
+}
+#result_txt{
+  color: red;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 20px;
+  left: 555px;
+  position: absolute;
+  top: 18px;
+}
+th{ font-size:28px;}
+td{ font-size:24px;}
+#baodao{ margin-left:280px; width:120px; height:50px; font-size:24px; cursor:pointer;}
+</style>
+<div class="patinfo_area" style="display:none;">
+<a href="#" id="fclose">关闭</a>
+<table cellpadding="0" cellspacing="0" border="0" class="pattable">
+	<thead>
+    <th>选择</th>
+    	
+        <th>姓名</th>
+       
+        <th>医生</th>
+        <th>科室</th>
+       <th>类型</th>
+        <th>排队序号</th>
+       
+    </thead>
+    <tbody id="patArea">
+    	<tr>
+    	<td colspan="11" class="tips2"><font color="red">暂无信息</font></td>
+	</tr>
+    </tbody>
+   
+   
+    <tbody id="handcz">
+    	<tr>
+        	<td colspan="11" valign="middle" style="padding:10px 0px; position:relative">
+             <input class="btn btn-primary" type="button" value="确认报到" id="baodao" />
+             <!-- <span id="bd_result"></span> -->
+             <i id="result_txt">30秒后关闭</i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+<script>  
+
+//禁用右键、文本选择功能、复制按键  
+   /*$(document).bind("contextmenu",function(){return false;});  
+    $(document).bind("keydown",function(e){ 
+e=window.event||e; 
+if(e.keyCode==116){ 
+e.keyCode = 0; 
+return false; 
+} 
+}); 
+
+    $(document).keydown(function(){return false});  
+*/
+
+</script>   
+
+</body>
+</html>

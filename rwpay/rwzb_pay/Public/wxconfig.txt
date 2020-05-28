@@ -1,0 +1,11 @@
+{
+	"APPID": "xxx",
+	"MCHID": "xxx",
+	"SUB_MCHID": "xxx",
+	"KEY": "xxx",
+	"APPSECRET": "xxx",
+	"SignType": "HMAC-SHA256",
+	"NOTIFY_URL": "http://222.128.103.58:11288/rwzb-pay/index.php/Home/Pay/notify/pay_type/wxpay",
+	"SSLCERT": "xxx",
+	"SSLKEY": "xxx"
+}

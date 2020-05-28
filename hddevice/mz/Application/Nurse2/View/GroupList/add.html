@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加用户组</title>
+<link href="__PUBLIC__/Nurse2/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Nurse2/css/select.css" rel="stylesheet" type="text/css" />
+     <script type="text/javascript" src="__PUBLIC__/Home/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/js/select-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Nurse2/editor/kindeditor.js"></script>
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.position.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/autocomplete/jquery.ui.autocomplete.js"></script> 
+<link rel="stylesheet" href="__PUBLIC__/autocomplete/jquery.ui.autocomplete.css"/>  
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
+	$("#dept_name").autocomplete({ 
+			source: "__URL__/getDeptKey", 
+			minLength: 1,
+			autoFocus:true,
+			mustMatch:true,
+			select: function( event, ui ) {
+			
+				$("#dept_code").val(ui.item.id);
+			}
+			
+	});	
+});
+
+</script>
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="__APP__/Nurse2/">首页</a></li>
+    <li><a href="#">添加用户组</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+  <div class="formtitle"><span>添加用户组</span></div>
+    <ul class="forminfo">
+    <form  method="post" action="__URL__/add_do">
+    <input type="hidden" name="url" value="{$url}" />
+    
+    <li><label>用户组名<b>*</b></label><input name="gname" id="gname" type="text" class="dfinput" value=""  style="width:218px;"/></li>
+ 
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确定"/></li>
+    </form>
+    </ul>
+  
+</body>
+
+</html>
